@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "doors/alba_door05"
+	"$surfaceprop" "stone"
+	"%keywords" "alba"
+	"$model" 1
+}
+
+

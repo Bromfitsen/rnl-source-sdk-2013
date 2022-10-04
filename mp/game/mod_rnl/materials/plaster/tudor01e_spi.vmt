@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "plaster/tudor01e_spi"
+        "$bumpmap" "plaster/tudor01e_spi_normal"
+        "$surfaceprop" "plaster"
+	"%keyword" "rnl"
+}

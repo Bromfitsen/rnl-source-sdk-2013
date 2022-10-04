@@ -1,0 +1,11 @@
+"SpriteCard"
+{
+	"$baseTexture" "particles\e_smoke_512_comp"
+	"$translucent" "1"
+	"$alpha" "1"
+	"$additive" "1"
+	"$overbrightfactor" "0.4"
+	"$minfadesize" "0.5"
+	"$maxfadesize" "0.7"
+
+}

@@ -1,0 +1,84 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"0"		// damage per bullet
+	"Bullets"			"0"		// bullets per shoot
+	"CycleTime"			"1.5"	// time between shoots
+	
+	
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"			"TnT"
+	"viewmodel"			"models/weapons/v_axis_exp.mdl"
+	"playermodel"			"models/weapons/p_axis_exp.mdl"
+	"PlayerAnimationExtension"	"frag"
+	"Team"				"axis"
+
+	"bucket"			"4"
+	"bucket_position"		"0"
+
+	"clip_size"			"1"
+	
+	"primary_ammo"			"None"
+	"secondary_ammo"		"None"
+
+	"weight"			"25"
+	"item_flags"			"0"
+ 	"BuiltRightHanded" 		"0"
+	"AllowFlipping" 		"1" 
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		//"reload"			"Default.Reload"
+		//"empty"			"Default.ClipEmpty_Rifle"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

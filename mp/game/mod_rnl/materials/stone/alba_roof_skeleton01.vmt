@@ -1,0 +1,8 @@
+
+LightmappedGeneric
+{
+	"$basetexture" "stone/alba_roof_skeleton01"
+	"$surfaceprop" "concrete"
+	"$translucent" 1 
+
+}

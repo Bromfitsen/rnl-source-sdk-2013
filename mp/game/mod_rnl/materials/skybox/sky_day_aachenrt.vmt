@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	// Original shader: BaseTexture
+	"$hdrbaseTexture" "skybox/sky_day_aachen_hdr_rt"
+	"$nofog" 1
+	$ignorez 1
+	"$basetexture" "skybox/sky_day_aachen_rt"
+}

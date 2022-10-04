@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/sme_rowatticwind_02"
+	"$bumpmap" "models/props_exterior/sme_rowatticwind_02a_normal"
+	"$surfaceprop" "wood"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

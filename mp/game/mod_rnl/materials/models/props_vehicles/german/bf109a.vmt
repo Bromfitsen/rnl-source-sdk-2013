@@ -1,0 +1,10 @@
+"vertexLitGeneric"
+{
+	"$basetexture" "models/props_vehicles/german/bf109a"
+	"$bumpmap" "models/props_vehicles/german/bf109a_normal"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}
+
+
+

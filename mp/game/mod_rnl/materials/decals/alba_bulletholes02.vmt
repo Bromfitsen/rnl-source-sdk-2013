@@ -1,0 +1,8 @@
+"lightmappedGeneric"
+{
+	"$baseTexture" "decals/alba_bulletholes02"
+        "$decalscale" 0.5 
+	"$translucent" 1 
+        "$decal" 1 
+      "%keywords" "alba"
+}

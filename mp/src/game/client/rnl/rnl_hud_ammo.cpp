@@ -11,7 +11,8 @@
 #include "iclientmode.h"
 #include <vgui_controls/AnimationController.h>
 #include <vgui/isurface.h>
-#include "ammodef.h"
+#include "rnl_ammodef.h"
+#include "rnl_shareddefs.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -175,8 +176,8 @@ bool CHudAmmo::ShouldDraw()
 void CHudAmmo::Paint()
 {
 	C_BasePlayer* pPlayer = C_BasePlayer::GetLocalPlayer();
-
-	if( !pPlayer )
+	CRnLAmmoDef* AmmoDef = GetRnLAmmoDef();
+	if( !pPlayer || !AmmoDef)
 		return;
 
 	if( pPlayer->GetTeamNumber() != TEAM_ALLIES && pPlayer->GetTeamNumber() != TEAM_AXIS )
@@ -202,10 +203,10 @@ void CHudAmmo::Paint()
 
 		if( iAmmo > 0 )
 		{
-			Ammo_t* pAmmo = GetAmmoDef()->GetAmmoOfIndex( i );
+			Ammo_t* pAmmo = AmmoDef->GetAmmoOfIndex( i );
 			if( pAmmo )
 			{
-				iClipSize = GetAmmoDef()->ClipSize( i );
+				iClipSize = AmmoDef->GetMagazineSize( i );
 				if( pAmmo->nFlags & AMMO_RNL_PRIMARY_AMMO )
 				{
 					int iLim = (int)(iAmmo / iClipSize );

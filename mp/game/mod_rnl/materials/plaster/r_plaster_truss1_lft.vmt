@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "plaster/r_plaster_truss1_lft"
+	"$surfaceprop" "plaster"
+	"%keyword" "rnl"
+}

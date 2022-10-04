@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	"$basetexture" "concrete/alba_blend_street01"
+	"$baseTexture2" "concrete/alba_blend_street02"
+	"$surfaceprop" "concrete"
+}

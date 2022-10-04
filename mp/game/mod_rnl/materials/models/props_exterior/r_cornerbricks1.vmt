@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_cornerbricks1"
+	"$surfaceprop" "stone"
+	"$model" 1
+}
+

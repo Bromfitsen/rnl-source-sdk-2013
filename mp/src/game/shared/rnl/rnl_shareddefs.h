@@ -10,6 +10,10 @@
 #pragma once
 #endif
 
+#include "mathlib/vector.h"
+#include "shareddefs.h"
+#include "rnl_dt_shared.h"
+
 // After this many seconds, the grenade will be thrown instead of rolled
 #define RNL_GRENADE_THROW_DELAY 0.25f
 
@@ -29,7 +33,7 @@ int AliasToWeaponID( const char *alias );
 const char *TeamNumberToName( int id );
 int TeamNameToNumber( const char *name );
 
-typedef struct RnLBulletInfo_t
+struct RnLBulletInfo_t
 {
 	Vector m_vecPosition;
 	Vector m_vecDirShooting;
@@ -50,7 +54,7 @@ typedef struct RnLBulletInfo_t
 #ifndef CLIENT_DLL
 	int m_iTickCount;
 #endif
-}RnLBulletInfo;
+};
 
 //RnL Damage types
 #define DMG_RNL_TNT		(1<<30)
@@ -231,36 +235,50 @@ enum eRnLClass
 #define KIT_DESC_TITLE_LEN 32
 #define KIT_DESC_MODEL_LEN 64
 
-typedef struct bodygroupInfo_t
+class CRnLLoadoutModelBodyGroupInfo
 {
-	bodygroupInfo_t(){ iVal = 0;}
+public:
+	DECLARE_CLASS_NOBASE(CRnLLoadoutModelBodyGroupInfo);
+	DECLARE_EMBEDDED_NETWORKVAR();
 
-	CUtlString groupName;
-	int	iVal;
-}RnLBodyGroupInfo;
+	CRnLLoadoutModelBodyGroupInfo(){ iVal = 0;}
 
-typedef struct modelInfo_t
+	CNetworkString(groupName, KIT_DESC_MODEL_LEN);
+	CNetworkVar(int, iVal);
+};
+
+
+class CRnLLoadoutModelInfo
 {
-	modelInfo_t(){ iSkin = 0;}
+public:
+	DECLARE_CLASS_NOBASE(CRnLLoadoutModelInfo);
+	DECLARE_EMBEDDED_NETWORKVAR();
 
-	char		file[KIT_DESC_MODEL_LEN];
-	int			iSkin;
-	CUtlVector<RnLBodyGroupInfo> vecBodyGroups;
-}RnLModelInfo;
+	CRnLLoadoutModelInfo(){ iSkin = 0;}
 
-typedef struct kitDescription_t
+	CNetworkString(file, KIT_DESC_MODEL_LEN);
+	CNetworkVar(int, iSkin);
+	CUtlVector<CRnLLoadoutModelBodyGroupInfo> vecBodyGroups;
+};
+
+class CRnLLoadoutKitInfo
 {
-	kitDescription_t(){ iClass = RNL_CLASS_INVALID; }
+public:
+	DECLARE_CLASS_NOBASE(CRnLLoadoutKitInfo);
+	DECLARE_EMBEDDED_NETWORKVAR();
 
-	char		title[KIT_DESC_TITLE_LEN];
-	char		name[KIT_DESC_TITLE_LEN];
-	int			iClass;
+	CRnLLoadoutKitInfo() { iClass = 0; }
+
+	CNetworkString(title, KIT_DESC_TITLE_LEN);
+	CNetworkString(name, KIT_DESC_TITLE_LEN);
+	CNetworkVar(int, iClass);
 	// TODO: Remove when squad leader voting is finished
-	bool		bSquadLeader;
-	RnLModelInfo model;
-	CUtlVector<CUtlString> weapons;
+	CNetworkVar(bool, bSquadLeader);
+	CNetworkVarEmbedded(CRnLLoadoutModelInfo, model);
+	CUtlVector<int> weapons;
+};
 
-}RnLKitDescription;
+EXTERN_PROP_TABLE(DT_RnLLoadoutKitInfo);
 
 //defs for the allied loadout panel
 enum {
@@ -322,5 +340,187 @@ enum
 {
 	HL2COLLISION_GROUP_CROW = LAST_SHARED_COLLISION_GROUP,
 };
+
+// RnL Specific team numbering.
+enum RnLTeams
+{
+	TEAM_ALLIES = FIRST_GAME_TEAM,
+	TEAM_AXIS,
+
+	TEAMS_COUNT
+};
+
+// Remap some of the existing inputs that aren't being used,
+//   to do things WE want to do instead :)
+#define IN_IRONSIGHTS	IN_ZOOM
+#define IN_LEAN_RIGHT	IN_ALT1
+#define IN_LEAN_LEFT	IN_ALT2
+#define IN_PRONE		IN_DUCK
+#define IN_MAP			IN_GRENADE2
+
+enum RnLMoveType
+{
+	MOVETYPE_CLIMBING = MOVETYPE_LAST + 1,
+};
+
+enum RnLEquipmentTypes_t
+{
+	RNL_EQUIPMENT_ANY = -1,
+	RNL_EQUIPMENT_PARACHUTE,
+	RNL_EQUIPMENT_RADIO,
+};
+
+
+enum RnLMovementPostures_t
+{
+	//RnL : MovementMod : These define all the movement types
+	MOVEMENT_POSTURE_NONE = 0,
+	//Base Movements
+	MOVEMENT_POSTURE_STAND,
+	MOVEMENT_POSTURE_CROUCH,
+	MOVEMENT_POSTURE_CROUCH_TOGGLE,
+	MOVEMENT_POSTURE_PRONE,
+	//Transitions
+	MOVEMENT_POSTURE_STAND_TO_CROUCH,
+	MOVEMENT_POSTURE_STAND_TO_CROUCH_TOGGLE,
+	MOVEMENT_POSTURE_STAND_TO_PRONE,
+	MOVEMENT_POSTURE_CROUCH_TO_STAND,
+	MOVEMENT_POSTURE_CROUCH_TO_PRONE,
+	MOVEMENT_POSTURE_PRONE_TO_CROUCH,
+	MOVEMENT_POSTURE_PRONE_TO_CROUCH_TOGGLE,
+	MOVEMENT_POSTURE_PRONE_TO_STAND,
+	MOVEMENT_POSTURE_PRONE_DIVE,
+	MOVEMENT_POSTURE_LAND_TO_CROUCH,
+	MOVEMENT_POSTURE_LAND_TO_PRONE,
+
+	//Others
+	MOVEMENT_POSTURE_PARACHUTING,
+	MOVEMENT_POSTURE_CLIMBING,
+	MOVEMENT_POSTURE_CLIMBING_TO_CROUCH,
+	MOVEMENT_POSTURE_DEPLOYED,
+	MOVEMENT_POSTURE_DEPLOYED_CROUCH,
+	MOVEMENT_POSTURE_DEPLOYED_PRONE,
+
+	MOVEMENT_POSTURE_PRONE_ROLL_LEFT,
+	MOVEMENT_POSTURE_PRONE_ROLL_RIGHT,
+
+	// Wounded states
+	MOVEMENT_POSTURE_KNOCKDOWN,
+	MOVEMENT_POSTURE_MORTAL_WOUND,
+
+	MOVEMENT_POSTURE_MAX,
+	//RnL : MovementMod : Done
+};
+
+//RnL : Andrew : Unused decal
+#define CHAR_TEX_HEDGEROW		'R'
+
+extern ConVar	sv_speed_walk;
+extern ConVar	sv_speed_run;
+extern ConVar	sv_speed_sprint;
+extern ConVar	sv_speed_crouchwalk;
+extern ConVar	sv_speed_crouchrun;
+extern ConVar	sv_speed_crouchsprint;
+extern ConVar	sv_speed_pronewalk;
+extern ConVar	sv_speed_pronerun;
+extern ConVar	sv_speed_recovery;
+extern ConVar	sv_speed_para;
+
+#define SPEED_NONE 0
+#define SPEED_WALK sv_speed_walk.GetFloat()
+#define SPEED_RUN sv_speed_run.GetFloat()
+#define SPEED_SPRINT sv_speed_sprint.GetFloat()
+#define SPEED_CROUCH_WALK sv_speed_crouchwalk.GetFloat()
+#define SPEED_CROUCH_RUN sv_speed_crouchrun.GetFloat()
+#define SPEED_CROUCH_SPRINT sv_speed_crouchsprint.GetFloat()
+#define SPEED_PRONE_WALK sv_speed_pronewalk.GetFloat()
+#define SPEED_PRONE_RUN sv_speed_pronerun.GetFloat()
+#define SPEED_RECOVER sv_speed_recovery.GetFloat()
+#define SPEED_PARA sv_speed_para.GetFloat()
+
+extern ConVar	sv_stamina_recover;
+extern ConVar	sv_stamina_recover_walk;
+extern ConVar	sv_stamina_recover_crouchwalk;
+extern ConVar	sv_stamina_recover_crouchrun;
+extern ConVar	sv_stamina_recover_pronewalk;
+extern ConVar	sv_stamina_recover_pronerun;
+
+#define STAMINA_RECOVER sv_stamina_recover.GetFloat()
+#define STAMINA_RECOVER_WALK sv_stamina_recover_walk.GetFloat()
+#define STAMINA_RECOVER_CROUCH_WALK sv_stamina_recover_crouchwalk.GetFloat()
+#define STAMINA_RECOVER_CROUCH_RUN sv_stamina_recover_crouchrun.GetFloat()
+#define STAMINA_RECOVER_PRONE_WALK sv_stamina_recover_pronewalk.GetFloat()
+#define STAMINA_RECOVER_PRONE_RUN sv_stamina_recover_pronerun.GetFloat()
+
+extern ConVar	sv_stamina_sprint;
+extern ConVar	sv_stamina_crouchsprint;
+extern ConVar	sv_stamina_pronesprint;
+
+#define STAMINA_SPRINT sv_stamina_sprint.GetFloat()
+#define STAMINA_CROUCH_SPRINT sv_stamina_crouchsprint.GetFloat()
+#define STAMINA_PRONE_SPRINT sv_stamina_pronesprint.GetFloat()
+
+
+// Each mod defines these for itself.
+class CRnLViewVectors : public CViewVectors
+{
+public:
+	CRnLViewVectors();
+
+	CRnLViewVectors(
+
+		Vector vView,
+		Vector vHullMin,
+		Vector vHullMax,
+
+		Vector vDuckView,
+		Vector vDuckWalkView,
+		Vector vDuckHullMin,
+		Vector vDuckHullMax,
+
+		Vector vProneView,
+		Vector vProneHullMin,
+		Vector vProneHullMax,
+
+		Vector vObsViewHeight,
+		Vector vObsHullMin,
+		Vector vObsHullMax
+	);
+
+	// Height above entity position where the viewer's eye is.
+	Vector m_vDuckWalkView;
+
+	Vector m_vProneView;
+	Vector m_vProneHullMin;
+	Vector m_vProneHullMax;
+};
+
+#define VEC_DUCK_VIEW_MOVING ((const CRnLViewVectors*)(g_pGameRules->GetViewVectors()))->m_vDuckWalkView
+
+#define VEC_PRONE_VIEW		((const CRnLViewVectors*)(g_pGameRules->GetViewVectors()))->m_vProneView
+#define VEC_PRONE_HULL_MIN	((const CRnLViewVectors*)(g_pGameRules->GetViewVectors()))->m_vProneHullMin
+#define VEC_PRONE_HULL_MAX	((const CRnLViewVectors*)(g_pGameRules->GetViewVectors()))->m_vProneHullMax
+
+#define PANEL_SQUAD_ALLIES	"squad_allies"
+#define PANEL_SQUAD_AXIS	"squad_axis"
+#define PANEL_SQUAD_SELECT	"squad_select"	// cjd @add
+#define PANEL_LOADOUT		"loadout"
+#define PANEL_LOADOUT_ROOM	"loadoutroom"	// cjd @add
+#define PANEL_APPEARANCE	"appearance"	// cjd @add
+#define PANEL_MAP			"map"
+#define PANEL_RADIAL		"radial"
+
+//RnL; Andrew
+enum RnLShellTypes
+{
+	RNL_SHELL = 0,
+	RNL_SHELL_PISTOL,
+	RNL_SHELL_RIFLE,
+	RNL_SHELL_MG,
+};
+//RnL;
+
+#define COLOR_DARKRED	Color(136, 5, 5, 255)
+#define COLOR_DARKGREEN	Color(0, 80, 0, 255)
 
 #endif // RNL_SHAREDDEFS_H

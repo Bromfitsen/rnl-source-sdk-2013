@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_rooftops/alba_dormer01"
+	"$surfaceprop" "model"
+
+	"$model" 1
+	"$nocull" 1
+}
+
+

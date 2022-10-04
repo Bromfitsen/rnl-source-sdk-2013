@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_supplies/german/wire-rool01"
+	"$model" 1
+	"$surfaceprop" "metal"
+
+}

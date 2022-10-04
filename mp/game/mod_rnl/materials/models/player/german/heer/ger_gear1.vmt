@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\\player\german\heer/ger_gear1"
+	"$bumpmap" "models\player\german\heer\ger_gear1_normal"
+	"$nocull" 1
+	"$model" 1
+	"$phong" "1"
+	"$phongexponent" "2"
+	"$phongboost" "1"	
+	"$phongfresnelranges"	"[0.05 0.5 1]"
+//	"$halflambert" "1"
+	"$phongalbedotint" "1"
+}

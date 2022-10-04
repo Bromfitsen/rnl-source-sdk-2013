@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "plaster/ceiling02"
+	"$bumpmap" "plaster/ceiling02_normal"
+	"$surfaceprop" "plaster"
+	"%keyword" "rnl"
+}

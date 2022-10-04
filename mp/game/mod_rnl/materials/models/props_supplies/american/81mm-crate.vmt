@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_supplies/american/81mm-crate"
+	"$model" 1
+	"$surfaceprop" "wood"
+
+}

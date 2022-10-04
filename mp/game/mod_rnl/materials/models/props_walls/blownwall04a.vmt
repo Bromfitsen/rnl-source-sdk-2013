@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "cs_italy/marketwall01a"
+	"$bumpmap" "cs_italy/marketwall01a_normal"
+	"$model" 1
+	"$surfaceprop" "concrete"
+}

@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_window_6401"
+	"$model" 1
+	"$surfaceprop" "glass"
+	"$alphatest" 1
+}
+
+

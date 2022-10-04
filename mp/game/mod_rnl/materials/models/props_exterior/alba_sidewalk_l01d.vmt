@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_sidewalk_l01d"
+	"$model" 1
+	"$nocull" 1
+}
+
+

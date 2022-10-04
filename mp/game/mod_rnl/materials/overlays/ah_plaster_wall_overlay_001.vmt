@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "overlays/ah_plaster_wall_overlay_001"
+	"$translucent" 1
+	"$decal" 1
+}

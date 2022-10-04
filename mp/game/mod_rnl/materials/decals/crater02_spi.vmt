@@ -1,0 +1,8 @@
+"lightmappedGeneric"
+{
+	"$baseTexture" "decals/crater02_spi"
+	"$translucent" 1
+	"$decal" 1
+	"$decalscale" 0.25
+	"%keywords" "rnl"
+}

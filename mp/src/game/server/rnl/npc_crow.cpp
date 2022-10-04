@@ -151,7 +151,7 @@ void CNPC_Crow::Spawn( void )
 //-----------------------------------------------------------------------------
 Class_T	CNPC_Crow::Classify( void )
 {
-	return( CLASS_EARTH_FAUNA );
+	return( CLASS_PLAYER_ALLY );
 }
 
 //-----------------------------------------------------------------------------
@@ -730,7 +730,7 @@ void CNPC_Crow::Takeoff( const Vector &vGoal )
 	}
 }
 
-void CNPC_Crow::TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, trace_t *ptr )
+void CNPC_Crow::TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator)
 {
 	CTakeDamageInfo	newInfo = info;
 
@@ -750,7 +750,7 @@ void CNPC_Crow::TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, 
 	SetCondition( COND_CROW_FORCED_FLY );
 	SetCondition( COND_PROVOKED );
 
-	BaseClass::TraceAttack( newInfo, vecDir, ptr );
+	BaseClass::TraceAttack( newInfo, vecDir, ptr, pAccumulator );
 }
 
 

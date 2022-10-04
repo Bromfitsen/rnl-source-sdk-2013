@@ -1,6 +1,8 @@
 #include "cbase.h"
+#include "rnl_dt_shared.h"
 #include "rnl_task_base.h"
 #include "rnl_gamerules.h"
+#include "rnl_shareddefs.h"
 
 #include "tier0/memdbgon.h"
 
@@ -33,27 +35,15 @@ const char *TaskStateToName( int state )
 
 IMPLEMENT_NETWORKCLASS_ALIASED(RnLTaskBase, DT_RnLTaskBase)
 BEGIN_NETWORK_TABLE( CRnLTaskBase, DT_RnLTaskBase )
-#ifndef CLIENT_DLL
-	SendPropEHandle( SENDINFO( m_eParentObjective ) ),
-	SendPropBool( SENDINFO( m_bVisibleOnMap)),
-	SendPropInt( SENDINFO( m_TaskState ) ),
-	SendPropInt( SENDINFO( m_TaskPrevState ) ),
-	SendPropInt( SENDINFO( m_iCapturePercent ) ),
-	SendPropString( SENDINFO( m_szTaskName ) ),
-	SendPropVector( SENDINFO(m_vTaskOrigin), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
-	SendPropVector( SENDINFO(m_vTaskExtentMin), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
-	SendPropVector( SENDINFO(m_vTaskExtentMax), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
-#else
-	RecvPropEHandle( RECVINFO( m_eParentObjective ) ),
-	RecvPropBool( RECVINFO( m_bVisibleOnMap)),
-	RecvPropInt( RECVINFO( m_TaskState ) ),
-	RecvPropInt( RECVINFO( m_TaskPrevState ) ),
-	RecvPropInt( RECVINFO( m_iCapturePercent ) ),
-	RecvPropString( RECVINFO( m_szTaskName ) ),
-	RecvPropVector( RECVINFO(m_vTaskOrigin) ),
-	RecvPropVector( RECVINFO(m_vTaskExtentMin) ),
-	RecvPropVector( RECVINFO(m_vTaskExtentMax) ),
-#endif
+	PropEHandle(PROPINFO( m_eParentObjective ) ),
+	PropBool(PROPINFO( m_bVisibleOnMap)),
+	PropInt(PROPINFO( m_TaskState ) ),
+	PropInt(PROPINFO( m_TaskPrevState ) ),
+	PropInt(PROPINFO( m_iCapturePercent ) ),
+	PropString(PROPINFO( m_szTaskName ) ),
+	PropVector(PROPINFO(m_vTaskOrigin), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
+	PropVector(PROPINFO(m_vTaskExtentMin), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
+	PropVector(PROPINFO(m_vTaskExtentMax), -1, SPROP_COORD, 0.0f, HIGH_DEFAULT ),	// only sent once
 END_NETWORK_TABLE()
 
 #ifndef CLIENT_DLL
@@ -104,8 +94,8 @@ CRnLTaskBase::CRnLTaskBase()
 	m_TaskState = RNL_TASK_NEUTRAL;
 
 #ifndef CLIENT_DLL
-	m_iInitialControllingTeam = TEAM_NONE;
-	m_iCapturableTeam = TEAM_NONE;
+	m_iInitialControllingTeam = TEAM_INVALID;
+	m_iCapturableTeam = TEAM_INVALID;
 #else
 	gvClientTaskList.AddToTail( this );
 #endif
@@ -294,7 +284,7 @@ void CRnLTaskBase::SetTaskState( int iState )
 	else if( iState == RNL_TASK_AXIS_CONTROLLED )
 		ChangeTeam( TEAM_AXIS );
 	else
-		ChangeTeam( TEAM_NONE );
+		ChangeTeam(TEAM_INVALID);
 #endif
 	PreStateChange( iState );
 

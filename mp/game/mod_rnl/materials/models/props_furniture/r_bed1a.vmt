@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_furniture/r_bed1a"
+	"$model" 1
+	"$surfaceprop" "no_decal"
+}

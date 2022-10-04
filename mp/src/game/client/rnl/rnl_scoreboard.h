@@ -12,6 +12,10 @@
 #endif
 
 #include <clientscoreboarddialog.h>
+#include "rnl_shareddefs.h"
+
+// defined for squad header
+#define TYPE_SQUAD			6
 
 //-----------------------------------------------------------------------------
 // Purpose: Game ScoreBoard
@@ -22,6 +26,10 @@ private:
 	DECLARE_CLASS_SIMPLE(CRnLScoreboard, CClientScoreBoardDialog);
 	
 public:
+	// column widths at 640
+	enum { CLASS_WIDTH = 65};
+	// total = 340
+
 	CRnLScoreboard(IViewPort *pViewPort);
 	~CRnLScoreboard();
 	virtual void Update();
@@ -47,7 +55,7 @@ protected:
 
 private:
 	virtual void AddHeader(); // add the start header of the scoreboard
-	virtual int AddSection(int iSectionType, int iTeamNumber = TEAM_NONE, const char *szSquadName = ""); // add a new section header for a team
+	virtual int AddSection(int iSectionType, int iTeamNumber = TEAM_INVALID, const char *szSquadName = ""); // add a new section header for a team
 	virtual void FillScoreBoard();
 
 	/* Michael Lebson
@@ -57,6 +65,8 @@ private:
 	int			iTeamSections[TEAMS_COUNT];
 	int			iNumPlayersOnTeam[TEAMS_COUNT];
 	int			iTeamLatency[TEAMS_COUNT];
+
+	vgui::SectionedListPanel* m_pAxisPlayerList;
 
 	// rounded corners
 	Color					 m_bgColor;

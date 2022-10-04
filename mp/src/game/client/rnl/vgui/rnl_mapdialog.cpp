@@ -134,16 +134,25 @@ bool CRnLMapDialog::NeedsUpdate( void )
 // Purpose: Recalculate the internal scoreboard data
 //-----------------------------------------------------------------------------
 void CRnLMapDialog::Update( void )
-{	
+{
+	if (CBasePlayer::GetLocalPlayer() == NULL)
+		return;
+
+	CRnLPlayer* pPlayer = CRnLPlayer::GetLocalRnLPlayer();
+	if (!pPlayer)
+		return;
+
 	// Reset();
 	MoveToCenterOfScreen();
 
 	m_pMapPanel->Update();
 
-	C_RnLPlayer *pPlayer = C_RnLPlayer::GetLocalRnLPlayer();
-
-	if( pPlayer && ((pPlayer->GetTeamNumber() <= TEAM_SPECTATOR) || !pPlayer->IsAlive() || (pPlayer->GetWaterLevel() >= WL_Waist)) )
-		ShowPanel( false );
+	if (pPlayer->GetTeamNumber() <= TEAM_SPECTATOR ||
+		!pPlayer->IsAlive() ||
+		(pPlayer->GetWaterLevel() >= WL_Waist))
+	{
+		ShowPanel(false);
+	}
 
 	// update every second
 	m_fNextUpdateTime = gpGlobals->curtime + 1.0f; 

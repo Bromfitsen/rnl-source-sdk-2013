@@ -61,6 +61,10 @@ public:
 #if defined( HL2_DLL ) || defined( HL2_CLIENT_DLL )
 		entitygroundcontact.RemoveAll();
 #endif
+
+#ifdef RNL_DLL
+		mod_data.RemoveAll();
+#endif
 	}
 
 	CUserCmd& operator =( const CUserCmd& src )
@@ -91,6 +95,9 @@ public:
 		entitygroundcontact			= src.entitygroundcontact;
 #endif
 
+#ifdef RNL_DLL
+		mod_data = src.mod_data;
+#endif
 		return *this;
 	}
 
@@ -117,6 +124,13 @@ public:
 		CRC32_ProcessBuffer( &crc, &random_seed, sizeof( random_seed ) );
 		CRC32_ProcessBuffer( &crc, &mousedx, sizeof( mousedx ) );
 		CRC32_ProcessBuffer( &crc, &mousedy, sizeof( mousedy ) );
+
+#ifdef RNL_DLL
+		if (mod_data.Count() > 0)
+		{
+			CRC32_ProcessBuffer(&crc, mod_data.Base(), mod_data.Count());
+		}
+#endif
 		CRC32_Final( &crc );
 
 		return crc;
@@ -131,6 +145,10 @@ public:
 		upmove = 0.f;
 		buttons = 0;
 		impulse = 0;
+
+#ifdef RNL_DLL
+		mod_data.RemoveAll();
+#endif
 	}
 
 	// For matching server and client commands for debugging
@@ -170,6 +188,10 @@ public:
 	// Back channel to communicate IK state
 #if defined( HL2_DLL ) || defined( HL2_CLIENT_DLL )
 	CUtlVector< CEntityGroundContact > entitygroundcontact;
+#endif
+
+#ifdef RNL_DLL
+	CUtlVector<byte> mod_data;
 #endif
 
 };

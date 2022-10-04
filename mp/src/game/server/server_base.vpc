@@ -670,6 +670,7 @@ $Project
 		$File	"$SRCDIR\public\bone_setup.cpp"					\
 				"$SRCDIR\public\collisionutils.cpp"					\
 				"$SRCDIR\public\dt_send.cpp"						\
+				"$SRCDIR\public\dt_shared.cpp"						\
 				"$SRCDIR\public\dt_utlvector_common.cpp"			\
 				"$SRCDIR\public\dt_utlvector_send.cpp"				\
 				"$SRCDIR\public\editor_sendcommand.cpp"				\

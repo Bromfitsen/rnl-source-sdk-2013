@@ -523,6 +523,7 @@ $Project
 				"$SRCDIR\public\collisionutils.cpp"					\
 				"$SRCDIR\public\crtmemdebug.cpp"					\
 				"$SRCDIR\public\dt_recv.cpp"						\
+				"$SRCDIR\public\dt_shared.cpp"						\
 				"$SRCDIR\public\dt_utlvector_common.cpp"			\
 				"$SRCDIR\public\dt_utlvector_recv.cpp"				\
 				"$SRCDIR\public\filesystem_helpers.cpp"				\

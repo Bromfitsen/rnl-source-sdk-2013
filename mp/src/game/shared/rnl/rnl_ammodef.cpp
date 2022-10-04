@@ -6,6 +6,8 @@
 #include "cbase.h"
 #include "decals.h"
 #include "rnl_ammodef.h"
+#include "rnl_shareddefs.h"
+
 #include "tier0/memdbgon.h"
 
 //-----------------------------------------------------------------------------
@@ -61,6 +63,28 @@ float CRnLAmmoDef::GetVelocity( int iAmmoID )
 		return 0.0;
 
 	return m_BallisticInfo[iAmmoID].velocity;
+}
+
+void CRnLAmmoDef::SetMagazineSize(const char* pszAmmoType, int32 iMagSize)
+{
+	int32 iAmmoID = Index(pszAmmoType);
+	if (iAmmoID >= MAX_AMMO_TYPES || iAmmoID < 0)
+		return;
+
+	m_MagazineInfo[iAmmoID] = iMagSize;
+}
+
+int32 CRnLAmmoDef::GetMagazineSize(const char* pszAmmoType)
+{
+	return GetMagazineSize(Index(pszAmmoType));
+}
+
+int32 CRnLAmmoDef::GetMagazineSize(int iAmmoID)
+{
+	if (iAmmoID >= MAX_AMMO_TYPES || iAmmoID < 0)
+		return 0;
+
+	return m_MagazineInfo[iAmmoID];
 }
 
 bool CRnLAmmoDef::GetDeflection(const char* pszAmmoType, unsigned short surfaceProp, float& flAng )

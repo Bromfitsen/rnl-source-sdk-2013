@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_well01"
+	"$bumpmap" "models/props_exterior/s_well01_normal"
+	"$surfaceprop" "stone"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

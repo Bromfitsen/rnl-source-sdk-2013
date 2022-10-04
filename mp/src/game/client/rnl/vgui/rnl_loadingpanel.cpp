@@ -250,7 +250,7 @@ wchar_t *CRnLLoadingPanel::ParseTipForKeys( wchar_t* wzStr )
 	}
 
 	// Convert it back.
-	wchar_t wzTemp[255] = L"";
+	static wchar_t wzTemp[255] = L"";
 	g_pVGuiLocalize->ConvertANSIToUnicode(szStr, wzTemp, 255);
 
 	return wzTemp;

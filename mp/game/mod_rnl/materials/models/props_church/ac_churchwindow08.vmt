@@ -1,0 +1,39 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_church/ac_churchwindow08_inside"
+	"$bumpmap" "models\props_church/ac_churchwindow08_normal"
+	"$translucent" 1
+	"$normalmapalphaenvmapmask" 1
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[.7 .7 .7]"
+	"$surfaceprop" "glass"
+	"$model" 1
+}
+
+
+/*
+"Refract"
+{
+
+"Refract_DX60"
+{
+  "$fallbackmaterial" "models\props_church/ac_churchwindow08_dx60"
+}
+ 
+
+	"$surfaceprop" "glass"
+	"$model" "1"
+	"$bluramount" "1"
+	"$refractamount" ".3"
+	"$refracttint" "[.9 .9 .9]"
+	
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[.7 .7 .7]"
+	"$translucent" 1
+	"$normalmapalphaenvmapmask" 1
+	"$normalmap" "models\props_church\ac_churchwindow08_normal"
+	
+	"$REFRACTTINTTEXTURE" "models\props_church\ac_churchwindow08_inside"
+
+}
+*/

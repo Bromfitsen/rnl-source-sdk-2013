@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\/player/german/heer/german_helmet_camo"
+	"$bumpmap" "models\player\german\heer\german_helmet_camo_normal"
+	"$nocull" 1
+	"$model" 1
+	"$phong" "1"
+	"$phongexponent" "3"
+	"$phongboost" "0.5"	
+	"$phongfresnelranges"	"[0.2 0.2 0.2]"
+//	"$halflambert" "1"
+	"$phongalbedotint" "1"
+}

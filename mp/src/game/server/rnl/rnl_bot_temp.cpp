@@ -15,7 +15,7 @@
 #include "player.h"
 #include "rnl_player.h"
 #include "rnl_game_team.h"
-#include "rnl_base_squad.h"
+#include "rnl_squad.h"
 #include "rnl_gamerules.h"
 #include "in_buttons.h"
 #include "movehelper_server.h"
@@ -119,7 +119,7 @@ CBasePlayer *BotPutInServer( bool bFrozen )
 		int iSquad = pTeam->GetNextAvailableSquad();
 		if( iSquad != -1 )
 		{
-			CRnLBaseSquad* pSquad = (CRnLBaseSquad*)pTeam->GetSquad( iSquad );
+			CRnLSquad* pSquad = pTeam->GetSquad( iSquad );
 			if( pSquad )
 			{
 				int iSlot = pSquad->GetNextAvailableSlot();
@@ -488,13 +488,9 @@ void Bot_Think( CRnLBot *pBot )
 		}
 
 		Bot_FlipOut( pBot, cmd );
-
-		// Fix up the m_fEffects flags
-		pBot->PostClientMessagesSent();
-
 		
 		
-		cmd.weaponangles = cmd.viewangles = pBot->GetLocalAngles();
+		cmd.viewangles = pBot->GetLocalAngles();
 		cmd.upmove = 0;
 		cmd.impulse = 0;
 	}

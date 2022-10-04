@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_artillery\german\LeFH18b"
+        // "$bumpmap" "models\props_artillery\german\LeFH18b_normal"
+	"$surfaceprop" "metal"
+        "$model" "1"
+
+	// "$phong" "1"
+	// "$phongexponent" "5"
+	// "$phongboost"	"0.1"
+	// "$phongfresnelranges"	"[1 0.2 1]"
+	
+	// Removed for performance reasons
+}

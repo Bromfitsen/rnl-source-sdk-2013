@@ -1,0 +1,757 @@
+//Carentan Causeway Soundscape File
+
+//Rivers
+
+"Causeway.River"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.7"
+		"wave"		"ambient\river\river-thick2.wav"
+		"pitch" 	"100"
+		"soundlevel" 	"SNDLVL_NORM"
+	}
+
+	"playrandom"
+	{
+		"time"		"5,15"
+		"volume"	"0.5,0.7"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"	"ambient/creatures/flies5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird6.wav"
+			"wave"	"ambient/levels/coast/coastbird4.wav"
+			"wave"	"ambient/levels/coast/coastbird5.wav"
+
+		}
+	}
+}
+
+//Steam area
+
+"Causeway.Stream"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.8"
+		"wave"		"ambient/river/Water_StreamLoop3"
+		"pitch" 	"100"
+		"soundlevel" 	"SNDLVL_NORM"
+		
+	}
+
+	"playrandom"
+	{
+		"time"		"5,15"
+		"volume"	"0.7,0.8"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"	"ambient/creatures/flies5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird6.wav"
+			"wave"	"ambient/levels/coast/coastbird4.wav"
+			"wave"	"ambient/levels/coast/coastbird5.wav"
+		}
+	}
+}
+
+//Swamp, gentle lapping water sounds, birds and flies buzzing around
+
+"Causeway.Swamp"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"wave"		"ambient\river\water_gently_lapping.wav"
+		"pitch" 	"100"
+		"soundlevel" 	"SNDLVL_NORM"
+	}
+
+	"playrandom"
+	{
+		"time"		"5,15"
+		"volume"	"0.5,0.7"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"	"ambient/creatures/flies5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird6.wav"
+			"wave"	"ambient/levels/coast/coastbird4.wav"
+			"wave"	"ambient/levels/coast/coastbird5.wav"
+		}
+	}
+}
+
+//Frogs
+
+"Causeway.Frogs"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.8"
+		"wave"		"ambient/levels/canals/swamp_frogs_loop2.wav"
+		"pitch" 	"100"
+	}
+}
+
+//Crickets
+
+"Causeway.Crickets"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.8"
+		"wave"		"ambient/animal/cricket_chirp_1.wav"
+		"pitch" 	"100"
+	}
+}
+
+//Rodents
+
+"Causeway.Rodents"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.8,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/mouse_squeak_1"
+			"wave"	"ambient/animal/mouse_squeak_2"
+			"wave"	"ambient/animal/rodent_scratch_1"
+			"wave"	"ambient/animal/rodent_scratch_short_1"
+			"wave"	"ambient/animal/rodent_scratch_short_2"
+		}
+	}
+}
+
+//Rats
+
+"Causeway.Rats"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.8,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/rats1"
+			"wave"	"ambient/creatures/rats2"
+			"wave"	"ambient/creatures/rats3"
+			"wave"	"ambient/creatures/rats4"			
+			
+		}
+	}
+}
+
+//Flies
+
+"Causeway.Flies"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.8,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1"
+			"wave"	"ambient/creatures/flies2"
+			"wave"	"ambient/creatures/flies3"
+			"wave"	"ambient/creatures/flies4"			
+			"wave"	"ambient/creatures/flies5"			
+
+		}
+	}
+}
+
+//Sheep
+
+"Causeway.Sheep"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.6,0.8"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/sheep_distant_1"
+			"wave"	"ambient/animal/sheep_distant_2"
+			"wave"	"ambient/animal/sheep_distant_3"
+			
+		}
+	}
+}
+
+//Rooster
+
+"Causeway.Rooster"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.6,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/rooster_distant_1"
+			
+		}
+	}
+}
+
+//Cow
+
+"Causeway.Cow"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"30,120"
+		"volume"	"0.6,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/cow_distant_single_1"
+			"wave"	"ambient/animal/cow_distant_single_2"
+			
+		}
+	}
+}
+
+//Birds 1 - Birds Chirpping
+
+"Causeway.Birds1"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"5,20"
+		"volume"	"0.6,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/bird1"
+			"wave"	"ambient/animal/bird2"
+			"wave"	"ambient/animal/bird3"
+			"wave"	"ambient/animal/bird4"
+			"wave"	"ambient/animal/bird5"
+			"wave"	"ambient/animal/bird6"
+			"wave"	"ambient/animal/bird7"
+			"wave"	"ambient/animal/bird8"
+			"wave"	"ambient/animal/bird9"
+			"wave"	"ambient/animal/bird10"
+			"wave"	"ambient/animal/bird11"
+			"wave"	"ambient/animal/bird12"
+			"wave"	"ambient/animal/bird13"
+			"wave"	"ambient/animal/bird14"
+			"wave"	"ambient/animal/bird15"
+			"wave"	"ambient/animal/bird16"
+			"wave"	"ambient/animal/bird17"
+			"wave"	"ambient/animal/bird18"
+			"wave"	"ambient/animal/bird19"
+			"wave"	"ambient/animal/bird20"
+			
+		}
+	}
+}
+
+//Birds 2 - Bird songs
+
+"Causeway.Birds2"
+
+{
+
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"5,20"
+		"volume"	"0.6,1.0"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/bird_song_1"
+			"wave"	"ambient/animal/bird_song_2"
+			"wave"	"ambient/animal/bird_song_3"
+			"wave"	"ambient/animal/bird_song_4"
+			"wave"	"ambient/animal/bird_song_5"
+			"wave"	"ambient/animal/bird_song_6"
+			"wave"	"ambient/animal/bird_song_7"
+			"wave"	"ambient/animal/bird_song_8"
+			"wave"	"ambient/animal/bird_song_9"
+			"wave"	"ambient/animal/bird_song_10"
+			"wave"	"ambient/animal/bird_song_11"
+			"wave"	"ambient/animal/bird_song_12"
+			"wave"	"ambient/animal/bird_song_13"
+			
+		}
+	}
+}
+
+//General Ambience for the entire map excluding the swamp area
+
+"Causeway.ambience"
+
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"1.0"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+		"pitch" 	"100"
+		"soundlevel" 	"SNDLVL_NORM"
+		
+	}
+
+	"playrandom"
+	{
+		"time"		"5,15"
+		"volume"	"0.7,0.8"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"	"ambient/creatures/flies5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird6.wav"
+			"wave"	"ambient/levels/coast/coastbird4.wav"
+			"wave"	"ambient/levels/coast/coastbird5.wav"
+		}
+	}
+}
+
+//Swamp area
+
+"Causeway.Swamparea"
+
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Causeway.Swamp"
+	}
+
+	// 0 = Crickets in bushes
+	"playsoundscape"
+	{	
+		"postionoverride" 	"0"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 1 = Cricket in bushes
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 2 = Cricket in bushes
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 3 = Cricket in bushes
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 4 = Frogs
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"Causeway.Frogs"
+	}
+
+	// 5 = Frogs
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"Causeway.Frogs"
+	}
+
+	// 6 = Frogs
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"Causeway.Frogs"
+	}
+	
+	// 7 = Frogs
+	"playsoundscape"
+	{	
+		"positionoverride"	"7"
+		"name"				"Causeway.Frogs"
+	}
+}
+
+//River area
+
+"Causeway.Riverarea"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Causeway.River"
+	}
+
+	// 0 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"Causeway.River"
+	}
+
+	// 1 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"Causeway.River"
+	}
+	
+	// 2 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"Causeway.River"
+	}
+	
+	// 3 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"Causeway.River"
+	}
+
+	// 4 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"Causeway.River"
+	}
+
+	// 5 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"Causeway.River"
+	}
+
+	// 6 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"Causeway.River"
+	}
+
+	// 7 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"7"
+		"name"				"Causeway.River"
+	}
+}	
+
+//Coles Charge and Cabbage patch area
+
+"Causeway.Coles"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Causeway.ambience"
+	}
+
+	// 0 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 1 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"Causeway.Crickets"
+	}
+	
+	// 2 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"Causeway.Cow"
+	}
+	
+	// 3 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"Causeway.Sheep"
+	}
+
+	// 4 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"Causeway.Birds1"
+	}
+
+	// 5 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"Causeway.Birds1"
+	}
+
+	// 6 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"Causeway.Birds2"
+	}
+
+	// 7 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"7"
+		"name"				"Causeway.Birds2"
+	}
+}	
+
+//Stream area ambience
+
+"Causeway.Streamarea"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Causeway.Stream"
+	}
+
+	// 0 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"Causeway.Crickets"
+	}
+
+	// 1 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"Causeway.Crickets"
+	}
+	
+	// 2 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"Causeway.Birds1"
+	}
+	
+	// 3 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"Causeway.Birds1"
+	}
+
+	// 4 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"Causeway.Birds2"
+	}
+
+	// 5 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"Causeway.Birds2"
+	}
+
+	// 6 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"Causeway.Frogs"
+	}
+
+	// 7 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"7"
+		"name"				"Causeway.Frogs"
+	}
+}	
+
+//Ingouf Farm area ambience
+
+"Causeway.Ingouf"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Causeway.ambience"
+	}
+
+	// 0 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"Causeway.Rodents"
+	}
+
+	// 1 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"Causeway.Rodents"
+	}
+	
+	// 2 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"Causeway.Rooster"
+	}
+	
+	// 3 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"Causeway.Rats"
+	}
+
+	// 4 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"Causeway.Rats"
+	}
+
+	// 5 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"Causeway.Flies"
+	}
+
+	// 6 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"Causeway.Flies"
+	}
+
+	// 7 = River
+	"playsoundscape"
+	{	
+		"positionoverride"	"7"
+		"name"				"Causeway.Birds1"
+	}
+}	

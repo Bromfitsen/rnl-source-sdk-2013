@@ -1,0 +1,12 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/germ_sleeve_splinter"
+        "$bumpmap" "models/weapons/germ_sleeve_normal"
+	"$model" 1
+	"$phong" "1"
+	"$phongexponent" "2"
+	"$phongboost" "0.2"	
+	"$phongfresnelranges"	"[0.3 2.3 5.3]"
+//	"$halflambert" "1"
+	"$phongalbedotint" "1"
+}

@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_exterior/sme_rowatticwind_02a"
+	"$surfaceprop" "wood"
+	"$model" 1
+	"%keyword" "rnl"
+}

@@ -234,6 +234,16 @@ void CWeaponM1Garand::ItemPostFrame()
 			}
 		}
 
+		// Attach the bayonett
+		if (pPlayer->m_nButtons & IN_ATTACK3)
+		{
+			if (gpGlobals->curtime >= m_flNextPrimaryAttack &&
+				gpGlobals->curtime >= m_flNextSecondaryAttack )
+			{
+				BayonetTransition(1);
+			}
+		}
+
 		// Reload
 		if (pPlayer->m_nButtons & IN_RELOAD  )
 		{
@@ -243,14 +253,6 @@ void CWeaponM1Garand::ItemPostFrame()
 			}
 		}
 
-		// Attach the bayonett
-		if (pPlayer->m_nButtons & IN_ATTACH )
-		{
-			if( gpGlobals->curtime >= m_flNextPrimaryAttack )
-			{
-				BayonetTransition( 1 );
-			}
-		}
 
 		WeaponIdle();
 	}

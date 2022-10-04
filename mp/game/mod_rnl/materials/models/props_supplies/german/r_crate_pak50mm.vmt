@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_supplies\german\r_crate_pak50mm"
+	"$bumpmap" "models\props_supplies\german\r_crate_pak50mm_normal"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

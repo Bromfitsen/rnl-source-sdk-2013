@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/world_models/axis_exp/w_axis_exp_fake"
+    "$translucent" 1
+	"$alpha" 0.5
+}

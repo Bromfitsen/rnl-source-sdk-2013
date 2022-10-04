@@ -48,7 +48,7 @@ CRnLTaskCapturePerimeter::CRnLTaskCapturePerimeter()
 		CBasePlayer *pPlayer = NULL;
 		int iAxisCount = 0;
 		int iAlliesCount = 0;
-		int iDominantTeam = TEAM_NONE;
+		int iDominantTeam = TEAM_INVALID;
 
 		for ( CEntitySphereQuery sphere( GetAbsOrigin(), m_iCaptureRadius, FL_CLIENT | FL_FAKECLIENT ); ( pEntity = sphere.GetCurrentEntity() ) != NULL; sphere.NextEntity() )
 		{

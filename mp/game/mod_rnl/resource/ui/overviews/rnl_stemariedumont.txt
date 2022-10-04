@@ -1,0 +1,122 @@
+// rnl NCO Map description file rnl_stmariedumont
+"mapvalues"
+{
+
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_stemariedumont_allies"	// texture file
+		"offset_x"	"-10" // -8
+		"offset_y"	"-60" // -78
+		"scale"		"1.31"  // 1.78
+		"reverse_y"	"0"   // 0
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_stemariedumont_axis"	// texture file
+		"offset_x"	"-10" // -8
+		"offset_y"	"-51" // -78
+		"scale"		"1.31"  // 1.78
+		"reverse_y"	"0"   // 0
+	}
+
+	"node0"
+	{
+		"displayname"	"Hotel"
+		"statuspos"	"10 140"
+	}
+
+	"node1"
+	{
+		"displayname"	"Town Square"
+		"statuspos"	"10 160"
+		"area"
+		{
+			"vert" "-2944 -9752 0"
+			"vert" "-2944 -7832 0"
+			"vert" "-1792 -7832 0"
+			"vert" "-724 -8148 0"
+			"vert" "296 -8148 0"
+			"vert" "296 -9752 0"
+		}
+	}
+
+	"node2"
+	{
+		"displayname"	"Apple Farm"
+		"statuspos"	"10 180"
+	}
+
+	"node3"
+	{
+		"displayname"	"Corn Farm"
+		"statuspos"	"10 200"
+		"area"
+		{
+			"vert" "-2918 2426 0"
+			"vert" "-2918 1914 0"
+			"vert" "-3094 1914 0"
+			"vert" "-3094 2426 0"
+		}
+		"area"
+		{
+			"vert" "-2854 1914 0"
+			"vert" "-2854 1510 0"
+			"vert" "-3178 1510 0"
+			"vert" "-3178 1914 0"
+		}
+		"area"
+		{
+			"vert" "-3178 1966 0"
+			"vert" "-3178 1674 0"
+			"vert" "-3606 1674 0"
+			"vert" "-3606 1966 0"
+		}
+	}
+
+	"node4"
+	{
+		"displayname"	"Pond House"
+		"statuspos"	"10 220"
+		"area"
+		{
+			"vert" "484 5924 0"
+			"vert" "484 5684 0"
+			"vert" "-140 5684 0"
+			"vert" "-140 5924 0"
+		}
+		"area"
+		{
+			"vert" "448 5684 0"
+			"vert" "448 5308 0"
+			"vert" "200 5308 0"
+			"vert" "200 5684 0"
+		}
+	}
+
+	"node5"
+	{
+		"displayname"	"Artillery Battery"
+		"statuspos"	"10 240"
+		"area"
+		{
+			"vert" "4728 6276 0"
+			"vert" "3232 6276 0"
+			"vert" "2688 6996 0"
+			"vert" "4728 6996 0"
+		}
+		"area"
+		{
+			"vert" "3584 6996 0"
+			"vert" "2688 6996 0"
+			"vert" "2688 8084 0"
+			"vert" "3584 8084 0"
+		}
+	}
+
+	"node6"
+	{
+		"displayname"	"Barn"
+		"statuspos"	"10 260"
+	}
+}

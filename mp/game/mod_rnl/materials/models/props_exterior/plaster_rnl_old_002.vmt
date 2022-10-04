@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture"			"models/props_exterior/plaster_rnl_old_002"
+	"$model" 			"1"
+	"$surfaceprop" 			"concrete"
+	"$bumpmap" 			"models/props_exterior/plaster_rnl_old_002_env"
+}
+
+

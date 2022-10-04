@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_debris/r_floor_destroyed"
+	"$model" 1
+}

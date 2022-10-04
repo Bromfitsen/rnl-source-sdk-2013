@@ -52,7 +52,7 @@ CRnLSpawnArea::CRnLSpawnArea()
 	m_vecCenter.Init();
 	m_bFallback = false;
 
-	m_iIntitialOwner = TEAM_NONE;
+	m_iIntitialOwner = TEAM_INVALID;
 	m_bBaseSpawn = false;
 }
 
@@ -125,7 +125,7 @@ void CRnLSpawnArea::InputDisable( inputdata_t &inputdata )
 	if( m_bBaseSpawn )
 		return;
 
-	ChangeTeam( TEAM_NONE );
+	ChangeTeam(TEAM_INVALID);
 }
 
 void CRnLSpawnArea::InputEnable( inputdata_t &inputdata )

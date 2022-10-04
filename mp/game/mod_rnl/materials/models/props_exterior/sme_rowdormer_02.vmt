@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/sme_rowdormer_02"
+	"$surfaceprop" "concrete"
+	"$model" 1
+	"%keyword" "rnl"
+}
+

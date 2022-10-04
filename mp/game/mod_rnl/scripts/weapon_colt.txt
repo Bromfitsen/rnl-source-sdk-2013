@@ -1,0 +1,105 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"35"		// damage per bullet
+	"Bullets"			"1"		// bullets per shoot
+	"CycleTime"			"0.15"	// time between shoots
+	"Spread"			"0.01760" //"0.01530"	//Bullet Spread
+
+
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"			"M1911A1 Colt"
+	"viewmodel"			"models/weapons/v_m1911a1.mdl"
+	"playermodel"			"models/weapons/W_colt.mdl"
+	"PlayerAnimationExtension"	"pistol"
+	"ClipModel"				"models/items/w_colt_ammo.mdl"
+	"Team"				"allies"
+
+	"bucket"			"1"
+	"bucket_position"		"0"
+
+	"clip_size"				"7"
+
+	"primary_ammo"			"45ACP_colt"
+	"secondary_ammo"		"None"
+
+	"weight"				"25"
+	"item_flags"			"0"
+ 	"BuiltRightHanded" 		"0"
+	"AllowFlipping" 		"1"
+
+	Recoil
+	{
+		"Normal"	"5.50"
+		"Crouched"	"3.50"
+		"Prone"		"0.80"
+		"Jumping"	"10.50"
+		"SightedFactor"	"0.66"
+	}
+
+	FieldsOfView
+	{
+		"Hip"		"75.0"
+		"Shoulder"	"75.0"
+		"Sights"	"65.0"
+		"SteadySights"	"55.0"
+		"Throwing"	"75.0"
+	}
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		"reload"			"Weapon_Colt.WorldReload"
+		//"empty"			"Default.DryFire_Pistol"
+		"single_shot"			"Weapon_Colt1911.Single"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

@@ -1,0 +1,9 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_concretecafewall01gdoor"
+	"$translucent" 1
+	"$decal" 1
+	"$nocull" 1
+	"$decalscale" 0.25
+	"%keywords" "rnl"
+}

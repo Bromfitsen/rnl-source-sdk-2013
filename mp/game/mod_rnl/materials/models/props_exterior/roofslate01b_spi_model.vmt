@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "tile/roofslate01b_spi"
+	//"$bumpmap" "tile/roofslate01a_spi_normal"
+	"$surfaceprop" "tile"
+}

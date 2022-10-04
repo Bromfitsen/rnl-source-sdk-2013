@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "concrete/v_concretewall02e"
+	"$model" 1
+	"$surfaceprop" "concrete"
+	"%keyword" "rnl"
+}

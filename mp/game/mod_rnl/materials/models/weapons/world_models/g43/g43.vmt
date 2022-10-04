@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/world_models/g43/g43"
+//	"$phong" "1"
+//	"$phongexponent" "12"
+//	"$phongboost" "1"	
+//	"$phongfresnelranges"	"[1 3 6]"
+//	"$halflambert" "1"
+//	"$phongalbedotint" "1"
+}

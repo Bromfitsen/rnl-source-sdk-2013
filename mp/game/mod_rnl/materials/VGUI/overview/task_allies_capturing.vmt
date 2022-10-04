@@ -1,0 +1,6 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/overview/task_allies_capturing"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

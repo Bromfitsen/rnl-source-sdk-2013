@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tools\model_locator"
+	"$translucent" 1
+}

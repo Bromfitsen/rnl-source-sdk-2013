@@ -1,0 +1,6 @@
+"LightMappedGeneric"
+{
+	"$basetexture" "decals/r_boulangerie"
+	"$translucent" "1"
+	"%keywords" "rnl"
+}

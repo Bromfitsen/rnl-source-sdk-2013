@@ -1,0 +1,115 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"40"		// damage per bullet
+	"Bullets"			"1"		// bullets per shoot
+	"CycleTime"			"0.087"	// time between shoots should be 0.1 or 0.087
+	"Spread"			"0.0455"	//Bullet Spread
+	
+	
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"			"M1A1 Thompson"
+	"viewmodel"			"models/weapons/v_thompson.mdl"
+	"playermodel"			"models/weapons/w_thompson.mdl"
+	"PlayerAnimationExtension"	"thompson"
+	"ClipModel"					"models/items/w_thompson_ammo.mdl"
+	"Team"				"allies"
+	
+	"bucket"			"0"
+	"bucket_position"		"0"
+
+	"clip_size"			"30"
+	
+	"primary_ammo"			"45ACP"
+	"secondary_ammo"		"None"
+
+	"weight"			"25"
+ 	"BuiltRightHanded" 		"0"
+	"AllowFlipping" 		"1"
+	
+	"autoswitchto"			"1"
+	"autoswitchfrom"		"0"
+
+	// old way to do item flags
+	"item_flags"			"7" // ITEM_FLAG_SELECTONEMPTY | ITEM_FLAG_NOAUTORELOAD | ITEM_FLAG_NOAUTOSWITCHEMPTY
+
+	// new way to do item flags
+	"ITEM_FLAG_SELECTONEMPTY"	"1"	
+	"ITEM_FLAG_NOAUTORELOAD"	"1"
+	"ITEM_FLAG_NOAUTOSWITCHEMPTY"	"1"
+
+	Recoil
+	{
+		"Normal"	"2.30"
+		"Crouched"	"1.85"
+		"Prone"		"0.30"
+		"Jumping"	"5.25"
+		"SightedFactor"	"0.66"
+	}
+
+	FieldsOfView
+	{
+		"Hip"		"75.0"
+		"Shoulder"	"75.0"
+		"Sights"	"65.0"
+		"SteadySights"	"50.0"
+		"Throwing"	"75.0"
+	}
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		"reload"			"Weapon_Thompson.WorldReload"
+		//"empty"			"Default.ClipEmpty_Rifle"
+		"single_shot"		"Weapon_Thompson.Shoot"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

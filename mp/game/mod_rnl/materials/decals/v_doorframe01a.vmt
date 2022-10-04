@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_doorframe01a"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+    "$nocull" 1
+}

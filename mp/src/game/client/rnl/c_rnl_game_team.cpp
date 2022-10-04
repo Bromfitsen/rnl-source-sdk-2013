@@ -6,10 +6,12 @@
 //=============================================================================//
 #include "cbase.h"
 #include "engine/IEngineSound.h"
+#include "dt_utlvector_recv.h"
 #include "hud.h"
 #include "recvproxy.h"
 #include "c_rnl_game_team.h"
-#include "c_rnl_base_squad.h"
+#include "rnl_squad.h"
+#include "rnl_shareddefs.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -44,8 +46,8 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetKitDescriptionCount(); j++ )
 		{
-			RnLKitDescription& desc = pGameTeam->GetKitDescription( j );
-			Msg( "			%s\n", desc.name );
+			CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
+			Msg( "			%s\n", desc.name.Get() );
 			
 		}
 
@@ -53,11 +55,11 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetNumberOfSquads(); j++ )
 		{
-			IRnLSquad* pSquad = pGameTeam->GetSquad(j);
+			CRnLSquad* pSquad = pGameTeam->GetSquad(j);
 			if( !pSquad )
 				continue;
 
-			Msg( "		%s\n", pSquad->GetSquadName() );
+			Msg( "		%s\n", pSquad->GetSquadTitle() );
 
 			if( pSquad->GetSquadLeader() != NULL )
 			{
@@ -70,16 +72,18 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 			Msg( "			Loadouts:\n" );
 
-			for( int k = 0; k < pSquad->GetSlotCount(); k++ )
+			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
-				CSquadSlotInfo& info = pSquad->GetSlotInfo(k);
-				RnLKitDescription& desc = pGameTeam->GetKitDescription( info.iKitDesc );
+				CRnLSquadKitInfo& info = pSquad->GetKitInfo(k);
+				CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
 
-				Msg( "				%s: (max %d)\n", desc.name, info.iMaxCount );
+				Msg( "				%s: (max %d)\n", desc.name.Get(), info.iMaxCount );
 
-				for( int l = 0; l < info.pMembers.Count(); l++ )
+				CRnLPlayer* pMember = pSquad->GetNextMember(info.iKitID, nullptr);
+				while (pMember != nullptr)
 				{
-					Msg( "					%s\n", info.pMembers[l]->GetPlayerName() );
+					Msg( "					%s\n", pMember->GetPlayerName() );
+					pMember = pSquad->GetNextMember(info.iKitID, nullptr);
 				}
 			}
 
@@ -87,35 +91,12 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Purpose: RecvProxy that converts the Team's player UtlVector to entindexes
-//-----------------------------------------------------------------------------
-void RecvProxy_SquadList(  const CRecvProxyData *pData, void *pStruct, void *pOut )
-{
-	C_RnLGameTeam *pTeam = (C_RnLGameTeam*)pOut;
-	pTeam->m_aSquads[pData->m_iElement] = pData->m_Value.m_Int;
-	pTeam->m_bSquadChange = true;
-}
+IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam)
 
-
-void RecvProxyArrayLength_SquadArray( void *pStruct, int objectID, int currentArrayLength )
-{
-	C_RnLGameTeam *pTeam = (C_RnLGameTeam*)pStruct;
-	pTeam->m_aSquads.SetSize( currentArrayLength );
-}
-
-IMPLEMENT_CLIENTCLASS_DT(C_RnLGameTeam, DT_RnLGameTeam, CRnLGameTeam)
-	RecvPropArray2( 
-		RecvProxyArrayLength_SquadArray,
-		RecvPropInt("squad_element", 0, SIZEOF_IGNORE, 0, RecvProxy_SquadList), 
-		MAX_PLAYERS, 
-		0, 
-		"squad_array"
-		),
-END_RECV_TABLE()
-
-BEGIN_PREDICTION_DATA( C_RnLGameTeam )
-END_PREDICTION_DATA();
+BEGIN_NETWORK_TABLE(C_RnLGameTeam, DT_RnLGameTeam)
+	PropUtlVectorDataTable(m_aClassDescriptions, RNL_SQUAD_SLOTS_MAX, DT_RnLLoadoutKitInfo),
+	RecvPropUtlVector(RECVINFO_UTLVECTOR(m_aSquads), RNL_SQUAD_SLOTS_MAX, RecvPropEHandle(NULL, 0)),
+END_NETWORK_TABLE()
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -131,11 +112,11 @@ C_RnLGameTeam::~C_RnLGameTeam()
 {
 }
 
-C_RnLBaseSquad* C_RnLGameTeam::GetSquad( int idx )
+CRnLSquad* C_RnLGameTeam::GetSquad( int idx )
 {
 	if( idx < 0 || idx >= m_aSquads.Count() )
 		return NULL;
 
-	return (C_RnLBaseSquad*)(cl_entitylist->GetBaseEntity( m_aSquads[idx]));
+	return m_aSquads[idx];
 }
 

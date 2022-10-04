@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_furniture/barcounter"
+	"$surfaceprop" "wood"
+	"$model" "1"
+}

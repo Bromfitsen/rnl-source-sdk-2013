@@ -1,0 +1,7 @@
+"Sky"
+{
+	"$hdrbaseTexture" "skybox/stcomedumont02_hdrlf"
+	"$nofog" "1"
+	"$ignorez" "1"
+	"$basetexture" "skybox/stcomedumont02_lf"
+}

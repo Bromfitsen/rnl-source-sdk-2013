@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/alba_aachen_decal01"
+	"$decal" 1
+	"%keywords" "rnl"
+    "$decalscale" 1.0
+}

@@ -1,0 +1,10 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "nature/ah_dirt_ground001"
+	"$baseTexture2" "concrete/e_concreterubble01"
+	"$blendmodulatetexture" "nature/ah_dirt1_modulate"
+	"$bumpmap2" "concrete/concrete/e_concreterubble01_normal"
+	"$surfaceprop" "dirt"
+	"$surfaceprop2" "dirt"
+	"%keywords" "rubble"
+}

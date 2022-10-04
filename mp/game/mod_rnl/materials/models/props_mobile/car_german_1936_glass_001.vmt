@@ -1,0 +1,18 @@
+"VertexLitGeneric"
+{
+	"$baseTexture"			"models/props_mobile/car_german_1936_glass_001"
+	"$model" 			1
+	"$translucent"			1
+	"$surfaceprop" 			"metal"
+        "$envmap" 			"env_cubemap"
+	"$normalmapalphaenvmapmask	 "1"
+	"$bumpmap"   			"elements/metal_polished_silver_002_env"
+        "$envmaptint" 			"[.7 .7 .7]"
+	"$envmapcontrast"		 "1"
+	"$phong"			 "1"
+	"$phongboost"			 "120"
+	"$phongexponent"		 "140"
+	"$phongfresnelranges"		"[.0 .7 1.0]"
+}
+
+

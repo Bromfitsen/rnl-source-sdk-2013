@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/fountain01"
+	"model" 1
+	%keyword "rnl"
+}

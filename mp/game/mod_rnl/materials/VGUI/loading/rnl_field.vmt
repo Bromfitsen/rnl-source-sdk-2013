@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "vgui/loading/rnl_field"
+	"%keywords" "rnl"
+	"$vertexcolor" 1 
+	"$no_fullbright" 1 
+}

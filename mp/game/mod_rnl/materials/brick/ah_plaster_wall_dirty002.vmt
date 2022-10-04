@@ -1,0 +1,6 @@
+"lightmappedgeneric"
+{
+	"$basetexture" "brick/ah_plaster_wall_dirty002"
+	//"$bumpmap" "brick/ah_tan_brick001_nrm"
+	"$surfaceprop" "brick"
+}

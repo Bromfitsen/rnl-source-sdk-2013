@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_supplies\german/ammobox1"
+	"$model" 1
+}

@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\german/kettenkraftrad"
+	"$translucent" "1"
+	"$alphatest" 1
+	"$nocull" "1"
+	"$surfaceprop" "metal"
+        "$model" "1"
+	
+}

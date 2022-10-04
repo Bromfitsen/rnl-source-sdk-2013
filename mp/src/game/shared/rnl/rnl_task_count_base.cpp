@@ -1,6 +1,7 @@
 #include "cbase.h"
 #include "rnl_task_count_base.h"
 #include "rnl_gamerules.h"
+#include "rnl_shareddefs.h"
 
 #include "tier0/memdbgon.h"
 

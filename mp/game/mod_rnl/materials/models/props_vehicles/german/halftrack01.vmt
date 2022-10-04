@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\german/halftrack01"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}

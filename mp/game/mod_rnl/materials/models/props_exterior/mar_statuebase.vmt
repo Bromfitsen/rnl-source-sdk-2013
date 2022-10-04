@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/props_exterior/mar_statuebase"
+	"$surfaceprop" "stone"
+	"$model" 1
+}

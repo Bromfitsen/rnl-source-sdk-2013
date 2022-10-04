@@ -1,0 +1,12 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/hand"
+        "$bumpmap" "models/weapons/hand_normal"
+	"$model" 1
+	"$nocull" 1
+	"$phong" "1"
+//	"$phongexponent" 33
+	"$phongexponenttexture" "models/weapons/hand_exp"
+	"$phongboost"	"5"
+	"$phongfresnelranges"	"[0.05 0.5 1]"
+}

@@ -14,6 +14,7 @@
 #include <vgui_controls/EditablePanel.h>
 #include <game/client/iviewport.h>
 #include "rnl_mappanel.h"
+#include "rnl_shareddefs.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: RnL Map

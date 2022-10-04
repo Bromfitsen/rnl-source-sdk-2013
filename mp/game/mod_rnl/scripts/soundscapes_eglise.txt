@@ -1,0 +1,377 @@
+// Soundscapes for Eglise
+
+"eglise.outside1"
+{
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"0.05"
+		"wave"		"ambient/levels/canals/critter8.wav"
+		"pitch"		"90"
+	}
+
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"pitch"		"100"
+	}
+
+	"playrandom"
+	{
+		"time"		"1,4"
+		"volume"	"0.05,0.12"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/critter4.wav"
+			"wave"	"ambient/levels/canals/critter8.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"2,10"
+		"volume"	"0.4,0.7"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+		}
+	}
+}
+"eglise.outside1_flys"
+{
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"0.05"
+		"wave"		"ambient/levels/canals/critter8.wav"
+		"pitch"		"90"
+	}
+
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"pitch"		"100"
+	}
+
+	"playrandom"
+	{
+		"time"		"1,4"
+		"volume"	"0.05,0.12"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/critter4.wav"
+			"wave"	"ambient/levels/canals/critter8.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"2,10"
+		"volume"	"0.4,0.7"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"		"7,10"
+		"volume"	"0.7,1"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"  "ambient/creatures/flies5.wav"
+		}
+	}
+}
+"eglise.outside_planesending"
+{
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"ambient/levels/eglise/Eglise-Landing-AA.mp3"
+		"pitch"		"100"
+	}
+
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"pitch"		"100"
+	}
+
+	"playrandom"
+	{
+		"time"		"1,4"
+		"volume"	"0.05,0.12"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/critter4.wav"
+			"wave"	"ambient/levels/canals/critter8.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"2,10"
+		"volume"	"0.4,0.7"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+		}
+	}
+//	"play"
+//	{
+//		"time"		"0.5"
+//		"volume"	"0.7"
+//		"pitch"		"100"
+//		"position"	"random"
+//		"soundlevel"	"SNDLVL_140db"
+//		"rndwave"
+//		{
+//			"wave" "eglise/eglise_after-planes.wav" <-- doesn't exist
+//		}
+//	}
+}
+
+//inside the town, less critters, and changed wind
+eglise.outside2
+
+{
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"wave"		"ambient/wind/wind-light.wav"
+		"pitch"		"100"
+	}
+
+	"playrandom"
+	{
+		"time"		"1,4"
+		"volume"	"0.05,0.12"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/critter4.wav"
+			"wave"	"ambient/levels/canals/critter8.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"2,10"
+		"volume"	"0.4,0.7"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+		}
+	}
+}
+
+eglise.critters
+
+{
+	"dsp"	"1"
+
+	"playrandom"
+	{
+		"time"		"1,4"
+		"volume"	"0.05,0.12"
+		"pitch"		"90,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/critter4.wav"
+			"wave"	"ambient/levels/canals/critter8.wav"
+		}
+	}
+}
+
+//inside town buildings
+
+eglise.inside_lightcombat
+
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"		"2,10"
+		"volume"	"0.5,1"
+		"pitch"		"80,100"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_120dB"
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+		}
+	}
+}
+
+//inside c47
+
+eglise.inside_c47
+
+{
+
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"vehicles\c47_engine-loop.wav"
+		"pitch"		"105"
+		"soundlevel"	"SNDLVL_140dB"
+	}
+}
+
+eglise.insidewithflak_c47
+
+{
+
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"vehicles\c47_engine-loop.wav"
+		"pitch"		"105"
+		"soundlevel"	"SNDLVL_140dB"
+	}
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"ambient/levels/eglise/Eglise-Landing-AA.mp3"
+		"pitch"		"60"
+		"soundlevel"	"SNDLVL_50dB"
+	}
+}
+
+//by c47 door
+
+eglise.c47_door
+
+{
+
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"vehicles\c47_engine-loop.wav"
+		"pitch"		"105"
+		"soundlevel"	"SNDLVL_160dB"
+	}
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"ambient/levels/eglise/Eglise-Landing-AA.mp3"
+		"pitch"		"100"
+		"soundlevel"	"SNDLVL_140dB"
+	}
+}
+
+//early dropzone
+
+eglise.c47_dropstart
+
+{
+
+	"dsp" "1"
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"vehicles/c47_outside.wav"
+		"pitch"		"105"
+		"soundlevel"	"SNDLVL_160dB"
+	}
+
+	"playlooping"
+	{
+		"volume"	"1"
+		"wave"		"ambient/levels/eglise/Eglise-Landing-AA.mp3"
+		"pitch"		"100"
+		"soundlevel"	"SNDLVL_140dB"
+	}
+}

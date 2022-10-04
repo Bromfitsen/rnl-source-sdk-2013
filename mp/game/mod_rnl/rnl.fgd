@@ -1,0 +1,542 @@
+//-------------------------------------------------------------------------
+//
+// Forge Game Data/Game Definition File for the Resistance and Liberation mod team
+// For RnL custom entities please go to bottom of document
+//-------------------------------------------------------------------------
+
+
+// Version History
+//--------------------
+//
+// v3.26 - Lebson
+//	- Removed "timer_length" from rnl_game_manager because it was not being used in code.
+//	- Some point in the past I added a "hold_timer_length" in rnl_game_manager to set how long all objectives must be held to win the map.
+//
+// v3.25 - Lebson
+//   - Added SetIconVisibleOnMap to BaseRnLObjective to enable hiding the objective's icon and name on the map.
+//
+// v3.24 - Stefan
+//   - Added an additional required node to rnl_objective_order_filter.
+//   - Changed the descriptions of the required nodes in rnl_objective_order_filter to actually be descriptive.
+//
+// v3.22 - Lebson
+//   - Added a team restriction to tasks
+//   - Removed unused "teamowner" from rnl_task_destructable
+//
+// v3.2 - Andrew
+//	 - Raped the hell out of it for OB ents
+//
+// v0.95.32c03 - Andrew
+//	 - Added fallback spawn entity
+//
+// v0.95.32c - Andrew
+//	 - Added filter_activator_team because it's damn usefull
+//
+// v0.95.1a - Andrew
+//	 - Added fallback spawns for spawn areas
+//
+// v0.95 - Nuke
+//	 - Added to rnl_detect_tacticalengagement, points needed fields to win.
+//	 - New field for tactical nodes "Initial spawn". Consult forums on use.
+//	 - New input to replace old CaptureByEnemy, CaptureByTeam. Ensure you pass it the parameter
+//	 -  of the team you want to capture with it. LEGEND: Allies = 2, Axis = 3, None = -1.
+//
+// v0.94 - Stefan
+//	 - Added an angle for rnl_spawn_area, the code is yet to be done.
+//
+// v0.93 - Andrew
+//	 - Added rnl_mortarfield for some reason
+//	 - Added env_flakexplosion for Mikey boy
+//
+// v0.92 - Andrew
+//	- Added rnl_sandbag
+//
+// v0.91 - Nuke
+//	- Added npc_crow for Wedge
+//
+// v0.9 - Stefan
+//	- Added a spawn point for the spectator: info_player_spectator
+//
+// v0.8 - Stefan
+//	- Added the second loadout camera and model to the fgd, for the axis now
+//
+// v0.7 - Stefan
+//  - Added one new input to the tactical nodes: CaptureByEnemy, use this to capture a node via input from another entity for example
+//
+// v0.6 - Stefan
+//  - Added 2 new outputs: OnCapturedByAllies and OnCapturedByAxis; to the rnl_tactical_node
+//
+// v0.5 - Stefan
+//	- fixed a bug displaying a lot of useless error messages for func_breakable_surf
+//	  the fix is from Raeven0
+//  - Added a target name for each spawn, so they can be triggered.
+//	- Added 2 inputs to disable or enable a spawnpoint. should be grouped later..not sure how to do that yet
+//	- Added output to johnys capture areas. they now recognize if the enemy team steps into your capture zone.
+//	  Use this as either message trigger..who would want that? ;) or better - temporarly disable spawnpoints of the enemy this way
+//
+// v0.4
+//	- first npc vehicle, the wirbelwind added. very basic atm though.
+//	- added two entities for loadout vgui, the first is the position of the player model,
+//	  the second is the position/angles for the viewport camera
+//		new entities: npc_wirbelwind
+//
+// v0.3
+//	- added entities for the Tactical Engagement gameplay
+//		new entities: 	rnl_detect_tacticalengagement
+//				rnl_tactical_node
+//
+// v0.2
+//      - added the base rnl capture point, from which others will be derived
+//		new entities: 	BaseRnLCapturePoint
+//
+// v0.1
+//	- Changelog created.
+//	- Added spawn points for Axis and Allies
+//		new entities: 	info_player_axis 
+//				info_player_allies
+
+@include "base.fgd"
+
+
+@FilterClass base(BaseFilter) size(-8 -8 -8, 8 8 8) = filter_activator_team :
+	"A filter that filters by the team of the activator."
+[
+	filterteam(choices) : "Filter Team Number" : 2 : "The team number to filter by.  If the filter mode is Allow, only entities whose "+
+		"team number matches the given team will pass the filter. If the filter mode is Disallow, "+
+		"all entities EXCEPT those whose team number matches the given team will pass the filter." =
+	[
+		2 : "Allies"
+		3 : "Axis"
+	]
+]
+
+@PointClass base(Angles) studioprop("models/editor/camera.mdl") = info_player_spectator :
+	"This entity indicates the position and facing direction at which the player will spawn as a spectator."
+[
+
+]
+
+@SolidClass = func_ladder : 
+	"Ladder. Players will be able to freely along this brush, as if it was a ladder. If you are using a model prop " +
+	"for the visual representation of the ladder in the map, apply the toolsinvisibleladder material to the " +
+	"func_ladder brush."
+[
+]
+
+@PointClass base(Targetname) studio("models/props_vehicles/german/wirbelwind02.mdl") = npc_wirbelwind : "A German wirbelwind, will fire into the air randomly"
+[
+	spawnflags(flags) =
+	[
+		1 : "Start firing" : 0
+	]
+
+	input ToggleFiring(void) : "Toggle the state of firing (on or off)."	
+]
+
+@NPCClass base(BaseNPC) studio("models/crow.mdl") = npc_crow : "Crow"
+[
+	input FlyAway( string ) : "Forces the crow to fly to the nearest crow flyto hint node."
+]
+
+@NPCClass base(BaseNPC) studio("models/pigeon.mdl") = npc_pigeon : "Pigeon"
+[
+	input FlyAway( string ) : "Forces the pigeon to fly to the nearest pigeon flyto hint node."
+]
+
+@PointClass base(Targetname) studio("models/props_trenches/sandbags_curved.mdl")= rnl_sandbag : "Point for random spawning sandbags."
+[     
+]
+
+@SolidClass base(Targetname)= rnl_mortarfield : "This creates an area in which mortars will land."
+[
+	Enabled(choices) : "Starts Enabled" : 0 : "This sets the starting state of the mortar field." =
+	[
+		0 : "Off"
+		1 : "on"
+	]
+
+	MortarSource(target_destination) : "Fire Source" : : "where the mortars originate from"
+	MinDelay(float) : "Minimum Delay" : "5.0" : "This is the minimum time between mortar strikes"
+	MaxDelay(float) : "Maximum Delay" : "10.0" : "This is the maximum time between mortar strikes"
+	Damage(float) : "Damage Done" : "65.0" : "Amount of damage done when hit by a mortar."
+	DamageRadius(float) : "Radius of Damage" : "200.0" : "The radius of damage that is caused by each strike."
+	ShakeAmplitude(float) : "Shake Amplitude" : "4" : "The amount of noise in the screen shake. Should be a range between 0 and 16."
+	ShakeFrequency(float) : "Shake Frequency" : "2.5" : "The frequency used to apply the screen shake. Should be a value between 0 and 255, where 0.1 = jerk, and 255.0 = rumble."
+	ShakeRadius(float) : "Shake Radius" : "300" : "The radius around this entity in which to affect players."
+
+
+	input Enable(void) : "Activates the mortar field."
+	input Disable(void) : "Turns the field off."
+
+
+	input SetMaxDelay(float) : "Changes the Maximum delay of each strike."
+	input SetMinDelay(float) : "Changes the Minimum delay of each strike."
+
+	input FireRound(void) : "Fires a single round into the area."
+]
+
+@PointClass base(Targetname, Parentname) iconsprite("editor/env_explosion.vmt") = env_flakexplosion : "An entity that creates a flak explosion at it's origin." 
+[
+	iMagnitude(Integer) : "Magnitude" : 100 : "The amount of damage done by the explosion."
+	// If no radius override, magnitude will determine radius.
+	iRadiusOverride(Integer) : "Radius Override" : 0 : "If specified, the radius in which the explosion damages entities. If unspecified, the radius will be based on the magnitude."
+	fireballsprite(sprite) : "Fireball Sprite" : "sprites/zerogxplode.spr"
+	rendermode(choices) : "Render Mode" : 5 =
+	[
+		0: "Normal"
+		4: "Solid"
+		5: "Additive"
+	]
+	spawnflags(flags) =
+	[
+		1: "No Damage" : 0
+		2: "Repeatable" : 0
+		4: "No Fireball" : 0
+		8: "No Smoke" : 0
+		16: "No Decal" : 0
+		32: "No Sparks" : 0
+		64: "No Sound" : 0
+		128: "Random Orientation" : 0
+		256: "No Fireball Smoke" : 0
+		512: "No particles" : 0
+		1024: "No DLights" : 0
+		2048: "Don't clamp Min" : 0
+		4096: "Don't clamp Max" : 0
+	]
+
+	// Inputs
+	input Explode(void) : "Triggers the explosion."
+]
+
+@SolidClass base(Targetname) = rnl_mine_field : "A mine field that will kill enemies that enter it."
+[
+	spawnflags(flags) =
+	[
+		1: "Hostile to Axis" : 0
+		2: "Hostile to Allies" : 0
+	]
+
+	mineModel(studio) : "mine model"
+
+	mineDamage(integer): "Mine Damage" : 100 : "The damage the mine causes to the player."
+	input ToggleMine(void) : "Toggle mine field on or off. Starts on."
+]
+
+@SolidClass base(Trigger) = trigger_parachute : "A trigger to cause players parachutes to deploy if they have one."
+[
+]
+
+
+@PointClass base(BaseDriveableVehicle, Parentname) studioprop() = rnl_prop_spawn_vehicle :
+	"Robbed from the prisoner pod that the player can ride in."
+[
+	model(studio) : "World model" : "models/vehicles/prisoner_pod.mdl"
+	vehiclescript(string) : "Vehicle Script File" : "scripts/vehicles/prisoner_pod.txt"
+	
+	input Open(void) : "Plays the pod's open animation and unlocks the pod for entry or exit."
+	input Close(void) : "Plays the pod's close animation and locks the pod for entry or exit."
+	input EnterVehicle(void) : "Forces the activator (or player) into the pod."
+	input EnterVehicleImmediate(void) : "Forces the activator (or player) into the pod without enter/exit animations."
+	input ExitVehicle(void) : "Boots the prisoner out of the pod."
+	
+	output OnOpen(void) : "Fired when the pod is open enough to enter."
+	output OnClose(void) : "Fired when the pod too closed to enter."
+]
+
+@NPCClass base(VehicleDriverNPC) studio("models/player/pir/505_nco01.mdl") = rnl_spawn_vehicle_driver: 
+	"NPC used to drive an APC vehicle."
+[
+	spawnflags(Flags) = 
+	[
+		131072 : "No Gun Attacks" : 0
+	]
+
+	drivermaxspeed(float) : "Maxspeed (percentage of vehicle's maxspeed)." : 1
+	driverminspeed(float) : "MinSpeed (percentage of vehicle's maxspeed)." : 0
+
+	input SetDriversMaxSpeed(float) : "Set the Maxspeed (percentage of vehicle's maxspeed)."
+	input SetDriversMinSpeed(float) : "Set the Minspeed (percentage of vehicle's maxspeed)."
+	input StartForward(void) : "Tell the driver to start driving."
+	input Stop(void) : "Tell the driver to stop driving."
+
+	input DisableFiring(float) : "Disables firing from happening"
+	input EnableFiring(float) : "Enables firing to start. Firing is enabled by default"
+]
+
+//--------------------------------------------
+//
+// OBJECTIVES
+//
+//----------------------------------------------------
+@BaseClass base(Targetname, Parentname) = BaseRnLObjective
+[
+	spawnflags(flags) =
+	[
+
+	]
+	
+	primary(choices) : "Is Primary" : 1 : "Determines if this is a primary objective." =
+	[
+		0 : "False"
+		1 : "True"
+	]
+	
+	initialowners(choices) : "Belongs to" : -1 : "Who initially owns the objective." =
+	[
+		-1 : "Neither"
+		2 : "Allies"
+		3 : "Axis"
+	]
+	
+	behaviour(choices) : "Behaviour" : 0 : "How the objective reacts to task state changes." =
+	[
+		0 : "Normal"
+		1 : "Require All Tasks"
+		2 : "Require More Tasks Than Opposing Team"
+		3 : "Require Majority of All Tasks"
+	]
+	
+	axisorderfilter(target_destination) : "Axis Order Filter" : "" : "The filter to determine capture requirements for Axis"
+	alliesorderfilter(target_destination) : "Allied Order Filter" : "" : "The filter to determine capture requirements for Allies"
+	
+	input SetControllingTeam(integer) : "Explicitly sets the owning team of this objective and all it's tasks."
+	input SetVisibleOnMap(bool) : "Sets whether or not the objective appears on the players' maps."
+	input SetIconVisibleOnMap(bool) : "Sets whether or not the objective's icon and name label appear on the players' maps."
+	input SetPrimary(bool) : "Sets whether or not this is a primary objective."
+	
+	output OnNeutral(void) : "Objective has become neutral."
+	output OnAxisCaptured(void) : "Axis team has captured the objective."
+	output OnAxisLose(void) : "Axis team has lost the objective."
+	output OnAlliedCaptured(void) : "Allied team has captured the objective."
+	output OnAlliedLose(void) : "Allied team has lost the objective."
+]
+
+@PointClass base(BaseRnLObjective) = rnl_objective : "Base Objective Entity" 
+[
+	task(target_destination) : "Task 1" : "" : "The task that's assigned to this objective. Can be a capture zone, a destruction task or any other task we added."
+	//task#1(target_destination) : "Task 2" : "" : "Optional second task that's assigned to this objective."
+	//task#2(target_destination) : "Task 3" : "" : "Optional third task that's assigned to this objective. If you need more, use smart edit."
+]
+
+@FilterClass base(BaseFilter) iconsprite("editor/filter_multiple.vmt") = rnl_objective_order_filter : "Filter for order of Objective capturing."
+[
+	RequiredNode(target_destination) : "Required objective 1" : "" : "The objective that needs to be finished before you can attack this one. Add more than 4 by turning off smart edit and copy pasting this key"
+	RequiredNode1(target_destination) : "Required objective 2" : "" : "The second objective that needs to be finished before you can attack this one. Add more than 4 by turning off smart edit and copy pasting this key"
+	RequiredNode2(target_destination) : "Required objective 3" : "" : "The third objective that needs to be finished before you can attack this one. Add more than 4 by turning off smart edit and copy pasting this key"
+	RequiredNode3(target_destination) : "Required objective 4" : "" : "The fourth objective that needs to be finished before you can attack this one. Add more than 4 by turning off smart edit and copy pasting this key"
+	RequiredNode4(target_destination) : "Required objective 5" : "" : "The fifth objective that needs to be finished before you can attack this one. Add more than 4 by turning off smart edit and copy pasting this key"
+	
+	goal(choices) : "Goal State" : 0 : "What the ideal state is for all objectives to be before meetin requirements." =
+	[
+		0 : "Neutral"
+		1 : "Allied Controlled"
+		2 : "Axis Controlled"
+	]
+]
+
+//--------------------------------------
+//
+// TASKS
+//
+//--------------------------------------------
+@BaseClass base(Targetname, Parentname) = BaseRnLTask
+[
+	spawnflags(flags) =
+	[
+		
+	]
+
+	initialowners(choices) : "Belongs to" : -1 : "Who initially owns the objective." =
+	[
+		-1 : "Neither"
+		2 : "Allies"
+		3 : "Axis"
+	]
+
+	captureteam(choices) : "Capturable by" : -1 : "Who can capture the objective. [Not used by rnl_task_destructable]" =
+	[
+		-1 : "Both"
+		2 : "Allies"
+		3 : "Axis"
+	]
+
+	output OnAxisCaptureStart(void) : "Fired when the Axis team begins capturing a task."
+	output OnAxisCaptureBlocked(void) : "Fired when the Axis team's capture attempt is blocked."
+	output OnAxisCaptureFailed(void) : "Fired when the Axis team's capture attempt fails."
+	output OnAxisCaptured(void) : "Fired when the Axis team captures a task."
+	output OnAxisLose(void) : "Fired when the Axis team loses a task."
+
+	output OnAlliesCaptureStart(void) : "Fired when the Allied team begins capturing a task."
+	output OnAlliesCaptureBlocked(void) : "Fired when the Allied team's capture attempt is blocked."
+	output OnAlliesCaptureFailed(void) : "Fired when the Allied team's capture attempt fails."
+	output OnAlliesCaptured(void) : "Fired when the Allied team captures a task."
+	output OnAlliesLose(void) : "Fired when the Allied team loses a task."
+
+	output OnBecomeNeutral(void) : "Fired when the task becomes neutral."
+]
+
+@PointClass base(BaseRnLTask) sphere(radius) = rnl_task_perimeter_capture : "An area control task based on distance from center" 
+[
+	time(float) : "Time to capture" : "5.0" : "The amount of time it takes to capture once the point has enough players."
+]
+
+@SolidClass base(BaseRnLTask) = rnl_task_area_capture : "A brush based area control task." 
+[
+	time(float) : "Time to capture" : "5.0" : "The amount of time it takes to capture once the point has enough players."
+]
+
+@PointClass base(BaseRnLTask,Angles) studio("models/weapons/p_allied_exp.mdl") = rnl_task_destructable : "A task that requires destruction by TnT ( DYNOMITE!! )" 
+[
+	enabled(choices) : "Enabled" : 1 : "Is the task initially enabled." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+
+	output OnDestroyed(void) : "Fired when the task is destroyed."
+	output OnAxisDestroyed(void) : "Fired when the Axis team destroys the task."
+	output OnAxisChargePlaced(void) : "Fired when the Axis team places a charge."
+	output OnAlliedDestroyed(void) : "Fired when the Allied team destroys the task."
+	output OnAlliedChargePlaced(void) : "Fired when the Allied team places a charge."
+]
+
+//-------------------------------------------
+//
+// SPAWNS
+//
+//---------------------------------------------------
+@SolidClass base(Targetname, Parentname) = rnl_spawn_area : "A brush based spawn area." 
+[
+	spawndir(angle) : "Direction (Pitch Yaw Roll)" : "0 0 0" : "Angles indicating the direction the player faces after spawning."
+
+	initialowner(choices) : "Belongs to" : -1 : "Team that initially owns the spawn." =
+	[
+		-1 : "Neither"
+		2 : "Allies"
+		3 : "Axis"
+	]
+
+	basespawn(choices) : "Base Spawn" : 0 : "Sets this spawn as the base spawn for the owner team." =
+	[
+		0 : "No"
+		1 : "Yes"
+	]
+
+	AxisSpawn(target_destination) : "Next Axis Spawn" : "" : "Identifies the next spawn area for the Axis team."
+	AlliedSpawn(target_destination) : "Next Allies Spawn" : "" : "Identifies the next spawn area for the Allied team."
+	
+	AxisFallbackSpawn(target_destination) : "Axis Fallback Spawn" : "" : "Identifies the first fallback spawn area for the Axis team."
+	AlliedFallbackSpawn(target_destination) : "Allies Fallback Spawn" : "" : "Identifies the first fallback spawn area for the Allied team."
+
+	input EnableFallback(void) : "Cause this spawn to force fallback spawns."
+	input DisableFallback(void) : "Stop fallback spawning."
+
+	input Enable( void ) : "Enable this spawn area for the initial owning team."
+	input EnableAllies( void ) : "Enable this spawn area for the Allied team."
+	input EnableAxis( void ) : "Enable this spawn area for the Axis team."
+	input Disable( void ) : "Disables this spawn area."
+]
+
+//-------------------------------------------
+//
+// MISC
+//
+//---------------------------------------------------
+@FilterClass base(BaseFilter) iconsprite("editor/filter.vmt") = rnl_filter_owner_team : "Filter for teams based on the owners team value."
+[
+	target(target_destination) : "Owner" : "" : "Identifies the owner to get the team choice from."
+	
+	output OnTeamChange(void) : "Owners team has changed."
+]
+
+@PointClass base(Targetname, Parentname) = rnl_game_manager : "Manager for tracking spawn tickets" 
+[
+	hold_timer_length(float) : "Hold to Win Length" : "0.0" : "The length of time a team needs to hold all objectives before they win a round in seconds. Set to 0.0 to disable."
+	
+	allied_spawn_length(float) : "Allied Spawn Length" : "35.0" : "The length between Allied spawns in seconds."
+	axis_spawn_length(float) : "Axis Spawn Length" : "35.0" : "The length between Axis spawns in seconds."
+	
+	axis_tickets(integer) : "Axis Tickets" : 200 : "The Number of tickets the Axis Start with."
+	allied_tickets(integer) : "Allied Tickets" : 200 : "The Number of tickets the Allies Start with."
+	
+	input SetTime(integer) : "Set the time remaining."
+	input AddTime(integer) : "Add time to the round."
+	input AddTeamTime(string) : "Time added by a given team."
+	
+	input SetTickets(string) : "Set the ticket count of an aribtrary team in the form 'team count'."
+	input SetAxisTickets(integer) : "Set the ticket count of the Axis team."
+	input SetAlliedTickets(integer) : "Set the ticket count of the Allied team."
+	
+	input AddTickets(string) : "Add tickets to arbitrary team in the form 'team count'."
+	input AddAxisTickets(integer) : "Add tickets to Axis team."
+	input AddAlliedTickets(integer) : "Add tickets to Allied team."
+]
+
+@PointClass base(Targetname,Angles,Studiomodel) studioprop() = rnl_air_support : "Air support unit for one of the teams." 
+[
+	owningteam(choices) : "Belongs to" : 2 : "Who this supports." =
+	[
+		2 : "Allies"
+		3 : "Axis"
+	]
+	target(target_destination) : "World Entry Point" : "" : "The locations from which support enters the world."
+	speed(float) : "Speed" : "512" : "Rate at which the air support travels."
+	traveltime(float) : "Travel Time" : "10" : "Amount of time it takes the plane to enter and depart the combat zones." 
+	rotateoffset(float) : "Yaw Offset" : "0" : "This rotates the object for models not facing down the axis of travel."
+	bombingradius(float) : "Bombing Coverage" : "512" : "The area that the support can cover in a bombing run."
+	bombdelay(float) : "Bombing Delay" : "0.5" : "The time between bomb drops."
+	supportforce(integer) : "FlightSize" : 3 : "The number of vessels tha tmake up the support."
+	
+	output OnBeginFlight(void) : "Fired when the air support is beginning it's approach."
+	output OnEndFlight(void) : "Fired when the air support is finished it's flight."
+	output OnBombingBegin(void) : "Fired when the air support is beginning it's bombing."
+	output OnBombingEnd(void) : "Fired when the air support is finished it's bombing."
+	
+	input BombTarget(target_destination) : "Takes the name of an entity to use as a target."
+]
+
+@PointClass base(Targetname) studioprop() = rnl_resupply_crate : "team associated resupply crate."
+[
+	angles(angle) : "Direction (Pitch Yaw Roll)" : "0 0 0" : "Angles of the supply crate."	
+	
+	model(studio) : "World model" : "models/vehicles/prisoner_pod.mdl"
+	InitialTeam(choices) : "Belongs to" : 2 : "Who this supports." =
+	[
+		2 : "Allies"
+		3 : "Axis"
+	]
+	ResupplyDelay(float) : "Delay" : "30" : "Delay for how often a player can reuse this resupply."
+
+	output OnUsed(void) : "Fired when a player resupplies."
+
+	input Kill(void) : "Kill."
+	input NeutralControlled(void) : "Switch to non controlled."
+	input AlliedControlled(void) : "Switch to Allied controlled."
+	input AxisControlled(void) : "Switch to Axis controlled."
+]
+
+@PointClass base(Targetname, Parentname) iconsprite("editor/obsolete.vmt") = rnl_timer : "Round Timer" 
+[
+	timer_length(float) : "Round Length" : "60.0" : "The length of a round in minutes."
+	
+	input SetTime(integer) : "Set the time remaining."
+	input AddTime(integer) : "Add time to the round."
+]
+
+@PointClass base(Targetname) size(-8 -8 -8, 8 8 8) = game_player_equip : 
+	"An entity that gives equipment to the player who activates it. To use, add new keys to this entity, where each key is the classname of a weapon/item, and the corresponding value is the number of those weapons/items to give to the player who uses this entity. If the 'Use Only' spawnflag isn't set, then players can just touch this entity to get the equipment."
+[
+	spawnflags(flags) =
+	[
+		1: "Use Only" : 0
+	]
+	master(string) : "Team Master (Obsolete)" : : "Legacy support: The name of a master entity. If the master hasn't been activated, this entity will not activate."	
+	parachute(flags) =
+	[
+		1: "parachute" : 1
+	]
+	parachute(string) : "Parachute" : : "parachute."	
+
+	input Use(void) : "Use."
+
+]

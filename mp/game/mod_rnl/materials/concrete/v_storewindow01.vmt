@@ -1,0 +1,9 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "concrete/v_storewindow01"
+	"$bumpmap" "concrete/v_storewindow01_normal"
+	"$normalmapalphaenvmapmask" 1
+	"$surfaceprop" "concrete"
+	"$envmap" "env_cubemap"
+	"%keyword" "rnl"
+}

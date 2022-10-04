@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/sme_lbuilding_wind"
+	"$surfaceprop" "concrete"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

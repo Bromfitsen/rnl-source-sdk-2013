@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\citroen-01-acc"
+	"$translucent" "1"
+	"$nocull" "1"	
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .5 .5 .5 ]"
+	"$surfaceprop" "glass"
+	"$model" 1
+}
+

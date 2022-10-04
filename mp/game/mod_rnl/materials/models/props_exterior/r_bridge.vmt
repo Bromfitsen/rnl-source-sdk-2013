@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_bridge"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

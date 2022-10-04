@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "models/player/american/pir\glint"
+	"$additive" 1
+	"$model" 1
+}

@@ -144,14 +144,14 @@ public:
 	}
 
 	// CBaseEntity
-	void			Think(void);
-	void			Precache( void );
-	void			Spawn( void ); 
-	void			Activate( void );
+	void			Think(void) OVERRIDE;
+	void			Precache( void ) OVERRIDE;
+	void			Spawn( void ) OVERRIDE;
+	void			Activate( void ) OVERRIDE;
 
 	virtual void	CreateServerVehicle( void );
 	virtual Vector	BodyTarget( const Vector &posSrc, bool bNoisy = true );
-	virtual void	TraceAttack( const CTakeDamageInfo &info, const Vector &vecDir, trace_t *ptr );
+	virtual void	TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) OVERRIDE;
 	virtual int		OnTakeDamage( const CTakeDamageInfo &info );
 	virtual float	PassengerDamageModifier( const CTakeDamageInfo &info );
 	virtual void	EnterVehicle( CBasePlayer *pPlayer );
@@ -411,18 +411,18 @@ void CPropJeep::DoImpactEffect( trace_t &tr, int nDamageType )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CPropJeep::TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &vecDir, trace_t *ptr )
+void CPropJeep::TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator)
 {
-	CTakeDamageInfo info = inputInfo;
+	CTakeDamageInfo newInfo = info;
 	if ( ptr->hitbox != VEHICLE_HITBOX_DRIVER )
 	{
-		if ( inputInfo.GetDamageType() & DMG_BULLET )
+		if ( info.GetDamageType() & DMG_BULLET )
 		{
-			info.ScaleDamage( 0.0001 );
+			newInfo.ScaleDamage( 0.0001 );
 		}
 	}
 
-	BaseClass::TraceAttack( info, vecDir, ptr );
+	BaseClass::TraceAttack( newInfo, vecDir, ptr, pAccumulator );
 }
 
 //-----------------------------------------------------------------------------

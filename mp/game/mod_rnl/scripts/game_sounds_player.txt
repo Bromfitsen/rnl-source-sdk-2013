@@ -1,0 +1,685 @@
+"Game.Win_Axis"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"		"SNDLVL_GUNFIRE"
+
+	"wave"			"music/axis_win.wav"
+}
+"Game.Lose_Axis"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"		"SNDLVL_GUNFIRE"
+
+	"wave"			"music/axis_loss.wav"
+}
+"Game.Win_Allies"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"		"SNDLVL_GUNFIRE"
+
+	"wave"			"music/allied_win.wav"
+}
+"Game.Lose_Allies"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"		"SNDLVL_GUNFIRE"
+
+	"wave"			"music/allied_loss.wav"
+}
+
+//Tony; deprecated, kept because andy FAILED to commit latest code.
+"Objective.Captured"
+{
+	"channel"		"CHAN_STREAM"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"Voice Commands/US/soldier1/Area Clear/Area Clear Spoken/areaclear_spoken2.wav"
+}
+"Objective.Captured_US"
+{
+	"channel"		"CHAN_STREAM"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"Voice Commands/US/soldier1/Area Clear/Area Clear Spoken/areaclear_spoken2.wav"
+}
+
+"Objective.Captured_GER"
+{
+	"channel"		"CHAN_STREAM"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"Voice Commands/ger/areasecure.wav"
+}
+
+//Tony; deprecated, kept because andy FAILED to commit latest code.
+"Objective.Lost"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"null.wav"
+}
+"Objective.Lost_US"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"null.wav"
+}
+
+"Objective.Lost_GER"
+{
+	"channel"		"CHAN_VOICE"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_GUNFIRE"
+	"wave"			"null.wav"
+}
+
+"Objective.Blocked"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_60dB"
+	"wave"			"null.wav"
+}
+"Objective.Blocked_US"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_60dB"
+	"wave"			"null.wav"
+}
+
+"Objective.Blocked_GER"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+	"soundlevel"		"SNDLVL_60dB"
+	"wave"			"null.wav"
+}
+
+
+
+"HL2Player.SprintNoPower"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_60dB"
+
+	"wave"	"player/suit_denydevice.wav"
+}
+
+"HL2Player.SprintStart"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.9"
+	"soundlevel"  "SNDLVL_60dB"
+
+	"wave"	"player/suit_sprint.wav"
+}
+
+"HL2Player.FlashLightOn"
+{
+	"channel"	"CHAN_WEAPON"
+	"volume"	"0.8"
+	"soundlevel"    "SNDLVL_75dB"
+	"pitch"	"PITCH_NORM"
+
+	"wave" "items/flashlight1.wav"
+}
+
+"HL2Player.FlashLightOff"
+{
+	"channel"	"CHAN_WEAPON"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+	"pitch"	"PITCH_NORM"
+
+	"wave" "items/flashlight1.wav"
+}
+
+"HL2Player.PickupWeapon"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"items/ammo_pickup.wav"
+}
+
+"HL2Player.TrainUse"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"plats/train_use1.wav"
+}
+
+"HL2Player.Use"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"1.0"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"player/use_1.wav"
+}
+
+"HL2Player.UseNPC"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.4"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"player/use_1.wav"
+}
+
+"HL2Player.UseDeny"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.4"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"common/wpn_denyselect.wav"
+}
+
+"HL2Player.BurnPain"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.5"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"rndwave"
+	{
+			"wave"	"player/pl_burnpain1.wav"
+			"wave"	"player/pl_burnpain2.wav"
+			"wave"	"player/pl_burnpain3.wav"
+	}
+}
+
+
+// SHARED player sounds
+
+"Hud.Hint"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.4"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"ui/buttonclick.wav"
+}
+
+"Player.Death"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"rndwave"
+	{
+		"wave"	"player/pl_pain5.wav"
+		"wave"	"player/pl_pain6.wav"
+		"wave"	"player/pl_pain7.wav"
+		"wave"	"player/pl_pain8.wav"
+		"wave"	"player/pl_pain9.wav"
+	}
+}
+
+"Player.PlasmaDamage"
+{
+	"channel"	"CHAN_BODY"
+	"volume"	"0.5"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"player/general/flesh_burn.wav"
+}
+
+"Player.SonicDamage"
+{
+	"channel"	"CHAN_BODY"
+	"volume"	"0.7"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"rndwave"
+	{
+		"wave"	"player/pl_pain5.wav"
+		"wave"	"player/pl_pain6.wav"
+		"wave"	"player/pl_pain7.wav"
+	}
+}
+
+"Player.DrownStart"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"  "SNDLVL_75dB"
+	"pitch"		"90,110"
+
+	"wave"	"player/pl_drown1.wav"
+}
+
+"Player.Swim"
+{
+	"channel"	"CHAN_STATIC"
+	"volume"	"0.5"
+	"pitch"		"PITCH_NORM"
+	"soundlevel"	"SNDLVL_50dB"
+
+	"rndwave"
+	{
+		"wave"		"player/footsteps/wade5.wav"
+		"wave"		"player/footsteps/wade6.wav"
+		"wave"		"player/footsteps/wade7.wav"
+		"wave"		"player/footsteps/wade8.wav"
+	}
+}
+
+"Player.FallDamage"
+{
+	"channel"	"CHAN_AUTO"
+	"volume"	"0.75"
+	"pitch"		"90,110"
+	"soundlevel"	"SNDLVL_NORM"
+
+	"rndwave"
+	{
+		"wave"		"player/pl_fallpain1.wav"
+		"wave"		"player/pl_fallpain3.wav"
+	}
+}
+
+"Player.FallGib"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.75"
+	"pitch"		"90,110"
+	"soundlevel"	"SNDLVL_NORM"
+
+	"rndwave"
+	{
+		"wave"		"physics/body/body_medium_break2.wav"
+	}
+}
+
+"Player.DrownContinue"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"  "SNDLVL_75dB"
+	"pitch"		"90,110"
+
+	"rndwave"
+	{
+		"wave"	"player/pl_drown1.wav"
+		"wave"	"player/pl_drown2.wav"
+		"wave"	"player/pl_drown3.wav"
+	}
+}
+
+"Player.Wade"
+{
+	"channel"	"CHAN_BODY"
+	"volume"	"0.25"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"rndwave"
+	{
+		"wave"	"player/footsteps/wade5.wav"
+		"wave"	"player/footsteps/wade6.wav"
+		"wave"	"player/footsteps/wade7.wav"
+		"wave"	"player/footsteps/wade8.wav"
+	}
+}
+
+"Player.AmbientUnderWater"
+{
+	"channel"	"CHAN_STATIC"
+	"volume"	"0.22"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"ambient/water/underwater.wav"
+}
+
+"Player.UseTrain"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"plats/train_use1.wav"
+}
+
+"Player.UseDeny"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.0"
+	"soundlevel"  "SNDLVL_75dB"
+
+	"wave"	"player/use_1.wav"
+}
+
+"Player.PickupWeapon"
+{
+	"channel"	"CHAN_ITEM"
+	"volume"	"0.8"
+	"soundlevel"  "SNDLVL_75dB"
+	"pitch"	"95,105"
+	"wave"	"weapons/Draw_2.wav"
+}
+
+// rnl damage
+"Player.QuickPain"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.8"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"90,110"
+	"rndwave"
+	{
+		"wave"	"player/damage/quick-pain.wav"
+		"wave"	"player/damage/quick-pain2.wav"
+	}
+}
+
+"Player.BleedingPain"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.6"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"90,110"
+	"rndwave"
+	{
+		"wave"	"player/damage/bleeding-pain1.wav"
+		"wave"	"player/damage/bleeding-pain2.wav"
+		"wave"	"player/damage/bleeding-pain3.wav"
+	}
+}
+
+"Player.BleedingBreath"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.6"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"90,110"
+	"rndwave"
+	{
+		"wave"	"player/damage/bleeding-breath.wav"
+		"wave"	"player/damage/bleeding-breath2.wav"
+	}
+}
+
+"Player.BleedingHeartbeat"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.6"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"90,110"
+	"rndwave"
+	{
+		"wave"	"player/damage/bleeding-heartbeat.wav"
+		"wave"	"player/damage/bleeding-heartbeat2.wav"
+	}
+}
+
+"Player.BulletNeck"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.8"
+	"soundlevel"	"SNDLVL_75dB"
+	"pitch"		"90,110"
+	"wave"	"player/damage/bullet-neck.wav"
+}
+
+"Player.MoveWoundedPain"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"0.8"
+	"soundlevel"	"SNDLVL_75dB"
+	"pitch"		"90,110"
+	"rndwave"
+	{
+		"wave"	"player/pl_pain1.wav"
+		"wave"	"player/pl_pain2.wav"
+		"wave"	"player/pl_pain3.wav"
+		"wave"	"player/pl_pain4.wav"
+	}
+}
+
+"Geiger.BeepLow"
+{
+	"channel"	"CHAN_STATIC"
+	"soundlevel"	"SNDLVL_NONE"
+	"pitch"			"PITCH_NORM"
+
+	"rndwave"
+	{
+		"wave"	"player/geiger1.wav"
+		"wave"	"player/geiger2.wav"
+	}
+}
+
+"Geiger.BeepHigh"
+{
+	"channel"		"CHAN_STATIC"
+	"soundlevel"	"SNDLVL_NONE"
+	"pitch"			"PITCH_NORM"
+
+	"rndwave"
+	{
+		"wave"	"player/geiger2.wav"
+		"wave"	"player/geiger3.wav"
+	}
+}
+
+"Player.LowMorale"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"90"
+	"wave"	"player/scared_breath_fast.wav"
+}
+
+"Player.LowerMorale"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_80dB"
+	"pitch"		"95"
+	"wave"	"player/scared_breath.wav"
+}
+
+"Player.LowestMorale"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/scared_breath.wav"
+}
+
+"Player.Knockdown"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_90dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/scared_breath4.wav"
+}
+"Player.HeavyBreathing"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing2.wav"
+}
+
+"Player.Parachute_Wind"
+{
+	"channel"	"CHAN_BODY"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"		"ambient/wind/parachute-wind.wav"
+}
+
+
+"Player.Parachute_Opening"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_120dB"
+	"pitch"		"PITCH_NORM"
+	"wave"		"ambient/parachute/parachute_deploy.wav"
+}
+
+
+
+"Player.Sprint_Stage0"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing1.wav"
+}
+
+
+"Player.Sprint_Stage1"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing2.wav"
+}
+
+"Player.Sprint_Stage2"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing3.wav"
+}
+
+"Player.Sprint_Stage3"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+		"wave"	"player/player_breathing4.wav"
+}
+
+"Player.Sprint_Stage4"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing5.wav"
+}
+
+"Player.Sprint_Stage5"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing6.wav"
+}
+
+"Player.Sprint_Stage6"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing7.wav"
+}
+
+"Player.Sprint_Stage7"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_breathing8.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage0"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath1.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage1"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath2.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage2"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath3.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage3"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath4.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage4"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath5.wav"
+}
+
+"Player.Sprint.OutofBreath_Stage5"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_70dB"
+	"pitch"		"PITCH_NORM"
+	"wave"	"player/player_out_of_breath6.wav"
+}

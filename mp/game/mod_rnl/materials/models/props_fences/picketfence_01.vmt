@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_fences/picketfence_01"
+	"$bumpmap" "models/props_fences/picketfence_01_normal"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

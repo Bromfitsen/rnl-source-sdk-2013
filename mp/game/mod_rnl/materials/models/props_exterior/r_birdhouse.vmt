@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_birdhouse"
+	"$surfaceprop" "wood"
+	"$model" 1
+}
+

@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_trenches/r_trenchwall2"
+	"$surfaceprop" "metal"
+}

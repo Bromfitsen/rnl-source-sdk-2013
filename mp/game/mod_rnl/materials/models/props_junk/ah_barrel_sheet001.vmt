@@ -1,0 +1,10 @@
+
+"VertexLitGeneric"
+{
+	
+	"$basetexture" "Models/props_junk/ah_barrel_sheet001"
+	"$model" 1
+	//"$bumpmap" "Models/props_junk/ah_barrel_sheet001_nrm"
+	"$surfaceprop" "wood"
+}
+

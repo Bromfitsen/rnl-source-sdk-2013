@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "models/props_buildings/ah_building_stone_barn001"
+	"$model" 1
+	"$surfaceprop" "brick"
+}

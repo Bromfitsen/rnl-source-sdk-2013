@@ -54,3 +54,12 @@ config.cfg
 # shader files
 *.tmp
 
+# RnL : Andrew : Add some more things to ignore :)
+*.vpc_crc
+*.filters
+*.pdb
+*.sentinel
+*.enc
+*.bin
+/*/.vs/
+

@@ -1,0 +1,10 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "Models/Effects/r_searchlight1_spot"
+	"$nocull" "1"	
+	"$additive" "1"
+	"$model" "1"
+	"$no_fullbright" 1
+	"$nofog" 1
+}
+

@@ -187,6 +187,19 @@ void WriteUsercmd( bf_write *buf, const CUserCmd *to, const CUserCmd *from )
 		buf->WriteOneBit( 0 );
 	}
 #endif
+
+#ifdef RNL_DLL
+	if (to->mod_data.Count() > 0)
+	{
+		buf->WriteOneBit(1);
+		buf->WriteShort(to->mod_data.Count());
+		buf->WriteBytes(to->mod_data.Base(), to->mod_data.Count());
+	}
+	else
+	{
+		buf->WriteOneBit(0);
+	}
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -301,6 +314,14 @@ void ReadUsercmd( bf_read *buf, CUserCmd *move, CUserCmd *from )
 			move->entitygroundcontact[i].minheight = buf->ReadBitCoord( );
 			move->entitygroundcontact[i].maxheight = buf->ReadBitCoord( );
 		}
+	}
+#endif
+
+#ifdef RNL_DLL
+	if (buf->ReadOneBit())
+	{
+		move->mod_data.SetCount(buf->ReadShort());
+		buf->ReadBytes(move->mod_data.Base(), move->mod_data.Count());
 	}
 #endif
 }

@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_stonewalll019i"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+	"$decalscale" 0.25
+}

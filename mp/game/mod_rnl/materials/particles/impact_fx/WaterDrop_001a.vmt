@@ -1,0 +1,8 @@
+"Unlitgeneric"
+{
+	"$basetexture"	"particle/water/WaterDrop_001a"
+	$vertexcolor 1
+	$vertexalpha 1
+	$transluscent 1
+	
+}

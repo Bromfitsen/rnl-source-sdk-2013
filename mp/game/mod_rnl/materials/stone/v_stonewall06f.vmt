@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "stone/v_stonewall06f"
+	"$bumpmap" "stone/v_stonewall06f_normal"
+	"$surfaceprop" "concrete"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .15 .15 .15 ]"
+	"$normalmapalphaenvmapmask" 1
+	"%keywords" "rnl"
+}

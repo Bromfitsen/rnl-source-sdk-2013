@@ -1,0 +1,6 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/overview/us_selected_spawn"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

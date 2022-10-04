@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_carentan/rd_steps02"
+	"$bumpmap" "models/props_carentan/rd_steps02_normal"
+	"$envmapmask" "models/props_carentan/rd_steps02_spec"
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" 1
+	"$envmaptint" "[ .1 .1 .1 ]"
+	"$surfaceprop" "wood"
+	"$model" 1
+}

@@ -8,6 +8,7 @@
 #include "tempent.h"
 #include "c_te_effect_dispatch.h"
 #include "c_te_legacytempents.h"
+#include "rnl_shareddefs.h"
 
 
 //-----------------------------------------------------------------------------

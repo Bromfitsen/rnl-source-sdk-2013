@@ -32,7 +32,7 @@
 #include "c_weapon__stubs.h"		//Tony; add stubs
 #include <vgui/ILocalize.h>
 #include "c_rnl_game_team.h"
-#include "c_rnl_base_squad.h"
+#include "rnl_squad.h"
 #include "c_rnl_player.h"	// cjd @add
 #include "hud_macros.h"	// cjd @add
 #include "ScreenSpaceEffects.h"
@@ -411,9 +411,16 @@ void ClientModeRnLNormal::FireGameEvent( IGameEvent* event )
 bool ClientModeRnLNormal::CreateMove( float flInputSampleTime, CUserCmd *cmd )
 {
 	CRnLPlayer *player = CRnLPlayer::GetLocalRnLPlayer();
-	if ( player )
-		VectorCopy( player->GetWeaponAngle(), cmd->weaponangles );
+	if (player)
+	{
+		cmd->mod_data.SetCount(1024);
 
+		bf_write writeBuffer(cmd->mod_data.Base(), cmd->mod_data.Count());
+		writeBuffer.WriteOneBit(1);
+		writeBuffer.WriteBitAngles(player->GetWeaponAngle());
+
+		cmd->mod_data.SetCountNonDestructively(writeBuffer.GetNumBytesWritten());
+	}
 	return BaseClass::CreateMove( flInputSampleTime, cmd );;
 }
 

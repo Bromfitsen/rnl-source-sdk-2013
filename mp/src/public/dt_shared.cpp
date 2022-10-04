@@ -74,12 +74,11 @@ DataTableProp PropInt(
 	int offset,
 	int sizeofVar,	// Handled by SENDINFO macro.
 	int nBits,					// Set to -1 to automatically pick (max) number of bits based on size of element.
-	int flags,
-	int rightShift
+	int flags
 	)
 {
 #if !defined (CLIENT_DLL)
-	return SendPropInt( pVarName, offset, sizeofVar, nBits, flags, rightShift );
+	return SendPropInt( pVarName, offset, sizeofVar, nBits, flags );
 #else
 	return RecvPropInt( pVarName, offset, sizeofVar, flags );
 #endif

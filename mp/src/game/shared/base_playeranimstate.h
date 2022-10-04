@@ -219,8 +219,9 @@ protected:
 
 	QAngle				m_angRender;
 
+#ifndef RNL_DLL
 private:
-
+#endif
 	// Update the prone state machine.
 	void		UpdateProneState();
 

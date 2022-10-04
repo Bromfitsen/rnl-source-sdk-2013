@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "concrete/v_fencewall03"
+	"$model" 1
+	"$surfaceprop" "concrete"
+}

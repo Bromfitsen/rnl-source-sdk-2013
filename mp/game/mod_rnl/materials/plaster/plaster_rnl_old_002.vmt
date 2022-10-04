@@ -1,0 +1,8 @@
+"LightMappedGeneric"
+{
+	"$baseTexture"			"models/props_exterior/plaster_rnl_old_002"
+	"$surfaceprop" 			"concrete"
+	"$bumpmap" 			"models/props_exterior/plaster_rnl_old_002_env"
+}
+
+

@@ -1,0 +1,850 @@
+//Voice Comm
+
+//Soldier Set 1 (Simon)
+
+//GO!
+"Player.Allied_Soldier1_VoiceComm_1"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Go/Go Spoken/go_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Spoken/go_spoken2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Spoken/go_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_1_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Go/Go Whisper/go_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Whisper/go_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Whisper/go_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_1_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Go/Go Frantic/go_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Frantic/go_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Frantic/go_frantic3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Go/Go Frantic/go_frantic4_new.wav"
+	}
+}
+
+//Hold this position!
+"Player.Allied_Soldier1_VoiceComm_2"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Spoken/hold_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Spoken/hold_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Spoken/hold_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_2_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Whisper/hold_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Whisper/hold_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Whisper/hold_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_2_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Frantic/hold_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Frantic/hold_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Frantic/hold_frantic3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Position/Hold Frantic/hold_frantic4_new.wav"
+	}
+}
+
+//Flank Left!
+"Player.Allied_Soldier1_VoiceComm_3"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Spoken/flankleft_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Spoken/flankleft_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Spoken/flankleft_spoken3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Spoken/flankleft_spoken4_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_3_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Whisper/flankleft_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Whisper/flankleft_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Whisper/flankleft_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_3_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Frantic/flankleft_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Frantic/flankleft_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Left/Flank Left Frantic/flankleft_frantic3_new.wav"
+	}
+}
+
+//Flank Right!
+"Player.Allied_Soldier1_VoiceComm_4"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Spoken/flankright_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Spoken/flankright_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Spoken/flankright_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_4_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Whisper/flankright_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Whisper/flankright_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Whisper/flankright_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_4_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Frantic/flankright_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Frantic/flankright_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Frantic/flankright_frantic3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Flank Right/Flank Right Frantic/flankright_frantic4_new.wav"
+	}
+}
+
+//Fall back!
+"Player.Allied_Soldier1_VoiceComm_5"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Spoken/fallback_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Spoken/fallback_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Spoken/fallback_spoken3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Spoken/fallback_spoken4_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Spoken/fallback_spoken5_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_5_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Whisper/fallback_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Whisper/fallback_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Whisper/fallback_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_5_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Frantic/fallback_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Frantic/fallback_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Fall Back/Fall Back Frantic/fallback_frantic3_new.wav"
+	}
+}
+
+//Enemy Ahead!
+"Player.Allied_Soldier1_VoiceComm_6"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_6_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper4_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper5_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_6_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic3_new.wav"
+	}
+}
+
+//Smoke 'em!
+"Player.Allied_Soldier1_VoiceComm_7"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Spoken/smoke_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Spoken/smoke_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Spoken/smoke_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_7_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Whisper/smoke_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Whisper/smoke_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Whisper/smoke_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_7_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Frantic/smoke_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Frantic/smoke_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Smoke 'em/Smoke 'em Frantic/smoke_frantic3_new.wav"
+	}
+}
+
+//Use Your Grenades!
+"Player.Allied_Soldier1_VoiceComm_8"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Spoken/grenade_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Spoken/grenade_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Spoken/grenade_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_8_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Whisper/grenade_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Whisper/grenade_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Whisper/grenade_whisper3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_8_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Frantic/grenade_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Frantic/grenade_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Grenade/Grenade Frantic/grenade_frantic3_new.wav"
+	}
+}
+
+//Cease Fire!
+"Player.Allied_Soldier1_VoiceComm_9"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Spoken/holdfire_spoken1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Spoken/holdfire_spoken2_new.wav" 
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Spoken/holdfire_spoken3_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_9_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Whisper/holdfire_whisper1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Whisper/holdfire_whisper2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Whisper/holdfire_whisper3_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Whisper/holdfire_whisper4_new.wav"
+	}
+}
+
+"Player.Allied_Soldier1_VoiceComm_9_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Frantic/holdfire_frantic1_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Frantic/holdfire_frantic2_new.wav"
+		"wave" "Voice Commands/US/soldier1/Hold Fire/Hold Fire Frantic/holdfire_frantic3_new.wav"
+	}
+}
+
+// US Soldier Set 2 (Mike)
+
+//GO!
+
+"Player.Allied_Soldier2_VoiceComm_1"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/go/go spoken/go_spoken.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_1_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/go/go whisper/go_whisp.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_1_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/go/go frantic/go_yell.wav"
+	}
+}
+
+//Hold this position!
+"Player.Allied_Soldier2_VoiceComm_2"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/hold position/hold position spoken/hold_spoken.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_2_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/hold position/hold position whisper/hold_position_whisp.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_2_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/hold position/hold position frantic/hold_position_yell.wav"
+	}
+}
+
+//Flank Left!
+"Player.Allied_Soldier2_VoiceComm_3"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/flank left/flank left spoken/flank_left_spoken.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_3_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/flank left/flank left whisper/flank_left_whisp.wav"
+	}
+}
+
+"Player.Allied_Soldier2_VoiceComm_3_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/US/soldier2/flank left/flank left frantic/flank_left_yell.wav"
+	}
+}
+
+//Axis
+
+//Soldier Set 1 (Tim)
+
+//GO!
+"Player.Axis_Soldier1_VoiceComm_1"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Go/Go Spoken/go_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Spoken/go_spoken2_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Spoken/go_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_1_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Go/Go Whisper/go_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Whisper/go_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Whisper/go_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_1_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Go/Go Frantic/go_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Frantic/go_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Frantic/go_frantic3_new.wav"
+		"wave" "Voice Commands/ger/Go/Go Frantic/go_frantic4_new.wav"
+	}
+}
+
+//Hold this position!
+"Player.Axis_Soldier1_VoiceComm_2"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Position/Hold Spoken/hold_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Spoken/hold_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Hold Position/Hold Spoken/hold_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_2_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Position/Hold Whisper/hold_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Whisper/hold_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Whisper/hold_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_2_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Position/Hold Frantic/hold_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Frantic/hold_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Frantic/hold_frantic3_new.wav"
+		"wave" "Voice Commands/ger/Hold Position/Hold Frantic/hold_frantic4_new.wav"
+	}
+}
+
+//Flank Left!
+"Player.Axis_Soldier1_VoiceComm_3"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Spoken/flankleft_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Spoken/flankleft_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Spoken/flankleft_spoken3_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Spoken/flankleft_spoken4_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_3_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Whisper/flankleft_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Whisper/flankleft_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Whisper/flankleft_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_3_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Frantic/flankleft_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Frantic/flankleft_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Flank Left/Flank Left Frantic/flankleft_frantic3_new.wav"
+	}
+}
+
+//Flank Right!
+"Player.Axis_Soldier1_VoiceComm_4"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Spoken/flankright_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Spoken/flankright_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Spoken/flankright_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_4_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Whisper/flankright_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Whisper/flankright_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Whisper/flankright_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_4_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Frantic/flankright_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Frantic/flankright_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Frantic/flankright_frantic3_new.wav"
+		"wave" "Voice Commands/ger/Flank Right/Flank Right Frantic/flankright_frantic4_new.wav"
+	}
+}
+
+//Fall back!
+"Player.Axis_Soldier1_VoiceComm_5"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Spoken/fallback_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Spoken/fallback_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Spoken/fallback_spoken3_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Spoken/fallback_spoken4_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Spoken/fallback_spoken5_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_5_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Whisper/fallback_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Whisper/fallback_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Whisper/fallback_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_5_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Frantic/fallback_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Frantic/fallback_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Fall Back/Fall Back Frantic/fallback_frantic3_new.wav"
+	}
+}
+
+//Enemy Ahead!
+"Player.Axis_Soldier1_VoiceComm_6"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Spoken/enemyahead_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_6_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper3_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper4_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Whisper/enemyahead_whisper5_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_6_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Enemy Ahead/Enemy Ahead Frantic/enemyahead_frantic3_new.wav"
+	}
+}
+
+//Smoke 'em!
+"Player.Axis_Soldier1_VoiceComm_7"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Spoken/smoke_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Spoken/smoke_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Spoken/smoke_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_7_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Whisper/smoke_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Whisper/smoke_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Whisper/smoke_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_7_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Frantic/smoke_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Frantic/smoke_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Smoke 'em/Smoke 'em Frantic/smoke_frantic3_new.wav"
+	}
+}
+
+//Use Your Grenades!
+"Player.Axis_Soldier1_VoiceComm_8"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Grenade/Grenade Spoken/grenade_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Grenade/Grenade Spoken/grenade_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Grenade/Grenade Spoken/grenade_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_8_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Grenade/Grenade Whisper/grenade_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Grenade/Grenade Whisper/grenade_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Grenade/Grenade Whisper/grenade_whisper3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_8_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Grenade/Grenade Frantic/grenade_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Grenade/Grenade Frantic/grenade_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Grenade/Grenade Frantic/grenade_frantic3_new.wav"
+	}
+}
+
+//Cease Fire!
+"Player.Axis_Soldier1_VoiceComm_9"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Spoken/holdfire_spoken1_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Spoken/holdfire_spoken2_new.wav" 
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Spoken/holdfire_spoken3_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_9_Whisper"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Whisper/holdfire_whisper1_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Whisper/holdfire_whisper2_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Whisper/holdfire_whisper3_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Whisper/holdfire_whisper4_new.wav"
+	}
+}
+
+"Player.Axis_Soldier1_VoiceComm_9_Loud"
+{
+	"channel"	"CHAN_VOICE"
+	"volume"	"1.0"
+	"soundlevel"	"SNDLVL_TALKING"
+	"rndwave"
+	{
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Frantic/holdfire_frantic1_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Frantic/holdfire_frantic2_new.wav"
+		"wave" "Voice Commands/ger/Hold Fire/Hold Fire Frantic/holdfire_frantic3_new.wav"
+	}
+}

@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_buildings/ah_window_glass_001"
+	"$model" 1
+	"$translucent" 1
+	"$nocull" 1
+	"$surfaceprop" "glass"
+}

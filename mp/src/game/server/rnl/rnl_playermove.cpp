@@ -61,9 +61,22 @@ void CRnLPlayerMove::StartCommand( CBasePlayer *player, CUserCmd *cmd )
 void CRnLPlayerMove::SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move )
 {
 	CRnLPlayer* pPlayer = ToRnLPlayer( player );
-	if( pPlayer )
+	if (pPlayer)
 	{
-		pPlayer->m_angWeaponAngle = ucmd->weaponangles;
+		if (ucmd->mod_data.Count() > 0)
+		{
+			bf_read readBuffer(ucmd->mod_data.Base(), ucmd->mod_data.Count());
+			if (readBuffer.ReadOneBit() > 0)
+			{
+				QAngle weaponAngle;
+				readBuffer.ReadBitAngles(weaponAngle);
+				pPlayer->m_angWeaponAngle = weaponAngle;
+			}
+			else
+			{
+				pPlayer->m_angWeaponAngle = ucmd->viewangles;
+			}
+		}
 	}
 
 	// Push physics object surround player

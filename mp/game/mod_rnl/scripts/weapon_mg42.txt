@@ -1,0 +1,110 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"50"		// damage per bullet
+	"Bullets"			"1"			// bullets per shoot
+	"CycleTime"			"0.05"		// time between shoots
+	"SoundCycleTime"	"0.16"		// min time between shoot sounds
+	"Spread"			"0.0030"		// Bullet Spread (old 0.01)
+	"Maxspread"			"0.0200"		// Maximum Spread when barrel heats up (old 0.09)
+	"HeatIndex"			"150"		// Maximum bullets before barrel overheats (constant shooting)
+
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"					"Maschinengewehr 42"
+	"viewmodel"					"models/weapons/v_mg42.mdl"
+	"playermodel"					"models/weapons/w_mg42.mdl"
+	"PlayerAnimationExtension"			"mg42"
+	"ClipModel"					"models/items/w_mg42_ammo.mdl"
+	"Team"				"axis"
+
+	"anim_prefix"			"mg42"
+	"bucket"					"0"
+	"bucket_position"				"0"
+
+	"clip_size"					"250"
+
+	"primary_ammo"					"AMMO_MG42"
+	"secondary_ammo"				"None"
+
+	"weight"						"25"
+	"item_flags"					"0"
+ 	"BuiltRightHanded" 				"0"
+	"AllowFlipping" 				"1"
+
+	Recoil
+	{
+		"Normal"	"2.0"
+		"Crouched"	"2.0"
+		"Prone"		"2.0"
+		"Jumping"	"2.0"
+		"SightedFactor"	"1.0"
+	}
+
+	FieldsOfView
+	{
+		"Hip"		"75.0"
+		"Shoulder"	"65.0"
+		"Sights"	"50.0"
+		"SteadySights"	"56.0"
+		"Throwing"	"75.0"
+	}
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		//"reload"				"Default.Reload"
+		//"empty"				"Default.ClipEmpty_Rifle"
+		"single_shot"			"Weapon_Mg42.Shoot"
+		"special1"				"Weapon_Mg42.Hot"
+		"special2"				"Weapon_Mg42.VeryHot"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$translucent" 1
+	"$basetexture" "Tools/toolsplayerclip"
+	"%compiletrigger" 1
+	"$surfaceprop" "hedgerow"
+	"%keywords" "rnl"
+}

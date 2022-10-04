@@ -14,7 +14,7 @@
 #include "rnl_backgroundpanel.h"
 #include "c_rnl_player.h"
 #include "c_rnl_game_team.h"
-#include "c_rnl_base_squad.h"
+#include "rnl_squad.h"
 
 #include <KeyValues.h>
 
@@ -34,8 +34,10 @@ extern ConVar sv_showenemysquads;
 //-----------------------------------------------------------------------------
 // Purpose: Constructor
 //-----------------------------------------------------------------------------
-CRnLScoreboard::CRnLScoreboard(IViewPort *pViewPort):CClientScoreBoardDialog(pViewPort)
+CRnLScoreboard::CRnLScoreboard(IViewPort *pViewPort)
+	: CClientScoreBoardDialog(pViewPort)
 {
+	m_pAxisPlayerList = dynamic_cast<vgui::SectionedListPanel*>(FindChildByName("AxisPlayerList", true));
 }
 
 //-----------------------------------------------------------------------------
@@ -204,7 +206,7 @@ void CRnLScoreboard::InitScoreboardSections()
 		}
 	}
 	else
-		iTeamSections[TEAM_UNASSIGNED] = AddSection( TYPE_UNASSIGNED );
+		iTeamSections[TEAM_UNASSIGNED] = AddSection(TYPE_NOTEAM);
 
 	iTeamSections[TEAM_SPECTATOR] = AddSection( TYPE_SPECTATORS );
 }
@@ -480,7 +482,7 @@ bool CRnLScoreboard::GetPlayerScoreInfo(int playerIndex, KeyValues *kv)
 	if( !pTeam )
 		return false;
 
-	C_RnLBaseSquad *pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
+	CRnLSquad*pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
 
 	if( !pSquad )
 		return false;
@@ -544,7 +546,7 @@ void CRnLScoreboard::UpdatePlayerInfo()
 			playerData->SetString("name", newName);
 
 			int iPlayerTeam = pGR->GetTeam(i);
-			int iItemID = FindItemIDForPlayerIndex( i, iPlayerTeam );
+			int iItemID = FindItemIDForPlayerIndex( i );
 
 			// put them in the correct scoreboard display
 			int iSectionID = iTeamSections[iPlayerTeam];
@@ -595,7 +597,7 @@ void CRnLScoreboard::UpdatePlayerInfo()
 		else if( pGR )
 		{
 			// remove the player
-			int iItemID = FindItemIDForPlayerIndex( i, pGR->GetTeam( i ) );
+			int iItemID = FindItemIDForPlayerIndex( i );
 			if (iItemID != -1)
 			{
 				switch ( pGR->GetTeam( i ) )

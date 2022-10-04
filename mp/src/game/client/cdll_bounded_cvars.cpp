@@ -23,7 +23,7 @@ public:
 	CBoundedCvar_Predict() :
 	  ConVar_ServerBounded( "cl_predict", 
 		  "1.0", 
-#if defined(DOD_DLL) || defined(CSTRIKE_DLL)
+#if defined(DOD_DLL) || defined(CSTRIKE_DLL) || defined(RNL_DLL)
 		  FCVAR_USERINFO | FCVAR_CHEAT, 
 #else
 		  FCVAR_USERINFO | FCVAR_NOT_CONNECTED, 

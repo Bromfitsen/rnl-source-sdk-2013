@@ -1,0 +1,25 @@
+"VertexLitGeneric" 
+{ 
+	"$basetexture" "models/items/supply_chest01_axis"
+	"$bumpmap" "models/items/supply_chest01_normal" 
+	"$surfaceprop" "wood"
+	
+	"$nocull" 0
+	"$model" 1
+
+//	"$detail" "detail/e_detail_wood2"
+//	"$detailtexturetransform" "center .5 .5 scale 2 2 rotate 90 translate 0 0"
+//	"$detailscale" "12"
+//	"$detailblendfactor" ".4"
+//	"$detailblendmode" "0"
+
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask " "1"
+	"$envmapcontrast" ".3"
+	"$envmapsaturation" ".8"
+	"$envmaptint" "[ .65 .65 .65 ]"
+
+}
+
+
+ 

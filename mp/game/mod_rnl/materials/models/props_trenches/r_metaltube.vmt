@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_trenches/r_metaltube"
+	"$surfaceprop" "metal"
+	"$model" 1
+}

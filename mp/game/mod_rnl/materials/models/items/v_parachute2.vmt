@@ -1,0 +1,8 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/items/v_parachute2"
+	"$bumpmap" "models/items/v_parachute2_normal"
+	"$alphatest" 1
+        "$nocull" 1
+	"$model" 1
+}

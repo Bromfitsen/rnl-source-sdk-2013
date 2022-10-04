@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_buildings/ah_door_sheet001"
+	"$model" 1
+	"$surfaceprop" "wood"
+	
+}

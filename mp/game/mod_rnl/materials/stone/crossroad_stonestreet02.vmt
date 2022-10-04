@@ -1,0 +1,10 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "stone/crossroad_stonestreet02"
+	"$bumpmap" "stone/crossroad_stonestreet02_normal"
+	"$surfaceprop" "dirt"
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" 1
+	"$envmaptint" "[ .25 .25 .25 ]"
+	"%keywords" "rnl"
+}

@@ -1,0 +1,11 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_supplies/german/lantern_skin"
+	"$bumpmap" "models/props_supplies/german/lantern_skin_normal"
+	"$model" 1
+	"$surfaceprop" "metal"
+	"$alphatest" 1
+//	"$selfillum" 1
+}
+
+

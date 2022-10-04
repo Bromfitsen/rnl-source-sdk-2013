@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\player\american\pir\us_face4_blood"
+	//"$bumpmap" "models\player\american\pir\us_face1_blood_normal"
+	//"$nocull" 1
+	"$model" 1
+	//"$phong" "1"
+
+	//"$phongexponent" "2"
+	//"$phongboost"	"0.5"
+	//"$phongfresnelranges"	"[0.1 0.1 0.1]"
+}

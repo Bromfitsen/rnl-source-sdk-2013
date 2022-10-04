@@ -1,0 +1,10 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "stone/stonewall020h"
+	"$bumpmap" "stone/stonewall020h_normal"
+	"$surfaceprop"	"concrete"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .15 .15 .15 ]"
+	"$normalmapalphaenvmapmask" 1
+	"%keywords" "rnl"
+}

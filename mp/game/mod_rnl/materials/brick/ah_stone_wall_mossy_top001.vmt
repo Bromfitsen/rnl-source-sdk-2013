@@ -1,0 +1,6 @@
+"lightmappedgeneric"
+{
+	"$basetexture" "brick/ah_stone_wall_mossy_top001"
+	//"$bumpmap" "brick/ah_tan_brick001_nrm"
+	"$surfaceprop" "brick"
+}

@@ -1,0 +1,47 @@
+// rnl NCO Map description file for rnl_carantan_causeway
+"mapvalues"
+{	
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_carentan_causeway_allies"	// texture file
+		"offset_x"	"0"
+		"offset_y"	"-33"
+		"scale"		"0.75" 	
+		"reverse_y"	"1"
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_carentan_causeway_axis"	// texture file
+		"offset_x"	"0"
+		"offset_y"	"-33"
+		"scale"		"0.75" 	
+		"reverse_y"	"1"
+	}
+
+	"node0"
+	{
+		"displayname"	"Allies Spawn"
+	}
+
+	"node1"
+	{
+		"displayname"	"Ingouf Farm"
+	}
+
+	"node2"
+	{
+		"displayname"	"Farm #1"
+	}
+
+	"node3"
+	{
+		"displayname"	"Farm #2"
+	}
+
+	"node4"
+	{
+		"displayname"	"Axis Spawn"
+	}
+
+}

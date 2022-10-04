@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\player\german\heer\ger_face3_blood"
+	"$model" 1
+}

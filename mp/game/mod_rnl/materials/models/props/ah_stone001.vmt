@@ -1,0 +1,8 @@
+"VertexLitGeneric" 
+
+{ 
+"$baseTexture" "models/props/ah_stone001" 
+
+$model 1
+
+}

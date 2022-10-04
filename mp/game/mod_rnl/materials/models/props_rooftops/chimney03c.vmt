@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_rooftops\chimney03c"
+	"$model" 1
+	"$surfaceprop" "concrete"
+}

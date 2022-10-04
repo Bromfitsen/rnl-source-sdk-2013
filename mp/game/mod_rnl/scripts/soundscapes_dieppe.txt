@@ -1,0 +1,279 @@
+// Soundscapes for Dieppe
+//------------------------------------------------------------------------------------------
+//
+// Generic outdoors ambience
+//
+"Dieppe.Outside"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Dieppe.Wind"
+	}
+	"playrandom"
+	{
+		"time"			"30,120"
+		"volume"		"0.6,1.0"
+		"pitch"			"90,100"
+		"position"		"random"
+		"soundlevel"		"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/cow_distant_single_1.wav"
+			"wave"	"ambient/animal/cow_distant_single_2.wav"
+			
+		}
+	}
+}
+//------------------------------------------------------------------------------------------
+// Rain and Wind
+//------------------------------------------------------------------------------------------
+"Dieppe.Wind"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"0.9"
+		"pitch"		"100"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+	}
+	"playlooping"
+	{
+		"channel"		"CHAN_STATIC"
+		"volume"		"VOL_NORM"
+		"pitch"			"PITCH_NORM"
+	
+		"soundlevel"		"SNDLVL_100dB"
+	
+		"wave"			"ambient\wind\wind_rooftop1.wav"
+	}
+	
+	"playrandom"
+	{
+		"time"		"30,60"
+		"pitch"		"90,100"
+		"volume"	"0.7"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+}
+"Dieppe.Ocean"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "coast.util_windgusts"
+	}
+	"playsoundscape"
+	{
+		"name" "coast.util_shoreline"
+	}
+}
+
+"Dieppe.Ocean_far"
+{
+	"channel"		"CHAN_STATIC"
+	"volume"		"VOL_NORM"
+	"pitch"			"PITCH_NORM"
+
+	"soundlevel"		"SNDLVL_100dB"
+
+	"wave"			"ambient\wind\wind_rooftop1.wav"
+}
+//------------------------------------------------------------------------------------------
+// Generic indoors ambience
+//------------------------------------------------------------------------------------------
+"Dieppe.Inside"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"1"
+		"pitch"		"100"
+		"wave"		"ambient/wind/dry_air_short_indoors.wav"
+	}
+}
+
+
+
+//------------------------------------------------------------------------------------------
+// German Radio Chatter
+//------------------------------------------------------------------------------------------
+"Dieppe.germanradiochatter"
+{
+	"playlooping"
+	{
+		"volume"	"0.9"
+		"pitch"		"100"
+		"wave"		"ambient/levels/prison/radio_random1.wav"
+	}
+}
+//------------------------------------------------------------------------------------------
+// cricket ambience
+//------------------------------------------------------------------------------------------
+
+"Dieppe.outside_crickets"
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"		"0.4"
+		"wave"			"ambient/animal/cricket_chirp_1.wav"
+		"pitch" 		"100"
+	}
+
+}
+//------------------------------------------------------------------------------------------
+// sheep - distant
+//------------------------------------------------------------------------------------------
+"Dieppe.sheep"
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"20,60"
+		"volume"		"0.5,0.7"
+		"pitch"			"90,100"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			
+			"wave"	"ambient/animal/sheep_distant_1.wav"
+			"wave"	"ambient/animal/sheep_distant_2.wav"
+			"wave"	"ambient/animal/sheep_distant_3.wav"
+		}
+	}
+			
+}
+//------------------------------------------------------------------------------------------
+// cellar ambience
+//------------------------------------------------------------------------------------------
+"Dieppe.Basement"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "Dieppe.inside_rat"
+	}
+	"playsoundscape"
+	{
+		"name" "Dieppe.inside_mouse"
+	}
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"1"
+		"pitch"		"100"
+		"wave"		"ambient/wind/dry_air_short_indoors.wav"
+	}
+
+}
+"Dieppe.inside_rat"
+{
+	"dsp" "1"		
+
+	"playrandom"
+	{
+		"time"			"17,30"
+		"volume"		"0.7,1"
+		"pitch"			"30,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/rats1.wav"
+			"wave"	"ambient/creatures/rats2.wav"
+			"wave"	"ambient/creatures/rats3.wav"
+			"wave"	"ambient/creatures/rats4.wav"
+		}
+	}		
+}
+
+
+"Dieppe.inside_mouse"
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"7,10"
+		"volume"		"0.7,1"
+		"pitch"			"30,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/animal/mouse_squeak_1.wav"
+			"wave"	"ambient/animal/mouse_squeak_2.wav"
+		}
+	}		
+}
+//------------------------------------------------------------------------------
+
+"coast.util_windgusts"
+{
+	"playrandom"
+	{
+		"volume"	"0.4,0.9"
+		"pitch"		"100"
+		"time"		"5.0, 12.0"
+		"pitch"		"90,130"
+		"soundlevel"	"SNDLVL_140dB"
+		"position"	"random"
+		"rndwave"
+		{
+			"wave" "ambient/wind/wind_med1.wav"
+			"wave" "ambient/wind/wind_hit1.wav"
+			"wave" "ambient/wind/wind_hit2.wav"
+			"wave" "ambient/wind/wind_snippet3.wav"
+			"wave" "ambient/wind/wind_snippet4.wav"
+			"wave" "ambient/wind/wind_snippet5.wav"
+		}
+	}
+}
+
+
+"coast.util_shoreline"
+{
+	"playrandom"
+	{
+		"volume"	"0.45,0.65"
+		"pitch"		"90,110"
+		"time"		"5.0, 7.0"
+		"rndwave"
+		{
+			"wave"	"ambient/water/wave1.wav"
+			"wave"	"ambient/water/wave2.wav"
+			"wave"	"ambient/water/wave3.wav"
+			"wave"	"ambient/water/wave4.wav"
+			"wave"	"ambient/water/wave5.wav"
+			"wave"	"ambient/water/wave6.wav"
+		}
+	}
+}
+"coast.util_distant_shoreline"
+{
+	"playrandom"
+	{
+		"volume"	"0.45,0.65"
+		"pitch"		"90,110"
+		"time"		"6.0, 10.0"
+		"rndwave"
+		{
+			"wave"	"ambient/water/distant_wave1.wav"
+			"wave"	"ambient/water/distant_wave2.wav"
+			"wave"	"ambient/water/distant_wave3.wav"
+		}
+	}
+}

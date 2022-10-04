@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	
+	"$baseTexture"			"models/props_exterior/ah_brick_edging001"
+	
+	"$model" 			1
+	
+	"$surfaceprop" 			"brick"
+	
+	
+
+	
+}
+
+

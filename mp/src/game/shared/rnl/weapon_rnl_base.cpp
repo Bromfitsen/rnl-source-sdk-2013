@@ -109,7 +109,7 @@ const CRnLWeaponInfo &CWeaponRnLBase::GetRnLWpnData() const
 
 bool CWeaponRnLBase::CanPickup( CRnLPlayer* pPlayer )
 {
-	if( pPlayer == NULL || GetRnLWpnData().m_iTeamAssociation == TEAM_NONE )
+	if( pPlayer == NULL || GetRnLWpnData().m_iTeamAssociation == TEAM_INVALID)
 		return true;
 	else
 		return GetRnLWpnData().m_iTeamAssociation == pPlayer->GetTeamNumber();

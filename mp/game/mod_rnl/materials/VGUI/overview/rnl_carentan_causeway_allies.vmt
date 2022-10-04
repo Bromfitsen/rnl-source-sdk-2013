@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "vgui/overview/rnl_carentan_causeway_allies"
+	"%keywords" "rnl"
+	"$vertexcolor" 1 
+	"$no_fullbright" 1 
+}

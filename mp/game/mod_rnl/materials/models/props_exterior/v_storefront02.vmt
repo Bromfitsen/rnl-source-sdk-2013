@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "concrete\v_storefront02"
+	"$bumpmap" "concrete\v_storefront02_normal"
+	"$model" 1
+	"$normalmapalphaenvmapmask" 1
+	"$surfaceprop" "concrete"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .25 .25 .25 ]"
+	"%keyword" "rnl"
+}

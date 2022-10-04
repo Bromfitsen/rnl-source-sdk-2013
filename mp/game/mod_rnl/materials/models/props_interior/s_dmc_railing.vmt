@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_interior/s_dmc_railing"
+	"$surfaceprop" "wood"
+	"%keyword" "rnl"
+}

@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/player/american/pir/eyeball_l"
+	"$halflambert" 1
+	"$nodecal" "1"
+}

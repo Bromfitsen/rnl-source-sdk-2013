@@ -1,0 +1,8 @@
+"WorldVertexTransition"
+{
+	"$baseTexture" "concrete/concretewall039a"
+	"$baseTexture2" "stone/wt_stonewall025fix2c"
+	"$surfaceprop" "concrete"
+	"$surfaceprop2" "concrete"
+	"%keywords" "rnl"
+}

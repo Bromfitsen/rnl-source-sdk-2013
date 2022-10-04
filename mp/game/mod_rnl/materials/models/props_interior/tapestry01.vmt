@@ -1,0 +1,7 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/props_interior/tapestry01"
+	"$bumpmap" "models/props_interior/tapestry01_norm"
+	"$model" 1
+	"$surfaceprop" "SolidMetal"
+}

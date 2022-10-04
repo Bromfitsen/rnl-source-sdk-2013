@@ -1,0 +1,9 @@
+"lightmappedGeneric"
+{
+	"$baseTexture" "stone/ah_stone_floor_001"
+	"%keywords" "rnl_wall"
+	"$surfaceprop" "brick"
+	//"$bumpmap" "stone/ah_stone_wall002_nrm"
+	//"$envmapmask" "stone/ah_stone_wall002_spec"
+	
+}

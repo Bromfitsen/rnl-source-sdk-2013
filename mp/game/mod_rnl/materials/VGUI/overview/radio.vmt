@@ -1,0 +1,6 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/overview/radio"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

@@ -130,6 +130,11 @@ public:
 	virtual int		PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarget );
 	virtual bool	IsTeamplay( void ) { return true;	}
 
+	virtual bool	IsConnectedUserInfoChangeAllowed(CBasePlayer* pPlayer) OVERRIDE;
+
+	// Get the view vectors for this mod.
+	virtual const CViewVectors* GetViewVectors() const OVERRIDE;
+
 	KeyValues*		GetTeamData( int iTeam );
 	int				GetTeamCount( int iTeam );
 
@@ -152,6 +157,7 @@ public:
 	const char*				GetCampaignFile( void )		{ return m_szCurrentCampaignFile.Get(); }
 	const char*				GetCampaignSection( void )	{ return m_szCurrentCampaignSection.Get(); }
 
+	void InitialiseSharedActivities( void );
 	void InitialiseWeapons( void );
 	void InitialiseCampaign( void );
 	void InitialiseSquads( void );
@@ -165,6 +171,7 @@ public:
 	DECLARE_SERVERCLASS_NOBASE(); // This makes datatables able to access our private vars.
 
 	virtual bool Init();
+	virtual void InitDefaultAIRelationships(void);
 	virtual bool ClientCommand( CBaseEntity *pEdict, const CCommand &args );
 	virtual void ClientSettingsChanged( CBasePlayer *pPlayer );
 	virtual void RadiusDamage( const CTakeDamageInfo &info, const Vector &vecSrcIn, float flRadius, int iClassIgnore );
@@ -182,8 +189,6 @@ public:
 	virtual void CheckRoundRestart( void );
 
 	virtual void CleanUpMap( void );
-	virtual bool ShouldCreateEntity( const char *pszClassName );
-	virtual bool RoundCleanupShouldIgnore( CBaseEntity *pEnt );
 
 	virtual void PlayStartRoundVoice( void );
 	virtual void PlayWinSong( int team );

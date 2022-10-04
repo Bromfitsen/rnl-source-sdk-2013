@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tile/shingles01a_spi"
+	//"$bumpmap" "tile/shingles01a_spi_normal"
+	"$surfaceprop" "Concrete"
+	"%keywords" "rnl"
+}

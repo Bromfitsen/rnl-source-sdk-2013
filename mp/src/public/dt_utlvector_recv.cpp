@@ -113,17 +113,20 @@ RecvProp RecvPropUtlVector(
 	else
 		pExtraData->m_ProxyFn = pArrayProp.GetProxyFn();
 
+	const char* pParentArrayPropName = AllocateStringHelper("%s", pVarName);
 
 	// The first property is datatable with an int that tells the length of the array.
 	// It has to go in a datatable, otherwise if this array holds datatable properties, it will be received last.
 	RecvProp *pLengthProp = new RecvProp;
 	*pLengthProp = RecvPropInt( AllocateStringHelper( "lengthprop%d", nMaxElements ), 0, 0, 0, RecvProxy_UtlVectorLength );
 	pLengthProp->SetExtraData( pExtraData );
+	pLengthProp->SetParentArrayPropName(pParentArrayPropName);
 
 	char *pLengthProxyTableName = AllocateUniqueDataTableName( false, "_LPT_%s_%d", pVarName, nMaxElements );
 	RecvTable *pLengthTable = new RecvTable( pLengthProp, 1, pLengthProxyTableName );
 	pProps[0] = RecvPropDataTable( "lengthproxy", 0, 0, pLengthTable, DataTableRecvProxy_LengthProxy );
 	pProps[0].SetExtraData( pExtraData );
+	pProps[0].SetParentArrayPropName(pParentArrayPropName);
 
 	// The first element is a sub-datatable.
 	for ( int i = 1; i < nMaxElements+1; i++ )
@@ -134,7 +137,8 @@ RecvProp RecvPropUtlVector(
 		pProps[i].SetExtraData( pExtraData );
 		pProps[i].SetElementStride( i-1 );	// Kind of lame overloading element stride to hold the element index,
 											// but we can easily move it into its SetExtraData stuff if we need to.
-		
+		pProps[i].SetParentArrayPropName(pParentArrayPropName);
+
 		// We provide our own proxy here.
 		if ( pArrayProp.m_RecvType == DPT_DataTable )
 		{

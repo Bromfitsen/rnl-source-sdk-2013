@@ -218,7 +218,7 @@ void CRnLWeaponInfo::Parse( KeyValues *pKeyValuesData, const char *szWeaponName 
 	Q_strncpy( m_szClipModel, pKeyValuesData->GetString( "ClipModel", "models/items/BoxMRounds.mdl" ), sizeof( m_szClipModel ) );
 
 	const char *pTeamName = pKeyValuesData->GetString( "Team", "None" );
-	m_iTeamAssociation = TEAM_NONE;
+	m_iTeamAssociation = TEAM_INVALID;
 	if( pTeamName != NULL )
 	{
 		if( Q_stricmp( pTeamName, "allies" ) == 0 )

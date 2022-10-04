@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\German\radiotruck_a"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}

@@ -26,6 +26,9 @@
 	#include "rnl_player.h"
 #endif
 
+
+#define LEANSEQUENCE_LAYER		1
+
 #define ANIM_TOPSPEED_WALK			65
 #define ANIM_TOPSPEED_RUN			150
 #define ANIM_TOPSPEED_SPRINT		250
@@ -128,6 +131,7 @@ protected:
 
 	void ComputePostureLayerSequence( CStudioHdr *pStudioHdr );
 	int CalcPostureLayerSequence( );
+	void ComputeLeaningLayer(void);
 	
 	void UpdatePostureSequenceLayers( float flCycle, int iFirstLayer, bool bForceIdle, 
 		CSequenceTransitioner *pTransitioner, float flWeightScale );
@@ -1305,6 +1309,51 @@ void CRnLPlayerAnimState::Update( float eyeYaw, float eyePitch )
 #endif
 
 	BaseClass::Update( eyeYaw, eyePitch );
+}
+
+
+void CRnLPlayerAnimState::ComputeLeaningLayer(void)
+{
+	//Leaning : HAX OMG
+	int iLeanSequence = CalcSequenceIndex("Upper_Lean");
+
+#ifdef CLIENT_DLL
+	if (m_pOuter == C_BasePlayer::GetLocalPlayer())
+		iLeanSequence = CalcSequenceIndex("fp_upper_Lean");
+#endif
+
+	// Synchronize the lower and upper body cycles.
+	float flCycle = m_pOuter->GetCycle();
+
+	// Now dump the state into its animation layer.
+	CAnimationLayer* pLayer = m_pOuter->GetAnimOverlay(LEANSEQUENCE_LAYER);
+
+	pLayer->m_nSequence = iLeanSequence;
+	pLayer->m_flWeight = 1.0f;
+	pLayer->m_nOrder = LEANSEQUENCE_LAYER;
+	pLayer->m_flCycle = flCycle;
+#ifndef CLIENT_DLL
+	pLayer->m_fFlags |= ANIM_LAYER_ACTIVE;
+#endif
+
+	int iLeaning = GetOuter()->LookupPoseParameter("body_lean");
+	if (iLeaning >= 0)
+	{
+		CRnLPlayer* pPlayer = ToRnLPlayer(m_pOuter);
+
+#ifdef CLIENT_DLL
+		if (pPlayer == CRnLPlayer::GetLocalRnLPlayer() && !input->CAM_IsThirdPerson())
+		{
+			iLeanSequence = CalcSequenceIndex("fp_upper_Lean");
+		}
+#endif
+		Vector vecOffset(0, 0, 0);
+		if (pPlayer)
+			vecOffset = pPlayer->GetLeaningOffset();
+
+		float flLean = -(vecOffset.y / 18.0f);
+		SetOuterPoseParameter(iLeaning, flLean);
+	}
 }
 
 void CRnLPlayerAnimState::ComputeSequences( CStudioHdr *pStudioHdr )

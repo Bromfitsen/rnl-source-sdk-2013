@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "plaster/v_church_insidewall"
+	"$bumpmap" "plaster/v_church_insidewall_normal"
+	"$surfaceprop" "plaster"
+	"%keyword" "rnl"
+}

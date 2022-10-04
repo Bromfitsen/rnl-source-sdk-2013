@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_structure_stone03"
+	"$model" 1
+	"$nocull" 1
+}
+
+

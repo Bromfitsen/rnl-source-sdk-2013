@@ -1,0 +1,58 @@
+// rnl NCO Map description file rnl_ardennes
+"mapvalues"
+{
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_ardennes_allies"	// texture file
+		"offset_x"	"9.0"
+		"offset_y"	"-11.0"
+		"scale"		"2.90"
+		"reverse_y"	"0"
+		"angle"		"90"
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_ardennes_axis"	// texture file
+		"offset_x"	"9.0"
+		"offset_y"	"-11.0"
+		"scale"		"2.90"
+		"reverse_y"	"0"
+		"angle"		"90"
+	}
+
+	"node0"
+	{
+		"displayname"	"Allies Start"
+		"textposition"  "2" 				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "0"				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+
+	"node1"
+	{
+		"displayname"	"Southern Zone"
+		"textposition"  "2" 				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "0"				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+
+	"node2"
+	{
+		"displayname"	"City Center"
+		"textposition"  "2" 				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "0"				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	
+	}
+
+	"node3"
+	{
+		"displayname"	"The Church"
+		"textposition"  "2" 				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "0"				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node4"
+	{
+		"displayname"	"Axis Spawn"
+		"textposition"  "2" 				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "0"				// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+}

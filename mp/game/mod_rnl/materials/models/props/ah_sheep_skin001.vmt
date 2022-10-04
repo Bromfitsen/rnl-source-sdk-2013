@@ -1,0 +1,8 @@
+"VertexLitGeneric" 
+
+{ 
+"$baseTexture" "models/props/ah_sheep_skin001" 
+
+$model 1
+
+}

@@ -1,0 +1,71 @@
+// Class numbers:
+// 		Allies:	RIFLEMAN 1, MACHINEGUNNER 2, RADIOMAN 3, MEDIC 4, NCO 5, INAVAILABLE SLOT 0
+// 		Axis:	GRENADIER 1, MGSCHUETZE 2, FUNKER 3, SANITAETER 4, OFFIZIER 5, INAVAILABLE SLOT 0
+// Subclass numbers:
+// 		DEFAULT 0, MG SUPPORT 1
+//
+// Each team consists of 2 squads, allied squads are split into 2 fireteams with 4 slots
+//
+// Attributes
+//		"squadX" - display name for squads
+// 		"slotX" - assigns class, subclass and slot dependancies
+//				  max 15 dependancies seperated by commas
+//				  example:
+//				  "slot5" "5 1 1,2,3,4"
+//				  results in slot 5 being an NCO requiring slots 1-4 being filled
+//		"slotX_desc" - short(!) description of the class if necessary
+
+"squads"
+{
+    "allies"
+    {
+        "squad1"		"Squad 1"
+        "squad2"		"Squad 2"
+
+        "slot1"			"5 0 0"
+        "slot2"			"1 0 0"
+        "slot3"			"1 0 0"
+        "slot4"			"1 0 0"
+        "slot5"			"5 0 0"
+        "slot6"			"2 0 0"
+        "slot7"			"3 0 0"
+        "slot8"			"4 1 0"
+        "slot9"			"5 0 0"
+        "slot10"		"1 0 0"
+        "slot11"		"1 0 0"
+        "slot12"		"1 0 0"
+        "slot13"		"5 0 0"
+        "slot14"		"1 0 0"
+        "slot15"		"2 0 0"
+        "slot16"		"1 1 0"
+        "slot1_desc"	"Squadleader"
+        "slot5_desc"	"Fire Team Leader"
+        "slot9_desc"	"Squadleader"
+        "slot13_desc"	"Fire Team Leader"
+    }
+
+    "axis"
+    {
+        "squad1"		"Gruppe 1"
+        "squad2"		"Gruppe 2"
+
+        "slot1"			"5 0 0"
+        "slot2"			"1 0 0"
+        "slot3"			"1 0 0"
+        "slot4"			"1 0 0"
+        "slot5"			"1 0 0"
+        "slot6"			"2 0 0"
+        "slot7"			"3 0 0"
+        "slot8"			"4 1 0"
+        "slot9"			"5 0 0"
+        "slot10"		"1 0 0"
+        "slot11"		"1 0 0"
+        "slot12"		"1 0 0"
+        "slot13"		"1 0 0"
+        "slot14"		"1 0 0"
+        "slot15"		"2 0 0"
+        "slot16"		"1 1 0"
+        "slot1_desc"	"Gruppenfuehrer"
+        "slot9_desc"	"Gruppenfuehrer"
+    }
+}

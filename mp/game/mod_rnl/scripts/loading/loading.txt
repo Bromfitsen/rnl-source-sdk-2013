@@ -1,0 +1,67 @@
+"scripts/loading/loading.txt"
+{
+	"tips"
+	{
+		"tip"	"#TIP_CAPTURE_DEFEND"
+		"tip"	"#TIP_CAPTURE_FEEDBACK"
+		"tip"	"#TIP_CAPTURE_OVERPOWER"
+		"tip"	"#TIP_CAPTURE_SPAWNS"
+		"tip"	"#TIP_CHECK_AMMO"
+		"tip"	"#TIP_CHECK_AMMO_BUTTON"
+		"tip"	"#TIP_CLIMBING"
+		"tip"	"#TIP_COMMUNICATE"
+		"tip"	"#TIP_CROUCH_PRONE"
+		"tip"	"#TIP_DROP_AMMO"
+		"tip"	"#TIP_DROP_AMMO_EXTRA"
+		"tip"	"#TIP_FIRE_IN_BURSTS"
+		"tip"	"#TIP_FRIENDLY_FIRE"
+		"tip"	"#TIP_GRENADE_MG"
+		"tip"	"#TIP_GRENADE_ROLL"
+		"tip"	"#TIP_GRENADE_SMOKE"
+		"tip"	"#TIP_GRENADE_STRENGTH"
+		"tip"	"#TIP_GRENADE_TEAMMATES"
+		"tip"	"#TIP_GRENADE_WINDOW"
+		"tip"	"#TIP_GROUP_COVER"
+		"tip"	"#TIP_IDENTIFY"
+		"tip"	"#TIP_JUMPING"
+		"tip"	"#TIP_JUMPING_STAMINA"
+		"tip"	"#TIP_LEANING"
+		"tip"	"#TIP_MORALE_RECOVER"
+		"tip"	"#TIP_NCO_MORALE"
+		"tip"	"#TIP_PINNED_MORALE"
+		"tip"	"#TIP_POINT_GUN"
+		"tip"	"#TIP_PRONE_DIVE"
+		"tip"	"#TIP_PRONE_ROLL"
+		"tip"	"#TIP_SIGHTS_HOLD"
+		"tip"	"#TIP_SIGHTS_LONGRANGE"
+		"tip"	"#TIP_SPEECH_ENEMY"
+		"tip"	"#TIP_SQUADS"
+		"tip"	"#TIP_TACTICS_COVER"
+		"tip"	"#TIP_TACTICS_COVER2"
+		"tip"	"#TIP_TACTICS_FLANKING"
+		"tip"	"#TIP_TACTICS_FLANKING2"
+		"tip"	"#TIP_TACTICS_FLANKING3"
+		"tip"	"#TIP_TACTICS_MG_COVER"
+		"tip"	"#TIP_TEAM_STRENGTH"
+		"tip"	"#TIP_USE_MAP"
+		"tip"	"#TIP_WAIT_FOR_MORE"
+		"tip"	"#TIP_WEAPON_SUPPRESSION"
+		"tip"	"#TIP_WIN_BY_CAPPING"
+	}
+
+	"panels"
+	{
+		
+
+		"panel"
+		{
+			"normal" 	"loading/nco"
+			"wide" 		"loading/nco"
+		}
+		"panel"
+		{
+			"normal" 	"loading/aiming"
+			"wide" 		"loading/aiming"
+		}
+	}
+}

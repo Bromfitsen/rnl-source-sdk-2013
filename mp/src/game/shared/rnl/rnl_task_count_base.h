@@ -6,6 +6,7 @@
 #endif
 
 #include "rnl_task_base.h"
+#include "rnl_shareddefs.h"
 
 #ifdef CLIENT_DLL
 	#define CRnLTaskCountBase C_RnLTaskCountBase

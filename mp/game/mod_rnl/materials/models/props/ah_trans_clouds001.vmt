@@ -1,0 +1,16 @@
+"VertexLitGeneric" 
+
+{ 
+"$baseTexture" "skybox/ah_trans_clouds001" 
+"$translucent" "1" 
+"$nofog" 1
+
+ "Proxies"
+ { "TextureScroll"
+ 	{ "texturescrollvar"
+ 		"$basetexturetransform" 
+		"texturescrollrate" .015
+		"texturescrollangle" 270 
+	} 
+  }
+}

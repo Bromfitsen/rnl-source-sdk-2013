@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "stone/r_stonewall10_tp"
+	"$surfaceprop"	"brick"
+	"%keywords" "rnl"
+}

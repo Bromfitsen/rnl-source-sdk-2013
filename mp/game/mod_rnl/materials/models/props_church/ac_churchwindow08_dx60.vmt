@@ -1,0 +1,7 @@
+"UnLitGeneric"
+{
+	"$basetexture" "models\props_church/ac_churchwindow08_inside"
+	"$surfaceprop" "glass"
+	"$model" 1
+	"$nocull" 1
+}

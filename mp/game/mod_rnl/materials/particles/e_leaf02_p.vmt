@@ -1,0 +1,10 @@
+"SpriteCard"
+{
+	"$baseTexture" "particles\e_leaf02_p"
+	"$translucent" "1"
+	"$alpha" "1"
+	"$overbrightfactor" "0.4"
+	"$minfadesize" "0.2"
+	"$maxfadesize" "0.3"
+
+}

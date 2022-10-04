@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/decal_wallbrkn04a_lfw"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+	"$decalscale" 0.25
+}

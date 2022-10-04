@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_artillery/german/flak18b"
+	"$surfaceprop" "metal"
+	"$model" 1
+}

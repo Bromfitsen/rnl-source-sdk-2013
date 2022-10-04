@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_trenches/ac_dragonsteeth"
+	"$model" 1
+	"$surfaceprop" "concrete" 
+}

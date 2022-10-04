@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_church/sme_church_bellframe"
+	"$bumpmap" "models\props_church/sme_church_bellframe_normal"
+	"$surfaceprop" "metal"
+	"$model" "1"
+}

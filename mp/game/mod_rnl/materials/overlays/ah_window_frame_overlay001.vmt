@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "overlays/ah_window_frame_overlay001"
+	"$translucent" 1
+	"$decal" 1
+}

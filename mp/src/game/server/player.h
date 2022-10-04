@@ -389,6 +389,9 @@ public:
 	// Handle view smoothing when going up stairs
 	void					SmoothViewOnStairs( Vector& eyeOrigin );
 	virtual float			CalcRoll (const QAngle& angles, const Vector& velocity, float rollangle, float rollspeed);
+#ifdef RNL_DLL
+	virtual
+#endif
 	void					CalcViewRoll( QAngle& eyeAngles );
 
 	virtual int				Save( ISave &save );

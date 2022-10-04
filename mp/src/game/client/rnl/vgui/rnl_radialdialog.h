@@ -13,6 +13,7 @@
 #include <vgui_controls/frame.h>
 #include <game/client/iviewport.h>
 #include "rnl_mappanel.h"
+#include "rnl_shareddefs.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: RnL Radial Menu

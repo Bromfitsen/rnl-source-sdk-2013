@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\american\c47_propellers"
+	"$surfaceprop" "metal"
+	"$translucent" 1
+	"$model" 1
+	"$nocull" 1
+}

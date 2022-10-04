@@ -1,0 +1,7 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/props_supplies/german/acrate03"
+	"$surfaceprop" "wood"
+	"$model" 1
+	"$alphatest" 1
+}

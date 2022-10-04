@@ -1,0 +1,18 @@
+"VertexlitGeneric"
+{
+	"$basetexture"		"models/weapons/view_models/g43/g43"
+	"$bumpmap"		"models/weapons/view_models/g43/g43_normal"
+	
+	"$nocull" "1"
+
+	"$phong" "1"
+
+	"$normalmapalphaphongmask" "1"
+//	"$phongexponent" 		"13"
+	"$phongboost" 		".5"
+	"$phongfresnelranges"	"[1.2 4 8]"
+
+	"$phongalbedotint"		"1"
+
+//	"$halflambert" 		"1"	
+}

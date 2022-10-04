@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_trenches/r_czech_hedgehog2"
+	"$surfaceprop" "metal"
+	"$model" 1
+}

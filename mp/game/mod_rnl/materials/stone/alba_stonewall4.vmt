@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	"$basetexture" "stone/alba_stonewall4"
+	"$surfaceprop" "concrete"
+	"$bumpmap"     "stone/alba_stonewall4_normal"
+}

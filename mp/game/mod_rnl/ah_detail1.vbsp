@@ -1,0 +1,132 @@
+detail
+{
+	///////////////////// Start Resistance and Liberation Detail Types /////////////////////
+
+	// Detail shapes
+	//
+	// "amount"		"0.3"	 - ratio of this type of detail relative to other types
+	//
+	// "sprite"		"x y width height dimension"	- coordinates in the detail texture
+	//
+	// "detailOrientation"	"0"	 - do not orient towards the player, use this for shaped sprites
+	//						"1"		- always face the viewer
+	//						"2"		- rotate the sprite in x,y only
+	//
+	// "spriterandomscale"	"0.2"	 - random size std. deviation
+	//
+	// "spritesize"		"0.5 0.0 40 50"		- ?, ?, width, height
+	//
+	// "sprite_shape"	"tri"	 - this makes a detail in the exploded prism shape
+	// "sprite_shape"	"cross"  - this makes a criss-cross shape
+	// "sway"		"0.3"	 - 0.0 -> 1.0, percent of cl_detail_max_sway ( default 5 )
+	//
+	// specific for the tri shape
+	// "shape_angle"	"x"	 - degress to angle out each of the leaves
+	// "shape_size"		"x"	 - percent of sprite width to separate each leaf. near 0 for a triangle shape, near 1 for a closer, criss-cross shape
+
+	
+
+//Test grass by Andrew Hayes.  NOT FINAL
+//UPDATED 3/19/08 by AH:  Added some changes to the flowers, this will add more detail shapes which may cause performance/compiling issues feel free to change. 
+	//--------------------------------------------------------------------------------------------------------------
+	ah_tall_thick_grass1 
+	{ 
+		"density" "800.0" 
+		 Group1 
+		{ 
+			"alpha" "1.0"
+			Model1 //main grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 1 512 256 1024"
+				"spritesize"		"0.5 0.0 64 32"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.5"
+				"detailOrientation"	"0"
+				"shape_angle"		"22"
+				"shape_size"		"0.1"
+				"sway"			"0.2"
+			}
+			Model2 //flower
+			{
+				"sprite"		"512 1 142 256 1024"
+				"spritesize"		"0.5 0.0 18 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.03"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+			}
+			Model3 //contrast grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 256 512 256 1024"
+				"spritesize"		"0.5 0.0 60 28"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.4"
+				"detailOrientation"	"0"
+				"shape_angle"	"	20"
+				"shape_size"		"0.1"
+				"sway"			"0.1"
+			}
+			Model4 //flowers shape
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"512 1 142 256 1024"
+				"spritesize"		"0.5 0.0 18 22"
+				"spriterandomscale"	"0.3"
+				"amount"		"0.04"
+				"detailOrientation"	"0"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+				"sway"			"0.1"
+			}
+			Model5 //flower 2 blue
+			{
+				"sprite"		"654 1 96 256 1024"
+				"spritesize"		"0.5 0.0 9 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.04"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+			}
+			Model6 //flower 3
+			{
+				"sprite"		"750 1 162 256 1024"
+				"spritesize"		"0.5 0.0 16 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+			}
+			Model7 //flower 4
+			{
+				"sprite"		"912 1 112 256 1024"
+				"spritesize"		"0.5 0.0 11 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.07"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+			}
+		}
+		Group2
+		{ 
+			"alpha" "0.7"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+		} 
+	
+	}
+}

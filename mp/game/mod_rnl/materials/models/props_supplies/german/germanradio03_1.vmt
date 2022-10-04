@@ -1,0 +1,6 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_supplies/german/germanradio03_1"
+	"$model" 1
+	"$surfaceprop" "metal"
+}

@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_foliage_treelog01a"
+	"$model" 1
+	"$nocull" 1
+}
+
+

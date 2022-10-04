@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_interior/ac_scounces02"
+	"$model" 1
+	"$nocull" 1
+}

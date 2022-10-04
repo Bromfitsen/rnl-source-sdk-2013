@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/shells/enbloc"
+        "$bumpmap" "models/shells/enbloc_normal"
+	"$model" 1
+	"$phong" "1"
+
+	"$phongexponent" "15"
+	"$phongboost"	"1"
+	"$phongfresnelranges"	"[1 0.2 1]"
+}

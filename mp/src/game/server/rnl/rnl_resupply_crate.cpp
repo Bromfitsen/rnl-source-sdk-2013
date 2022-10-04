@@ -88,7 +88,7 @@ void CRnLResupplyCrate::Spawn( void )
 		else
 		{
 			SetBodygroup( bodygroup, 0 );
-			m_iInitialTeam = TEAM_NONE;
+			m_iInitialTeam = TEAM_INVALID;
 		}
 	}
 	ChangeTeam( m_iInitialTeam );
@@ -215,10 +215,10 @@ void CRnLResupplyCrate::InputAxisCapture( inputdata_t &data )
 //-----------------------------------------------------------------------------
 void CRnLResupplyCrate::InputNeutral( inputdata_t &data )
 {
-	if( GetTeamNumber() != TEAM_NONE )
+	if( GetTeamNumber() != TEAM_INVALID)
 	{
 		memset( m_fPlayerResupplyTime, 0, sizeof(float) * (MAX_PLAYERS+1) );
-		ChangeTeam( TEAM_NONE );
+		ChangeTeam(TEAM_INVALID);
 		int bodygroup = FindBodygroupByName( "team" );
 		if( bodygroup > -1 )
 			SetBodygroup( bodygroup, 0 );

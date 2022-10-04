@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\\player\american\pir/pir_body1"
+	"$bumpmap" "models\\player\american\pir/pir_body1_normal"
+	"$nocull" "1"
+	"$model" 1
+	"$phong" "1"
+	"$phongexponent" "2"
+	"$phongboost" "0.5"	
+	"$phongfresnelranges"	"[0.3 0.7 0.3]"
+//	"$halflambert" "1"
+	"$phongalbedotint" "1"
+}

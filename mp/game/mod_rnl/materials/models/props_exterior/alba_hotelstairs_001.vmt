@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture"		"models/props_exterior/alba_hotelstairs_001"
+	"$model"		"1"
+	"$surfaceprop"		"wood"
+	"$nocull" 		"1"
+}
+
+

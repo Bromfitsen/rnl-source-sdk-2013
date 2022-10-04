@@ -1,0 +1,15 @@
+"LightmappedGeneric"
+{
+	"$baseTexture"	"concrete/e_desireingouf_sign"
+	"$translucent" "1"
+
+	"$surfaceprop" "concrete"
+
+	"$detail" "detail/r_detail1"
+//	"$detailtexturetransform" "center .5 .5 scale .25 1 rotate 5 translate 0 0"
+	"$detailscale" "4"
+	"$detailblendfactor" ".5"
+	"$detailblendmode" "0"
+
+	"%keywords" "rnl_carentan_desire_ingouf"
+}

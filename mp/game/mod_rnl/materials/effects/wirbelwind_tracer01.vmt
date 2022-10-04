@@ -1,0 +1,7 @@
+"Sprite"
+{
+	"$spriteorientation" "vp_parallel"
+	"$spriteorigin" "[ 0.4 0.4 ]"
+	"$basetexture" "effects/wirbelwind_tracer01"
+	"$spriterendermode" 3
+}

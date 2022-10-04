@@ -1,0 +1,626 @@
+detail
+{
+	///////////////////// Start Resistance and Liberation Detail Types /////////////////////
+	// Test grass by Andrew Hayes & Toni Kreska.  NOT FINAL
+	// UPDATED 6/2010 by TK
+	// -------------------------------------------------------------------------------------
+
+	r_ah_thickgrass_dirt
+	{ 
+		"density" "600.0" 
+		 Group1 
+		{ 
+			"alpha" "0.4"
+			Model1 //main grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 1 512 256 1024"
+				"spritesize"		"0.5 0.0 65 26"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.55"
+				"detailOrientation"	"0"
+				"shape_angle"		"22"
+				"shape_size"		"0.1"
+				"sway"			"0.2"
+			}
+			Model3 //contrast grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 256 512 256 1024"
+				"spritesize"		"0.5 0.0 58 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.34"
+				"detailOrientation"	"0"
+				"shape_angle"	"	20"
+				"shape_size"		"0.1"
+				"sway"			"0.1"
+			}
+			Model2 //flower
+			{
+				"sprite"		"512 1 142 256 1024"
+				"spritesize"		"0.5 0.0 18 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.025"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model5 //flower 2 blue
+			{
+				"sprite"		"654 1 96 256 1024"
+				"spritesize"		"0.5 0.0 9 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.01"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model8 //green filler 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"594 944 177 80 1024"
+				"spritesize"		"0.5 0.0 25 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model9 //green filler 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"602 860 171 82 1024"
+				"spritesize"		"0.5 0.0 24 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model10 //shrub
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"763 65 260 201 1024"
+				"spritesize"		"0.5 0.0 30 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.01"
+				"detailOrientation"	 "0"
+				"upright"		"1"
+				"sway"			"0.1"
+			}
+		}
+		Group2
+		{ 
+			"alpha" "0.75"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+			Model4 // dead bramble 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"768 712 220 146 1024"
+				"spritesize"		"0.5 0.0 45 32"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.02"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model5 // dead bramble 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"590 750 181 108 1024"
+				"spritesize"		"0.5 0.0 40 26"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.013"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model6 // dry plant
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"774 871 249 153 1024"
+				"spritesize"		"0.5 0.0 24 15"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.1"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}
+			Model7 //shrub
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"763 65 260 201 1024"
+				"spritesize"		"0.5 0.0 30 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.03"
+				"detailOrientation"	 "0"
+				"upright"		"1"
+				"sway"			"0.1"
+			}
+		} 
+		Group3
+		{ 
+			"alpha" "1.0"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+			Model4 // dead bramble 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"768 712 220 146 1024"
+				"spritesize"		"0.5 0.0 45 32"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model5 // dead bramble 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"590 750 181 108 1024"
+				"spritesize"		"0.5 0.0 41 25"
+				"spriterandomscale"	"0.3"
+				"amount"		"0.07"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model6 // dry plant
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"774 871 249 153 1024"
+				"spritesize"		"0.5 0.0 24 15"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.09"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}
+			Model6 //flower 3
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"520 265 170 280 1024"
+				"spritesize"		"0.5 0.0 16 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.03"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+				"shape_angle"		"10"
+				"shape_size"		"0.1"
+			}
+			Model7 //flower 4
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"687 263 130 301 1024"
+				"spritesize"		"0.5 0.0 11 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.025"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+				"shape_angle"		"10"
+				"shape_size"		"0.1"
+			}			
+			Model10 //shrub
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"763 65 260 201 1024"
+				"spritesize"		"0.5 0.0 30 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.1"
+				"detailOrientation"	 "0"
+				"upright"		"1"
+				"sway"			"0.1"
+			}
+		} 
+	}
+
+	r_ah_thickgrass
+	{ 
+		"density" "600.0" 
+		 Group1 
+		{ 
+			"alpha" "0.4"
+			Model1 //main grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 1 512 256 1024"
+				"spritesize"		"0.5 0.0 65 26"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.55"
+				"detailOrientation"	"0"
+				"shape_angle"		"22"
+				"shape_size"		"0.1"
+				"sway"			"0.2"
+			}
+			Model3 //contrast grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 256 512 256 1024"
+				"spritesize"		"0.5 0.0 58 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.34"
+				"detailOrientation"	"0"
+				"shape_angle"	"	20"
+				"shape_size"		"0.1"
+				"sway"			"0.1"
+			}
+			Model2 //flower
+			{
+				"sprite"		"512 1 142 256 1024"
+				"spritesize"		"0.5 0.0 18 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.025"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model5 //flower 2 blue
+			{
+				"sprite"		"654 1 96 256 1024"
+				"spritesize"		"0.5 0.0 9 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.01"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model8 //green filler 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"594 944 177 80 1024"
+				"spritesize"		"0.5 0.0 25 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model9 //green filler 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"602 860 171 82 1024"
+				"spritesize"		"0.5 0.0 24 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model10 //shrub
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"763 65 260 201 1024"
+				"spritesize"		"0.5 0.0 30 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.01"
+				"detailOrientation"	 "0"
+				"upright"		"1"
+				"sway"			"0.1"
+			}
+		}
+		Group2
+		{ 
+			"alpha" "0.75"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+		} 
+	}
+
+	r_ah_dirt_road
+	{ 
+		"density" "600.0" 
+		 Group0
+		{ 
+			"alpha" "0.0"
+			Model4 // dead bramble 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"768 712 220 146 1024"
+				"spritesize"		"0.5 0.0 30 15"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.03"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model5 // dead bramble 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"590 750 181 108 1024"
+				"spritesize"		"0.5 0.0 26 16"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.04"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+		}
+		 Group1 
+		{ 
+			"alpha" "0.4"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+			Model6 // dry plant
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"774 871 249 153 1024"
+				"spritesize"		"0.5 0.0 24 15"
+				"spriterandomscale"	"0.4"
+				"amount"		"0.04"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}
+			Model4
+			{
+				"sprite"		"660 675 112 60 1024"
+				"spritesize"		"0.5 0.0 8 4"
+				"spriterandomscale"	"0.5"
+				"amount"		"0.1"
+				"detailOrientation"	 "1"
+				"sway"			"0.00"
+			}
+			Model5
+			{
+				"sprite"		"573 707 85 33 1024"
+				"spritesize"		"0.5 0.0 6 3"
+				"spriterandomscale"	"0.5"
+				"amount"		"0.15"
+				"detailOrientation"	 "1"
+				"sway"			"0.00"
+			}
+		}
+		Group2
+		{ 
+			"alpha" "0.75"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.005"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.015"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.015"
+			}
+		} 
+	}
+
+	
+	r_grass1_haystubble1
+	{ 
+		"density" "550.0" 
+		 Group1 
+		{ 
+			"alpha" "0.4"
+			Model1 //main grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 1 512 256 1024"
+				"spritesize"		"0.5 0.0 70 27"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.55"
+				"detailOrientation"	"0"
+				"shape_angle"		"22"
+				"shape_size"		"0.1"
+				"sway"			"0.2"
+			}
+			Model3 //contrast grass
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"1 256 512 256 1024"
+				"spritesize"		"0.5 0.0 62 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.34"
+				"detailOrientation"	"0"
+				"shape_angle"	"	20"
+				"shape_size"		"0.1"
+				"sway"			"0.1"
+			}
+			Model2 //flower
+			{
+				"sprite"		"512 1 142 256 1024"
+				"spritesize"		"0.5 0.0 18 22"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.025"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model5 //flower 2 blue
+			{
+				"sprite"		"654 1 96 256 1024"
+				"spritesize"		"0.5 0.0 9 25"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.01"
+				"detailOrientation"	 "1"
+				"sway"			"0.1"
+			}
+			Model8 //green filler 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"594 944 177 80 1024"
+				"spritesize"		"0.5 0.0 25 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model9 //green filler 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"602 860 171 82 1024"
+				"spritesize"		"0.5 0.0 24 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+		}
+		 Group2 
+		{ 
+			"alpha" "0.8"
+			Model8 //green filler 1
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"594 944 177 80 1024"
+				"spritesize"		"0.5 0.0 25 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+			Model9 //green filler 2
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"602 860 171 82 1024"
+				"spritesize"		"0.5 0.0 24 10"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.05"
+				"detailOrientation"	 "0"
+				"sway"			"0.1"
+				"shape_angle"		"20"
+				"shape_size"		"0.1"
+			}			
+		}
+		Group3
+		{ 
+			"alpha" "1.0"
+			Model1
+			{
+				"model"			"models/props_foliage/r_detailprop1.mdl"
+				"amount"		"0.01"
+			}
+			Model2
+			{
+				"model"			"models/props_foliage/r_detailprop2.mdl"
+				"amount"		"0.02"
+			}
+			Model3
+			{
+				"model"			"models/props_foliage/r_detailprop3.mdl"
+				"amount"		"0.02"
+			}
+			Model4 // hay stubble
+			{
+				"sprite_shape"		"tri"
+				"sprite"		"768 25 256 39 1024"
+				"spritesize"		"0.5 0.0 38 7"
+				"spriterandomscale"	"0.1"
+				"amount"		"0.25"
+				"detailOrientation"	 "0"
+				"sway"			"0.02"
+				"shape_angle"		"5"
+				"shape_size"		"0.5"
+			}			
+		} 
+	}
+	
+	r_skyboxtrees1
+	{
+		"density" "250.0"
+
+		Group1
+		{
+			"alpha" "0.0"
+			Model1
+			{
+				"sprite_shape"		"cross"
+				"sprite"		"0 538 163 468 1024"
+				"spritesize"		"0.5 0.0 11 34"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.6"
+				"detailOrientation"	"0"
+				"shape_angle"		"3"
+				"shape_size"		"0.03"
+				"sway"			"0.1"
+				"upright"		"1"
+			}
+			Model2
+			{
+				"sprite_shape"		"cross"
+				"sprite"		"165 540 290 467 1024"
+				"spritesize"		"0.5 0.0 21 38"
+				"spriterandomscale"	"0.2"
+				"amount"		"0.4"
+				"detailOrientation"	"0"
+				"shape_angle"		"3"
+				"shape_size"		"0.03"
+				"sway"			"0.1"
+				"upright"		"1"
+			}
+		}
+	}	
+}

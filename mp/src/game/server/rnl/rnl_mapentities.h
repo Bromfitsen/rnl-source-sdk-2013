@@ -17,20 +17,25 @@
 class CRnLEntityFilter : public CMapLoadEntityFilter
 {
 public:
-	CRnLEntityFilter();
+	CRnLEntityFilter(const char** filterEntityList);
 	virtual bool ShouldCreateEntity( const char *pClassname );
 	virtual CBaseEntity* CreateNextEntity( const char *pClassname );
+
+protected:
+	const char** m_pszPreserveEntityList;
 };
 
 class CRnLRespawnEntityFilter : public CRnLEntityFilter
 {
 public:
-	CRnLRespawnEntityFilter();
+	CRnLRespawnEntityFilter(const char** filterEntityList);
 	virtual bool ShouldCreateEntity( const char *pClassname );
 	virtual CBaseEntity* CreateNextEntity( const char *pClassname );
 
 public:
 	int m_iIterator; // Iterator into g_MapEntityRefs.
 };
+
+bool UTIL_FindInList(const char** pStrings, const char* pToFind);
 
 #endif //RNL_MAPENTITIES_H

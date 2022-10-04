@@ -1,0 +1,7 @@
+VertexLitGeneric
+{
+	"$basetexture"	"models\props_lafiere\rd_laf_bridge02"
+	"$bumpmap"	"models\props_lafiere\rd_laf_bridge02_normal"
+	"$model" 1
+
+}

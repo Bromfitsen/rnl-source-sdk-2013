@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "VGUI/overview/objective_axis_control"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

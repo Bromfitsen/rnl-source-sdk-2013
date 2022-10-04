@@ -32,6 +32,9 @@
 #include "weapon_rnlbasemachinegun.h"
 #include "obstacle_pushaway.h"
 
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
+
 // ----------------------------------------------------------------------------- //
 // Class Global functions.
 // ----------------------------------------------------------------------------- //
@@ -85,18 +88,7 @@ ConVar mp_bulletmaxlifetime( "mp_bulletmaxlifetime", "3.0", FCVAR_REPLICATED, "M
 ConVar mp_useballistics( "mp_useballistics", "0", FCVAR_REPLICATED | FCVAR_CHEAT, "Use Ballistics" );
 
 
-#ifdef CLIENT_DLL
-
-BEGIN_PREDICTION_DATA( CRnLPlayer )
-	DEFINE_PRED_TYPEDESCRIPTION( m_RnLLocal, C_RnLPlayerLocalData ),
-	DEFINE_PRED_FIELD( m_flCycle, FIELD_FLOAT, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE | FTYPEDESC_NOERRORCHECK ),
-	DEFINE_PRED_FIELD( m_iShotsFired, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_nWeaponPosture, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_vecLeanOffset, FIELD_VECTOR, FTYPEDESC_INSENDTABLE ),
-
-END_PREDICTION_DATA()
-
-#else
+#ifndef CLIENT_DLL
 
 ConVar mp_moraledistance( "mp_moraledistance", "200.0", FCVAR_NOTIFY|FCVAR_REPLICATED, "The maximum distance from a teammate before they stop offering a morale boost." );
 
@@ -119,6 +111,159 @@ bool CRnLPlayer::CanMove()
 
 	return true;
 }
+
+//RnL : MovementMod : Begin
+bool CRnLPlayer::IsStanding(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_STAND);
+}
+
+bool CRnLPlayer::IsStandingUp(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_CROUCH_TO_STAND || m_nMovementPosture == MOVEMENT_POSTURE_PRONE_TO_STAND);
+}
+
+bool CRnLPlayer::IsDucked(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_CROUCH || m_nMovementPosture == MOVEMENT_POSTURE_CROUCH_TOGGLE
+		|| m_nMovementPosture == MOVEMENT_POSTURE_DEPLOYED_CROUCH);
+}
+
+bool CRnLPlayer::IsDucking(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_STAND_TO_CROUCH || m_nMovementPosture == MOVEMENT_POSTURE_STAND_TO_CROUCH_TOGGLE
+		|| m_nMovementPosture == MOVEMENT_POSTURE_LAND_TO_CROUCH);
+}
+
+bool CRnLPlayer::IsProne(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_PRONE || m_nMovementPosture == MOVEMENT_POSTURE_DEPLOYED_PRONE
+		|| m_nMovementPosture == MOVEMENT_POSTURE_PRONE_ROLL_LEFT || m_nMovementPosture == MOVEMENT_POSTURE_PRONE_ROLL_RIGHT);
+}
+
+bool CRnLPlayer::IsProning(void) const
+{
+	return (m_nMovementPosture == MOVEMENT_POSTURE_STAND_TO_PRONE || m_nMovementPosture == MOVEMENT_POSTURE_CROUCH_TO_PRONE
+		|| m_nMovementPosture == MOVEMENT_POSTURE_PRONE_DIVE || m_nMovementPosture == MOVEMENT_POSTURE_LAND_TO_PRONE
+		|| m_nMovementPosture == MOVEMENT_POSTURE_PRONE_TO_STAND || m_nMovementPosture == MOVEMENT_POSTURE_PRONE_TO_CROUCH
+		|| m_nMovementPosture == MOVEMENT_POSTURE_PRONE_TO_CROUCH_TOGGLE);
+}
+
+
+//MovementMod : Functions to grab everything we needs
+//-----------------------------------------------------------------------------
+// Purpose: Get the current movement posture
+// Output : RnLMovementPostures_t
+//-----------------------------------------------------------------------------
+RnLMovementPostures_t CRnLPlayer::GetMovementPosture(void) const
+{
+	return (RnLMovementPostures_t)((int)m_nMovementPosture);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Get the previous movement posture
+// Output : RnLMovementPostures_t
+//-----------------------------------------------------------------------------
+RnLMovementPostures_t CRnLPlayer::GetMovementPostureFrom(void) const
+{
+	return (RnLMovementPostures_t)((int)m_nMovementPostureFrom);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Change to the given movement posture
+// Output :
+//-----------------------------------------------------------------------------
+void CRnLPlayer::SetMovementPosture(RnLMovementPostures_t iType)
+{
+	if (iType < 0 || iType >= MOVEMENT_POSTURE_MAX)
+	{
+		return;
+	}
+
+	if (m_nMovementPosture != iType)
+	{
+		m_nMovementPostureFrom = m_nMovementPosture;
+	}
+	m_nMovementPosture = iType;
+	m_RnLLocal.m_flMovementPostureEntranceTime = 0;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Get the time when we entered the current movement posture
+// Output : float
+//-----------------------------------------------------------------------------
+float CRnLPlayer::GetMovementPostureDuration(void) const
+{
+	return (gpGlobals->curtime - m_RnLLocal.m_flMovementPostureEntranceTime);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Manually set the movement time on this if needed
+// Output :
+//-----------------------------------------------------------------------------
+void CRnLPlayer::SetMovementPostureDuration(float flTime)
+{
+	m_RnLLocal.m_flMovementPostureEntranceTime = flTime;
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: Get the angle of the current movement posture
+// Output : QAngle
+//-----------------------------------------------------------------------------
+QAngle CRnLPlayer::GetMovementPostureAngle(void) const
+{
+	return (m_angMovementPostureAngle.Get());
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: set the posture angle
+// Output :
+//-----------------------------------------------------------------------------
+void CRnLPlayer::SetMovementPostureAngle(QAngle angle)
+{
+	m_angMovementPostureAngle = angle;
+}
+
+float CRnLPlayer::GetMovementPostureOffset(void) const
+{
+	return m_RnLLocal.m_flMovementPostureOffset;
+}
+
+void CRnLPlayer::SetMovementPostureOffset(float flOffset)
+{
+	m_RnLLocal.m_flMovementPostureOffset = flOffset;
+}
+
+float CRnLPlayer::GetMovementPostureTarget(void) const
+{
+	return m_RnLLocal.m_flMovementPostureTarget;
+}
+
+void CRnLPlayer::SetMovementPostureTarget(float fTarget)
+{
+	m_RnLLocal.m_flMovementPostureTarget = fTarget;
+}
+
+float CRnLPlayer::GetMovementPostureVelocity(void) const
+{
+	return m_RnLLocal.m_flMovementPostureVelocity;
+}
+
+void CRnLPlayer::SetMovementPostureVelocity(float fTarget)
+{
+	m_RnLLocal.m_flMovementPostureVelocity = fTarget;
+}
+
+bool CRnLPlayer::IsPostureChanging(float flVelLimit /*= 0.01*/, float flDiffLimit /*= 0.01*/) const {
+
+	float flTarget = m_RnLLocal.m_flMovementPostureTarget;
+	float flOffset = GetMovementPostureOffset();
+	float flVelocity = m_RnLLocal.m_flMovementPostureVelocity;
+
+	return (fabsf(flVelocity) > flVelLimit || fabsf(flTarget - flOffset) > flDiffLimit);
+}
+
+//RnL : MovementMod : End
 
 bool CRnLPlayer::IsWounded( void )
 {
@@ -179,16 +324,6 @@ float CRnLPlayer::GetViewRollOffset( void )
 void CRnLPlayer::SetViewRollOffset( float newOffset )
 {
 	m_RnLLocal.m_flViewRollOffset = newOffset;
-}
-
-bool CRnLPlayer::IsDuckToggled( void )
-{
-	return m_bIsDuckToggled;
-}
-
-void CRnLPlayer::ToggleDuck( void )
-{
-	m_bIsDuckToggled = !m_bIsDuckToggled;
 }
 
 void CRnLPlayer::SetMoraleLevel( int iLev )
@@ -645,7 +780,7 @@ bool CRnLPlayer::UpdateBullet( int iIndex )
 	if( iIndex < 0 || iIndex >= m_aBullets.Count() )
 		return false;
 
-	RnLBulletInfo* pInfo = &(m_aBullets[iIndex]);
+	RnLBulletInfo_t* pInfo = &(m_aBullets[iIndex]);
 
 	if( !pInfo )
 		return false;
@@ -939,7 +1074,7 @@ void CRnLPlayer::FireBullet(
 
 	if( !mp_useballistics.GetBool() )
 	{
-		RnLBulletInfo bullet;
+		RnLBulletInfo_t bullet;
 		bullet.m_vecPosition = vecSrc;
 		bullet.m_vecDirShooting = vecDir;
 		bullet.m_vecVelocity = vecDir * GetRnLAmmoDef()->GetVelocity( iBulletType );
@@ -987,7 +1122,7 @@ void CRnLPlayer::FireBullet(
 }
 
 //modified by NuclearFriend to take into effect shooting through objects
-void CRnLPlayer::FireBulletImmediately( RnLBulletInfo& bullet )
+void CRnLPlayer::FireBulletImmediately(RnLBulletInfo_t& bullet )
 {
 	bool bTraceRefire = true;
 	do
@@ -1242,7 +1377,7 @@ void CRnLPlayer::RemoveAllAmmo( void )
 	}
 }
 
-void CRnLPlayer::TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &vecDir, trace_t *ptr )
+void CRnLPlayer::TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &vecDir, trace_t *ptr, CDmgAccumulator* pAccumulator)
 {
 	CDisablePredictionFiltering disabler;
 
@@ -1253,7 +1388,7 @@ void CRnLPlayer::TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &ve
 	// Prevent team damage here so blood doesn't appear
 	if ( inputInfo.GetAttacker()->IsPlayer() )
 	{
-		if ( !g_pGameRules->FPlayerCanTakeDamage( this, inputInfo.GetAttacker() ) )
+		if ( !g_pGameRules->FPlayerCanTakeDamage( this, inputInfo.GetAttacker(), inputInfo) )
 			return;
 	}
 

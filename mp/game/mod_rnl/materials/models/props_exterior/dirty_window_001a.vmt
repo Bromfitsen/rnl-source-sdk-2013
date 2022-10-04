@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/dirty_window_001a"
+	"$model" 1
+	"$nocull" 1
+}
+
+

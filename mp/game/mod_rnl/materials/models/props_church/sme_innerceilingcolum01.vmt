@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_church/sme_innerceilingcolum01"
+	"$surfaceprop" "concrete"
+	"$model" 1
+}

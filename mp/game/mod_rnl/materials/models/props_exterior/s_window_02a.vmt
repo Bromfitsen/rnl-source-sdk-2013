@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_window_02a"
+	"$bumpmap" "models/props_exterior/s_window_02a_normal"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

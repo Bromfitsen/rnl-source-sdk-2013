@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_interior/lfm_truss01"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

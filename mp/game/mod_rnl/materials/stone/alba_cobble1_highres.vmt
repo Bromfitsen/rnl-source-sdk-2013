@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	"$basetexture" "stone/alba_cobble1_highres"
+	"$surfaceprop" "concrete"
+	"$bumpmap"     "stone/alba_cobble1_normal"
+}

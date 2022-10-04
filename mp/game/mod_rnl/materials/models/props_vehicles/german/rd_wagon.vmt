@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_supplies/german/rd_wagon"
+	"$model" 1
+	"$surfaceprop" "wood"
+
+}

@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_light01"
+	"$surfaceprop" "metal"
+
+	"$model" 1
+}
+
+

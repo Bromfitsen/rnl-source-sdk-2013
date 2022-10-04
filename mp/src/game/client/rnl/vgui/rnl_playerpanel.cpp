@@ -26,7 +26,7 @@
 #include "c_rnl_player.h"
 
 #include "c_rnl_game_team.h"
-#include "c_rnl_base_squad.h"
+#include "rnl_squad.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -77,7 +77,7 @@ void CRnLPlayerPlayerPanel::Paint( void )
 	if( !pTeam )
 		return;
 
-	C_RnLBaseSquad* pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
+	CRnLSquad* pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
 	if( !pSquad )
 		return;
 
@@ -95,8 +95,8 @@ void CRnLPlayerPlayerPanel::Paint( void )
 					{
 						if( pOtherPlayer->IsAlive() )
 						{
-							panelPos =  m_pNCOParent->WorldToMapCoords( pGR->GetPosition(pOtherPlayer->entindex()) );
-							DrawPlayer( panelPos, pGR->GetEyeYaw(pOtherPlayer->entindex()), 16, pOtherPlayer->GetTeamNumber() );
+							panelPos =  m_pNCOParent->WorldToMapCoords( pOtherPlayer->GetAbsOrigin() );
+							DrawPlayer( panelPos, pOtherPlayer->GetAbsAngles()[YAW], 16, pOtherPlayer->GetTeamNumber());
 
 							wchar_t wcPlayerName[MAX_PLAYER_NAME_LENGTH + 1];
 							g_pVGuiLocalize->ConvertANSIToUnicode( pOtherPlayer->GetPlayerName(), wcPlayerName, sizeof( wcPlayerName ) );
@@ -114,8 +114,8 @@ void CRnLPlayerPlayerPanel::Paint( void )
 		{
 			if( pOtherPlayer->IsAlive() )
 			{
-				panelPos =  m_pNCOParent->WorldToMapCoords( pGR->GetPosition(pOtherPlayer->entindex()) );
-				DrawPlayer( panelPos, pGR->GetEyeYaw(pOtherPlayer->entindex()), 16, pOtherPlayer->GetTeamNumber() );
+				panelPos =  m_pNCOParent->WorldToMapCoords( pOtherPlayer->GetAbsOrigin() );
+				DrawPlayer( panelPos, pOtherPlayer->GetAbsAngles()[YAW], 16, pOtherPlayer->GetTeamNumber() );
 
 				vgui::surface()->DrawSetTextColor(0, 0, 0, 255);
 				vgui::surface()->DrawSetTextPos( panelPos.x - 12, panelPos.y - 36);

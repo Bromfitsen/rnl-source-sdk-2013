@@ -1,0 +1,13 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/world_models/allied_exp/w_allied_exp"
+        "$bumpmap" "models/weapons/world_models/allied_exp/w_allied_exp_norm"
+	"$phong" "1"
+	"$phongexponent" "18"
+	"$phongboost" ".5"	
+	"$phongfresnelranges"	"[1 3 6]"
+//	"$halflambert" "1"
+	"$phongtint" "[2 2 2]"
+	"$phongalbedotint" "1"
+	
+}

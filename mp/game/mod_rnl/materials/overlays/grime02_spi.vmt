@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "overlays/grime02_spi"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+    	"$nocull" 1
+}

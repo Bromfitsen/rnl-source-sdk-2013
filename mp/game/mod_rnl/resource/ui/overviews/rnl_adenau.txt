@@ -1,0 +1,54 @@
+// rnl NCO Map description file rnl_adenau
+"mapvalues"
+{
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_adenau"	// texture file
+		"offset_x"	"11" 
+		"offset_y"	"57" 
+		"scale"		"4.1"  
+		"reverse_y"	"0"  
+		"angle"		"90"
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_adenau"	// texture file
+		"offset_x"	"11" 
+		"offset_y"	"57" 
+		"scale"		"4.1"  
+		"reverse_y"	"0"  
+		"angle"		"90"
+	}
+
+	"node1"
+	{
+		"displayname"	"Crashed Truck"
+		"textposition"  "0" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node2"
+	{
+		"displayname"	"Market"
+		"textposition"  "0" 					
+		"iconposition"  "1"
+	}
+	"node3"
+	{
+		"displayname"	"Bridge"
+		"textposition"  "2" 					
+		"iconposition"  "1"						
+	}
+	"node4"
+	{
+		"displayname"	"Plane Crash Site"
+		"textposition"  "0" 					
+		"iconposition"  "1"						
+	}
+	"node5"
+	{
+		"displayname"	"Underpath"
+		"textposition"  "0" 					
+		"iconposition"  "1"						
+	}
+}

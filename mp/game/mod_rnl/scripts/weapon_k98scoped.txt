@@ -1,0 +1,113 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"90"		// damage per bullet
+	"Bullets"			"1"		// bullets per shoot
+	"CycleTime"			"0.5"		// time between shoots
+	"Spread"			"0.0062"	//Bullet Spread
+	
+	
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"				"Karabiner 98k Zf41/1"
+	"viewmodel"				"models/weapons/v_k98zf41.mdl"
+	"playermodel"				"models/weapons/w_k98zf41.mdl"
+	"PlayerAnimationExtension"		"M1"
+	"ClipModel"				"models/items/w_k98_ammo.mdl"
+	"Team"				"axis"
+	
+	"bucket"			"0"
+	"bucket_position"		"0"
+
+	"clip_size"			"5"
+	
+	"primary_ammo"			"792"
+	"secondary_ammo"		"None"
+
+	// old way to do item flags
+	"item_flags"			"7" // ITEM_FLAG_SELECTONEMPTY | ITEM_FLAG_NOAUTORELOAD | ITEM_FLAG_NOAUTOSWITCHEMPTY
+
+	// new way to do item flags
+	"ITEM_FLAG_SELECTONEMPTY"	"1"	
+	"ITEM_FLAG_NOAUTORELOAD"	"1"
+	"ITEM_FLAG_NOAUTOSWITCHEMPTY"	"1"
+
+	"weight"				"25"
+	"item_flags"			"0"
+ 	"BuiltRightHanded" 		"0"
+	"AllowFlipping" 		"1"
+
+	Recoil
+	{
+		"Normal"	"5.50"
+		"Crouched"	"3.50"
+		"Prone"		"0.80"
+		"Jumping"	"10.50"
+		"SightedFactor"	"0.66"
+	}
+
+	FieldsOfView
+	{
+		"Hip"		"75.0"
+		"Shoulder"	"75.0"
+		"Sights"	"50.0"
+		"SteadySights"	"20.0"
+		"Throwing"	"75.0"
+	}
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		//"reload"			"Default.Reload"
+		//"empty"			"Default.ClipEmpty_Rifle"
+		"single_shot"		"Weapon_Kar.Shoot"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

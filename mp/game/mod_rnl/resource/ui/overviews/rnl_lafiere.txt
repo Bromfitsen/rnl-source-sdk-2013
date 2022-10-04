@@ -1,0 +1,53 @@
+// rnl NCO Map description file for rnl_lafiere
+"mapvalues"
+{
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_lafiere_allies"	// texture file
+		"offset_x"	"2"
+		"offset_y"	"-65"
+		"scale"		"1.33"
+		"rotate"	"0"
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_lafiere_axis"	// texture file
+		"offset_x"	"2"
+		"offset_y"	"-14"
+		"scale"		"1.3"
+		"rotate"	"0"
+	}
+
+
+	"node0"
+	{
+		"displayname"	"82nd"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node1"
+	{
+		"displayname"	"Manor"
+		"textposition"  "0" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node2"
+	{
+		"displayname"	"Causeway"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node3"
+	{
+		"displayname"	"Pillbox"
+		"textposition"  "0" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node4"
+	{
+		"displayname"	"Cauquigny"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+}

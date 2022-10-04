@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "concrete/v_fencewall03"
+	"$bumpmap" "concrete/v_fencewall03_normal"
+	"$model" 1
+	"$surfaceprop" "concrete"
+}

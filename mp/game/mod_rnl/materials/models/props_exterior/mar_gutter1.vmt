@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/mar_gutter1"
+	"$nocull" "1"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

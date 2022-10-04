@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "decals/v_cafesign02"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+}

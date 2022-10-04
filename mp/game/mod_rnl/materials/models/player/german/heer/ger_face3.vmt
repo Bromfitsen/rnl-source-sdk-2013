@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\player\german\heer/ger_face3"
+    //"$bumpmap" "models\player\german\heer\ger_face1_normal"
+	"$model" 1
+	//"$phong" "1"
+	//"$phongexponenttexture" "models\player\german\heer\ger_face1_exp"
+	//"$phongboost" "6"	
+	//"$phongfresnelranges"	"[0.05 0.5 1]"
+}

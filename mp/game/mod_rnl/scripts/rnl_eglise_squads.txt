@@ -1,0 +1,97 @@
+// Class numbers:
+// 		Allies:	RIFLEMAN 1, MACHINEGUNNER 2, RADIOMAN 3, MEDIC 4, NCO 5, UNAVAILABLE SLOT 0
+// 		Axis:	GRENADIER 1, MGSCHUETZE 2, FUNKER 3, SANITAETER 4, OFFIZIER 5, UNAVAILABLE SLOT 0
+// Subclass numbers:
+// 		DEFAULT 0, MG SUPPORT 1
+//
+// Each team consists of 2 squads, allied squads are split into 2 fireteams with 4 slots
+//
+// Attributes
+//		"squadX" - display name for squads
+// 		"slotX" - assigns class, subclass and slot dependancies
+//				  max 15 dependancies seperated by commas
+//				  example:
+//				  "slot5" "5 1 1,2,3,4"
+//				  results in slot 5 being an NCO requiring slots 1-4 being filled
+//		"slotX_desc" - short(!) description of the class if necessary
+
+"squads"
+{
+    "allies"
+    {
+        "squad1"		"Squad 1"
+        "squad2"		"Squad 2"
+
+        "slot1"			"5 0 0"
+        "slot2"			"1 0 0"
+        "slot3"			"1 0 2"
+        "slot4"			"1 0 3"
+        "slot5"			"5 0 1,3"
+        "slot6"			"2 0 1,3"
+        "slot7"			"1 1 1,3"
+        "slot8"			"1 0 1,3"
+        "slot9"			"5 0 1,4,5,6,7,8"
+        "slot10"		"1 0 1,4,5,6,7,8"
+        "slot11"		"1 0 10"
+        "slot12"		"1 0 11"
+        "slot13"		"5 0 9,11"
+        "slot14"		"2 0 9,11"
+        "slot15"		"1 1 9,11"
+        "slot16"		"1 0 9,11"
+        "slot1_desc"	"Squad Leader"
+        "slot2_desc"	"Rifleman 1"
+        "slot3_desc"	"Rifleman 2"
+        "slot4_desc"	"Rifleman 3"
+        "slot5_desc"	"Fire Team Leader"
+        "slot6_desc"	"Gunner"
+        "slot7_desc"	"Support"
+        "slot8_desc"	"Spotter"
+        "slot9_desc"	"Squad Leader"
+        "slot10_desc"	"Rifleman 1"
+        "slot11_desc"	"Rifleman 2"
+        "slot12_desc"	"Rifleman 3"
+        "slot13_desc"	"Fire Team Leader"
+        "slot14_desc"	"Gunner"
+        "slot15_desc"	"Support"
+        "slot16_desc"	"Spotter"
+    }
+
+    "axis"
+    {
+        "squad1"		"Gruppe 1"
+        "squad2"		"Gruppe 2"
+
+        "slot1"			"5 0 0"
+        "slot2"			"1 0 0"
+        "slot3"			"1 0 2"
+        "slot4"			"1 0 3"
+        "slot5"			"5 0 1,3"
+        "slot6"			"2 0 1,3"
+        "slot7"			"1 1 1,3"
+        "slot8"			"1 0 1,3"
+        "slot9"			"5 0 1,4,5,6,7,8"
+        "slot10"		"1 0 1,4,5,6,7,8"
+        "slot11"		"1 0 10"
+        "slot12"		"1 0 11"
+        "slot13"		"5 0 9,11"
+        "slot14"		"2 0 9,11"
+        "slot15"		"1 1 9,11"
+        "slot16"		"1 0 9,11"
+        "slot1_desc"	"Gruppenfuehrer"
+        "slot2_desc"	"Schuetze 1"
+        "slot3_desc"	"Schuetze 2"
+        "slot4_desc"	"Schuetze 3"
+        "slot5_desc"	"Truppfuehrer"
+        "slot6_desc"	"MG-Schuetze"
+        "slot7_desc"	"Richtschuetze"
+        "slot8_desc"	"Spaeher"
+        "slot9_desc"	"Gruppenfuehrer"
+        "slot10_desc"	"Schuetze 1"
+        "slot11_desc"	"Schuetze 2"
+        "slot12_desc"	"Schuetze 3"
+        "slot13_desc"	"Truppfuehrer"
+        "slot14_desc"	"MG-Schuetze"
+        "slot15_desc"	"Richtschuetze"
+        "slot16_desc"	"Spaeher"
+    }
+}

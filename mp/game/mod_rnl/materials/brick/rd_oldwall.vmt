@@ -1,0 +1,6 @@
+"lightmappedgeneric"
+{
+	"$basetexture" "brick/rd_oldwall"
+	"$bumpmap" "brick/rd_oldwall_normal"
+	"$surfaceprop" "brick"
+}

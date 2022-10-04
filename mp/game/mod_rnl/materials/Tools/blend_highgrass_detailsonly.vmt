@@ -1,0 +1,11 @@
+"WorldVertexTransition"
+{
+	"$basetexture" "Tools/toolsnodetails"
+	"$basetexture2" "Tools/toolsdetails"
+	"$surfaceprop2" "grass"
+	"$alphatest" "1"
+	"$alpha" "0"
+	%compilepassbullets
+	%compilenodraw
+	"%detailtype" "ah_tall_thick_grass1"	
+}

@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_trim_horizontalm01"
+	"$bumpmap" "models/props_exterior/alba_trim_horizontalm01_normal"
+	"$surfaceprop" "stone"
+	"%keywords" "alba"
+	"$model" 1
+}
+
+

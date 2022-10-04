@@ -1,0 +1,355 @@
+"sprites/640_hud"
+{
+	TextureData
+	{
+		"death_357"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"."
+		}
+		"death_ar2"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"2"
+		}
+		"death_crossbow_bolt"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"1"
+		}
+		"death_smg1"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"/"
+		}
+		"death_shotgun"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"0"
+		}
+		"death_rpg_missile"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"3"
+		}
+		"death_grenade_frag"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"4"
+		}
+		"death_pistol"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"-"
+		}
+		"death_physics"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"9"
+		}
+		"death_combine_ball"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"8"
+		}
+		"death_smg1_grenade"
+		{
+				"font"		"HL2MPTypeDeath"
+				"character"	"7"
+		}
+
+		"voice_player"
+		{
+				"file"		"voice/icntlk_sv"
+				"x"		"0"
+				"y"		"0"
+				"width"		"32"
+				"height"	"32"
+		}
+		"voice_self"
+		{
+				"file"		"voice/icntlk_local"
+				"x"		"0"
+				"y"		"0"
+				"width"		"32"
+				"height"	"32"
+		}
+		"german_belt"	
+		{
+				"file"		"vgui/hud/ammoicons"
+				"x"		"0"
+				"y"		"0"
+				"width"		"512"
+				"height"	"34"
+		}
+		"american_belt"
+		{
+				"file"		"vgui/hud/ammoicons"
+				"x"		"0"
+				"y"		"34"
+				"width"		"512"
+				"height"	"34"
+		}
+
+// american weapons
+		"30-06_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"18"
+				"y"		"2"
+				"width"		"48"
+				"height"	"30"
+		}
+		"30-06_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"18"
+				"y"		"2"
+				"width"		"48"
+				"height"	"15"
+		}
+		"AMMO_CARBINE_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"303"
+				"y"		"8"
+				"width"		"60"
+				"height"	"136"
+		}
+		"AMMO_CARBINE_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"303"
+				"y"		"8"
+				"width"		"60"
+				"height"	"78"
+		}
+		"AMMO_BAR_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"390"
+				"y"		"391"
+				"width"		"61"
+				"height"	"113"
+		}
+		"AMMO_BAR_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"390"
+				"y"		"391"
+				"width"		"61"
+				"height"	"60"
+		}
+		"45acp_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"404"
+				"y"		"193"
+				"width"		"36"
+				"height"	"184"
+		}
+		"45acp_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"404"
+				"y"		"193"
+				"width"		"36"
+				"height"	"92"
+		}
+		"45acp_colt_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"243"
+				"y"		"391"
+				"width"		"69"
+				"height"	"121"
+		}
+		"45acp_colt_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"243"
+				"y"		"391"
+				"width"		"69"
+				"height"	"60"
+		}
+		"AMMO_BROWNING_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"88"
+				"y"		"245"
+				"width"		"78"
+				"height"	"62"
+		}
+		"AMMO_BROWNING_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"88"
+				"y"		"245"
+				"width"		"78"
+				"height"	"62"
+		}
+		"mk2_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"56"
+				"y"		"322"
+				"width"		"39"
+				"height"	"69"
+		}
+		"mk2_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"56"
+				"y"		"322"
+				"width"		"39"
+				"height"	"69"
+		}
+		"m18_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"6"
+				"y"		"320"
+				"width"		"39"
+				"height"	"74"
+		}
+		"m18_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"6"
+				"y"		"320"
+				"width"		"39"
+				"height"	"74"
+		}
+
+
+// german weapons
+		"792_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"110"
+				"y"		"2"
+				"width"		"35"
+				"height"	"30"
+		}
+		"792_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"110"
+				"y"		"2"
+				"width"		"35"
+				"height"	"15"
+		}
+		"AMMO_G43_full"
+		{
+				"file"		"vgui/hud/clips_bullets2"
+				"x"			"25"
+				"y"			"24"
+				"width"		"80"
+				"height"	"80"
+		}
+		"AMMO_G43_part"
+		{
+				"file"		"vgui/hud/clips_bullets2"
+				"x"			"25"
+				"y"			"24"
+				"width"		"80"
+				"height"	"40"
+		}
+		"792_fg42_full"
+		{
+				"file"		"vgui/hud/clips_bullets2"
+				"x"			"143"
+				"y"			"4"
+				"width"		"74"
+				"height"	"120"
+		}
+		"792_fg42_part"
+		{
+				"file"		"vgui/hud/clips_bullets2"
+				"x"			"143"
+				"y"			"4"
+				"width"		"74"
+				"height"	"60"
+		}
+		"9mm_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"420"
+				"y"		"2"
+				"width"		"45"
+				"height"	"145"
+		}
+		"9mm_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"420"
+				"y"		"2"
+				"width"		"45"
+				"height"	"70"
+		}
+		"9mm_walther_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"172"
+				"y"		"375"
+				"width"		"70"
+				"height"	"138"
+		}
+		"9mm_walther_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"243"
+				"y"		"391"
+				"width"		"70"
+				"height"	"60"
+		}
+		"AMMO_MG42_full"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"1"
+				"y"		"245"
+				"width"		"86"
+				"height"	"86"
+		}
+		"AMMO_MG42_part"
+		{
+				"file"		"vgui/hud/clips_bullets"
+				"x"		"1"
+				"y"		"245"
+				"width"		"86"
+				"height"	"86"
+		}
+		"stiel24_full"
+		{
+			"file"		"vgui/hud/clips_bullets"
+			"x"		"60"
+			"y"		"392"
+			"width"		"25"
+			"height"	"112"
+		}
+		"stiel24_part"
+		{
+			"file"		"vgui/hud/clips_bullets"
+			"x"		"60"
+			"y"		"392"
+			"width"		"25"
+			"height"	"112"
+		}
+		"stiel39_full"
+		{
+			"file"		"vgui/hud/clips_bullets"
+			"x"		"10"
+			"y"		"400"
+			"width"		"25"
+			"height"	"104"
+		}
+		"stiel39_part"
+		{
+			"file"		"vgui/hud/clips_bullets"
+			"x"		"10"
+			"y"		"400"
+			"width"		"25"
+			"height"	"104"
+		}
+	}	
+}

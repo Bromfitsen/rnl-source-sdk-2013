@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_furniture/kitchencabinet"
+	"$normal" "models\props_furniture\kitchencabinet_normal"	
+	"$normalmapalphaenvmapmask" 1
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .1 .1 .1 ]"
+	"$model" 1
+	"$surfaceprop" "wood_furniture"
+}

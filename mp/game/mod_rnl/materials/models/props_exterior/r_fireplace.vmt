@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_fireplace"
+	"model" 1
+	%keyword "rnl"
+}

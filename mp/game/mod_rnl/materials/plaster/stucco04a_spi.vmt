@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "plaster/stucco04a_spi"
+        "$bumpmap" "plaster/stucco04a_spi_normal"
+        "$surfaceprop" "plaster"
+	"%keyword" "rnl"
+}

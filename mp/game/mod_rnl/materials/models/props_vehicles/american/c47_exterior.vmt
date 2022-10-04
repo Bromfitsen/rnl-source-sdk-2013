@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\american\c47_exterior"
+	"$alphatest" 1
+	//"$multipass" 1
+	"$surfaceprop" "metal"
+        "$model" "1"
+}

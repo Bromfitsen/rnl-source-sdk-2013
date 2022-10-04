@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_bridge_02"
+	"$bumpmap" "models/props_exterior/s_bridge_02_normal"
+	"$model" 1
+	"$surfaceprop" "concrete"
+	"%keyword" "rnl"
+}

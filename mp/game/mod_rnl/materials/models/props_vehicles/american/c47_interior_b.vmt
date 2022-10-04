@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\american\c47_interior_b"
+	//"$nocull" "1"
+	"$surfaceprop" "metal"
+        "$model" "1"
+	//"$alphatest" 1
+	//"$translucent" 1
+}

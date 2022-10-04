@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_vehicles/alba_170_kombi01a"
+	"$envmapmask" "models/props_vehicles/alba_170_kombi01a_mask"
+	"$envmap" "env_cubemap"
+	"$model" 1
+	"$envmapcontrast" .08
+	"$nocull" 1
+}
+
+

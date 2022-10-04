@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	// Original shader: BaseTimesLightmapAlphaBlend
+	"$basetexture" "Models/props_fences/s_fence_01"
+	"$surfaceprop" "wood"
+	"$model" 1
+}

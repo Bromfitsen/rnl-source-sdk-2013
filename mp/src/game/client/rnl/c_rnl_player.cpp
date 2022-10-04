@@ -83,8 +83,8 @@ BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLNonLocalPlayerExclusive )
 END_RECV_TABLE()
 
 IMPLEMENT_CLIENTCLASS_DT( C_RnLPlayer, DT_RnLPlayer, CRnLPlayer )
-	RecvPropDataTable( "RnLlocaldata", 0, 0, &REFERENCE_RECV_TABLE(DT_RnLLocalPlayerExclusive) ),
-	RecvPropDataTable( "RnLnonlocaldata", 0, 0, &REFERENCE_RECV_TABLE(DT_RnLNonLocalPlayerExclusive) ),
+	RecvPropDataTable( "rnllocaldata", 0, 0, &REFERENCE_RECV_TABLE(DT_RnLLocalPlayerExclusive) ),
+	RecvPropDataTable( "rnlnonlocaldata", 0, 0, &REFERENCE_RECV_TABLE(DT_RnLNonLocalPlayerExclusive) ),
 
 	RecvPropDataTable( RECVINFO_DT(m_RnLLocal),0, &REFERENCE_RECV_TABLE(DT_RnLLocal) ),
 
@@ -102,9 +102,22 @@ IMPLEMENT_CLIENTCLASS_DT( C_RnLPlayer, DT_RnLPlayer, CRnLPlayer )
 	RecvPropVector( RECVINFO( m_vecLeanOffset ) ),
 	RecvPropFloat( RECVINFO( m_flBodyHeight ) ),
 	RecvPropFloat( RECVINFO( m_flDeathViewTime ) ),
-	RecvPropBool(  RECVINFO( m_bIsDuckToggled ) ),
+
+	RecvPropInt(RECVINFO(m_nMovementPosture)),
+	RecvPropInt(RECVINFO(m_nMovementPostureFrom)),
 
 END_RECV_TABLE()
+
+BEGIN_PREDICTION_DATA(C_RnLPlayer)
+	DEFINE_PRED_TYPEDESCRIPTION(m_RnLLocal, C_RnLPlayerLocalData),
+	DEFINE_PRED_FIELD(m_flCycle, FIELD_FLOAT, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE | FTYPEDESC_NOERRORCHECK),
+	DEFINE_PRED_FIELD(m_iShotsFired, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	DEFINE_PRED_FIELD(m_nWeaponPosture, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	DEFINE_PRED_FIELD(m_vecLeanOffset, FIELD_VECTOR, FTYPEDESC_INSENDTABLE),
+
+	DEFINE_PRED_FIELD(m_nMovementPosture, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	DEFINE_PRED_FIELD(m_nMovementPostureFrom, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+END_PREDICTION_DATA()
 
 class C_RnLRagdoll : public C_BaseAnimatingOverlay
 {
@@ -117,10 +130,10 @@ public:
 
 	virtual void OnDataChanged( DataUpdateType_t type );
 
-	int GetPlayerEntIndex() const;
 	IRagdoll* GetIRagdoll() const;
 
 	void ImpactTrace( trace_t *pTrace, int iDamageType, char *pCustomImpactName );
+	void UpdateOnRemove(void);
 
 private:
 
@@ -162,6 +175,11 @@ C_RnLRagdoll::~C_RnLRagdoll()
 		g_pLocalRagdoll = NULL;
 
 	PhysCleanupFrictionSounds( this );
+
+	if (m_hPlayer)
+	{
+		m_hPlayer->CreateModelInstance();
+	}
 }
 
 void C_RnLRagdoll::Interp_Copy( C_BaseAnimatingOverlay *pSourceEntity )
@@ -324,6 +342,13 @@ void C_RnLRagdoll::OnDataChanged( DataUpdateType_t type )
 IRagdoll* C_RnLRagdoll::GetIRagdoll() const
 {
 	return m_pRagdoll;
+}
+
+void C_RnLRagdoll::UpdateOnRemove(void)
+{
+	VPhysicsSetObject(NULL);
+
+	BaseClass::UpdateOnRemove();
 }
 
 C_BaseAnimating * C_RnLPlayer::BecomeRagdollOnClient()
@@ -768,9 +793,7 @@ void C_RnLPlayer::PreMouseMove( QAngle& inAngles )
 		If we are parachuting, act as if the third person camera
 		is overridden and set the camera to free look.
 		*/
-		if( ((m_nButtons & IN_ALT1) && 
-					((IsDeployed() && pWeapon && pWeapon->GetAnimationState() != WEAPON_ANIMATION_RELOAD)
-					|| (GetMovementPosture() == MOVEMENT_POSTURE_STAND || GetMovementPosture() == MOVEMENT_POSTURE_CROUCH || GetMovementPosture() == MOVEMENT_POSTURE_PRONE)))
+		if( ((m_nButtons & IN_ATTACK3) && (IsDeployed() && pWeapon && pWeapon->GetAnimationState() != WEAPON_ANIMATION_RELOAD))
 			|| OverrideThirdPersonCamera()
 			|| GetMovementPosture() == MOVEMENT_POSTURE_PARACHUTING )
 		{

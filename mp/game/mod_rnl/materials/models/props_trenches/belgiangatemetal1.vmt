@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_trenches/belgiangatemetal1"
+	"$model" 1
+	"$surfaceprop" "metal"
+	"%keyword" "rnl"
+}

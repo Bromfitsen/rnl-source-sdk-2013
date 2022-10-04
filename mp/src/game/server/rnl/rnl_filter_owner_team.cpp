@@ -24,7 +24,7 @@ public:
 	void Spawn()
 	{
 		BaseClass::Spawn();
-		m_iTeamValue = TEAM_NONE;
+		m_iTeamValue = TEAM_UNASSIGNED;
 		if ( m_target != NULL_STRING )
 		{
 			SetThink( &CRnLFilterOwnerTeam::TeamCheckThink );

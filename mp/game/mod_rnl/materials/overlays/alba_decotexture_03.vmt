@@ -1,0 +1,8 @@
+LightmappedGeneric
+{
+	"$baseTexture" "overlays/alba_decotexture_03"
+	"$translucent" 1
+	"$decal" 1
+	"$decalscale" 0.20 
+	"%keywords" "rnl"
+}

@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_interior/s_chimney01"
+	"$bumpmap" "models/props_interior/s_chimney01_normal"
+	"$model" 1
+	"$surfaceprop" "stone"
+}

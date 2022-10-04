@@ -1,0 +1,330 @@
+// Soundscapes for Saint Come du Mont
+// general ambience in the village
+"stcomedumont.generalambience"
+{
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.6"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+		"pitch"		"100"
+	}
+	"playrandom"
+	{
+		"time"			"2,10"
+		"volume"		"0.6,0.8"
+		"pitch"			"90,120"
+		"position"		"random"
+		
+		"rndwave"
+		{
+
+			"wave"		"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+	
+	"playrandom"
+	{
+		"time"			"10,30"
+		"volume"		"0.3,0.6"
+		"pitch"			"90,120"
+		"position"		"random"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+			"wave"	"ambient/levels/canals/swamp_bird6.wav"
+			"wave"	"ambient/levels/coast/coastbird4.wav"
+			"wave"	"ambient/levels/coast/coastbird5.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"			"5,15"
+		"volume"		"0.8,1.0"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/distantbattle.wav"
+			"wave"	"ambient/explosions/distantbattle2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"			"10,25"
+		"volume"		"0.7,1.0"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/distantexplosion1.wav"
+			"wave"	"ambient/explosions/distantexplosion2.wav"
+			"wave"	"ambient/explosions/distantexplosion3.wav"
+		}
+	}
+}
+
+// ambience for the outdoor toilets
+"stcomedumont.outside_flys_toilet"
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"10,13"
+		"volume"		"0.7,1"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"  "ambient/creatures/flies5.wav"
+		}
+	}		
+}
+
+// generic flies
+"stcomedumont.outside_flys"
+{
+	"dsp" "1"
+
+	"playrandom"
+	{	
+		"time"			"45,65"
+		"volume"		"0.7,1"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"  "ambient/creatures/flies5.wav"
+		}
+	}		
+}
+
+// the general ambience outside of the village
+"stcomedumont.outside_field_ambience"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "stcomedumont.generalambience"
+	}
+	//"playsoundscape"
+	//{
+	//	"name" "stcomedumont.outside_crickets"
+	//}
+	"playsoundscape"
+	{
+		"name" "stcomedumont.outside_birds"
+	}
+	"playsoundscape"
+	{
+		"name" "stcomedumont.outside_flys"
+	}
+	
+	"playrandom"
+	{
+		"time"			"30,120"
+		"volume"		"0.6,1.0"
+		"pitch"			"90,100"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/cow_distant_single_1.wav"
+			"wave"	"ambient/animal/cow_distant_single_2.wav"
+			
+		}
+	}
+
+	// 0 = flies in the outdoor toilet
+	//"playsoundscape"
+	//{	
+	//	"positionoverride" 	"0"
+	//	"name"				"stcomedumont.outside_flys_toilet"
+	//}
+		
+}
+
+// cricket ambience for inside the fields
+stcomedumont.outside_crickets
+{
+
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"		"0.4"
+		"wave"			"ambient/animal/cricket_chirp_1.wav"
+		"pitch" 		"100"
+	}
+
+}
+
+// creatures: birds
+stcomedumont.outside_birds
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"15,45"
+		"volume"		"0.4,0.6"
+		"pitch"			"90,100"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/bird1.wav"
+			"wave"	"ambient/animal/bird2.wav"
+			"wave"	"ambient/animal/bird3.wav"
+			"wave"	"ambient/animal/bird4.wav"
+			"wave"	"ambient/animal/bird5.wav"
+			"wave"	"ambient/animal/bird6.wav"
+			"wave"	"ambient/animal/bird7.wav"
+			"wave"	"ambient/animal/bird8.wav"
+			"wave"	"ambient/animal/bird9.wav"
+			"wave"	"ambient/animal/bird10.wav"
+			"wave"	"ambient/animal/bird11.wav"
+			"wave"	"ambient/animal/bird12.wav"
+			"wave"	"ambient/animal/bird13.wav"
+			"wave"	"ambient/animal/bird14.wav"
+			"wave"	"ambient/animal/bird15.wav"
+			"wave"	"ambient/animal/bird16.wav"
+			"wave"	"ambient/animal/bird17.wav"
+			"wave"	"ambient/animal/bird18.wav"
+			"wave"	"ambient/animal/bird19.wav"
+			"wave"	"ambient/animal/bird20.wav"
+		}
+	}
+			
+}
+
+stcomedumont.sheep
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"20,60"
+		"volume"		"0.5,0.7"
+		"pitch"			"90,100"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_NORM"
+		"rndwave"
+		{
+			
+			"wave"	"ambient/animal/sheep_distant_1.wav"
+			"wave"	"ambient/animal/sheep_distant_2.wav"
+			"wave"	"ambient/animal/sheep_distant_3.wav"
+		}
+	}
+			
+}
+
+stcomedumont.inside_lightcombat
+
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"5,15"
+		"volume"		"0.5"
+		"pitch"			"80,100"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_60dB"
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/distantbattle.wav"
+			"wave"	"ambient/explosions/distantbattle2.wav"
+		}
+	}
+	
+	"playrandom"
+	{
+		"time"			"10,25"
+		"volume"		"0.5"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_60dB"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/distantexplosion1.wav"
+			"wave"	"ambient/explosions/distantexplosion2.wav"
+			"wave"	"ambient/explosions/distantexplosion3.wav"
+		}
+	}
+	
+	// 0 = mouse squeak
+	"playsoundscape"
+	{	
+		"positionoverride" 	"0"
+		//"name"				"stcomedumont.inside_mouse"
+	}
+	// 1 = rat squeak
+	"playsoundscape"
+	{	
+		"positionoverride" 	"1"
+		//"name"				"stcomedumont.inside_rat"
+	}
+}
+
+"stcomedumont.inside_rat"
+{
+	"dsp" "1"		
+
+	"playrandom"
+	{
+		"time"			"17,30"
+		"volume"		"0.7,1"
+		"pitch"			"30,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/rats1.wav"
+			"wave"	"ambient/creatures/rats2.wav"
+			"wave"	"ambient/creatures/rats3.wav"
+			"wave"	"ambient/creatures/rats4.wav"
+		}
+	}		
+}
+
+
+"stcomedumont.inside_mouse"
+{
+	"dsp" "1"
+
+	"playrandom"
+	{
+		"time"			"7,10"
+		"volume"		"0.7,1"
+		"pitch"			"30,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/animal/mouse_squeak_1.wav"
+			"wave"	"ambient/animal/mouse_squeak_2.wav"
+		}
+	}		
+}

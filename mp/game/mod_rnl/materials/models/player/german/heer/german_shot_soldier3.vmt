@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\\player\german\heer/german_shot_soldier3"
+	"$nocull" 1
+	"$model" 1
+}

@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_supplies\german/tent1"
+	//"$bumpmap" "models/props_supplies/german/tent1_normal"
+	"$model" 1
+	"$surfaceprop" "cloth"
+	"$nocull" 1 	
+}

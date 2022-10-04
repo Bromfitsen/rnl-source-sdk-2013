@@ -1,0 +1,10 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/props_vehicles/german/bf109c_destroyed"
+	"$translucent" "1"
+	"$surfaceprop" "glass"
+        "$model" "1"
+}
+
+
+

@@ -1,6 +1,7 @@
 #include "cbase.h"
 #include "rnl_task_area.h"
 #include "rnl_gamerules.h"
+#include "rnl_shareddefs.h"
 
 #include "tier0/memdbgon.h"
 
@@ -105,7 +106,7 @@ CRnLTaskCaptureArea::CRnLTaskCaptureArea()
 		CBasePlayer *pPlayer = NULL;
 		int iAxisCount = 0;
 		int iAlliesCount = 0;
-		int iDominantTeam = TEAM_NONE;
+		int iDominantTeam = TEAM_INVALID;
 
 		for ( int i = 0; i < m_hTouchingEntities.Count(); i++ )
 		{

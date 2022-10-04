@@ -12,6 +12,7 @@
 #include "weapon_rnl_base.h"
 #include "rnl_ammodef.h"
 #include "rnl_weapon_parse.h"
+#include "rnl_shareddefs.h"
 
 
 #ifdef CLIENT_DLL
@@ -23,13 +24,12 @@
 	#include "filesystem.h"
 	#include "rnl_campaign_manager.h"
 	#include "rnl_player.h"	// cjd @add
-	#include "mapentities.h"
 	#include "gameinterface.h"
 	#include "eventqueue.h"
 	#include "viewport_panel_names.h"
 	#include "player_resource.h"
+	#include "rnl_mapentities.h"
 #endif
-
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -55,51 +55,6 @@ void VoiceCarry_ChangeCallback( IConVar *pConVar, char const *pOldString, float 
 	if( GetVoiceGameMgr() )
 		GetVoiceGameMgr()->SetProximityDistance( var.GetFloat() );
 }
-
-// Classnames of entities that are preserved across round restarts
-static const char *s_RnLPreserveEnts[] =
-{
-	"player",
-	"player_manager",
-	"viewmodel",
-	"worldspawn",
-	"soundent",
-	"ai_network",
-	"ai_hint",
-	"env_soundscape",
-	"env_soundscape_proxy",
-	"env_soundscape_triggerable",
-	"env_sprite",
-	"env_sun",
-	"env_wind",
-	"env_fog_controller",
-	"func_wall",
-	"func_illusionary",
-	"info_node",
-	"info_target",
-	"info_node_hint",
-	"point_commentary_node",
-	"point_viewcontrol",
-	"func_precipitation",
-	"func_team_wall",
-	"shadow_control",
-	"sky_camera",
-	"scene_manager",
-	"trigger_soundscape",
-	"commentary_auto",
-	"point_commentary_node",
-	"point_commentary_viewpoint",
-
-	//RnL Stuff
-	"rnl_gamerules",
-	"rnl_team_manager",
-	"rnl_team_axis",
-	"rnl_team_allies",
-	"rnl_axis_squad",
-	"rnl_allied_squad",
-
-	"", // END Marker
-};
 #endif
 
 //spawn points defined here - nuke
@@ -149,6 +104,7 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 
 		if ( type == DATA_UPDATE_CREATED  /*|| type == DATA_UPDATE_DATATABLE_CHANGED*/ )
 		{
+			RnLGameRules()->InitialiseSharedActivities();
 			RnLGameRules()->InitialiseWeapons();
 			RnLGameRules()->InitialiseCampaign();
 			RnLGameRules()->InitialiseSquads();
@@ -233,6 +189,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 			return g_Teams.Element( TEAM_AXIS )->GetNumPlayers();
 
 		return 0;
+	}
+
+	void CRnLGameRules::InitialiseSharedActivities(void)
+	{
 	}
 
 	void CRnLGameRules::InitialiseWeapons( void )
@@ -412,29 +372,34 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 
 		DevMsg( "Creating Teams\n" );
 
-		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team_manager" ));
+		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_UNASSIGNED) );
 		pTeam->Init( TeamNumberToName(TEAM_UNASSIGNED), TEAM_UNASSIGNED, NULL );
 		g_Teams.AddToTail( pTeam );
 
-		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team_manager" ));
+		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_SPECTATOR) );
 		pTeam->Init( TeamNumberToName(TEAM_SPECTATOR), TEAM_SPECTATOR, NULL );
 		g_Teams.AddToTail( pTeam );
 
-		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team_allies" ));
+		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_ALLIES) );
 		pTeam->Init( TeamNumberToName(TEAM_ALLIES), TEAM_ALLIES, m_pTeamData->FindKey( TeamNumberToName(TEAM_ALLIES) ) );
 		g_Teams.AddToTail( pTeam );
 
-		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team_axis" ));
-		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_UNASSIGNED) );
+		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
+		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_AXIS) );
 		pTeam->Init( TeamNumberToName(TEAM_AXIS), TEAM_AXIS, m_pTeamData->FindKey( TeamNumberToName(TEAM_AXIS) ) );
 		g_Teams.AddToTail( pTeam );
 
 		State_Transition( RNL_GR_STATE_INIT );
 
 		return BaseClass::Init();
+	}
+
+	void CRnLGameRules::InitDefaultAIRelationships(void)
+	{
+		BaseClass::InitDefaultAIRelationships();
 	}
 
 	void CRnLGameRules::GetNextLevelName( char *szNextMap, int bufsize )
@@ -627,13 +592,36 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 
 #endif
 
+static CRnLViewVectors g_RnLDefaultViewVectors(
+	Vector(0, 0, 64),		//VEC_VIEW (m_vView)
+	Vector(-16, -16, 0),	//VEC_HULL_MIN (m_vHullMin)
+	Vector(16, 16, 72),		//VEC_HULL_MAX (m_vHullMax)
+
+	Vector(0, 0, 28),		//VEC_DUCK_VIEW		(m_vDuckView)
+	Vector(0, 0, 36),		//VEC_DUCK_WALK_VIEW(m_vDuckWalkView)
+	Vector(-16, -16, 0),	//VEC_DUCK_HULL_MIN (m_vDuckHullMin)
+	Vector(16, 16, 36),		//VEC_DUCK_HULL_MAX	(m_vDuckHullMax)
+
+	Vector(0, 0, 18),		//VEC_PRONE_VIEW	 (m_vProneView)
+	Vector(-32, -32, 0),	//VEC_PRONE_HULL_MIN (m_vProneHullMin)
+	Vector(32, 32, 24),		//VEC_PRONE_HULL_MAX (m_vProneHullMax)
+
+	Vector(0, 0, 14),		//VEC_DEAD_VIEWHEIGHT (m_vObsViewHeight)
+	Vector(-10, -10, -10),	//VEC_OBS_HULL_MIN	(m_vObsHullMin)
+	Vector(10, 10, 10)		//VEC_OBS_HULL_MAX	(m_vObsHullMax)
+);
+
+const CViewVectors* CRnLGameRules::GetViewVectors() const
+{
+	return &g_RnLDefaultViewVectors;
+}
 
 bool CRnLGameRules::ShouldCollide( int collisionGroup0, int collisionGroup1 )
 {
 	if ( collisionGroup0 > collisionGroup1 )
 	{
 		// swap so that lowest is always first
-		swap(collisionGroup0,collisionGroup1);
+		::V_swap(collisionGroup0,collisionGroup1);
 	}
 	
 	//Don't stand on COLLISION_GROUP_WEAPON
@@ -703,6 +691,21 @@ CAmmoDef* GetAmmoDef()
 		// Tony; added for the sdk_jeep
 		def.AddAmmoType(	"JeepAmmo",		DMG_SHOCK,		TRACER_NONE,			"sdk_jeep_weapon_damage",		"sdk_jeep_weapon_damage", "sdk_jeep_max_rounds", BULLET_IMPULSE(650, 8000), 0 );
 		
+		def.SetMagazineSize(AMMO_MK2GREN, 1);
+		def.SetMagazineSize(AMMO_STIEL24, 1);
+		def.SetMagazineSize(AMMO_M18GREN, 1);
+		def.SetMagazineSize(AMMO_STIEL39, 1);
+		def.SetMagazineSize(AMMO_GARAND, 8);
+		def.SetMagazineSize(AMMO_K98K, 5);
+		def.SetMagazineSize(AMMO_THOMPSON, 30);
+		def.SetMagazineSize(AMMO_MP40, 32);
+		def.SetMagazineSize(AMMO_MG42, 250);
+		def.SetMagazineSize(AMMO_BROWNING, 150);
+		def.SetMagazineSize(AMMO_BAR, 20);
+		def.SetMagazineSize(AMMO_CARBINE, 15);
+		def.SetMagazineSize(AMMO_G43, 10);
+		def.SetMagazineSize(AMMO_COLT, 7);
+		def.SetMagazineSize(AMMO_WALTHER, 8);
 
 		def.AddBallisticInfo( AMMO_GARAND,		33600.0,	18000.0	);
 		def.AddBallisticInfo( AMMO_K98K,		31500.0,	18000.0	);
@@ -811,6 +814,11 @@ int CRnLGameRules::PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarge
 #endif
 
 	return GR_NOTTEAMMATE;
+}
+
+bool CRnLGameRules::IsConnectedUserInfoChangeAllowed(CBasePlayer* pPlayer)
+{
+	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -939,7 +947,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 	}
 
 	static float flGameWinTime = -1.0f;
-	static int iWinningTeam = TEAM_NONE;
+	static int iWinningTeam = TEAM_INVALID;
 
 	void CRnLGameRules::CheckObjectives( void )
 	{
@@ -1000,7 +1008,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 					if( flGameWinTime < gpGlobals->curtime )
 					{
 						flGameWinTime = -1.0f;
-						iWinningTeam = TEAM_NONE;
+						iWinningTeam = TEAM_INVALID;
 						RoundEnd( TEAM_AXIS );
 					}
 					else
@@ -1021,7 +1029,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 					if( flGameWinTime < gpGlobals->curtime )
 					{
 						flGameWinTime = -1.0f;
-						iWinningTeam = TEAM_NONE;
+						iWinningTeam = TEAM_INVALID;
 						RoundEnd( TEAM_ALLIES );
 					}
 					else
@@ -1035,7 +1043,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 				{
 					UTIL_CenterPrintAll( "#RnL_WinBlock", TeamNumberToName( iWinningTeam ) );
 					flGameWinTime = -1.0f;
-					iWinningTeam = TEAM_NONE;
+					iWinningTeam = TEAM_INVALID;
 				}
 			}
 		}
@@ -1099,7 +1107,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 					else if( playersAlive[1] < playersAlive[0] ) 
 						RoundEnd( TEAM_AXIS );
 					else
-						RoundEnd( TEAM_NONE );
+						RoundEnd( TEAM_INVALID );
 
 					return;
 				}
@@ -1110,7 +1118,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 					DevMsg( "Allies have no one alive and no tickets.\n" );
 					//See if the Axis are all dead with no tickets either
 					if( iAxisTickets <= 0 && playersAlive[1] <= 0 )
-						RoundEnd( TEAM_NONE );
+						RoundEnd( TEAM_INVALID );
 					//Axis are still kicking so they win!
 					else
 						RoundEnd( TEAM_AXIS );
@@ -1123,7 +1131,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 					DevMsg( "Axis have no one alive and no tickets.\n" );
 					//See if the Allies are all dead with no tickets either
 					if( iAlliedTickets <= 0 && playersAlive[0] <= 0 )
-						RoundEnd( TEAM_NONE );
+						RoundEnd( TEAM_INVALID );
 					//Axis are still kicking so they win!
 					else
 						RoundEnd( TEAM_ALLIES );
@@ -1194,16 +1202,16 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 	void CRnLGameRules::RoundRespawn( void )
 	{
 		CleanUpMap();
-		if( RnLGameRules() && !RnLGameRules()->GetGameManager() )
+		if (RnLGameRules() && !RnLGameRules()->GetGameManager())
 			RnLGameRules()->InitialiseGameManager();
 
-		UTIL_LogPrintf( "World triggered \"Round_Start\"\n" );
+		UTIL_LogPrintf("World triggered \"Round_Start\"\n");
 
 		// reset per-round scores for each player
-		for ( int i = 1; i <= MAX_PLAYERS; i++ )
+		for (int i = 1; i <= MAX_PLAYERS; i++)
 		{
-			CBasePlayer *pPlayer = ToBasePlayer( UTIL_PlayerByIndex( i ) );
-			if ( pPlayer )
+			CBasePlayer* pPlayer = ToBasePlayer(UTIL_PlayerByIndex(i));
+			if (pPlayer)
 			{
 				pPlayer->ResetPerRoundStats();
 				pPlayer->Spawn();
@@ -1212,148 +1220,112 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 	}
 
 	ConVar mp_rnl_showcleanedupents( "mp_rnl_showcleanedupents", "0", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY, "Show entities that are removed on round respawn." );
-	
+
+	// Classnames of entities that are preserved across round restarts
+	static const char* s_RnLRespawnPreserveEnts[] =
+	{
+		"player",
+		"player_manager",
+		"viewmodel",
+		"worldspawn",
+		"soundent",
+		"ai_network",
+		"ai_hint",
+		"env_soundscape",
+		"env_soundscape_proxy",
+		"env_soundscape_triggerable",
+		"env_sprite",
+		"env_sun",
+		"env_wind",
+		"env_fog_controller",
+		"func_wall",
+		"func_illusionary",
+		"info_node",
+		"info_target",
+		"info_node_hint",
+		"point_commentary_node",
+		"point_viewcontrol",
+		"func_precipitation",
+		"func_team_wall",
+		"shadow_control",
+		"sky_camera",
+		"scene_manager",
+		"trigger_soundscape",
+		"commentary_auto",
+		"point_commentary_node",
+		"point_commentary_viewpoint",
+
+		//RnL Stuff
+		"rnl_gamerules",
+		"rnl_team",
+		"rnl_game_team",
+		"rnl_squad",
+
+		"", // END Marker
+	};
+
 	//-----------------------------------------------------------------------------
 	// Purpose: Recreate all the map entities from the map data (preserving their indices),
 	//			then remove everything else except the players.
 	//-----------------------------------------------------------------------------
 	void CRnLGameRules::CleanUpMap( void )
 	{
-		if( mp_rnl_showcleanedupents.GetInt() )
+		int printRespawnStages = mp_rnl_showcleanedupents.GetInt();
+		
+		if (printRespawnStages > 0)
 		{
-			Msg( "CleanUpMap\n===============\n" );
-			Msg( "  Entities: %d (%d edicts)\n", gEntList.NumberOfEntities(), gEntList.NumberOfEdicts() );
+			Msg("CleanUpMap\n===============\n");
+			Msg("  Entities: %d (%d edicts)\n", gEntList.NumberOfEntities(), gEntList.NumberOfEdicts());
 		}
 
-		// Get rid of all entities except players.
-		CBaseEntity *pCur = gEntList.FirstEnt();
-		while ( pCur )
+		// Delete entities that we want to recreate.
 		{
-			if ( !RoundCleanupShouldIgnore( pCur ) )
+			CRnLEntityFilter cleanupFilter(s_RnLRespawnPreserveEnts);
+			
+			// Get rid of all entities except players.
+			CBaseEntity* pCur = gEntList.FirstEnt();
+			while (pCur)
 			{
-				if( mp_rnl_showcleanedupents.GetInt() & 1 )
+				if (cleanupFilter.ShouldCreateEntity(pCur->GetClassname()))
 				{
-					Msg( "Removed Entity: %s\n", pCur->GetClassname() );
-				}
-				UTIL_Remove( pCur );
-			}
-
-			pCur = gEntList.NextEnt( pCur );
-		}
-
-		// Clear out the event queue
-		g_EventQueue.Clear();
-
-		// Really remove the entities so we can have access to their slots below.
-		gEntList.CleanupDeleteList();
-
-		engine->AllowImmediateEdictReuse();
-
-		if ( mp_rnl_showcleanedupents.GetInt() & 2 )
-		{
-			Msg( "  Entities Left:\n" );
-			pCur = gEntList.FirstEnt();
-			while ( pCur )
-			{
-				Msg( "  %s (%d)\n", pCur->GetClassname(), pCur->entindex() );
-				pCur = gEntList.NextEnt( pCur );
-			}
-		}
-
-		// Now reload the map entities.
-		class CRnLMapEntityFilter : public IMapEntityFilter
-		{
-		public:
-			CRnLMapEntityFilter()
-			{
-				m_pRules = RnLGameRules();
-			}
-
-			virtual bool ShouldCreateEntity( const char *pClassname )
-			{
-				// Don't recreate the preserved entities.
-				if ( m_pRules->ShouldCreateEntity( pClassname ) )
-					return true;
-
-				// Increment our iterator since it's not going to call CreateNextEntity for this ent.
-				if ( m_iIterator != g_MapEntityRefs.InvalidIndex() )
-				{
-					m_iIterator = g_MapEntityRefs.Next( m_iIterator );
-				}
-
-				return false;
-			}
-
-
-			virtual CBaseEntity* CreateNextEntity( const char *pClassname )
-			{
-				if ( m_iIterator == g_MapEntityRefs.InvalidIndex() )
-				{
-					// This shouldn't be possible. When we loaded the map, it should have used 
-					// CTeamplayMapEntityFilter, which should have built the g_MapEntityRefs list
-					// with the same list of entities we're referring to here.
-					Assert( false );
-					return NULL;
-				}
-				else
-				{
-					CMapEntityRef &ref = g_MapEntityRefs[m_iIterator];
-					m_iIterator = g_MapEntityRefs.Next( m_iIterator );	// Seek to the next entity.
-
-					if ( ref.m_iEdict == -1 || engine->PEntityOfEntIndex( ref.m_iEdict ) )
+					if (printRespawnStages > 0)
 					{
-						// Doh! The entity was delete and its slot was reused.
-						// Just use any old edict slot. This case sucks because we lose the baseline.
-						return CreateEntityByName( pClassname );
+						Msg("Removed Entity: %s[%s]\n", pCur->GetDebugName(), pCur->GetClassname());
 					}
-					else
-					{
-						// Cool, the slot where this entity was is free again (most likely, the entity was 
-						// freed above). Now create an entity with this specific index.
-						return CreateEntityByName( pClassname, ref.m_iEdict );
-					}
+					UTIL_Remove(pCur);
 				}
+
+				pCur = gEntList.NextEnt(pCur);
 			}
-
-		public:
-			int m_iIterator; // Iterator into g_MapEntityRefs.
-			CRnLGameRules *m_pRules;
-		};
-		CRnLMapEntityFilter filter;
-		filter.m_iIterator = g_MapEntityRefs.Head();
-
-		// DO NOT CALL SPAWN ON info_node ENTITIES!
-		MapEntity_ParseAllEntities( engine->GetMapEntitiesString(), &filter, true );
-	}
-
-	// Utility function
-	bool FindInList( const char **pStrings, const char *pToFind )
-	{
-		int i = 0;
-		while ( pStrings[i][0] != 0 )
-		{
-			if ( Q_stricmp( pStrings[i], pToFind ) == 0 )
-				return true;
-			i++;
 		}
 
-		return false;
-	}
+		// Do some book keeping to clean up the world state.
+		{
+			// Clear out the event queue
+			g_EventQueue.Clear();
 
-	//-----------------------------------------------------------------------------
-	// Purpose: 
-	//-----------------------------------------------------------------------------
-	bool CRnLGameRules::ShouldCreateEntity( const char *pszClassName )
-	{
-		return !FindInList( s_RnLPreserveEnts, pszClassName );
-	}
+			// Really remove the entities so we can have access to their slots below.
+			gEntList.CleanupDeleteList();
 
-	//-----------------------------------------------------------------------------
-	// Purpose: 
-	//-----------------------------------------------------------------------------
-	bool CRnLGameRules::RoundCleanupShouldIgnore( CBaseEntity *pEnt )
-	{
-		return FindInList( s_RnLPreserveEnts, pEnt->GetClassname() );
+			engine->AllowImmediateEdictReuse();
+		}
+
+		if (printRespawnStages > 1)
+		{
+			Msg("  Entities Left:\n");
+			CBaseEntity* pCur = gEntList.FirstEnt();
+			while (pCur)
+			{
+				Msg("  %s (%d)\n", pCur->GetClassname(), pCur->entindex());
+				pCur = gEntList.NextEnt(pCur);
+			}
+		}
+
+		// Respawn the deleted entities.
+		{
+			CRnLRespawnEntityFilter filter(s_RnLRespawnPreserveEnts);
+			MapEntity_ParseAllEntities(engine->GetMapEntitiesString(), &filter, true);
+		}
 	}
 
 	//-----------------------------------------------------------------------------
@@ -1467,7 +1439,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 
 	void CRnLGameRules::RoundStart( void )
 	{
-		m_iWinningTeam = TEAM_NONE;
+		m_iWinningTeam = TEAM_INVALID;
 	}
 
 	void CRnLGameRules::RoundEnd( int iWinningTeam, bool bForceMapChange )
@@ -1495,7 +1467,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 			if( pPlayer->IsInAVehicle() )
 				pPlayer->LeaveVehicle( vec3_origin, vec3_angle ); 
 
-			pPlayer->RemoveEquipment( -1 ); 
+			pPlayer->RemoveEquipment(RNL_EQUIPMENT_ANY);
 			pPlayer->RemoveAllAmmo();
 		}
 

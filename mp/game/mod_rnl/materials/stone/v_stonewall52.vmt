@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "stone/v_stonewall52"
+	"$bumpmap" "stone/v_stonewall51_normal"
+	"$surfaceprop" "concrete"
+	"%keywords" "rnl"
+}

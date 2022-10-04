@@ -5,10 +5,12 @@
 // $NoKeywords: $
 //=============================================================================//
 #include "cbase.h"
+#include "dt_utlvector_send.h"
 #include "rnl_game_team.h"
 #include "entitylist.h"
 #include "weapon_rnl_base.h"
 #include "rnl_ammodef.h"
+#include "rnl_squad.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -61,7 +63,7 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetKitDescriptionCount(); j++ )
 		{
-			RnLKitDescription& desc = pGameTeam->GetKitDescription( j );
+			CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
 
 			if (pPlayer)
 				ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "			%s\n", desc.name ) );
@@ -77,7 +79,7 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetNumberOfSquads(); j++ )
 		{
-			IRnLSquad* pSquad = pGameTeam->GetSquad(j);
+			CRnLSquad* pSquad = pGameTeam->GetSquad(j);
 			if( !pSquad )
 				continue;
 
@@ -106,22 +108,23 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 			else
 				Msg( "			Loadouts:\n" );
 
-			for( int k = 0; k < pSquad->GetSlotCount(); k++ )
+			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
-				CSquadSlotInfo& info = pSquad->GetSlotInfo(k);
-				RnLKitDescription& desc = pGameTeam->GetKitDescription( info.iKitDesc );
+				CRnLSquadKitInfo& info = pSquad->GetKitInfo(k);
+				CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
 
 				if (pPlayer)
 					ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "				%s: (max %d)\n", desc.name, info.iMaxCount  ) );
 				else
 					Msg( "				%s: (max %d)\n", desc.name, info.iMaxCount );
 
-				for( int l = 0; l < info.pMembers.Count(); l++ )
+				CRnLPlayer* pMember = pSquad->GetNextMember(info.iKitID, nullptr);
+				while (pMember != nullptr)
 				{
 					if (pPlayer)
-						ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "					%s\n", info.pMembers[l]->GetPlayerName()  ) );
+						ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "					%s\n", pMember->GetPlayerName()  ) );
 					else
-						Msg( "					%s\n", info.pMembers[l]->GetPlayerName() );
+						Msg( "					%s\n", pMember->GetPlayerName() );
 				}
 			}
 
@@ -129,36 +132,13 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 	}
 }
 
-//-------------------------
-//
-//Proxies
-//
-//------------------------
-void SendProxy_SquadList( const SendProp *pProp, const void *pStruct, const void *pData, DVariant *pOut, int iElement, int objectID )
-{
-	CRnLGameTeam *pTeam = (CRnLGameTeam*)pData;
-	pOut->m_Int = pTeam->m_aSquads[iElement]->GetEntIndex();
-}
-
-
-int SendProxyArrayLength_SquadArray( const void *pStruct, int objectID )
-{
-	CRnLGameTeam* pTeam = (CRnLGameTeam*)pStruct;
-	return pTeam->m_aSquads.Count();
-}
-
 // Datatable
 IMPLEMENT_SERVERCLASS_ST(CRnLGameTeam, DT_RnLGameTeam)
-	SendPropArray2( 
-		SendProxyArrayLength_SquadArray,
-		SendPropInt("squad_element", 0, sizeof( int ), -1, 0, SendProxy_SquadList), 
-		MAX_PLAYERS, 
-		0, 
-		"squad_array"
-		),
+	PropUtlVectorDataTable(m_aClassDescriptions, RNL_SQUAD_SLOTS_MAX, DT_RnLLoadoutKitInfo),
+	SendPropUtlVector(SENDINFO_UTLVECTOR(m_aSquads), RNL_SQUAD_SLOTS_MAX, SendPropEHandle(NULL, 0)),
 END_SEND_TABLE()
 
-LINK_ENTITY_TO_CLASS( rnl_game_team, CRnLGameTeam );
+LINK_ENTITY_TO_CLASS(rnl_game_team, CRnLGameTeam );
 
 
 CRnLGameTeam::CRnLGameTeam()
@@ -171,7 +151,7 @@ CRnLGameTeam::~CRnLGameTeam()
 	m_aSquads.Purge();
 }
 
-IRnLSquad* CRnLGameTeam::GetSquad( int idx )
+CRnLSquad* CRnLGameTeam::GetSquad( int idx )
 {
 	if( idx < 0 || idx >= m_aSquads.Count() )
 		return NULL;
@@ -197,10 +177,15 @@ void CRnLGameTeam::Init( const char *pName, int iNumber, KeyValues* pVal )
 {
 	BaseClass::Init( pName, iNumber, pVal );
 
+
+	bool precacheAllowed = IsPrecacheAllowed();
+	SetAllowPrecache(true);
 	if( pVal )
 	{
-		LoadClassDescriptions( pVal->FindKey( "kits" ) );
+		LoadClassDescriptions(pVal->FindKey( "kits" ));
+		LoadSquadDescriptions(pVal->FindKey("squads"));
 	}
+	SetAllowPrecache(precacheAllowed);
 }
 
 void CRnLGameTeam::Update( void )
@@ -242,7 +227,9 @@ void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 	CBaseCombatWeapon* pWeapon = NULL;
 	for( int i = 0; i < m_aClassDescriptions[iDesc].weapons.Count(); i++ )
 	{
-		pWeapon = (CBaseCombatWeapon*)(pPlayer->GiveNamedItem( m_aClassDescriptions[iDesc].weapons[i].Get() ));
+		char weaponFullName[128];
+		Q_snprintf(weaponFullName, 127, "weapon_%s", WeaponIDToAlias(m_aClassDescriptions[iDesc].weapons[i]));
+		pWeapon = (CBaseCombatWeapon*)(pPlayer->GiveNamedItem(weaponFullName));
 
 		if( pWeapon )
 		{
@@ -254,4 +241,114 @@ void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 		pPlayer->GiveNamedItem( "weapon_alliedfists" );
 	else
 		pPlayer->GiveNamedItem( "weapon_axisfists" );
+}
+
+bool CRnLGameTeam::LoadClassDescriptions(KeyValues* pKey)
+{
+	if (!pKey)
+		return false;
+
+	int index = -1;
+	KeyValues* pModelData = NULL;
+	KeyValues* pWeaponData = NULL;
+	KeyValues* pWeaponSubData = NULL;
+	KeyValues* pBodyGroups = NULL;
+	KeyValues* pGroup = NULL;
+
+	m_aClassDescriptions.RemoveAll();
+
+	KeyValues* pClassData = pKey->GetFirstSubKey();
+	while (pClassData)
+	{
+		index = m_aClassDescriptions.AddToTail();
+
+		Q_strncpy(m_aClassDescriptions[index].name.GetForModify(), pClassData->GetName(), KIT_DESC_TITLE_LEN);
+		Q_strncpy(m_aClassDescriptions[index].title.GetForModify(), pClassData->GetString("title"), KIT_DESC_TITLE_LEN);
+
+		// TODO: Remove when squad leader voting is finished.
+		if (FStrEq(pClassData->GetString("squadleader", "false"), "true"))
+			m_aClassDescriptions[index].bSquadLeader = true;
+		else
+			m_aClassDescriptions[index].bSquadLeader = false;
+
+		pWeaponData = pClassData->FindKey("weapons");
+		if (pWeaponData != NULL)
+		{
+			pWeaponSubData = pWeaponData->GetFirstSubKey();
+			while (pWeaponSubData)
+			{
+				int weaponID = AliasToWeaponID(pWeaponSubData->GetString());
+				if (weaponID != WEAPON_NONE &&
+					weaponID != WEAPON_MAX)
+				{
+					m_aClassDescriptions[index].weapons.AddToTail(weaponID);
+				}
+				pWeaponSubData = pWeaponSubData->GetNextKey();
+			}
+		}
+
+		m_aClassDescriptions[index].iClass = AliasToClassID(pClassData->GetString("type"));
+		if (m_aClassDescriptions[index].iClass == RNL_CLASS_INVALID)
+		{
+			m_aClassDescriptions.Remove(index);
+		}
+		else
+		{
+			pModelData = pClassData->FindKey("model");
+			if (pModelData != NULL)
+			{
+				Q_strncpy(m_aClassDescriptions[index].model.file.GetForModify(), pModelData->GetString("file"), KIT_DESC_MODEL_LEN);
+				if (PrecacheModel(m_aClassDescriptions[index].model.file) < 0)
+				{
+					Q_strncpy(m_aClassDescriptions[index].model.file.GetForModify(), RNL_DEFAULT_PLAYER_MODEL, KIT_DESC_MODEL_LEN);
+				}
+
+				m_aClassDescriptions[index].model.iSkin = pModelData->GetInt("skin");
+
+				pBodyGroups = pModelData->FindKey("bodygroups");
+				if (pBodyGroups)
+				{
+					pGroup = pBodyGroups->GetFirstSubKey();
+					int bodyGroupIndex = -1;
+					while (pGroup)
+					{
+						bodyGroupIndex = m_aClassDescriptions[index].model.vecBodyGroups.AddToTail();
+						Q_strncpy(
+							m_aClassDescriptions[index].model.vecBodyGroups[bodyGroupIndex].groupName.GetForModify(),
+							pGroup->GetName(),
+							KIT_DESC_MODEL_LEN
+						);
+						m_aClassDescriptions[index].model.vecBodyGroups[bodyGroupIndex].iVal = pGroup->GetInt();
+						pGroup = pGroup->GetNextKey();
+					}
+
+				}
+			}
+			else
+			{
+				m_aClassDescriptions.Remove(index);
+			}
+		}
+
+		pClassData = pClassData->GetNextKey();
+	}
+	return true;
+}
+
+bool CRnLGameTeam::LoadSquadDescriptions(KeyValues* pKey)
+{
+	if (!pKey)
+		return false;
+
+	KeyValues* pSquadInfo = pKey->GetFirstSubKey();
+	while (pSquadInfo)
+	{
+		CRnLSquad* pSquad = (CRnLSquad*)(CreateEntityByName("rnl_squad"));
+		pSquad->SetParentTeam(this);
+		pSquad->Load(pSquadInfo);
+		m_aSquads.AddToTail(pSquad);
+
+		pSquadInfo = pSquadInfo->GetNextKey();
+	}
+	return true;
 }

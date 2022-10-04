@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	//"$translucent" 1
+	"$basetexture" "doors\barndoor3"
+	"$bumpmap" "doors\barndoor3_normal"
+	"%keywords" "door"
+	"%keyword" "rnl"
+}

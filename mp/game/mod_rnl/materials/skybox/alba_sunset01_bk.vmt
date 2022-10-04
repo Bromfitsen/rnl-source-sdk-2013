@@ -1,0 +1,6 @@
+"unlitGeneric" 
+{ 
+"$baseTexture" "skybox/alba_sunset01_bk" 
+"$nofog" 1 
+$ignorez 1 
+}  

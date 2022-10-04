@@ -1,0 +1,8 @@
+"lightmappedGeneric"
+{
+	"$baseTexture" "stone/ah_celler_wall02"
+	"%keywords" "rnl_wall"
+	"$surfaceprop" "brick"
+	"$bumpmap" "stone/ah_celler_wall01_ssbump"
+        "$ssbump" "1"
+}

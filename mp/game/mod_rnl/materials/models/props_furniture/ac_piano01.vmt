@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_furniture/ac_piano01"
+	"$nocull" 1
+	"$bumpmap" "models\props_furniture/ac_piano01_normal"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

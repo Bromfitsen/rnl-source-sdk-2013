@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_exterior/sme_rowshutter_01_brown"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

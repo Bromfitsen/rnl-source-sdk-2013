@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/items/rd_usradio"
+	"$bumpmap" "models/items/rd_usradio_normal"
+	"$nocull" 1
+	"$model" 1
+}

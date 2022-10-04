@@ -14,7 +14,7 @@
 #include "rnl_playeranimstate.h"
 #include "c_baseplayer.h"
 #include "rnl_shareddefs.h"
-#include "c_rnl_playerlocaldata.h"
+#include "rnl_playerlocaldata.h"
 #include "baseparticleentity.h"
 
 
@@ -44,8 +44,40 @@ public:
 	virtual void OnDataChanged( DataUpdateType_t updateType );
 	virtual void ItemPostFrame( void );
 
-	virtual void TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &vecDir, trace_t *ptr );
+	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) override;
 
+	//RnL : MovementMod : Begin
+	//MovementMod : 
+	virtual RnLMovementPostures_t	GetMovementPosture(void) const;
+	virtual void			SetMovementPosture(RnLMovementPostures_t iType);
+	virtual RnLMovementPostures_t	GetMovementPostureFrom(void) const;
+	virtual float			GetMovementPostureDuration(void) const;
+	virtual void			SetMovementPostureDuration(float flTime);
+	virtual QAngle			GetMovementPostureAngle(void) const;
+	virtual void			SetMovementPostureAngle(QAngle angle);
+
+	// adam: new stance changing method
+	virtual float GetMovementPostureOffset(void) const;
+	virtual void SetMovementPostureOffset(float flOffset);
+	virtual float GetMovementPostureTarget(void) const;
+	virtual void SetMovementPostureTarget(float fTarget);
+	virtual float GetMovementPostureVelocity(void) const;
+	virtual void SetMovementPostureVelocity(float fTarget);
+	virtual bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
+
+	//RnL : MovementMod : Begin
+	//Moved
+	virtual bool IsStanding(void) const;
+	virtual bool IsStandingUp(void) const;
+
+	virtual bool IsDucked(void) const;
+	virtual bool IsDucking(void) const;
+
+	virtual bool IsProne(void) const;
+	virtual bool IsProning(void) const;
+
+	//RnL : MovementMod : End
+	// 
 	//RnL : MovementMod : Begin
 	virtual bool		ShouldDrawViewModel( void );
 	virtual bool		OverrideCamera( void );
@@ -73,9 +105,6 @@ public:
 	void AdjustWeaponAngle( const QAngle &angleOffset );
 	void AdjustWeaponSway( const QAngle& offset );
 
-	virtual bool	IsDuckToggled( void );
-	virtual void	ToggleDuck( void );
-
 	virtual int		GetSquadNumber();
 	virtual void	SetSquadNumber( int iNum );
 
@@ -98,7 +127,7 @@ public:
 	float fRagdollViewTime;
 	bool bLastRagdollView;
 
-	virtual void CalcViewRoll( QAngle& eyeAngles );
+	virtual void CalcViewRoll( QAngle& eyeAngles ) OVERRIDE;
 	virtual void CalcViewModelView( const Vector& eyeOrigin, const QAngle& eyeAngles);
 	virtual void CalcPlayerView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov );
 	virtual void CalcInEyeCamView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov );
@@ -184,7 +213,7 @@ public:
 		float x,
 		float y );
 
-	void FireBulletImmediately( RnLBulletInfo& bullet );
+	void FireBulletImmediately( RnLBulletInfo_t& bullet );
 	void RemoveAllAmmo( void );
 
 	// cjd @add
@@ -208,12 +237,17 @@ public:
 	CNetworkVar( int, m_iKitNumber );
 	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
-	CNetworkVar( bool, m_bIsDuckToggled );
 
 	EHANDLE	m_hRagdoll;
 	EHANDLE	m_hKnockDownRagdoll;
 
 	//RnL : MovementMod : Begin
+
+	//Our acctual movement posture
+	int m_nMovementPosture;
+	int m_nMovementPostureFrom;
+	CNetworkQAngle(m_angMovementPostureAngle);
+
 	QAngle m_angWeaponAngle;
 	QAngle m_angFreeLookAngle;
 	QAngle m_angWeaponSway;
@@ -230,7 +264,7 @@ public:
 	//RnL : Andrew : Current Weapon Posture
 	CNetworkVar( int, m_nWeaponPosture );
 	
-	C_RnLPlayerLocalData	m_RnLLocal;
+	CRnLPlayerLocalData	m_RnLLocal;
 	CNetworkVector( m_vecLeanOffset );
 
 	float	m_fAfterClimbDrawDelay;
@@ -249,7 +283,7 @@ public:
 private:
 	C_RnLPlayer( const C_RnLPlayer & );
 
-	CUtlVector<RnLBulletInfo> m_aBullets;
+	CUtlVector<RnLBulletInfo_t> m_aBullets;
 
 	float m_flNextMoraleEffect;
 	QAngle m_angMoraleEffect;

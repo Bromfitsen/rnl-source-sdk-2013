@@ -1,0 +1,8 @@
+"DecalModulate"
+{
+	"$translucent" 1
+	"$basetexture"	"decals/flesh/entrywounds/entrywound3"
+	"$decal" 1
+	"$decalscale" 	0.05
+	"$modelmaterial" "decals/flesh/entrywounds/entrywound3"
+}

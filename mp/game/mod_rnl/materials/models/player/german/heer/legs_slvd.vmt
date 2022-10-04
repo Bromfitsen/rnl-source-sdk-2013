@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\\player\german\heer/legs_slvd"
+	"$bumpmap" "models\player\german\heer\legs_slvd_normal"
+	"$nocull" 1
+	"$model" 1
+	"$phong" "1"
+	"$phongexponenttexture" "models\player\german\heer\legs_slvd_exp"
+	"$phongboost"	"5"
+	"$phongfresnelranges"	"[0.04 0.4 1]"
+}

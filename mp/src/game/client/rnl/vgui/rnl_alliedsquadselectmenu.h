@@ -16,6 +16,7 @@
 #include <vgui_imagebutton.h>
 
 #include <igameevents.h>
+#include "rnl_shareddefs.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: Squad selection panel

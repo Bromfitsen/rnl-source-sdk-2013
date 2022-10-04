@@ -1,0 +1,17 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\German\opel01"
+	"$bumpmap" "models\props_vehicles\German\opel01_normal"
+
+	"$model" "1"
+	"$nocull" "1"
+
+	"$phong" "1"
+	"$phongexponent" "16"
+	"$phongboost" ".1"	
+	"$phongfresnelranges"	"[.3 .5 2]"
+ 	"$halflambert" "1"
+	"$phongalbedotint" "1"
+
+	"$surfaceprop" "metal"
+}

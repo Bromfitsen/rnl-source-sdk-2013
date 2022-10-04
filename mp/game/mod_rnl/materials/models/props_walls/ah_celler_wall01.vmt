@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "stone/ah_celler_wall01"
+	//"$bumpmap" "stone/ah_celler_wall01_normal"
+	"$model" 1
+	"$surfaceprop" "stone"
+}

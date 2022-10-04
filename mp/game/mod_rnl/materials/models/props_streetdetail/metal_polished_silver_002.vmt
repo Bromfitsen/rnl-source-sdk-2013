@@ -1,0 +1,17 @@
+VertexLitGeneric
+{
+	"$baseTexture" 			"elements/metal_polished_silver_002"
+	"$surfaceprop" 			"metal"
+        "$envmap" 			"env_cubemap"
+	"$normalmapalphaenvmapmask"	 "1"
+	"$bumpmap"   			"elements/metal_polished_silver_002_env"
+        "$envmaptint" 			"[.7 .7 .7]"
+	"$envmapcontrast"		 "1"
+	"$phong"			 "1"
+	"$model"			 "1"
+	"$phongboost"			 "100"
+	// 50
+	"$phongexponent"		 "127"
+	// 33
+	"$phongfresnelranges"		"[.0 .5 1.0]"
+}

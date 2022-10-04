@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_interior/sme_rowrailing_03a"
+	"$model" 1
+	"$surfaceprop" "wood"
+}

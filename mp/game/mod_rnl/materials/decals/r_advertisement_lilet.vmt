@@ -1,0 +1,8 @@
+LightmappedGeneric
+{
+	"$basetexture"	"decals\r_advertisement_lilet"
+	"$translucent" "1"
+	"$decal" "1"
+	"$decalscale" "0.5"
+	"%keywords" "rnl"
+}

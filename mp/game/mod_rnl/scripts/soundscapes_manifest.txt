@@ -1,0 +1,14 @@
+soundscaples_manifest
+{
+	"file"		"scripts/soundscapes.txt"
+
+	// List additional soundscape files here
+
+	"file"		"scripts/soundscapes_eglise.txt"
+	"file"		"scripts/soundscapes_lafiere.txt"
+	"file"		"scripts/soundscapes_stcomedumont.txt"
+	"file"		"scripts/soundscapes_stemariedumont.txt"
+	"file"		"scripts/soundscapes_carentan_causeway.txt"
+	"file"		"scripts/soundscapes_wachsenburg.txt"
+	"file"		"scripts/soundscapes_dieppe.txt"
+}

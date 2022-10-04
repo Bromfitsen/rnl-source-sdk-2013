@@ -1,0 +1,9 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/map02"
+	"$translucent" 1
+	"$decal" 1
+	"$nocull" 1
+    "%keywords" "rnl"
+  	"$decalscale" 0.125
+}

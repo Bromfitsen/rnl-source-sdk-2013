@@ -10,6 +10,7 @@
 #include "cbase.h"
 #include "rnl_gamerules.h"
 #include "rnl_game_manager.h"
+#include "rnl_shareddefs.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"

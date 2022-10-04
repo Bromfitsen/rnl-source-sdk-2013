@@ -1,0 +1,10 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/props_vehicles/german/stuka01b"
+	"$normal" "models/props_vehicles/german/stuka01b_normal"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}
+
+
+

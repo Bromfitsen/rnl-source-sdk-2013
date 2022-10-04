@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture"	"models/weapons/view_models/mg42/v_mg42"
+        "$bumpmap"	"models/weapons/view_models/mg42/v_mg42_normal"
+	"$phong" "1"
+	"$phongexponent" "12"
+	"$phongboost" "1"	
+	"$phongfresnelranges"	"[1 3 6]"
+	"$phongalbedotint" "1"
+}

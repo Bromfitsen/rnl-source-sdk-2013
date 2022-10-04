@@ -1,0 +1,10 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_dmcwinframe01"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl, dmc"
+    "$nocull" 1
+    "$decalscale" 0.25
+
+}

@@ -112,6 +112,7 @@ void CRnLTeamMenu::ShowPanel(bool bShow)
 
 	if ( bShow )
 	{
+		/*
 		CSpectatorGUI *specPanel = (CSpectatorGUI*)gViewPortInterface->FindPanelByName( PANEL_SPECGUI );
 		if (specPanel) 
 		{
@@ -120,6 +121,7 @@ void CRnLTeamMenu::ShowPanel(bool bShow)
 			if ( bSpecGUIVisible )
 				specPanel->SetWantsToBeShown( true );
 		}
+		*/
 
 		Activate();
 		LoadMapPage();
@@ -142,9 +144,11 @@ void CRnLTeamMenu::ShowPanel(bool bShow)
 		SetVisible( false );
 		SetMouseInputEnabled( false );
 
+		/*
 		CSpectatorGUI *specPanel = (CSpectatorGUI*)gViewPortInterface->FindPanelByName( PANEL_SPECGUI );
 		if (specPanel && specPanel->GetWantsToBeShown())
 			gViewPortInterface->ShowPanel( PANEL_SPECGUI, true );
+		*/
 	}
 }
 
@@ -170,7 +174,7 @@ void CRnLTeamMenu::LoadMapPage()
 	g_pFullFileSystem->GetLocalPath( mapRES, pPathData, sizeof(pPathData) );
 	Q_strncat( localURL, pPathData, sizeof( localURL ), COPY_ALL_CHARACTERS );
 
-	m_pRnLSite->OpenURL(localURL, true);
+	m_pRnLSite->OpenURL(localURL, nullptr, true);
 }
 
 //-----------------------------------------------------------------------------

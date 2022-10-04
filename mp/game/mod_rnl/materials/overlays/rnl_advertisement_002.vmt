@@ -1,0 +1,8 @@
+LightmappedGeneric
+{
+	"$baseTexture" "plaster/rnl_advertisement_002"
+	"$alphatest" 1
+	"$decal" 1
+	"$decalscale" 0.1
+	"%keywords" "rnl"
+}

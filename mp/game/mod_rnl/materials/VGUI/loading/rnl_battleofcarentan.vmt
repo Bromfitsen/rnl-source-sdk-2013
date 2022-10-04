@@ -1,0 +1,8 @@
+UnlitGeneric
+{
+	
+	"$basetexture" "vgui/loading/rnl_battleofcarentan"
+	"%keywords" "rnl"
+	"$vertexcolor" 1 
+	"$no_fullbright" 1 
+}

@@ -1,0 +1,8 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/props_vehicles/american/waco_01_glass"
+    "$surfaceprop" "glass"
+    "$translucent" 1
+    "$alpha" 0.95
+	"$model" 1
+}

@@ -1,0 +1,6 @@
+LightmappedGeneric
+{
+	"$basetexture" "doors/alba_door01"
+	"$surfaceprop" "concrete"
+	"$bumpmap"     "doors/alba_door01_normal"
+}

@@ -1,0 +1,13 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/props_furniture/piano_up"
+	"$bumpmap" "models/props_furniture/piano_up_norm"
+	"$surfaceprop" "Wood_Furniture"
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" 1
+	"$envmapcontrast" 0.5
+
+}
+	
+
+

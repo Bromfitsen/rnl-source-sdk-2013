@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_wachsenburg_stair_railing"
+	"$bumpmap" "models/props_exterior/s_wachsenburg_stair_railing_normal"
+	"$surfaceprop" "wood"
+	"%keywords" "rnl"
+	"$model" 1
+}
+
+

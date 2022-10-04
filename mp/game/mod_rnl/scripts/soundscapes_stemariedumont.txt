@@ -1,0 +1,373 @@
+// --------------------------------------------------------------------------
+// SOUNDSCAPES STE. MARIE DU MONT
+// --------------------------------------------------------------------------
+
+// --------------------------------------------------------------------------
+// MISC SOUNDS
+// --------------------------------------------------------------------------
+
+"marie.music"
+{
+	"playlooping"
+	{
+		"volume"	"0.6"
+		"pitch"		"100"
+		"position"	"0"
+		"wave"	"music/german/Lili_marleen_by_marlene_dietrich.wav"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.indoor"
+	}
+}
+
+"marie.rooster"
+{
+	"playrandom"
+	{
+		"time"		"30,90"
+		"volume"	"0.2,0.7"
+		"pitch"		"90,110"
+		"position"	"4"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/rooster_distant_1.wav"
+		}
+	}
+}
+
+"marie.moo"
+{
+	"playrandom"
+	{
+		"time"		"10,50"
+		"volume"	"0.1,0.7"
+		"pitch"		"90,110"
+		"position"	"0"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/cow_distant_single_1.wav"
+			"wave"	"ambient/animal/cow_distant_single_2.wav"
+		}
+	}
+}
+
+"marie.baa"
+{
+	"playrandom"
+	{
+		"time"		"10,50"
+		"volume"	"0.1,0.5"
+		"pitch"		"90,110"
+		"position"	"0"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/sheep_distant_1.wav"
+			"wave"	"ambient/animal/sheep_distant_2.wav"
+			"wave"	"ambient/animal/sheep_distant_3.wav"
+		}
+	}
+}
+
+"marie.birds"
+{
+	"playrandom"
+	{
+		"time"		"2,15"
+		"volume"	"0.05,0.25"
+		"pitch"		"85,105"
+		"position"	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/animal/bird1.wav"
+			"wave"	"ambient/animal/bird2.wav"
+			"wave"	"ambient/animal/bird4.wav"
+			"wave"	"ambient/animal/bird6.wav"
+			"wave"	"ambient/animal/bird11.wav"
+			"wave"	"ambient/animal/bird12.wav"
+			"wave"	"ambient/animal/bird18.wav"
+			"wave"	"ambient/animal/bird_song_2.wav"
+			"wave"	"ambient/animal/bird_song_3.wav"
+			"wave"	"ambient/animal/bird_song_4.wav"
+			"wave"	"ambient/animal/bird_song_5.wav"
+			"wave"	"ambient/animal/bird_song_6.wav"
+			"wave"	"ambient/animal/bird_song_9.wav"
+			"wave"	"ambient/animal/bird_song_10.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"15,30"
+		"volume"	"0.02,0.15"
+		"pitch"		"90,100"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"	"ambient/creatures/flies5.wav"
+		}
+	}
+}
+
+"marie.pigeons"
+{
+	"playrandom"
+	{
+		"time"		"10,80"
+		"volume"	"0.03,0.1"
+		"pitch"		"90,110"
+		"position"	"0"
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/pigeon_idle1.wav"
+			"wave"	"ambient/creatures/pigeon_idle2.wav"
+			"wave"	"ambient/creatures/pigeon_idle3.wav"
+			"wave"	"ambient/creatures/pigeon_idle4.wav"
+		}
+	}
+}
+
+"marie.shutter"
+{
+	"playrandom"
+	{
+		"time"		"10,40"
+		"volume"	"0.05,0.15"
+		"pitch"		"90,110"
+		"position"	"5" // and 6
+		"rndwave"
+		{
+			"wave"	"ambient/materials/shutter8.wav"
+			"wave"	"ambient/materials/shutter7.wav"
+			"wave"	"ambient/materials/shutter6.wav"
+			"wave"	"ambient/materials/shuffle1.wav"
+		}
+	}
+}
+
+"marie.wood"
+{
+	"playrandom"
+	{
+		"time"		"10,50"
+		"volume"	"0.05,0.15"
+		"pitch"		"90,110"
+		"position"	"random"
+		"rndwave"
+		{
+			"wave"	"ambient/materials/wood_creak5.wav"
+			"wave"	"ambient/materials/wood_creak2.wav"
+		}
+	}
+}
+
+"marie.battle"
+{
+	"playlooping"
+	{
+		"volume"	"0.1"
+		"pitch"		"100"
+		"wave"		"ambient/explosions/distantbattle.wav"
+	}
+
+	"playrandom"
+	{
+		"time"		"30,90"
+		"volume"	"0.1,0.2"
+		"pitch"		"95,105"
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/event_dist_arty.wav"
+			"wave"	"ambient/explosions/event_dist_arty_2.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"		"5,50"
+		"volume"	"0.1,0.2"
+		"pitch"		"95,105"
+		"rndwave"
+		{
+			"wave"	"ambient/explosions/distantexplosion1.wav"
+			"wave"	"ambient/explosions/distantexplosion2.wav"
+			"wave"	"ambient/explosions/distantexplosion3.wav"
+			"wave"	"ambient/plane/airplane3.wav"
+		}
+	}
+}
+
+// --------------------------------------------------------------------------
+// base soundscapes
+// --------------------------------------------------------------------------
+
+"marie.fields"
+{
+	"dsp" "0"
+
+	"playlooping"
+	{
+		"volume"	"0.1"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"pitch"		"100"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.birds"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.battle"
+	}
+}
+
+"marie.town"
+{
+	"dsp" "0"
+
+	"playlooping"
+	{
+		"volume"	"0.2"
+		"pitch"		"100"
+		"wave"		"ambient/wind/wind-light.wav"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.baa"
+		"positionoverride"	"0"
+		"ambientpositionoverride" "0"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.rooster"
+		"positionoverride"	"4"
+		"ambientpositionoverride" "4"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.pigeons"
+		"positionoverride"	"2"
+		"ambientpositionoverride" "2"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.birds"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.shutter"
+		"positionoverride"	"5"
+		"ambientpositionoverride" "5"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.shutter"
+		"positionoverride"	"6"
+		"ambientpositionoverride" "6"
+	}
+
+	"playsoundscape"
+	{
+		"volume"	"0.7"
+		"name" "marie.battle"
+	}
+}
+
+"marie.indoor"
+{
+	"dsp" "9"
+
+	"playlooping"
+	{
+		"volume"	"0.3"
+		"pitch"		"100"
+		"wave"		"ambient/wind/dry_air_short_indoors.wav"
+	}
+
+	"playsoundscape"
+	{
+		"name" "marie.wood"
+	}
+
+	"playsoundscape"
+	{
+		"volume"	"0.4"
+		"name" "marie.battle"
+	}
+}
+
+// --------------------------------------------------------------------------
+// Special soundscapes
+// --------------------------------------------------------------------------
+
+"marie.fields.cows"
+{
+	"dsp" "0"
+
+	"playsoundscape"
+	{
+		"name" "marie.fields"
+	}
+
+	"playsoundscape"
+	{
+		"ambientpositionoverride" "0"
+		"positionoverride"	"0"
+		"name" "marie.moo"
+	}
+
+	"playrandom"
+	{
+		"time"			"0.8,3.0"
+		"volume"		"0.1,0.6"
+		"pitch"			"98,102"
+		"soundlevel"  	"SNDLVL_75dB"
+		"position" 	    "7"
+		"rndwave"
+		{
+			"wave"		"ambient/animal/cricket_chirp_1.wav"
+		}
+	}
+
+	"playrandom"
+	{
+		"time"			"0.8,3.0"
+		"volume"		"0.1,0.6"
+		"pitch"			"98,102"
+		"soundlevel"  	"SNDLVL_75dB"
+		"position" 	    "6"
+		"rndwave"
+		{
+			"wave"		"ambient/animal/cricket_chirp_1.wav"
+		}
+	}
+}
+
+"marie.radioroom"
+{
+	"dsp" "9"
+
+	"playsoundscape"
+	{
+		"name" "marie.indoor"
+	}
+
+	"playsoundscape"
+	{
+		"ambientpositionoverride" "0"
+		"positionoverride"	"0"
+		"name" "marie.music"
+	}
+}

@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_vehicles\american\willies_jeep_mesh"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}

@@ -1,0 +1,70 @@
+// rnl NCO Map description file rnl_eglise
+"mapvalues"
+{
+	"alliesinfo"
+	{
+		"material"	"overview/rnl_eglise_allies"	// texture file
+		"offset_x"	"-18"
+		"offset_y"	"-3"
+		"scale"		"1.0"
+		"reverse_y"	"0"
+	}
+
+	"axisinfo"
+	{
+		"material"	"overview/rnl_eglise_axis"	// texture file
+		"offset_x"	"-18"
+		"offset_y"	"32"
+		"scale"		"1.0"
+		"reverse_y"	"0"
+	}
+
+	"node0"
+	{
+		"displayname"	"Axis Base"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node1"
+	{
+		"displayname"	"C47s"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node2"
+	{
+		"displayname"	"Cider Farm"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node3"
+	{
+		"displayname"	"Old Folks Home"
+		"textposition"  "4" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node4"
+	{
+		"displayname"	"Cabbage Farm"
+		"textposition"  "0" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node5"
+	{
+		"displayname"	"Hotel"
+		"textposition"  "2" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node6"
+	{
+		"displayname"	"Church"
+		"textposition"  "3" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+	"node7"
+	{
+		"displayname"	"Town Square North"
+		"textposition"  "0" 					// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+		"iconposition"  "1"						// 0 = above, 1 = center of, 2 = below, 3 = left of, 4 = right of capture zone
+	}
+}

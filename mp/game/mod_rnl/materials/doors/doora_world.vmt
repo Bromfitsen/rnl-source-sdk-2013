@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "doors\doora_world"
+	"$surfaceprop" "wood"
+	"%keywords" "door"	
+}

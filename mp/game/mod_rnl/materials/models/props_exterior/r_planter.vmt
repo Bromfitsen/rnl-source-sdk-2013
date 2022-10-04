@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_planter"
+	"$model" 1
+	"$surfaceprop" "wood"
+	"%keyword" "rnl"
+}
+
+

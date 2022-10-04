@@ -1,0 +1,9 @@
+"vertexLitGeneric"
+{
+	"$basetexture" "models/props_vehicles/german/bf109a_destroyed"
+	"$surfaceprop" "metal"
+        "$model" "1"
+}
+
+
+

@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_furniture/ac_lamp01"
+	"$model" 1
+        "$nocull" 1
+}

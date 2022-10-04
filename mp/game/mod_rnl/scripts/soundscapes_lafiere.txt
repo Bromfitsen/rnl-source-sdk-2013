@@ -1,0 +1,1487 @@
+// Soundscapes for LaFiere
+
+//------------------------------------------------------------------------------------------
+//
+// Generic outdoors ambience // Added rain effects 05/03/2007
+//
+"lafiere.Outside"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+	}
+
+	//Rain effects added
+	//"playlooping"
+	//{
+	//	"volume"	"0.5"
+	//	"pitch"		"100"
+	//	"wave"		"ambient/weather/rumble_rain_nowind.wav"
+	//}
+
+	//"playrandom"
+	//{
+
+		//"time"		"8,16"
+		//"volume"	"0.4,0.7"
+		//"pitch"		"85,100"
+
+		//"rndwave"
+		//{
+		//	"wave"	"ambient/weather/thunder1.wav"
+		//	"wave"	"ambient/weather/thunder2.wav"
+		//	"wave"	"ambient/weather/thunder3.wav"
+		//	"wave"	"ambient/weather/thunder4.wav"
+		//	"wave"	"ambient/weather/thunder5.wav"
+		//	"wave"	"ambient/weather/thunder6.wav"
+//
+		//}
+	//}	
+
+	"playrandom"
+	{
+		"time"		"30,60"
+		"pitch"		"90,100"
+		"volume"	"0.7"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Generic outside swamp area ambience
+//
+"lafiere.swampshore"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+	}
+
+	// general swamp area "tone" just before you are in the swamp area
+	"playlooping"
+	{
+		"volume"	"0.1"
+		"pitch"		"100"
+		"wave"		"ambient/levels/canals/swamp_frogs_loop2.wav"
+	}
+
+	"playrandom"
+	{
+		"time"		"30,60"
+		"pitch"		"90,100"
+		"volume"	"0.7"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+
+	//"playlooping"
+	//{
+	//	"volume"	"0.5"
+	//	"pitch"		"100"
+	//	"wave"		"ambient/weather/rumble_rain_nowind.wav"
+	//}
+
+	//"playrandom"
+	//{
+
+	//	"time"		"8,16"
+		//"volume"	"0.4,0.7"
+		//"pitch"		"85,100"
+//
+		//"rndwave"
+		//{
+		//	"wave"	"ambient/weather/thunder1.wav"
+		//	"wave"	"ambient/weather/thunder2.wav"
+		//	"wave"	"ambient/weather/thunder3.wav"
+		//	"wave"	"ambient/weather/thunder4.wav"
+		//	"wave"	"ambient/weather/thunder5.wav"
+		//	"wave"	"ambient/weather/thunder6.wav"
+//
+		//}
+	//}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Generic swamp area ambience
+//
+"lafiere.Swamp"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"0.4"
+		"pitch"		"100"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+	}
+
+	// general swamp area "tone" on causeway
+	"playlooping"
+	{
+		"volume"	"0.5"
+		"pitch"		"100"
+		"wave"		"ambient/levels/canals/swamp_frogs_loop2.wav"
+	}
+
+	"playrandom"
+	{
+		"time"		"30,60"
+		"pitch"		"90,100"
+		"volume"	"0.7"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Generic indoors ambience
+//
+"lafiere.inside"
+{
+	// underlying area "tone"
+	"playlooping"
+	{
+		"volume"	"1"
+		"pitch"		"100"
+		"wave"		"ambient/wind/dry_air_short_indoors.wav"
+	}
+
+	
+}
+
+//------------------------------------------------------------------------------------------
+//
+// A chirping cricket
+//
+"lafiere.Cricket"
+{
+	"playrandom"
+	{
+		"time"			"0.8,1.0"
+		"pitch"			"98,102"
+		"volume"		"0.7"
+		"soundlevel"  	"SNDLVL_75dB"
+
+		"rndwave"
+		{
+			"wave"		"ambient/animal/cricket_chirp_1.wav"
+		}
+	}
+}
+
+
+//------------------------------------------------------------------------------------------
+//
+// A burrowing/scratching rodent
+//
+"lafiere.Rodent"
+{
+	"playrandom"
+	{
+		"time"			"3,15"
+		"pitch"			"95,102"
+		"volume"		"0.7"
+		"soundlevel"  	"SNDLVL_55dB"
+
+		"rndwave"
+		{
+			"wave"		"ambient/animal/rodent_scratch_1.wav"
+			"wave"		"ambient/animal/rodent_scratch_short_1.wav"
+			"wave"		"ambient/animal/rodent_scratch_short_2.wav"
+			"wave"		"ambient/animal/rodent_scratch_short_3.wav"
+		}
+	}
+}
+
+"lafiere.Rodent02"
+{
+	"playrandom"
+	{
+		"time"			"3,15"
+		"pitch"			"95,102"
+		"volume"		"0.7"
+		"soundlevel"  	"SNDLVL_55dB"
+
+		"rndwave"
+		{
+			"wave"		"ambient/animal/mouse_squeak_1.wav"
+			"wave"		"ambient/animal/mouse_squeak_2.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Birdsong
+//
+"lafiere.Birds"
+{
+	"playrandom"
+	{
+		"time"			"6,20"
+		"pitch"			"85,105"
+		"volume"		"0.5"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/animal/bird1.wav"
+			"wave"	"ambient/animal/bird2.wav"
+			"wave"	"ambient/animal/bird3.wav"
+			"wave"	"ambient/animal/bird4.wav"
+			"wave"	"ambient/animal/bird5.wav"
+			"wave"	"ambient/animal/bird6.wav"
+			"wave"	"ambient/animal/bird7.wav"
+			"wave"	"ambient/animal/bird8.wav"
+			"wave"	"ambient/animal/bird9.wav"
+			"wave"	"ambient/animal/bird10.wav"
+			"wave"	"ambient/animal/bird11.wav"
+			"wave"	"ambient/animal/bird12.wav"
+			"wave"	"ambient/animal/bird13.wav"
+			"wave"	"ambient/animal/bird14.wav"
+			"wave"	"ambient/animal/bird15.wav"
+			"wave"	"ambient/animal/bird16.wav"
+			"wave"	"ambient/animal/bird17.wav"
+			"wave"	"ambient/animal/bird18.wav"
+			"wave"	"ambient/animal/bird19.wav"
+			"wave"	"ambient/animal/bird20.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// PigeonCoup
+//
+"lafiere.Pigeons"
+{
+	"playrandom"
+	{
+		"time"			"6,20"
+		"pitch"			"85,105"
+		"volume"		"0.5"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/pigeon_idle1.wav"
+			"wave"	"ambient/creatures/pigeon_idle2.wav"
+			"wave"	"ambient/creatures/pigeon_idle3.wav"
+			"wave"	"ambient/creatures/pigeon_idle4.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// SwampBirds
+//
+"lafiere.SwampBirds"
+{
+	"playrandom"
+	{
+		"time"			"6,20"
+		"pitch"			"85,105"
+		"volume"		"0.5"
+		"soundlevel"  	"SNDLVL_NORM"
+
+		"rndwave"
+		{
+			"wave"	"ambient/levels/canals/swamp_bird1.wav"
+			"wave"	"ambient/levels/canals/swamp_bird2.wav"
+			"wave"	"ambient/levels/canals/swamp_bird3.wav"
+			"wave"	"ambient/levels/canals/swamp_bird4.wav"
+			"wave"	"ambient/levels/canals/swamp_bird5.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// ToiletFlies
+//
+"lafiere.flies"
+{
+	"playrandom"
+	{
+		"time"		"1,3"
+		"volume"	"0.7,1"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_140db"	
+		"rndwave"
+		{
+			"wave"	"ambient/creatures/flies1.wav"
+			"wave"	"ambient/creatures/flies2.wav"
+			"wave"	"ambient/creatures/flies3.wav"
+			"wave"	"ambient/creatures/flies4.wav"
+			"wave"  "ambient/creatures/flies5.wav"
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// German Music
+//
+//"lafiere.germanmusic"
+//{
+//	"playlooping"
+//	{
+//		"volume"	"1"
+//		"pitch"		"100"
+//		"soundlevel"	"SNDLVL_100db"
+//		//"wave"	"music/german/swastikasong.wav"
+//	}
+//}
+
+//------------------------------------------------------------------------------------------
+//
+// German Radio Chatter
+//
+"lafiere.germanradiochatter"
+{
+	"playlooping"
+	{
+		"volume"	"0.9"
+		"pitch"		"100"
+		"wave"		"ambient/levels/prison/radio_random1.wav"
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Pillbox
+//
+"lafiere.pillbox"
+{
+	"dsp" "17"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.SwampShore"
+	}
+
+	// 0 = German Radio Music
+	//"playsoundscape"
+	//{	
+	//	"positionoverride"	"0"
+	//	"name"				"lafiere.germanmusic"
+	//}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+// Radio Cellar
+//
+"lafiere.radiocellar"
+{
+	"dsp" "17"
+
+	// 0 = German Radio
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.germanradiochatter"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+
+"lafiere.alliesspawn1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	// 3 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Birds"
+	}
+
+	// 4 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"lafiere.Birds"
+	}
+
+	// 5 = Cricket by large rock formation
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 6 = Cricket by large rock formation
+	"playsoundscape"
+	{	
+		"positionoverride"	"6"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.alliesspawn2"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.ruinbarnfield1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Rodent by the old barn big door
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Rodent"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.orchard1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	// 3 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.kittenmiddens1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Cricket by hedgerowpath
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 2 = Pigeon cages
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Pigeons"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.pigeonyard1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = flies in the toliet
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.flies"
+	}
+
+	// 2 = pigeon sounds by pen
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Pigeons"
+	}
+
+	"playlooping"
+	{
+		"volume"	"0.2"
+		"pitch"		"100"
+		"wave"		"ambient/levels/canals/swamp_frogs_loop2.wav"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.Barn05bySwamp1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.SwampShore"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.SwampBirds"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.swampshore1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.swampshore"
+	}
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.manorcourtyard1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = cricket by the barn wall
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.axisbasebackyard"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Cricket by barn wall
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Cricket"
+	}
+	
+	// 3 = Cricket by fence
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.axisbasefrontyard"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = mice in large barn by cots
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Rodent02"
+	}
+
+	// 2 = Rodent by the ammo crates by barn
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Rodent"
+	}
+
+	// 3 = Cricket in planter
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 4 = Cricket in large barn by small door
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 5 = flies by outhouse
+	"playsoundscape"
+	{	
+		"positionoverride"	"5"
+		"name"				"lafiere.flies"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.axisorchard1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	// 3 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 4 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.churchshore"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.SwampShore"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.SwampBirds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.axisfield1"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.SwampShore"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	// 3 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 4 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"4"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.axisfield2"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Birds"
+	}
+
+	// 2 = Surrounding trees
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Birds"
+	}
+
+	// 3 = Cricket by ferns
+	"playsoundscape"
+	{	
+		"positionoverride"	"3"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+"lafiere.churchgrounds"
+{
+	"dsp" "1"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Outside"
+	}
+
+	// 0 = Willow Tree
+	"playsoundscape"
+	{	
+		"positionoverride"	"0"
+		"name"				"lafiere.Birds"
+	}
+
+	// 1 = Cricket by bench
+	"playsoundscape"
+	{	
+		"positionoverride"	"1"
+		"name"				"lafiere.Cricket"
+	}
+
+	// 2 = Cricket by small tree
+	"playsoundscape"
+	{	
+		"positionoverride"	"2"
+		"name"				"lafiere.Cricket"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.2,0.5"
+		"pitch"		"90,120"
+		"position"	"random"
+		"soundlevel"	"SNDLVL_100db"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+
+//------------------------------------------------------------------------------------------
+//
+//inside town buildings
+
+"lafiere.inside_lightcombat"
+{
+	"dsp"	"9"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Inside"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.5,1"
+		"pitch"		"80,100"
+		"position"	"random"	
+		"soundlevel"	"SNDLVL_75dB"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+//
+//inside town buildings
+
+"lafiere.inside_Barn05bySwamp1"
+{
+	"dsp"	"9"
+
+	"playsoundscape"
+	{
+		"name" "lafiere.Inside"
+	}
+
+	"playlooping"
+	{
+		"volume"	"0.2"
+		"pitch"		"100"
+		"soundlevel"	"SNDLVL_45dB"
+		"wave"		"ambient/levels/canals/swamp_frogs_loop2.wav"
+	}
+
+	"playrandom"
+	{
+		"time"		"9,20"
+		"volume"	"0.5,1"
+		"pitch"		"80,100"
+		"position"	"random"	
+		"soundlevel"	"SNDLVL_45dB"	
+		"rndwave"
+		{
+			"wave"	"ambient/levels/streetwar/city_battle1.wav"
+			"wave"	"ambient/levels/streetwar/city_battle2.wav"
+			"wave"	"ambient/levels/streetwar/city_battle3.wav"
+			"wave"	"ambient/levels/streetwar/city_battle4.wav"
+			"wave"	"ambient/levels/streetwar/city_battle5.wav"
+			"wave"	"ambient/levels/streetwar/city_battle6.wav"
+			"wave"	"ambient/levels/streetwar/city_battle7.wav"
+			"wave"	"ambient/levels/streetwar/city_battle8.wav"
+			"wave"	"ambient/levels/streetwar/city_battle9.wav"
+			"wave"	"ambient/levels/streetwar/city_battle17.wav"
+			"wave"	"ambient/levels/streetwar/city_battle18.wav"
+			"wave"	"ambient/levels/streetwar/city_battle19.wav"
+		}
+	}	
+}

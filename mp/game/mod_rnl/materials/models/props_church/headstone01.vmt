@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_church/headstone01"
+	"$bumpmap" "models/props_church/headstone01_normal"
+	"model" 1
+	%keyword "rnl"
+}

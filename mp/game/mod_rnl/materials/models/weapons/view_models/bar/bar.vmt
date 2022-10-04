@@ -1,0 +1,11 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/view_models/bar/bar"
+//        "$bumpmap" "models/weapons/view_models/bar/bar_normal"
+	"$phong" "1"
+	"$phongexponent" "12"
+	"$phongboost" "1"	
+	"$phongfresnelranges"	"[1 3 6]"
+//	"$halflambert" "1"
+	"$phongalbedotint" "1"
+}

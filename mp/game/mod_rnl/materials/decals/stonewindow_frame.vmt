@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$translucent" 1
+	"$basetexture" "Decals/stonewindow_frame"
+	"$decal" 1
+	"$decalscale" 0.25
+	"%keyword" "rnl"
+}

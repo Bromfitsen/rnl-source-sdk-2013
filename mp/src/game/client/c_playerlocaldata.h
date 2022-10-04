@@ -41,7 +41,6 @@ public:
 	int						m_iHideHUD;			// bitfields containing sections of the HUD to hide
 	
 	float					m_flFOVRate;		// rate at which the FOV changes
-	
 
 	bool					m_bDucked;
 	bool					m_bDucking;
@@ -49,6 +48,7 @@ public:
 	float					m_flDucktime;
 	float					m_flDuckJumpTime;
 	float					m_flJumpTime;
+
 	int						m_nStepside;
 	float					m_flFallVelocity;
 	int						m_nOldButtons;
@@ -74,7 +74,6 @@ public:
 	audioparams_t			m_audio;
 
 	bool					m_bSlowMovement;
-
 };
 
 #endif // C_PLAYERLOCALDATA_H

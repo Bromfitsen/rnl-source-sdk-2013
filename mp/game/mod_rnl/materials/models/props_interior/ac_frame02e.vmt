@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_interior/ac_frame02e"
+	"$surfaceprop" "glass"
+	"%keyword" "rnl"
+}

@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/rd_door02"
+	"$normalmap" "models/props_exterior/rd_door02_normal"
+	"$envmapmask" "models/props_exterior/rd_door02_spec"
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .1 .1 .1 ]"
+	"$surfaceprop" "wood"
+	"$model" 1
+}

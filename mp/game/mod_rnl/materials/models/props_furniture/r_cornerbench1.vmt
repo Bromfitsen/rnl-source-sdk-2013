@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_furniture/r_cornerbench1"
+	"$model" 1
+}

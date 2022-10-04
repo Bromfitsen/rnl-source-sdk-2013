@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_concretecafewall01c"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+}

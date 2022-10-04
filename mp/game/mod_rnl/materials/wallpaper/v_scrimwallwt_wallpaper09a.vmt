@@ -1,0 +1,9 @@
+"WorldVertexTransition"
+{
+	"$baseTexture" "wallpaper\v_scrimwall"
+	"$basetexture2" "wallpaper\wt_wallpaper09a"
+	"$surfaceprop" "plaster"
+	"$surfaceprop2" "plaster"
+	"%keyword" "rnl"
+}
+

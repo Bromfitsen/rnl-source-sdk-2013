@@ -1,0 +1,8 @@
+"VertexLitGeneric" 
+
+{ 
+"$baseTexture" "models/props/ah_tool_sheet001" 
+
+$model 1
+
+}

@@ -1,0 +1,8 @@
+"LightMappedGeneric"
+{
+	"$baseTexture" "camo\wt_camo_netting01"
+	"$surfaceprop" "foliage"
+	"$alphatest" 1
+}
+
+//texture by watchtower

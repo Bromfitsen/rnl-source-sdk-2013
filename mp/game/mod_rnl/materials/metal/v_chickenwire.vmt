@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "metal/v_chickenwire"
+	"%compilepassbullets" 1
+	"$translucent" 1
+	"$surfaceprop" "metal"
+	"%keyword" "rnl"
+}

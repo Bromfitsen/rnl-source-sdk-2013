@@ -3,6 +3,7 @@
 #include "rnl_gamerules.h"
 #include "rnl_objective_base.h"
 #include "rnl_objective_order_filter.h"
+#include "rnl_shareddefs.h"
 
 #ifndef CLIENT_DLL
 #include "dt_utlvector_send.h"
@@ -43,7 +44,7 @@ BEGIN_NETWORK_TABLE( CRnLObjectiveBase, DT_RnLObjectiveBase )
 	SendPropUtlVector(
 		SENDINFO_UTLVECTOR( m_aTasks ),
 		MAX_TASKS, // max elements
-		SendPropEHandle( NULL, 0 ) ),
+		SendPropEHandle("m_aTasks::entry", 0 ) ),
 	
 #else
 	RecvPropString( RECVINFO( m_szObjectiveName ) ),
@@ -58,7 +59,7 @@ BEGIN_NETWORK_TABLE( CRnLObjectiveBase, DT_RnLObjectiveBase )
 	RecvPropUtlVector( 
 		RECVINFO_UTLVECTOR( m_aTasks ), 
 		MAX_TASKS,
-		RecvPropEHandle(NULL, 0, 0)),
+		RecvPropEHandle("m_aTasks::entry", 0, 0)),
 
 #endif
 END_NETWORK_TABLE()
@@ -96,7 +97,7 @@ CRnLObjectiveBase::CRnLObjectiveBase()
 	m_iObjectivePrevState = RNL_OBJECTIVE_INVALID;
 	m_iObjectiveState = RNL_OBJECTIVE_NEUTRAL;
 #ifndef CLIENT_DLL
-	m_iInitialControllingTeam = TEAM_NONE;
+	m_iInitialControllingTeam = TEAM_INVALID;
 #endif
 }
 
@@ -267,7 +268,7 @@ void CRnLObjectiveBase::SetObjectiveState( int iState )
 				break;
 			};
 		}
-		ChangeTeam( TEAM_NONE );
+		ChangeTeam(TEAM_INVALID);
 		break;
 	//------------------------
 	//Allied Events

@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "concrete/e_concreterubble02"
+	"$bumpmap" "concrete/e_concreterubble02_normal"
+	"$surfaceprop" "dirt"
+	"%keywords" "rubble"
+}
+

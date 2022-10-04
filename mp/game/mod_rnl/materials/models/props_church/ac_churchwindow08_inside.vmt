@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_church/ac_churchwindow08_inside"
+	//"$bumpmap" "models\props_church/ac_churchwindow08_normal"
+	"$surfaceprop" "concrete"
+	"$model" 1
+}

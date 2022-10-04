@@ -1,0 +1,8 @@
+"LightMappedGeneric"
+{
+	"$baseTexture"			"plaster/rnl_advertisement_001"
+	"$surfaceprop" 			"concrete"
+	"$alphatest"			"1"
+}
+
+

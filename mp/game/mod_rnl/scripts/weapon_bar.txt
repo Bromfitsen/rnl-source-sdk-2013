@@ -1,0 +1,116 @@
+WeaponData
+{
+	// Weapon characteristics:
+	"Damage"			"50"		// damage per bullet
+	"Bullets"			"1"		// bullets per shoot
+	"CycleTime"			"0.109"	// time between shoots
+	"Spread"			"0.01873" //Bullet Spread
+	
+	
+	// Weapon data is loaded by both the Game and Client DLLs.
+	"printname"				"M1918A2 BAR"
+	"viewmodel"		        "models/weapons/v_bar.mdl"
+	"playermodel"			"models/weapons/w_bar.mdl"
+	"PlayerAnimationExtension"	"M1"
+	"ClipModel"			"models/items/w_bar_ammo.mdl"
+	"Team"				"allies"
+	
+	"bucket"			"0"
+	"bucket_position"		"0"
+
+	"clip_size"			"20"
+	
+	"primary_ammo"			"AMMO_BAR"
+	"secondary_ammo"		"None"
+
+	"weight"			"25"
+
+	// old way to do item flags
+	"item_flags"			"7" // ITEM_FLAG_SELECTONEMPTY | ITEM_FLAG_NOAUTORELOAD | ITEM_FLAG_NOAUTOSWITCHEMPTY
+
+	// new way to do item flags
+	"ITEM_FLAG_SELECTONEMPTY"	"1"	
+	"ITEM_FLAG_NOAUTORELOAD"	"1"
+	"ITEM_FLAG_NOAUTOSWITCHEMPTY"	"1"
+	"ITEM_FLAG_NOAUTOSWITCHEMPTY"	"1"
+
+ 	"BuiltRightHanded" 		"0"
+	"AllowFlipping" 		"1"
+
+	Recoil
+	{
+		"Normal"	"4.50"
+		"Crouched"	"2.50"
+		"Prone"		"0.50"
+		"Jumping"	"8.50"
+		"SightedFactor"	"0.66"
+	}
+
+	FieldsOfView
+	{
+		"Hip"		"75.0"
+		"Shoulder"	"75.0"
+		"Sights"	"65.0"
+		"SteadySights"	"50.0"
+		"Throwing"	"75.0"
+	}
+
+	// Sounds for the weapon. There is a max of 16 sounds per category (i.e. max 16 "single_shot" sounds)
+	SoundData
+	{
+		"reload"			"Weapon_Garand.WorldReload"
+		//"empty"			"Default.ClipEmpty_Rifle"
+		"single_shot"			"Weapon_Bar.Shoot"
+		"melee_hit"			"Weapon_Fists.Melee_Hit"
+		"melee_miss"			"Weapon_Frag.Throw"
+	}
+
+	// Weapon Sprite data is loaded by the Client DLL.
+	TextureData
+	{
+		"weapon"
+		{
+				"font"		"WeaponIcons"
+				"character"	"a"
+		}
+		"weapon_s"
+		{	
+				"font"		"WeaponIconsSelected"
+				"character"	"a"
+		}
+		"ammo"
+		{
+				"font"		"WeaponIcons"
+				"character"	"r"
+		}
+		"crosshair"
+		{
+				"file"		"sprites/crosshairs"
+				"x"		"0"
+				"y"		"48"
+				"width"		"24"
+				"height"	"24"
+		}
+		"autoaim"
+		{
+				"file"		"sprites/crosshairs"
+				"x"			"0"
+				"y"			"48"
+				"width"		"24"
+				"height"	"24"
+		}
+	}
+	ModelBounds
+	{
+		Viewmodel
+		{
+			Mins	"-10 -4 -13"
+			Maxs	"21 9 -1"
+		}
+		World
+		{
+			Mins	"-10 -7 -6"
+			Maxs	"22 8 9"
+		}
+	}
+}

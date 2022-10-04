@@ -1,0 +1,9 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/props_furniture/piano_up_stool"
+	"$bumpmap" "models/props_furniture/piano_up_stool_normal"
+	"$surfaceprop" "Wood_Furniture"
+
+}
+	
+

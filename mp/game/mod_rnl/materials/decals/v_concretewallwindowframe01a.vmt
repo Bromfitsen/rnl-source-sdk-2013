@@ -1,0 +1,9 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_concretewallwindowframe01a"
+	"$translucent" 1
+	"$decal" 1
+	"$nocull" 1
+	"%keywords" "rnl"
+	"$decalscale" 0.25
+}

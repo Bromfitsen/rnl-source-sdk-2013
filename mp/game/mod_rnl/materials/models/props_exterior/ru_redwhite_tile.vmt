@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/ru_redwhite_tile"
+	"$model" 1
+	"$surfaceprop" "concrete"
+}

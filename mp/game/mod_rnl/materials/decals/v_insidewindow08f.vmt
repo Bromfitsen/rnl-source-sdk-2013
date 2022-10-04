@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/v_insidewindow08f"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+	"$decalscale" 0.25
+}

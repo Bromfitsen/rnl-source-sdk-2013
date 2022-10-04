@@ -1,0 +1,6 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/overview/enemy"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

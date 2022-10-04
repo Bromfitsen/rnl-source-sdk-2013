@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_church/belltower_insidewall"
+	"$surfaceprop" "concrete"
+	"$model" 1
+}

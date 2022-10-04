@@ -1,0 +1,11 @@
+// Texture + Normalmap by COREDAMAGE
+
+
+"VertexLitGeneric"
+{
+	"$basetexture"	"models/props_exterior/s_canopy"
+	//"$bumpmap"	"models/props_exteriors/s_canopy_normal"
+	"$surfaceprop"	"metal"
+	"$model"		1
+	"%keywords"	"rnl"
+}

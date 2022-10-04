@@ -36,7 +36,7 @@
 #include "voice_status.h"
 
 #include "c_rnl_player.h"
-#include "c_rnl_base_squad.h"
+#include "rnl_squad.h"
 #include "c_rnl_game_team.h"
 
 #include "engine/IEngineSound.h"
@@ -131,6 +131,7 @@ void CRnLAxisSquadSelectMenu::ShowPanel(bool bShow)
 		Reset();
 		Update();
 
+		/*
 		CSpectatorGUI *specPanel = (CSpectatorGUI*)gViewPortInterface->FindPanelByName( PANEL_SPECGUI );
 		if (specPanel) 
 		{
@@ -139,6 +140,7 @@ void CRnLAxisSquadSelectMenu::ShowPanel(bool bShow)
 			if ( bSpecGUIVisible )
 				specPanel->SetWantsToBeShown( true );
 		}
+		*/
 
 		Activate();
 		
@@ -202,7 +204,7 @@ void CRnLAxisSquadSelectMenu::Update( void )
 	if( pAxisTeam->GetNumberOfSquads() < 1 )
 		return;
 
-	C_RnLBaseSquad* pSquad = NULL;
+	CRnLSquad* pSquad = NULL;
 	int iClassData = 0;
 	int itemCount = 0;
 	CRnLPlayer* pPlayer = NULL;
@@ -219,17 +221,14 @@ void CRnLAxisSquadSelectMenu::Update( void )
 
 		if( pSquad )
 		{
-			if( pSquad->NeedsUpdate() )
-				pSquad->Update();
-
 			if( m_pSquadList.Count() <= iSquad )
 			{
 				m_pSquadList.AddToTail();
-				m_pSquadList[iSquad] = new ListPanel( this, pSquad->m_szSquadTitle );
+				m_pSquadList[iSquad] = new ListPanel( this, pSquad->GetSquadTitle() );
 				m_pSquadList[iSquad]->SetVisible( true );
 
 				m_pSquadList[iSquad]->AddActionSignalTarget( this );
-				m_pSquadList[iSquad]->AddColumnHeader(0, "name", pSquad->m_szSquadTitle, XRES(NAME_WIDTH), ListPanel::COLUMN_FIXEDSIZE  );
+				m_pSquadList[iSquad]->AddColumnHeader(0, "name", pSquad->GetSquadTitle(), XRES(NAME_WIDTH), ListPanel::COLUMN_FIXEDSIZE  );
 				m_pSquadList[iSquad]->AddColumnHeader(1, "class", "#PlayerClass", XRES(CLASS_WIDTH), ListPanel::COLUMN_FIXEDSIZE );
 				m_pSquadList[iSquad]->SetColumnSortable( 0, false );
 				m_pSquadList[iSquad]->SetColumnSortable( 1, false );
@@ -319,14 +318,14 @@ void CRnLAxisSquadSelectMenu::OnSquadListItemSelected( KeyValues *data )
 		return;
 	if( pAxisTeam->GetNumberOfSquads() < 1 )
 		return;
-	C_RnLBaseSquad* pSquad = NULL;
+	CRnLSquad* pSquad = NULL;
 	bool bSearch = true;
 	int itemCount = 0;
 
 	for( int iSquad = 0; iSquad < pAxisTeam->GetNumberOfSquads(); iSquad++ )
 	{
 		itemCount = 0;
-		pSquad = dynamic_cast<C_RnLBaseSquad*>(pAxisTeam->GetSquad(iSquad));
+		pSquad = pAxisTeam->GetSquad(iSquad);
 		if( bSearch )
 		{
 			for( int i = 0; i < pSquad->GetTotalAvailableKits() && bSearch; i++ )

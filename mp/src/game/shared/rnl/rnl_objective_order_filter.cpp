@@ -27,14 +27,14 @@ BEGIN_NETWORK_TABLE( CRnLObjectiveOrderFilter, DT_RnLObjectiveOrderFilter )
 	SendPropUtlVector(
 		SENDINFO_UTLVECTOR( m_vNodes ),
 		MAX_OBJECTIVE_LINKS, // max elements
-		SendPropEHandle( NULL, 0 ) ),
+		SendPropEHandle("m_vNodes::entry", 0)),
 #else
 	RecvPropInt( RECVINFO( m_iGoalState ) ),
 	
 	RecvPropUtlVector( 
 		RECVINFO_UTLVECTOR( m_vNodes ), 
 		MAX_OBJECTIVE_LINKS,
-		RecvPropEHandle(NULL, 0, 0)),
+		RecvPropEHandle("m_vNodes::entry", 0, 0)),
 
 #endif
 END_NETWORK_TABLE()

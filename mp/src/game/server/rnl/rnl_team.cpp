@@ -16,7 +16,7 @@
 IMPLEMENT_SERVERCLASS_ST(CRnLTeam, DT_RnLTeam)
 END_SEND_TABLE()
 
-LINK_ENTITY_TO_CLASS( rnl_team_manager, CRnLTeam );
+LINK_ENTITY_TO_CLASS( rnl_team, CRnLTeam );
 
 //-----------------------------------------------------------------------------
 // Purpose: Get a pointer to the specified TF team manager

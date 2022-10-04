@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_window_large07"
+	"$model" 1
+	"$alphatest" 1
+}
+
+

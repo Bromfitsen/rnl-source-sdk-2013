@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/props_church/mar_church_wnd5"
+	"$surfaceprop" "concrete"
+	"$model" 1
+}

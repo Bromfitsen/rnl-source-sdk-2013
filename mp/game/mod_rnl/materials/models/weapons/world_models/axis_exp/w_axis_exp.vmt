@@ -1,0 +1,13 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models/weapons/world_models/axis_exp/w_axis_exp"
+        "$bumpmap" "models/weapons/world_models/axis_exp/w_axis_exp_norm"
+	"$phong" "1"
+	"$phongexponent" "16"
+	"$phongboost" ".5"	
+	"$phongfresnelranges"	"[.1 .2 2]"
+//	"$halflambert" "1"
+	"$phongtint" "[0 0 0]"
+	"$phongalbedotint" "1"
+	
+}

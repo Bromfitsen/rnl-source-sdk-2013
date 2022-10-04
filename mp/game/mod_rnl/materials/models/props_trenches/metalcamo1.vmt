@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_trenches/metalcamo1"
+	"$surfaceprop" "foliage"
+	"$alphatest" 1
+	"$nocull" 1
+}

@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_trenches/r_concretetube"
+	"$surfaceprop" "concrete"
+	"$model" 1
+}

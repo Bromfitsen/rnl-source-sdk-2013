@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture"			"models/props_exterior/floor_concrete_dirty_001"
+	"$model" 			"1"
+	"$surfaceprop" 			"concrete"
+}
+
+

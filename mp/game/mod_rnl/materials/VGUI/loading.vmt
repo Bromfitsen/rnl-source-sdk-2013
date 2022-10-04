@@ -1,0 +1,13 @@
+"UnlitGeneric"
+{
+	"$basetexture" "vgui/overview/map_back"
+
+	"Proxies"
+	{
+		// This is a sine proxy
+		"RnLLoadingTexture"
+		{
+			"resultVar" "$basetexture" 
+		}
+	}
+}

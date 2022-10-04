@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_structure_tudor03"
+	"$surfaceprop" "model"
+	"$model" 1
+	"$nocull" 1
+}
+
+

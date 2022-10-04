@@ -1,0 +1,21 @@
+"VertexLitGeneric"
+{
+	"$color"			"[1 1 1]"
+	"$baseTexture"			"models/props_mobile/car_german_1936_grille_001"
+	"$nocull"			1
+	"$model" 			1
+	"$translucent"			0
+	"$surfaceprop" 			"metal"
+	"$alpha"			0
+	"$bumpmap" 			"models/props_mobile/car_german_1936_grille_001_env"
+//	"$envmap" 			"env_cubemap"
+	"$normalmapalphaenvmapmask" 	1
+	"$phong" 			1
+	"$phongboost" 			"100"
+// 		50
+	"$phongexponent" 		"127"
+// 		33
+	"$phongfresnelranges"		"[.0 .5 1.0]"
+}
+
+

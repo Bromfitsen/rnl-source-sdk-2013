@@ -1,0 +1,7 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/r_barrel1"
+	"$surfaceprop" "wood"
+	"$model" 1
+}
+

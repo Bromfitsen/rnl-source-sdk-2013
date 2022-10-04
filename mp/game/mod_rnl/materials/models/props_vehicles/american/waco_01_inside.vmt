@@ -1,0 +1,10 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "models/props_vehicles/american/waco_01_inside"
+    //"$bumpmap" "models/props_vehicles/american/waco_01_inside_normal"
+    "$surfaceprop" "metal"
+	"$model" 1
+	"$normalmapalphaenvmapmask" 1
+	"$envmap" "env_cubemap"
+	"$envmaptint" "[ .1 .1 .1 ]"
+}

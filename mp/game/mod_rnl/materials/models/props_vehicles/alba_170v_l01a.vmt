@@ -1,0 +1,15 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_vehicles/alba_170v_l01a"
+	"$bumpmap" "models/props_vehicles/alba_170v_l01a_env"
+	"$surfaceprop" "metal"
+	"%keywords" "alba"
+        "$envmaptint" "[.3 .3 .3]"
+	"$translucent" 1 
+	"$envmapcontrast" .5
+	"$envmap" "env_cubemap"
+	"$model" 1
+	"$alphatest" 1
+}
+
+

@@ -1,0 +1,12 @@
+"WorldVertexTransition"
+{
+	"$basetexture" "nature/rd_grass01_low"
+	"$baseTexture2" "stone/stonestreet02b"
+	"$bumpmap" "stone/stonestreet02_normal"
+	"$bumpmap2" "stone/stonestreet02b_normal"
+	//"$normalmapalphaenvmapmask" 1
+	//"$envmap" "env_cubemap"
+	//"$surfaceprop" "gravel"
+	"$surfaceprop" "dirt"
+	"%keywords" "rnl"
+}

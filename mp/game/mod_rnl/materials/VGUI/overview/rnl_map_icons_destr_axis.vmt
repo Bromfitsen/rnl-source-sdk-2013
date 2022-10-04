@@ -1,0 +1,6 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/overview/rnl_map_icons_destr_axis"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

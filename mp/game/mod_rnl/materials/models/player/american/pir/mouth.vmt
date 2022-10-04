@@ -1,0 +1,7 @@
+"Teeth"
+{
+	"$baseTexture" "models\/player/american/pir\mouth"
+	"$model" 1
+	"$clientshader" "MouthShader"
+	"$halflambert" 1
+}

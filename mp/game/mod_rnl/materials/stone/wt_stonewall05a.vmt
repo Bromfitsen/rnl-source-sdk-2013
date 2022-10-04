@@ -1,0 +1,5 @@
+"LightMappedGeneric"
+{
+	"$baseTexture" "stone/wt_stonewall05a"
+	"$surfaceprop" "concrete"
+}

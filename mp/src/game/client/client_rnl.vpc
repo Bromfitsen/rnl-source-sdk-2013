@@ -19,7 +19,7 @@ $Configuration
 	}
 }
 
-$Project "Client (R&L)"
+$Project "RnL - Client"
 {
 	$Folder	"Source Files"
 	{
@@ -56,8 +56,6 @@ $Project "Client (R&L)"
 			{			
 				$File	"rnl\c_rnl_player.cpp"
 				$File	"rnl\c_rnl_player.h"
-				$File	"rnl\c_rnl_playerlocaldata.cpp"
-				$File	"rnl\c_rnl_playerlocaldata.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_player_shared.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.h"
@@ -65,8 +63,12 @@ $Project "Client (R&L)"
 			
 			$Folder	"Shared"
 			{
+				$File	"$SRCDIR\game\shared\rnl\rnl_dt_shared.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_dt_shared.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_shareddefs.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_shareddefs.h"
+				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_usermessages.cpp"
 			}
 			
@@ -78,12 +80,6 @@ $Project "Client (R&L)"
 				$File	"$SRCDIR\game\shared\rnl\rnl_basetimer.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_basetimer.h"
 
-				$File	"rnl\c_rnl_allied_team.cpp"
-				$File	"rnl\c_rnl_allied_team.h"
-				$File	"rnl\c_rnl_axis_team.cpp"
-				$File	"rnl\c_rnl_axis_team.h"
-				$File	"rnl\c_rnl_base_squad.cpp"
-				$File	"rnl\c_rnl_base_squad.h"
 				$File	"rnl\c_rnl_game_team.cpp"
 				$File	"rnl\c_rnl_game_team.h"
 				$File	"rnl\c_rnl_team.cpp"
@@ -91,12 +87,12 @@ $Project "Client (R&L)"
 				$File	"rnl\c_rnl_resupply_crate.cpp"
 				$File	"rnl\c_rnl_spawn_area.cpp"
 				$File	"rnl\c_rnl_spawn_area.h"
-				
+
 				$File	"$SRCDIR\game\shared\rnl\rnl_iobjective.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_iobjectivelistener.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_itask.h"
+				$File	"$SRCDIR\game\shared\rnl\rnl_squad.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_squad.h"
-				$File	"$SRCDIR\game\shared\rnl\rnl_base_squad_shared.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_game_team_shared.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_objective_base.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_objective_base.h"
@@ -213,6 +209,8 @@ $Project "Client (R&L)"
 				$File	"rnl\vgui\rnl_teammenu.h"
 				$File	"rnl\vgui\rnl_radialdialog.cpp"
 				$File	"rnl\vgui\rnl_radialdialog.h"
+				$File   "rnl\vgui\vgui_imagebutton.cpp"
+				$File   "rnl\vgui\vgui_imagebutton.h"
 			}
 		}
 	}

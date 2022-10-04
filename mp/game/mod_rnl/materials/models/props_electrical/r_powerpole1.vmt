@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_electrical/r_powerpole1"
+	"$model" 1
+}

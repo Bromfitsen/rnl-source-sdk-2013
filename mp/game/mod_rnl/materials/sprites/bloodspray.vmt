@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "sprites\bloodspray"
+	"$translucent" 1
+	"alpha" 1
+}
+

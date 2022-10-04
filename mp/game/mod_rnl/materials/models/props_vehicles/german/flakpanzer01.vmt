@@ -1,0 +1,7 @@
+"vertexlitGeneric"
+{
+	"$basetexture" "models/props_vehicles/german/flakpanzer01"
+	"$surfaceprop" "metal"
+	"$alphatest" 1
+        "$model" "1"
+}

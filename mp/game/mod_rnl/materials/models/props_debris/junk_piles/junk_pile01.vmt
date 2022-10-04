@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_debris/junk_piles/junk_pile01"
+	"$nocull" 1
+	"$model" 1
+}

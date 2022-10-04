@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "VGUI/overview/objective_grey"
+	"$translucent" 1
+	"%keywords" "rnl"
+}

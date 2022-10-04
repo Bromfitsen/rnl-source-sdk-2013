@@ -1,0 +1,8 @@
+"Subrect"
+{
+	"$basetexture" "effects/blood_puff"
+	"$Material"	"particle/particle_composite"
+	"$Pos"		"0 64"
+	"$Size"		"128 128"
+}
+

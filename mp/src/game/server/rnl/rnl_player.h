@@ -48,27 +48,59 @@ public:
 	// This passes the event to the client's and server's CPlayerAnimState.
 	void DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
 
-	virtual void PreThink();
-	virtual void PostThink();
-	virtual void ItemPostFrame( void );
-	virtual void Spawn();
-	virtual void InitialSpawn();
-	virtual void Precache();
-	virtual int	 OnTakeDamage( const CTakeDamageInfo &info );
-	virtual void Event_Killed( const CTakeDamageInfo &info );
-	virtual void TraceAttack( const CTakeDamageInfo &inputInfo, const Vector &vecDir, trace_t *ptr );
-	virtual void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles );
+	virtual void PreThink() OVERRIDE;
+	virtual void PostThink() OVERRIDE;
+	virtual void ItemPostFrame( void ) OVERRIDE;
+	virtual void Spawn() OVERRIDE;
+	virtual void InitialSpawn() OVERRIDE;
+	virtual void Precache() OVERRIDE;
+	virtual int	 OnTakeDamage( const CTakeDamageInfo &info ) OVERRIDE;
+	virtual void Event_Killed( const CTakeDamageInfo &info ) OVERRIDE;
+	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) OVERRIDE;
+	virtual void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles ) OVERRIDE;
 
-	virtual CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 );
+	virtual CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 ) OVERRIDE;
 
-	virtual bool BumpWeapon( CBaseCombatWeapon *pWeapon );
+	virtual bool BumpWeapon( CBaseCombatWeapon *pWeapon ) OVERRIDE;
+
+	//RnL : MovementMod : Begin
+	//MovementMod : Add these to gain access to the movement posture stuff
+	virtual RnLMovementPostures_t	GetMovementPosture(void) const;
+	virtual void			SetMovementPosture(RnLMovementPostures_t iType);
+	virtual RnLMovementPostures_t	GetMovementPostureFrom(void) const;
+	virtual float			GetMovementPostureDuration(void) const;
+	virtual void			SetMovementPostureDuration(float flTime);
+	virtual QAngle			GetMovementPostureAngle(void) const;
+	virtual void			SetMovementPostureAngle(QAngle angle);
+
+
+	// adam: new stance changing method
+	virtual float GetMovementPostureOffset(void) const;
+	virtual void SetMovementPostureOffset(float flOffset);
+	virtual float GetMovementPostureTarget(void) const;
+	virtual void SetMovementPostureTarget(float fTarget);
+	virtual float GetMovementPostureVelocity(void) const;
+	virtual void SetMovementPostureVelocity(float fTarget);
+	virtual bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
+
+	//Moved to public
+	// Accessors for gamemovement
+	bool IsStanding(void) const;
+	bool IsStandingUp(void) const;
+
+	bool IsDucked(void) const;
+	bool IsDucking(void) const;
+
+	bool IsProne(void) const;
+	bool IsProning(void) const;
+	//RnL : MovementMod : End
 
 	void CheckWeaponSwitch( void );
 	void SelectItem( const char *pstr, int iSubType );
 
 	//Michael Lebson: Equipment handling and stuff
-	void	AddEquipment( int iType );
-	void	RemoveEquipment( int iType );
+	void	AddEquipment(RnLEquipmentTypes_t iType );
+	void	RemoveEquipment(RnLEquipmentTypes_t iType );
 	void	OpenParachute( void );
 
 	virtual bool ClientCommand( const CCommand &args );
@@ -82,9 +114,6 @@ public:
 	virtual void		SetWeaponAngle( const QAngle& angle );
 	void AdjustWeaponAngle( const QAngle &angleOffset );
 	void AdjustWeaponSway( const QAngle& offset );
-
-	virtual bool	IsDuckToggled( void );
-	virtual void	ToggleDuck( void );
 
 	virtual int		GetSquadNumber();
 	virtual void	SetSquadNumber( int iNum );
@@ -103,6 +132,12 @@ public:
 
 	virtual void	CheatImpulseCommands( int iImpulse );
 
+	//MovementMod : Our  movement posture
+	CNetworkVar(int, m_nMovementPosture);
+	CNetworkVar(int, m_nMovementPostureFrom);
+	CNetworkQAngle(m_angMovementPostureAngle);
+	//RnL : MovmentMod : End
+
 	CNetworkVar( int, m_iThrowGrenadeCounter );	// used to trigger grenade throw animations.
 	CNetworkQAngle( m_angEyeAngles );	// Copied from EyeAngles() so we can send it to the client.
 	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
@@ -116,7 +151,6 @@ public:
 	CNetworkVar( int, m_iKitNumber );
 	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
-	CNetworkVar( bool, m_bIsDuckToggled );
 
 	//Damage Report and TK Kick
 	int				m_iTeamKills;
@@ -210,7 +244,7 @@ public:
 		float x,
 		float y );
 
-	void FireBulletImmediately( RnLBulletInfo& bullet );
+	void FireBulletImmediately(RnLBulletInfo_t& bullet );
 	void RemoveAllAmmo( void );
 	void DropActiveWeapon( void );
 
@@ -231,7 +265,7 @@ private:
 
 	IRnLPlayerAnimState *m_PlayerAnimState;
 
-	CUtlVector<RnLBulletInfo> m_aBullets;
+	CUtlVector<RnLBulletInfo_t> m_aBullets;
 	int m_iSquadLeaderVote;
 
 	float	m_flNextVocalizationTime;	// cjd @add

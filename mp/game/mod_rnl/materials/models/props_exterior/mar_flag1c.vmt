@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/mar_flag1c"
+	"$nocull" "1"
+	"$surfaceprop" "cloth"
+	"$model" 1
+	"%keyword" "rnl"
+}
+
+

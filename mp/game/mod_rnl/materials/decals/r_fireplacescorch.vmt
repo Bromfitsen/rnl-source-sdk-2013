@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "decals/r_fireplacescorch"
+	"$translucent" 1
+	"$decal" 1
+	"%keywords" "rnl"
+   	"$decalscale" 0.25
+}

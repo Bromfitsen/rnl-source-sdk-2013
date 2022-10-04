@@ -1,0 +1,7 @@
+"UnLitGeneric"
+{
+	"$baseTexture" "VGUI/indicators/nco_allies"
+	"$translucent" 1
+	"$ignorez" 1
+	"%keywords" "rnl"
+}

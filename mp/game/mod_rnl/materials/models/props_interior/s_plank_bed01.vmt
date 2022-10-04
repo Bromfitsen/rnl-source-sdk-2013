@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models\props_interior\s_plank_bed01"
+	"$surfaceprop" "wood"
+	"%keyword" "rnl"
+}

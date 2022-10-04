@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$baseTexture" "vgui/overview/rnl_eglise_axis"
+	"%keywords" "rnl"
+	"$vertexcolor" 1 
+	"$no_fullbright" 1 
+}

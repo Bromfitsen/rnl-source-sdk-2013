@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/alba_letter_grey"
+	"$model" 1
+	"$nocull" 1
+}
+
+

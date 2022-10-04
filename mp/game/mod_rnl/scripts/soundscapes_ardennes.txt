@@ -1,0 +1,60 @@
+// Soundscapes for Ardennes
+"ardennes.generalambience"
+{
+	"dsp" "1"
+	
+	"playlooping"
+	{
+		"volume"	"0.6"
+		"wave"		"ambient/wind/wind-light-rustle.wav"
+		"wave"		"ambient/nature/woodland_ambient_1.wav"
+		"pitch"		"100"
+	}
+	"playrandom"
+	{
+		"time"			"2,10"
+		"volume"		"0.6,0.8"
+		"pitch"			"90,120"
+		"position"		"random"
+		
+		"rndwave"
+		{
+
+			"wave"		"ambient/nature/wind_leaves_mild_gust_1.wav"
+		}
+	}
+	
+	"playrandom"
+	{
+		"time"			"5,15"
+		"volume"		"0.8,1.0"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/weather/thunder1.wav"
+			"wave"	"ambient/weather/thunder2.wav"
+		}
+	}
+	"playrandom"
+	{
+		"time"			"10,25"
+		"volume"		"0.7,1.0"
+		"pitch"			"90,120"
+		"position"		"random"
+		"soundlevel"	"SNDLVL_100db"
+		
+		"rndwave"
+		{
+			"wave"	"ambient/weather/thunder1.wav"
+			"wave"	"ambient/weather/thunder2.wav"
+			"wave"	"ambient/weather/thunder3.wav"
+			"wave"	"ambient/weather/thunder4.wav"
+			"wave"	"ambient/weather/thunder5.wav"
+			"wave"	"ambient/weather/thunder6.wav"
+		}
+	}
+}
+

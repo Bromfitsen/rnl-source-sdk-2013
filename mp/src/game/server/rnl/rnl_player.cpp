@@ -17,6 +17,11 @@
 #include "rnl_game_team.h"
 #include "rnl_ammodef.h"
 #include "rnl_hitgroupdata.h"
+#include "rnl_shareddefs.h"
+#include "rnl_squad.h"
+
+// memdbgon must be the last include file in a .cpp file!!!
+#include "tier0/memdbgon.h"
 
 extern int gEvilImpulse101;
 
@@ -117,6 +122,24 @@ BEGIN_SEND_TABLE_NOBASE( CRnLPlayer, DT_RnLNonLocalPlayerExclusive )
 END_SEND_TABLE()
 
 
+//-----------------------------------------------------------------------------
+// Purpose: Only send to non-local players
+//-----------------------------------------------------------------------------
+void* SendProxy_SendNonLocalPlayerDataTable(const SendProp* pProp, const void* pStruct, const void* pVarData, CSendProxyRecipients* pRecipients, int objectID)
+{
+	pRecipients->SetAllRecipients();
+
+	CRnLPlayer* pPlayer = (CRnLPlayer*)pVarData;
+	if (pPlayer)
+	{
+		pRecipients->ClearRecipient(pPlayer->GetClientIndex());
+		return (void*)pVarData;
+	}
+
+	return NULL;
+}
+REGISTER_SEND_PROXY_NON_MODIFIED_POINTER(SendProxy_SendNonLocalPlayerDataTable);
+
 IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropExclude( "DT_BaseAnimating", "m_flPoseParameter" ),
 	SendPropExclude( "DT_BaseAnimating", "m_flPlaybackRate" ),	
@@ -131,15 +154,14 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 
 	// Data that only gets sent to the local player.
 	SendPropDataTable( "rnllocaldata", 0, &REFERENCE_SEND_TABLE(DT_RnLLocalPlayerExclusive), SendProxy_SendLocalDataTable ),
-	SendPropDataTable( "rnlnonlocaldata", 0, &REFERENCE_SEND_TABLE(DT_RnLNonLocalPlayerExclusive), SendProxy_SendNonLocalDataTable ),
+	SendPropDataTable( "rnlnonlocaldata", 0, &REFERENCE_SEND_TABLE(DT_RnLNonLocalPlayerExclusive), SendProxy_SendNonLocalPlayerDataTable),
 	SendPropDataTable(SENDINFO_DT(m_RnLLocal), &REFERENCE_SEND_TABLE(DT_RnLLocal), SendProxy_SendLocalDataTable),
 
 	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 0), 11 ),
 	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 1), 11 ),
+	SendPropInt(SENDINFO(m_iThrowGrenadeCounter), THROWGRENADE_COUNTER_BITS, SPROP_UNSIGNED),
 	SendPropEHandle( SENDINFO( m_hRagdoll ) ),
 	SendPropEHandle( SENDINFO( m_hKnockDownRagdoll ) ),
-
-	SendPropInt( SENDINFO( m_iThrowGrenadeCounter ), THROWGRENADE_COUNTER_BITS, SPROP_UNSIGNED ),
 
 	SendPropInt( SENDINFO( m_iSquadNumber ) ),
 	SendPropInt( SENDINFO( m_iKitNumber ) ),
@@ -149,8 +171,9 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropVector( SENDINFO( m_vecLeanOffset ) ),
 	SendPropFloat( SENDINFO( m_flBodyHeight ) ),
 	SendPropFloat( SENDINFO( m_flDeathViewTime ) ),
-	SendPropBool(  SENDINFO( m_bIsDuckToggled ) ),
 
+	SendPropInt(SENDINFO(m_nMovementPosture)),
+	SendPropInt(SENDINFO(m_nMovementPostureFrom)),
 END_SEND_TABLE()
 
 class CRnLRagdoll : public CBaseAnimatingOverlay
@@ -217,7 +240,6 @@ CRnLPlayer::CRnLPlayer()
 	m_iKitNumber = RNL_KIT_INVALID;
 
 	m_bSpawnInterpCounter = false;
-	m_bIsDuckToggled = false;
 
 	m_pRnLParachute = NULL;
 	m_pRnLRadio = NULL;
@@ -355,7 +377,6 @@ void CRnLPlayer::Spawn()
 	
 	if( IsReadyToSpawn() )
 	{
-		m_bIsDuckToggled = false;
 		StopObserverMode();
 
 		SetMoveType( MOVETYPE_WALK );
@@ -419,14 +440,13 @@ void CRnLPlayer::InitialSpawn( void )
 	const char *title = (hostname) ? hostname->GetString() : "MESSAGE OF THE DAY";
 
 	// open info panel on client showing MOTD:
-	KeyValues *data = new KeyValues("data");
+	KeyValues::AutoDelete data("data");
 	data->SetString( "title", title );		// info panel title
 	data->SetString( "type", "1" );			// show userdata from stringtable entry
 	data->SetString( "msg",	"motd" );		// use this stringtable entry
-	data->SetString( "cmd", SHOW_TEAM_SELECTION );// exec this command if panel closed
+	data->SetInt( "cmd", TEXTWINDOW_CMD_CHANGETEAM);// exec this command if panel closed
 
 	ShowViewPortPanel( PANEL_INFO, true, data );
-	data->deleteThis();
 
 	m_RnLLocal.m_bUseAutobolt = Q_atoi( engine->GetClientConVarValue( entindex(), "cl_autobolt" ) ) != 0;
 
@@ -441,7 +461,7 @@ extern ConVar mp_armshotimpedance;
 int CRnLPlayer::OnTakeDamage( const CTakeDamageInfo &info )
 {
 	CTakeDamageInfo newDamageInfo = info;
-	if( IsAlive() && newDamageInfo.GetDamage() && g_pGameRules->FPlayerCanTakeDamage(this, newDamageInfo.GetAttacker()) )
+	if( IsAlive() && newDamageInfo.GetDamage() && g_pGameRules->FPlayerCanTakeDamage(this, newDamageInfo.GetAttacker(), info) )
 	{
 		if( newDamageInfo.GetDamageType() & DMG_BULLET )
 		{
@@ -745,7 +765,7 @@ void CRnLPlayer::Event_Killed( const CTakeDamageInfo &info )
 
 	// Michael Lebson
 	// Remove any equipment they had when they died.
-	RemoveEquipment( -1 );
+	RemoveEquipment(RNL_EQUIPMENT_ANY);
 
 	// Decrement the team tickets remaining by one.
 	if( RnLGameRules() && RnLGameRules()->GetGameManager() )
@@ -990,12 +1010,12 @@ CBaseEntity *CRnLPlayer::GiveNamedItem( const char *pszName, int iSubType )
 {
 	if( strcmp( pszName, "parachute" ) == 0 )
 	{
-		AddEquipment( 0 );
+		AddEquipment(RNL_EQUIPMENT_PARACHUTE);
 		return m_pRnLParachute;
 	}
 	else if( strcmp( pszName, "radio" ) == 0 )
 	{
-		AddEquipment( 1 );
+		AddEquipment(RNL_EQUIPMENT_RADIO);
 		return m_pRnLRadio;
 	}
 	else
@@ -1004,9 +1024,9 @@ CBaseEntity *CRnLPlayer::GiveNamedItem( const char *pszName, int iSubType )
 	}
 }
 
-void CRnLPlayer::AddEquipment( int iType )
+void CRnLPlayer::AddEquipment(RnLEquipmentTypes_t iType )
 {
-	if( iType == 0 )
+	if( iType == RNL_EQUIPMENT_PARACHUTE)
 	{
 		if( m_pRnLParachute == NULL )
 		{
@@ -1020,7 +1040,7 @@ void CRnLPlayer::AddEquipment( int iType )
 			}
 		}
 	}
-	/*else if( iType == 1 )
+	/*else if( iType == RNL_EQUIPMENT_RADIO )
 	{
 		if( m_pRnLRadio == NULL )
 		{
@@ -1036,9 +1056,9 @@ void CRnLPlayer::AddEquipment( int iType )
 	}*/
 }
 
-void CRnLPlayer::RemoveEquipment( int iType )
+void CRnLPlayer::RemoveEquipment(RnLEquipmentTypes_t iType )
 {
-	if( iType == 0 || iType == -1 )
+	if( iType == RNL_EQUIPMENT_PARACHUTE || iType == RNL_EQUIPMENT_ANY)
 	{
 		if( m_pRnLParachute )
 		{
@@ -1050,7 +1070,7 @@ void CRnLPlayer::RemoveEquipment( int iType )
 		}
 	}
 
-	if( iType == 1 || iType == -1 )
+	if( iType == RNL_EQUIPMENT_RADIO || iType == RNL_EQUIPMENT_ANY)
 	{
 		if( m_pRnLRadio )
 		{
@@ -1293,7 +1313,7 @@ void CRnLPlayer::ChangeTeam( int iTeamNum )
 			CRnLGameTeam* pOldTeam = (CRnLGameTeam*)GetGlobalRnLTeam( iOldTeam );
 			if( pOldTeam )
 			{
-				IRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
+				CRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
 				if( pOldSquad )
 				{
 					pOldSquad->RemovePlayer( this );
@@ -1332,8 +1352,7 @@ bool CRnLPlayer::ChangeSquad( int iSquad, int iSlot )
 	if( iSquad < 0 || iSquad >= pTeam->GetNumberOfSquads() )
 		return false;
 
-	IRnLSquad* pSquad = pTeam->GetSquad( iSquad );
-
+	CRnLSquad* pSquad = pTeam->GetSquad( iSquad );
 	if( !pSquad )
 		return false;
 
@@ -1348,8 +1367,7 @@ bool CRnLPlayer::ChangeSquad( int iSquad, int iSlot )
 		CRnLGameTeam* pOldTeam = (CRnLGameTeam*)GetGlobalRnLTeam( GetTeamNumber() );
 		if( pOldTeam )
 		{
-			IRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
-
+			CRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
 			if( pOldSquad )
 			{
 				if( pOldSquad == pSquad )

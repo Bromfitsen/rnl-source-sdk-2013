@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_exterior/s_dmc_window_02"
+	"$bumpmap" "models/props_exterior/s_dmc_window_02_normal"
+	"$model" 1
+	"$surfaceprop" "wood"
+	"%keywords" "rnl"
+}

@@ -1,0 +1,8 @@
+"LightMappedGeneric"
+{
+	"$baseTexture"			"models/props_exterior/floor_cobbles_dirty_001a"
+	"$surfaceprop" 			"concrete"
+	"$bumpmap" 			"models/props_exterior/floor_cobbles_dirty_001_env"
+}
+
+

@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/props_vehicles/r_tram1"
+	"$model" 1
+}

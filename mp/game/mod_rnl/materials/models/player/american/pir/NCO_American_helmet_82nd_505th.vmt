@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/player/american/pir/NCO_American_helmet_82nd_505th"
+	"$bumpmap" "models/player/american/pir/American_helmet_normal"
+	"$surfaceprop" "metal"
+	"$model" 1
+	"$phong" "1"
+
+	"$phongexponent" "5"
+	"$phongboost" "0.5"	
+	"$phongfresnelranges"	"[0.5 0.5 0.5]"
+//	"$halflambert" "1"
+//	"$phongalbedotint" "1"
+}

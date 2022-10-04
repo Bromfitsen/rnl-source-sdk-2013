@@ -43,6 +43,20 @@ struct BallisticInfo_t
 	float velocity;
 };
 
+enum RnLTracerTypes_t
+{
+	TRACER_WHIZ_ONLY = TRACER_LINE_AND_WHIZ + 1,
+};
+
+
+enum RnLAmmoFlags_t
+{
+	AMMO_RNL_PRIMARY_AMMO	= (1<<2),
+	AMMO_RNL_SECONDARY_AMMO = (1<<3),
+	AMMO_RNL_GRENADE_AMMO	= (1<<4),
+
+};
+
 class CRnLAmmoDef : public CAmmoDef
 {
 
@@ -58,6 +72,10 @@ public:
 
 	float	GetVelocity( const char* pszAmmoType );
 	float	GetVelocity( int iAmmoID );
+
+	void	SetMagazineSize(const char* pszAmmoType, int32 iMagSize);
+	int32	GetMagazineSize(const char* pszAmmoType);
+	int32	GetMagazineSize(int iAmmoID);
 
 	bool	GetDeflection( const char* pszAmmoType, unsigned short surfaceProp, float& flAng );
 	bool	GetDeflection(int iAmmoID, unsigned short surfaceProp, float& flAng );
@@ -77,6 +95,7 @@ private:
 	Pen_t				m_PenetrationType[MAX_AMMO_TYPES];
 	Deflect_t			m_DeflectionType[MAX_AMMO_TYPES];
 	BallisticInfo_t		m_BallisticInfo[MAX_AMMO_TYPES];
+	int32				m_MagazineInfo[MAX_AMMO_TYPES];
 };
 
 // Get the global ammodef object. This is usually implemented in each mod's game rules file somewhere,

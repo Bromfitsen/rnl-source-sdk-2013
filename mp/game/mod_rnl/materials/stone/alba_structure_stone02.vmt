@@ -1,0 +1,10 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "stone/alba_structure_stone02"
+	"$bumpmap" "stone/alba_structure_stone02_env"
+	"$surfaceprop"	"brick"
+
+
+
+	"%keywords" "rnl"
+}

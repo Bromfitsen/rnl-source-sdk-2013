@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$baseTexture" "tile/ah_slate_roof001"
+	"%keywords" "rnl_roof"
+	"$surfaceprop" "tile"
+}
