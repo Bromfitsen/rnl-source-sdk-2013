@@ -11,6 +11,8 @@
 #include "weapon_rnl_base.h"
 #include "rnl_ammodef.h"
 #include "rnl_squad.h"
+#include "rnl_gamerules.h"
+#include "rnl_game_manager.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -63,7 +65,7 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetKitDescriptionCount(); j++ )
 		{
-			CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
+			const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
 
 			if (pPlayer)
 				ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "			%s\n", desc.name ) );
@@ -79,7 +81,7 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetNumberOfSquads(); j++ )
 		{
-			CRnLSquad* pSquad = pGameTeam->GetSquad(j);
+			const CRnLSquad* pSquad = pGameTeam->GetSquad(j);
 			if( !pSquad )
 				continue;
 
@@ -110,8 +112,8 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 
 			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
-				CRnLSquadKitInfo& info = pSquad->GetKitInfo(k);
-				CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
+				const RnLSquadKitInfo& info = pSquad->GetKitInfo(k);
+				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
 
 				if (pPlayer)
 					ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "				%s: (max %d)\n", desc.name, info.iMaxCount  ) );
@@ -132,38 +134,33 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 	}
 }
 
+IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam);
+
 // Datatable
-IMPLEMENT_SERVERCLASS_ST(CRnLGameTeam, DT_RnLGameTeam)
-	PropUtlVectorDataTable(m_aClassDescriptions, RNL_SQUAD_SLOTS_MAX, DT_RnLLoadoutKitInfo),
-	SendPropUtlVector(SENDINFO_UTLVECTOR(m_aSquads), RNL_SQUAD_SLOTS_MAX, SendPropEHandle(NULL, 0)),
-END_SEND_TABLE()
+BEGIN_NETWORK_TABLE(CRnLGameTeam, DT_RnLGameTeam)
+	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
+	PropUtlVectorDataTable(m_aClassDescriptions, RNL_KITS_MAX, DT_RnLLoadoutKitInfo),
+	PropUtlVector(PROPINFO_UTLVECTOR(m_aSquads), RNL_SQUADS_MAX, PropEHandle("m_aSquads::entry", 0, 0)),
+END_NETWORK_TABLE()
 
 LINK_ENTITY_TO_CLASS(rnl_game_team, CRnLGameTeam );
 
 
 CRnLGameTeam::CRnLGameTeam()
 {
-	m_pBaseSpawnArea = NULL;
+	m_hBaseSpawnArea = NULL;
 }
 
 CRnLGameTeam::~CRnLGameTeam()
 {
-	m_aSquads.Purge();
 }
 
-CRnLSquad* CRnLGameTeam::GetSquad( int idx )
+int CRnLGameTeam::GetNextAvailableSquad( void ) const
 {
-	if( idx < 0 || idx >= m_aSquads.Count() )
-		return NULL;
-
-	return m_aSquads[idx];
-}
-
-int CRnLGameTeam::GetNextAvailableSquad( void )
-{
-	for( int i = 0; i < m_aSquads.Count(); i++ )
+	for( int i = 0; i < m_aSquads.Count(); i++)
 	{
-		if( !m_aSquads[i]->IsSquadFull() )
+		if(m_aSquads[i].IsValid() &&
+			!m_aSquads[i]->IsSquadFull())
 			return i;
 	}
 
@@ -188,23 +185,125 @@ void CRnLGameTeam::Init( const char *pName, int iNumber, KeyValues* pVal )
 	SetAllowPrecache(precacheAllowed);
 }
 
+extern void respawn(CBaseEntity* pEdict, bool fCopyCorpse);
 void CRnLGameTeam::Update( void )
 {
-	for( int i = 0; i < m_aSquads.Count(); i++ )
+	for (int i = 0; i < m_aSquads.Count(); i++)
 	{
-		m_aSquads[i]->Update();
+		if (m_aSquads[i].IsValid())
+		{
+			// Clear the current squad leader.
+			if (m_aSquads[i]->GetSquadLeader() == nullptr)
+			{
+				for (int j = 0; j < m_aPlayers.Count(); j++)
+				{
+					CRnLPlayer* pPlayer = ToRnLPlayer(m_aPlayers[j]);
+					if (!pPlayer || pPlayer->GetSquadNumber() != m_aSquads[i]->m_SquadId)
+						continue;
+
+					if (m_aSquads[i]->CanBeSquadLeader(this, pPlayer))
+					{
+						m_aSquads[i]->SetSquadLeader(pPlayer);
+						NetworkStateChanged(&m_aSquads);
+						break;
+					}
+				}
+			}
+		}
 	}
+
+	// Respawn any players that are waiting.
+	if (RnLGameRules() && RnLGameRules()->GetGameManager() &&
+		(RnLGameRules()->GetGameManager()->GetSpawnTimer(GetTeamNumber()) <= 0.0f) &&
+		(RnLGameRules()->GetGameManager()->GetTicketsRemaining(GetTeamNumber()) > 0))
+	{
+		for (int i = 0; i < m_aSquads.Count(); i++)
+		{
+			if (m_aSquads[i].IsValid())
+			{
+				CRnLSquad* pSquad = m_aSquads[i];
+				for (int j = 0; j < pSquad->GetMemberCount(); j++)
+				{
+					CRnLPlayer* pPlayer = pSquad->GetMember(j);
+					if (!pPlayer)
+						continue;
+
+					if (!pPlayer->IsAlive() && pPlayer->IsReadyToSpawn())
+					{
+						respawn(pPlayer, false);
+					}
+				}
+			}
+		}
+
+	}
+}
+
+void CRnLGameTeam::AddPlayer(CBasePlayer* pPlayer)
+{
+	BaseClass::AddPlayer(pPlayer);
+}
+
+void CRnLGameTeam::RemovePlayer(CBasePlayer* pPlayer)
+{
+	CRnLPlayer* pRnLPlayer = ToRnLPlayer(pPlayer);
+	if (pRnLPlayer)
+	{
+		int iSquad = pRnLPlayer->GetSquadNumber();
+		if (m_aSquads.IsValidIndex(iSquad))
+		{
+			m_aSquads[iSquad]->RemovePlayer(pRnLPlayer);
+		}
+	}
+	BaseClass::RemovePlayer(pPlayer);
+}
+
+bool CRnLGameTeam::JoinSquad(CRnLPlayer* pPlayer, int iSquad, int iKit)
+{
+	if (!IsKitDescriptionValid(iKit))
+	{
+		return false;
+	}
+
+	if (!m_aSquads.IsValidIndex(iSquad))
+	{
+		return false;
+	}
+
+	CRnLSquad* Squad = m_aSquads[iSquad];
+	if (!Squad->IsValid())
+	{
+		return false;
+	}
+
+	if (pPlayer->GetSquadNumber() == iSquad &&
+		pPlayer->GetKitNumber() == iKit)
+	{
+		return false;
+	}
+
+	// Remove the player from the root team list.
+	RemovePlayer(pPlayer);
+
+	if (!Squad->AddPlayer(pPlayer, iKit))
+	{
+		// Failed to add, put them back onto the root team.
+		AddPlayer(pPlayer);
+		return false;
+	}
+	return true;
 }
 
 void CRnLGameTeam::SetBaseSpawn( CRnLSpawnArea* pArea )
 {
-	m_pBaseSpawnArea = pArea;
+	m_hBaseSpawnArea = pArea;
 }
 
 void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 {
 	int iSquad = pPlayer->GetSquadNumber();
-	if( iSquad < 0 || iSquad > m_aSquads.Count() )
+	if( iSquad < 0 || iSquad > m_aSquads.Count() ||
+		m_aSquads[iSquad].IsValid() == false)
 		return;
 
 	int iDesc = m_aSquads[iSquad]->GetKitDescription(pPlayer->GetKitNumber());
@@ -219,9 +318,9 @@ void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 		pPlayer->SetBodygroup( pPlayer->FindBodygroupByName( m_aClassDescriptions[iDesc].model.vecBodyGroups[i].groupName.Get() ), m_aClassDescriptions[iDesc].model.vecBodyGroups[i].iVal );
 	}
 
-	if( m_pBaseSpawnArea )
+	if(m_hBaseSpawnArea)
 	{
-		m_pBaseSpawnArea->OnPlayerSpawn( pPlayer );
+		m_hBaseSpawnArea->OnPlayerSpawn( pPlayer );
 	}
 
 	CBaseCombatWeapon* pWeapon = NULL;
@@ -237,9 +336,9 @@ void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 		}
 	}
 
-	if( pPlayer->GetTeamNumber() == TEAM_ALLIES )
+	if( GetTeamNumber() == TEAM_ALLIES )
 		pPlayer->GiveNamedItem( "weapon_alliedfists" );
-	else
+	else if (GetTeamNumber() == TEAM_AXIS)
 		pPlayer->GiveNamedItem( "weapon_axisfists" );
 }
 
@@ -248,28 +347,25 @@ bool CRnLGameTeam::LoadClassDescriptions(KeyValues* pKey)
 	if (!pKey)
 		return false;
 
-	int index = -1;
 	KeyValues* pModelData = NULL;
 	KeyValues* pWeaponData = NULL;
 	KeyValues* pWeaponSubData = NULL;
 	KeyValues* pBodyGroups = NULL;
 	KeyValues* pGroup = NULL;
 
-	m_aClassDescriptions.RemoveAll();
-
 	KeyValues* pClassData = pKey->GetFirstSubKey();
 	while (pClassData)
 	{
-		index = m_aClassDescriptions.AddToTail();
+		int kitIndex = m_aClassDescriptions.AddToTail();
+		RnLLoadoutKitInfo& classInfo = m_aClassDescriptions[kitIndex];
+		classInfo.iKitId = kitIndex;
+		kitIndex++;
 
-		Q_strncpy(m_aClassDescriptions[index].name.GetForModify(), pClassData->GetName(), KIT_DESC_TITLE_LEN);
-		Q_strncpy(m_aClassDescriptions[index].title.GetForModify(), pClassData->GetString("title"), KIT_DESC_TITLE_LEN);
+		Q_strncpy(classInfo.name.GetForModify(), pClassData->GetName(), KIT_DESC_TITLE_LEN);
+		Q_strncpy(classInfo.title.GetForModify(), pClassData->GetString("title"), KIT_DESC_TITLE_LEN);
 
 		// TODO: Remove when squad leader voting is finished.
-		if (FStrEq(pClassData->GetString("squadleader", "false"), "true"))
-			m_aClassDescriptions[index].bSquadLeader = true;
-		else
-			m_aClassDescriptions[index].bSquadLeader = false;
+		classInfo.bSquadLeader = FStrEq(pClassData->GetString("squadleader", "false"), "true");
 
 		pWeaponData = pClassData->FindKey("weapons");
 		if (pWeaponData != NULL)
@@ -281,57 +377,53 @@ bool CRnLGameTeam::LoadClassDescriptions(KeyValues* pKey)
 				if (weaponID != WEAPON_NONE &&
 					weaponID != WEAPON_MAX)
 				{
-					m_aClassDescriptions[index].weapons.AddToTail(weaponID);
+					classInfo.weapons.AddToTail(weaponID);
 				}
 				pWeaponSubData = pWeaponSubData->GetNextKey();
 			}
 		}
 
-		m_aClassDescriptions[index].iClass = AliasToClassID(pClassData->GetString("type"));
-		if (m_aClassDescriptions[index].iClass == RNL_CLASS_INVALID)
+		classInfo.iClass = AliasToClassID(pClassData->GetString("type"));
+		pModelData = pClassData->FindKey("model");
+		
+		if (classInfo.iClass == RNL_CLASS_INVALID ||
+			pModelData == NULL)
 		{
-			m_aClassDescriptions.Remove(index);
+			kitIndex--;
 		}
 		else
 		{
-			pModelData = pClassData->FindKey("model");
-			if (pModelData != NULL)
+			Q_strncpy(classInfo.model.file.GetForModify(), pModelData->GetString("file"), KIT_DESC_MODEL_LEN);
+			if (PrecacheModel(classInfo.model.file) < 0)
 			{
-				Q_strncpy(m_aClassDescriptions[index].model.file.GetForModify(), pModelData->GetString("file"), KIT_DESC_MODEL_LEN);
-				if (PrecacheModel(m_aClassDescriptions[index].model.file) < 0)
-				{
-					Q_strncpy(m_aClassDescriptions[index].model.file.GetForModify(), RNL_DEFAULT_PLAYER_MODEL, KIT_DESC_MODEL_LEN);
-				}
-
-				m_aClassDescriptions[index].model.iSkin = pModelData->GetInt("skin");
-
-				pBodyGroups = pModelData->FindKey("bodygroups");
-				if (pBodyGroups)
-				{
-					pGroup = pBodyGroups->GetFirstSubKey();
-					int bodyGroupIndex = -1;
-					while (pGroup)
-					{
-						bodyGroupIndex = m_aClassDescriptions[index].model.vecBodyGroups.AddToTail();
-						Q_strncpy(
-							m_aClassDescriptions[index].model.vecBodyGroups[bodyGroupIndex].groupName.GetForModify(),
-							pGroup->GetName(),
-							KIT_DESC_MODEL_LEN
-						);
-						m_aClassDescriptions[index].model.vecBodyGroups[bodyGroupIndex].iVal = pGroup->GetInt();
-						pGroup = pGroup->GetNextKey();
-					}
-
-				}
+				Q_strncpy(classInfo.model.file.GetForModify(), RNL_DEFAULT_PLAYER_MODEL, KIT_DESC_MODEL_LEN);
 			}
-			else
+
+			classInfo.model.iSkin = pModelData->GetInt("skin");
+
+			pBodyGroups = pModelData->FindKey("bodygroups");
+			if (pBodyGroups)
 			{
-				m_aClassDescriptions.Remove(index);
+				pGroup = pBodyGroups->GetFirstSubKey();
+				int bodyGroupIndex = -1;
+				while (pGroup)
+				{
+					bodyGroupIndex = classInfo.model.vecBodyGroups.AddToTail();
+					Q_strncpy(
+						classInfo.model.vecBodyGroups[bodyGroupIndex].groupName.GetForModify(),
+						pGroup->GetName(),
+						KIT_DESC_MODEL_LEN
+					);
+					classInfo.model.vecBodyGroups[bodyGroupIndex].iVal = pGroup->GetInt();
+					pGroup = pGroup->GetNextKey();
+				}
+
 			}
 		}
 
 		pClassData = pClassData->GetNextKey();
 	}
+	NetworkStateChanged(&m_aClassDescriptions);
 	return true;
 }
 
@@ -343,12 +435,18 @@ bool CRnLGameTeam::LoadSquadDescriptions(KeyValues* pKey)
 	KeyValues* pSquadInfo = pKey->GetFirstSubKey();
 	while (pSquadInfo)
 	{
-		CRnLSquad* pSquad = (CRnLSquad*)(CreateEntityByName("rnl_squad"));
-		pSquad->SetParentTeam(this);
-		pSquad->Load(pSquadInfo);
-		m_aSquads.AddToTail(pSquad);
+		if (m_aSquads.Count() < RNL_SQUADS_MAX)
+		{
+			CRnLSquad* pSquad = (CRnLSquad*)CreateEntityByName("rnl_squad");
+			int SquadIndex = m_aSquads.AddToTail(pSquad);
+
+			pSquad->m_SquadId = SquadIndex;
+			pSquad->ChangeTeam(GetTeamNumber());
+			pSquad->Load(this, pSquadInfo);
+		}
 
 		pSquadInfo = pSquadInfo->GetNextKey();
 	}
+	NetworkStateChanged();
 	return true;
 }

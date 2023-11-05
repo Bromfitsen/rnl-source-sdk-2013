@@ -97,7 +97,7 @@ void ParseParticleEffects( bool bLoadSheets, bool bPrecache )
 	for ( int i = 0; i < nCount; ++i )
 	{
 		CUtlString& particleFile = files[i];
-		g_pParticleSystemMgr->ReadParticleConfigFile(particleFile, bPrecache, false );
+		g_pParticleSystemMgr->ReadParticleConfigFile(particleFile.String(), bPrecache, false);
 	}
 
 	g_pParticleSystemMgr->DecommitTempMemory();

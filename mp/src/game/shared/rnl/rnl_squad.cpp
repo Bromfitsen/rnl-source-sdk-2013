@@ -16,6 +16,12 @@
 #include "rnl_gamerules.h"
 #include "rnl_game_manager.h"
 
+#ifdef CLIENT_DLL
+#include "c_rnl_game_team.h"
+#else
+#include "rnl_game_team.h"
+#endif
+
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
 
@@ -60,27 +66,67 @@ void SquadGUIGetIdealProportions(int iCurrSquad, int iTotalSquads, int& x, int& 
 }
 #endif
 
-BEGIN_NETWORK_TABLE_NOBASE(CRnLSquadKitInfo, DT_RnLSquadKitInfo)
+#ifdef CLIENT_DLL
+//-----------------------------------------------------------------------------
+// Purpose: RecvProxy that converts the Team's player UtlVector to entindexes
+//-----------------------------------------------------------------------------
+void PlayerArray_Proxy(const CRecvProxyData* pData, void* pStruct, void* pOut)
+{
+	CRnLSquad* pSquad = (CRnLSquad*)pOut;
+	pSquad->m_aPlayers[pData->m_iElement] = CHandle<CRnLPlayer>::FromIndex(pData->m_Value.m_Int);
+}
+
+void PlayerArray_Length(void* pStruct, int objectID, int currentArrayLength)
+{
+	CRnLSquad* pSquad = (CRnLSquad*)pStruct;
+	if (pSquad->m_aPlayers.Size() != currentArrayLength)
+		pSquad->m_aPlayers.SetSize(currentArrayLength);
+}
+#else
+//-----------------------------------------------------------------------------
+// Purpose: SendProxy that converts the Team's player UtlVector to entindexes
+//-----------------------------------------------------------------------------
+void PlayerArray_Proxy(const SendProp* pProp, const void* pStruct, const void* pData, DVariant* pOut, int iElement, int objectID)
+{
+	CRnLSquad* pSquad = (CRnLSquad*)pData;
+
+	// If this assertion fails, then SendProxyArrayLength_PlayerArray must have failed.
+	Assert(iElement < pSquad->m_aPlayers.Size());
+
+	CHandle<CRnLPlayer>& Handle = pSquad->m_aPlayers[iElement];
+	pOut->m_Int = Handle.ToInt();
+}
+
+int PlayerArray_Length(const void* pStruct, int objectID)
+{
+	CRnLSquad* pSquad = (CRnLSquad*)pStruct;
+	return pSquad->m_aPlayers.Count();
+}
+#endif
+
+BEGIN_NETWORK_TABLE_NOBASE(RnLSquadKitInfo, DT_RnLSquadKitInfo)
 	PropInt(PROPINFO(iKitID)),
 	PropInt(PROPINFO(iMaxCount)),
 END_NETWORK_TABLE()
 
-BEGIN_NETWORK_TABLE_NOBASE(CRnLSquadMember, DT_RnLSquadMember)
-	PropInt(PROPINFO(iKitDesc)),
-	PropEHandle(PROPINFO(m_Player))
-END_NETWORK_TABLE()
+
+IMPLEMENT_NETWORKCLASS(CRnLSquad, DT_RnLSquad);
 
 // Datatable
-IMPLEMENT_NETWORKCLASS_DT(CRnLSquad, DT_RnLSquad)
+BEGIN_NETWORK_TABLE(CRnLSquad, DT_RnLSquad)
+	PropInt(PROPINFO(m_SquadId)),
 	PropString(PROPINFO(m_szSquadTitle)),
-	PropEHandle(PROPINFO( m_hParentTeam ) ),
-	PropEHandle(PROPINFO( m_hSquadLeader ) ),
-	PropUtlVectorDataTable(m_KitInfo, RNL_SQUAD_SLOTS_MAX, DT_RnLSquadKitInfo),
-	PropUtlVectorDataTable(m_Members, RNL_SQUAD_SLOTS_MAX, DT_RnLSquadMember),
+	PropEHandle(PROPINFO(m_hSquadLeader)),
+	PropUtlVectorDataTable(m_KitInfo, RNL_KITS_PER_SQUAD_MAX,DT_RnLSquadKitInfo),
+	PropArray2(
+		PlayerArray_Length,
+		PropInt("player_array_element", 0, 4, NUM_NETWORKED_EHANDLE_BITS, SPROP_UNSIGNED, PlayerArray_Proxy),
+		MAX_PLAYERS,
+		0,
+		"player_array"
+	)
 END_NETWORK_TABLE()
 
-BEGIN_DATADESC(CRnLSquad)
-END_DATADESC()
 
 LINK_ENTITY_TO_CLASS(rnl_squad, CRnLSquad);
 
@@ -89,6 +135,7 @@ LINK_ENTITY_TO_CLASS(rnl_squad, CRnLSquad);
 //-----------------------------------------------------------------------------
 CRnLSquad::CRnLSquad()
 {
+	m_SquadId = -1;
 }
 
 //-----------------------------------------------------------------------------
@@ -98,22 +145,50 @@ CRnLSquad::~CRnLSquad()
 {
 }
 
+bool CRnLSquad::IsValid() const
+{
+	return m_SquadId > -1;
+}
+
 #ifndef CLIENT_DLL
+int CRnLSquad::UpdateTransmitState(void)
+{
+	return SetTransmitState(FL_EDICT_ALWAYS);
+}
+
 bool CRnLSquad::AddPlayer( CRnLPlayer* pPlayer, int iKit )
 {
+	if (m_SquadId < 0)
+	{
+		return false;
+	}
+
 	if(iKit < 0 || iKit >= m_KitInfo.Count() )
 		return false;
 
 	if( GetMemberCount(iKit) >= m_KitInfo[iKit].iMaxCount)
 		return false;
 
-	int indx = m_Members.AddToTail();
-	CRnLSquadMember& mem = m_Members[indx];
-	mem.iKitDesc = iKit;
-	mem.m_Player = pPlayer;
+	pPlayer->SetSquadNumber(m_SquadId);
 	pPlayer->SetKitNumber(iKit);
 
+	m_aPlayers.AddToTail(pPlayer);
 	NetworkStateChanged();
+
+	// Immediately tell all clients that he's changing team. This has to be done
+	// first, so that all user messages that follow as a result of the team change
+	// come after this one, allowing the client to be prepared for them.
+	IGameEvent* event = gameeventmanager->CreateEvent("player_squad");
+	if (event)
+	{
+		event->SetInt("userid", pPlayer->GetUserID());
+		event->SetInt("team", GetTeamNumber());
+		event->SetInt("squad", m_SquadId);
+		event->SetInt("slot", iKit);
+		event->SetBool("disconnect", pPlayer->IsDisconnecting());
+
+		gameeventmanager->FireEvent(event);
+	}
 	return true;
 }
 
@@ -122,72 +197,88 @@ bool CRnLSquad::RemovePlayer( CRnLPlayer* pPlayer )
 	if( !pPlayer )
 		return false;
 
-	bool found = false;
 	if (m_hSquadLeader.Get() == pPlayer)
 	{
-		found = true;
 		m_hSquadLeader = NULL;
 	}
-	
-	for (int i = m_Members.Count() - 1; i >= 0; i--)
-	{
-		if (m_Members[i].m_Player.Get() == pPlayer)
-		{
-			m_Members.Remove(i);
-			found = true;
-		}
-	}
 
+	if (!m_aPlayers.FindAndRemove(pPlayer))
+	{
+		return false;
+	}
 	NetworkStateChanged();
-	return found;
+
+	pPlayer->SetSquadNumber(RNL_SQUAD_INVALID);
+	pPlayer->SetKitNumber(RNL_KIT_INVALID);
+	return true;
 }
 #endif
 
-int CRnLSquad::GetKitCount(void)
-{
-	return m_KitInfo.Count();
-}
-
-CRnLSquadKitInfo& CRnLSquad::GetKitInfo(int indx)
-{
-	return m_KitInfo[indx];
-}
-
-int CRnLSquad::GetMemberCount(void)
-{
-	return m_Members.Count();
-}
-
-int CRnLSquad::GetMemberCount(int iKit)
+int CRnLSquad::GetKitCount(void) const
 {
 	int count = 0;
-	for (int i = 0; i < m_Members.Count(); i++)
+	for (int i = 0; i < m_KitInfo.Count(); i++)
 	{
-		if (m_Members[i].iKitDesc == iKit)
+		if (m_KitInfo[i].iKitID >= 0)
+		{
 			count++;
+		}
+		else
+		{
+			break;
+		}
 	}
 	return count;
 }
 
-CRnLPlayer* CRnLSquad::GetMember(int indx)
+const RnLSquadKitInfo& CRnLSquad::GetKitInfo(int indx) const
 {
-	if (indx < 0 || indx >= m_Members.Count())
-		return NULL;
-
-	return m_Members[indx].m_Player;
+	return m_KitInfo[indx];
 }
 
-CRnLPlayer* CRnLSquad::GetNextMember(int iKitID, CRnLPlayer* CurrentMember)
+int CRnLSquad::GetMemberCount(void) const
 {
-	for (int i = 0; i < m_Members.Count(); i++)
+	return m_aPlayers.Count();
+}
+
+int CRnLSquad::GetMemberCount(int iKit) const
+{
+	int count = 0;
+	for (int i = 0; i < m_aPlayers.Count(); i++)
 	{
-		if (m_Members[i].iKitDesc == iKitID)
+		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
+		if (pRnLPlayer != NULL &&
+			pRnLPlayer->GetKitNumber() == iKit)
+		{
+			count++;
+		}
+	}
+	return count;
+}
+
+CRnLPlayer* CRnLSquad::GetMember(int indx) const
+{
+	if (!m_aPlayers.IsValidIndex(indx))
+	{
+		return NULL;
+	}
+
+	return m_aPlayers[indx];
+}
+
+CRnLPlayer* CRnLSquad::GetNextMember(int iKit, CRnLPlayer* CurrentMember) const
+{
+	for (int i = 0; i < m_aPlayers.Count(); i++)
+	{
+		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
+		if (pRnLPlayer != NULL &&
+			pRnLPlayer->GetKitNumber() == iKit)
 		{
 			if (CurrentMember == nullptr)
 			{
-				return m_Members[i].m_Player;
+				return pRnLPlayer;
 			}
-			else if (CurrentMember == m_Members[i].m_Player)
+			else if (CurrentMember == pRnLPlayer)
 			{
 				CurrentMember = nullptr;
 			}
@@ -196,15 +287,17 @@ CRnLPlayer* CRnLSquad::GetNextMember(int iKitID, CRnLPlayer* CurrentMember)
 	return nullptr;
 }
 
-CRnLPlayer* CRnLSquad::GetMember(int iKit, int idx)
+CRnLPlayer* CRnLSquad::GetMember(int iKit, int idx) const
 {
-	for (int i = 0; i < m_Members.Count(); i++)
+	for (int i = 0; i < m_aPlayers.Count(); i++)
 	{
-		if (m_Members[i].iKitDesc == iKit)
+		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
+		if (pRnLPlayer != NULL &&
+			pRnLPlayer->GetKitNumber() == iKit)
 		{
 			if (idx == 0)
 			{
-				return m_Members[i].m_Player;
+				return pRnLPlayer;
 			}
 			idx--;
 		}
@@ -212,44 +305,47 @@ CRnLPlayer* CRnLSquad::GetMember(int iKit, int idx)
 	return NULL;
 }
 
-int CRnLSquad::GetKitMaxCount(int iKit)
+int CRnLSquad::GetKitMaxCount(int iKit) const
 {
 	if (iKit < 0 || iKit >= m_KitInfo.Count())
-		return NULL;
-
+		return 0;
+	if (m_KitInfo[iKit].iKitID < 0)
+		return 0;
 	return m_KitInfo[iKit].iMaxCount;
 }
 
 
-int CRnLSquad::SquadSize( void )
+int CRnLSquad::SquadSize( void ) const
 {
-	return m_Members.Count();
+	return m_aPlayers.Count();
 }
 
-bool CRnLSquad::IsSquadFull( void )
+bool CRnLSquad::IsSquadFull( void ) const
 {
 	for( int i = 0; i < m_KitInfo.Count(); i++ )
 	{
-		if(GetMemberCount(m_KitInfo[i].iKitID) < m_KitInfo[i].iMaxCount)
+		if(m_KitInfo[i].IsValid() &&
+			GetMemberCount(m_KitInfo[i].iKitID) < m_KitInfo[i].iMaxCount)
 			return false;
 	}
 	return true;
 }
 
-bool CRnLSquad::AreRequirementsMet( void )
+bool CRnLSquad::AreRequirementsMet( void ) const
 {
 	return true;
 }
 
-bool CRnLSquad::IsKitAvailable( int iKit )
+bool CRnLSquad::IsKitAvailable( int iKit ) const
 {
-	if( iKit < 0 || iKit >= m_KitInfo.Count() )
+	if( iKit < 0 || iKit >= m_KitInfo.Count() ||
+		m_KitInfo[iKit].iKitID < 0)
 		return false;
 
 	return (GetMemberCount(iKit) < m_KitInfo[iKit].iMaxCount);
 }
 
-int CRnLSquad::GetKitDescription( int iKit )
+int CRnLSquad::GetKitDescription( int iKit ) const
 {
 	if( iKit < 0 || iKit >= m_KitInfo.Count() )
 		return false;
@@ -257,124 +353,23 @@ int CRnLSquad::GetKitDescription( int iKit )
 	return (m_KitInfo[iKit].iKitID);
 }
 
-int CRnLSquad::GetTotalAvailableKits( void )
+int CRnLSquad::GetTotalAvailableKits( void ) const
 {
 	return m_KitInfo.Count();
 }
 
-const char* CRnLSquad::GetSquadTitle(void)
+const char* CRnLSquad::GetSquadTitle(void) const
 {
 	return m_szSquadTitle.Get();
 }
 
 #ifndef CLIENT_DLL
-const char* CRnLSquad::GetSquadName(void)
+const char* CRnLSquad::GetSquadName(void) const
 {
 	return m_szSquadReferenceName;
 }
 
-int CRnLSquad::UpdateTransmitState()
-{
-	return SetTransmitState( FL_EDICT_ALWAYS );
-}
-
-extern void respawn(CBaseEntity* pEdict, bool fCopyCorpse);
-void CRnLSquad::Update( void )
-{
-	CRnLGameTeam* pTeam = (CRnLGameTeam*)(m_hParentTeam.Get());
-	
-	if( !pTeam )
-		return;
-
-	// Clear the current squad leader.
-	if (GetSquadLeader() == nullptr)
-	{
-		for (int j = 0; j < m_Members.Count(); j++)
-		{
-			CRnLPlayer*  pPlayer = m_Members[j].m_Player.Get();
-
-			if (!pPlayer)
-				continue;
-
-			if (CanBeSquadLeader(pPlayer))
-			{
-				SetSquadLeader(pPlayer);
-				break;
-			}
-		}
-	}
-
-	if (RnLGameRules() && RnLGameRules()->GetGameManager() &&
-		(RnLGameRules()->GetGameManager()->GetSpawnTimer(GetTeamNumber()) <= 0.0f) &&
-		(RnLGameRules()->GetGameManager()->GetTicketsRemaining(GetTeamNumber()) > 0))
-	{
-		for (int j = 0; j < m_Members.Count(); j++)
-		{
-			if (!m_Members[j].m_Player->IsAlive() && m_Members[j].m_Player->IsReadyToSpawn())
-			{
-				respawn(m_Members[j].m_Player, false);
-			}
-		}
-	}
-
-	// TODO: Uncomment and delete above when Squad Leader voting is finished.
-	/*if( m_hSquadLeader == NULL )
-	{
-		if( m_flSquadLeaderSelectionTimer == -1.0f )
-		{
-			m_flSquadLeaderSelectionTimer = gpGlobals->curtime + 15.0f;
-		}
-		else if( m_flSquadLeaderSelectionTimer <= gpGlobals->curtime )
-		{
-			CUtlMap<int,int> playerVotes(DefLessFunc(int));
-			for( int i = 0; i < m_aSlotInfo.Count(); i++ )
-			{
-				for( int j = 0; j < m_aSlotInfo[i].pMembers.Count(); j++ )
-				{
-					int vote = m_aSlotInfo[i].pMembers[j]->GetSquadLeaderVote();
-					if( playerVotes.Find( vote ) != playerVotes.InvalidIndex() )
-					{
-						playerVotes[playerVotes.Find(vote)] += 1;
-					}
-					else
-					{
-						playerVotes.Insert( vote );
-						playerVotes[playerVotes.Find(vote)] = 1;
-					}
-				}
-			}
-
-			int highestVote = 0;
-			int voteCount = 0;
-			for( int i = playerVotes.FirstInorder(); i != playerVotes.InvalidIndex(); i = playerVotes.NextInorder( i ) )
-			{
-				int key = playerVotes.Key( i );
-				if( key > 0 && key < gpGlobals->maxClients )
-				{
-					int votes = playerVotes[playerVotes.Find(key)];
-					if( votes > voteCount )
-					{
-						highestVote = key;
-						voteCount = votes;
-					}
-				}
-			}
-
-			if( highestVote > 0 && highestVote < gpGlobals->maxClients )
-			{
-				CHandle<CRnLPlayer> chosenPlayer = highestVote;
-				if( CanBeSquadLeader( chosenPlayer.Get() ) )
-				{
-					SetSquadLeader( chosenPlayer.Get() );
-				}
-			}
-			
-			m_flSquadLeaderSelectionTimer = -1.0f;
-		}
-	}*/
-}
-
-int CRnLSquad::GetNextAvailableSlot( void )
+int CRnLSquad::GetNextAvailableSlot( void ) const
 {
 	for( int i = 0; i < m_KitInfo.Count(); i++ )
 	{
@@ -385,25 +380,9 @@ int CRnLSquad::GetNextAvailableSlot( void )
 	return -1;
 }
 
-void CRnLSquad::SetParentTeam(CRnLGameTeam* pEnt)
+bool CRnLSquad::Load( CRnLGameTeam* OwnerTeam, KeyValues* pKey )
 {
-	m_hParentTeam = pEnt; 
-	if (pEnt)
-	{
-		ChangeTeam(pEnt->GetTeamNumber());
-	}
-	else
-	{
-		ChangeTeam(TEAM_UNASSIGNED);
-	}
-}
-
-bool CRnLSquad::Load( KeyValues* pKey )
-{
-	// Only detect changes every half-second.
-	NetworkProp()->SetUpdateInterval( 0.75f );
-
-	if (pKey && m_hParentTeam)
+	if (pKey && OwnerTeam)
 	{
 		Q_strncpy(m_szSquadReferenceName, pKey->GetName(), MAX_TEAM_NAME_LENGTH);
 		Q_strncpy(m_szSquadTitle.GetForModify(), pKey->GetString("name"), MAX_TEAM_NAME_LENGTH);
@@ -411,18 +390,21 @@ bool CRnLSquad::Load( KeyValues* pKey )
 		KeyValues* pSlots = pKey->FindKey("slots");
 		if (pSlots)
 		{
+			int CurrentKitIndex = 0;
 			KeyValues* pClassKV = pSlots->GetFirstSubKey();
 			while (pClassKV)
 			{
-				int iClassId = m_hParentTeam->LookupKitDescription(pClassKV->GetName());
-
+				int iClassId = OwnerTeam->LookupKitDescription(pClassKV->GetName());
 				if (iClassId > -1)
 				{
 					DevMsg("Squad Adding Kit Def: %s with max of %d\n", pClassKV->GetName(), pClassKV->GetInt());
-					int index = m_KitInfo.AddToTail();
+					int KidIndex = m_KitInfo.AddToTail();
+					RnLSquadKitInfo& Kit = m_KitInfo[KidIndex];
 
-					m_KitInfo[index].iKitID = iClassId;
-					m_KitInfo[index].iMaxCount = pClassKV->GetInt();
+					Kit.iKitID = iClassId;
+					Kit.iMaxCount = pClassKV->GetInt();
+
+					CurrentKitIndex++;
 				}
 				else
 				{
@@ -433,16 +415,17 @@ bool CRnLSquad::Load( KeyValues* pKey )
 			}
 		}
 	}
+	NetworkStateChanged(&m_KitInfo);
 	return true; 
 }
 
-bool CRnLSquad::CanBeSquadLeader( CRnLPlayer* pEnt )
+bool CRnLSquad::CanBeSquadLeader(CRnLGameTeam* OwnerTeam, CRnLPlayer* pEnt ) const
 {
-	if( pEnt == NULL )
+	if(OwnerTeam == NULL || pEnt == NULL )
 		return false;
 
 	//if( m_hParentTeam.Get()->GetKitDescription( m_aSlotInfo[i].iKitDesc ).iClass == RNL_CLASS_INFANTRY )
-	if( m_hParentTeam.Get()->GetKitDescription(pEnt->GetKitNumber()).bSquadLeader )
+	if(OwnerTeam->GetKitDescription(pEnt->GetKitNumber()).bSquadLeader )
 	{
 		return true;
 	}

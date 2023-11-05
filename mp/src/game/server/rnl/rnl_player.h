@@ -147,9 +147,7 @@ public:
 	CNetworkHandle( CBaseEntity, m_hKnockDownRagdoll );	// networked entity handle 
 
 	CNetworkVar( int, m_iSquadNumber );
-	CNetworkVar( int, m_iPreviousSquadNumber );
 	CNetworkVar( int, m_iKitNumber );
-	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
 
 	//Damage Report and TK Kick

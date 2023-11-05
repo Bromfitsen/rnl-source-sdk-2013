@@ -66,6 +66,8 @@ $Project "RnL - Server"
 				$File	"rnl\rnl_player.h"
 				$File	"rnl\rnl_playermove.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_player_shared.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_player_resource.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_player_resource.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.h"
 			}

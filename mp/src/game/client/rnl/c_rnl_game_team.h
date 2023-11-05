@@ -12,9 +12,9 @@
 #endif
 
 #include "c_rnl_team.h"
+#include "c_rnl_spawn_area.h"
 #include "rnl_shareddefs.h"
-
-class CRnLSquad;
+#include "rnl_squad.h"
 
 #define CRnLGameTeam C_RnLGameTeam
 
@@ -31,19 +31,18 @@ public:
 					C_RnLGameTeam();
 	virtual			~C_RnLGameTeam();
 
-	int					GetNumberOfSquads( void );
-	CRnLSquad*			GetSquad( int idx );
+	int					GetNumberOfSquads( void ) const;
+	const CRnLSquad*	GetSquad(int idx) const;
 
-	virtual int						LookupKitDescription( const char* pName );
-	virtual bool					IsKitDescriptionValid( int iIndex );
-	virtual CRnLLoadoutKitInfo&		GetKitDescription( int iIndex );
-	virtual int						GetKitDescriptionCount( void );
+	virtual int						LookupKitDescription(const char* pName) const;
+	virtual bool					IsKitDescriptionValid(int iIndex) const;
+	virtual const RnLLoadoutKitInfo& GetKitDescription(int iIndex) const;
+	virtual int						GetKitDescriptionCount(void) const;
 
 public:
-	CUtlVector<CRnLLoadoutKitInfo>	m_aClassDescriptions;
-	CUtlVector<CHandle<CRnLSquad>>			m_aSquads;
-
-	bool							m_bSquadChange;
+	CUtlVector<RnLLoadoutKitInfo>	m_aClassDescriptions;
+	CUtlVector<CHandle<CRnLSquad>>	m_aSquads;
+	CNetworkHandle(C_RnLSpawnArea,	m_hBaseSpawnArea);
 };
 
 

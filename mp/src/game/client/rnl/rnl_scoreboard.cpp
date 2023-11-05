@@ -482,7 +482,7 @@ bool CRnLScoreboard::GetPlayerScoreInfo(int playerIndex, KeyValues *kv)
 	if( !pTeam )
 		return false;
 
-	CRnLSquad*pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
+	const CRnLSquad*pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
 
 	if( !pSquad )
 		return false;

@@ -144,7 +144,7 @@ BEGIN_NETWORK_TABLE_NOBASE(CRnLLoadoutModelInfo, DT_RnLLoadoutModelInfo)
 END_NETWORK_TABLE()
 
 // Datatable
-BEGIN_NETWORK_TABLE_NOBASE(CRnLLoadoutKitInfo, DT_RnLLoadoutKitInfo)
+BEGIN_NETWORK_TABLE_NOBASE(RnLLoadoutKitInfo, DT_RnLLoadoutKitInfo)
 	PropString(PROPINFO(title)),
 	PropString(PROPINFO(name)),
 	PropInt(PROPINFO(iClass)),

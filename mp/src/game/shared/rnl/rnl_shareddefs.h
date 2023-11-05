@@ -21,8 +21,6 @@
 
 #define LOWEST_CONTROLLED_CLIMB 40
 
-#define RNL_SQUAD_SLOTS_MAX 10
-
 #define RNL_VOICE_DISTANCE	1000.0f	// cjd @add
 
 #define RNL_DEFAULT_PLAYER_MODEL "models/gman.mdl"
@@ -230,7 +228,9 @@ enum eRnLClass
 #define RNL_KIT_INVALID -1
 #define RNL_SQUAD_INVALID -1
 
-#define RNL_SQUAD_SLOTS_MAX 10
+#define RNL_KITS_MAX 10
+#define RNL_SQUADS_MAX 8
+#define RNL_KITS_PER_SQUAD_MAX 5
 
 #define KIT_DESC_TITLE_LEN 32
 #define KIT_DESC_MODEL_LEN 64
@@ -261,17 +261,18 @@ public:
 	CUtlVector<CRnLLoadoutModelBodyGroupInfo> vecBodyGroups;
 };
 
-class CRnLLoadoutKitInfo
+class RnLLoadoutKitInfo
 {
 public:
-	DECLARE_CLASS_NOBASE(CRnLLoadoutKitInfo);
+	DECLARE_CLASS_NOBASE(RnLLoadoutKitInfo);
 	DECLARE_EMBEDDED_NETWORKVAR();
 
-	CRnLLoadoutKitInfo() { iClass = 0; }
+	RnLLoadoutKitInfo() { iKitId = -1; }
 
+	CNetworkVar(int, iKitId);
+	CNetworkVar(int, iClass);
 	CNetworkString(title, KIT_DESC_TITLE_LEN);
 	CNetworkString(name, KIT_DESC_TITLE_LEN);
-	CNetworkVar(int, iClass);
 	// TODO: Remove when squad leader voting is finished
 	CNetworkVar(bool, bSquadLeader);
 	CNetworkVarEmbedded(CRnLLoadoutModelInfo, model);

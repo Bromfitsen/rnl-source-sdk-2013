@@ -204,7 +204,7 @@ void CRnLAxisSquadSelectMenu::Update( void )
 	if( pAxisTeam->GetNumberOfSquads() < 1 )
 		return;
 
-	CRnLSquad* pSquad = NULL;
+	const CRnLSquad* pSquad = NULL;
 	int iClassData = 0;
 	int itemCount = 0;
 	CRnLPlayer* pPlayer = NULL;
@@ -318,7 +318,7 @@ void CRnLAxisSquadSelectMenu::OnSquadListItemSelected( KeyValues *data )
 		return;
 	if( pAxisTeam->GetNumberOfSquads() < 1 )
 		return;
-	CRnLSquad* pSquad = NULL;
+	const CRnLSquad* pSquad = NULL;
 	bool bSearch = true;
 	int itemCount = 0;
 

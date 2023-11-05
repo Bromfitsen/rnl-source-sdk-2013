@@ -372,12 +372,12 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 
 		DevMsg( "Creating Teams\n" );
 
-		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
+		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_UNASSIGNED) );
 		pTeam->Init( TeamNumberToName(TEAM_UNASSIGNED), TEAM_UNASSIGNED, NULL );
 		g_Teams.AddToTail( pTeam );
 
-		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
+		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_SPECTATOR) );
 		pTeam->Init( TeamNumberToName(TEAM_SPECTATOR), TEAM_SPECTATOR, NULL );
 		g_Teams.AddToTail( pTeam );
@@ -1259,7 +1259,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 		"rnl_gamerules",
 		"rnl_team",
 		"rnl_game_team",
-		"rnl_squad",
+		"rnl_player_manager",
 
 		"", // END Marker
 	};

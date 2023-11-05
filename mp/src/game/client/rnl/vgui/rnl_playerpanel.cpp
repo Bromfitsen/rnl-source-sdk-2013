@@ -77,7 +77,7 @@ void CRnLPlayerPlayerPanel::Paint( void )
 	if( !pTeam )
 		return;
 
-	CRnLSquad* pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
+	const CRnLSquad* pSquad = pTeam->GetSquad( pPlayer->GetSquadNumber() );
 	if( !pSquad )
 		return;
 

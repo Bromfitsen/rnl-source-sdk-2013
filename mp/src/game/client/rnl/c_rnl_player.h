@@ -233,9 +233,7 @@ public:
 	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
 
 	CNetworkVar( int, m_iSquadNumber );
-	CNetworkVar( int, m_iPreviousSquadNumber );
 	CNetworkVar( int, m_iKitNumber );
-	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
 
 	EHANDLE	m_hRagdoll;

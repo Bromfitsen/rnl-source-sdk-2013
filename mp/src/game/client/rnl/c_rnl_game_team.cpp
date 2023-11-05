@@ -46,7 +46,7 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetKitDescriptionCount(); j++ )
 		{
-			CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
+			const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( j );
 			Msg( "			%s\n", desc.name.Get() );
 			
 		}
@@ -55,7 +55,7 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 		for( int j = 0; j < pGameTeam->GetNumberOfSquads(); j++ )
 		{
-			CRnLSquad* pSquad = pGameTeam->GetSquad(j);
+			const CRnLSquad* pSquad = pGameTeam->GetSquad(j);
 			if( !pSquad )
 				continue;
 
@@ -74,8 +74,8 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 
 			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
-				CRnLSquadKitInfo& info = pSquad->GetKitInfo(k);
-				CRnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
+				const RnLSquadKitInfo& info = pSquad->GetKitInfo(k);
+				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
 
 				Msg( "				%s: (max %d)\n", desc.name.Get(), info.iMaxCount );
 
@@ -94,8 +94,9 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam)
 
 BEGIN_NETWORK_TABLE(C_RnLGameTeam, DT_RnLGameTeam)
-	PropUtlVectorDataTable(m_aClassDescriptions, RNL_SQUAD_SLOTS_MAX, DT_RnLLoadoutKitInfo),
-	RecvPropUtlVector(RECVINFO_UTLVECTOR(m_aSquads), RNL_SQUAD_SLOTS_MAX, RecvPropEHandle(NULL, 0)),
+	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
+	PropUtlVectorDataTable(m_aClassDescriptions,RNL_KITS_MAX,DT_RnLLoadoutKitInfo),
+	PropUtlVector(PROPINFO_UTLVECTOR(m_aSquads), RNL_SQUADS_MAX, PropEHandle("m_aSquads::entry", 0, 0)),
 END_NETWORK_TABLE()
 
 //-----------------------------------------------------------------------------
@@ -110,13 +111,5 @@ C_RnLGameTeam::C_RnLGameTeam()
 //-----------------------------------------------------------------------------
 C_RnLGameTeam::~C_RnLGameTeam()
 {
-}
-
-CRnLSquad* C_RnLGameTeam::GetSquad( int idx )
-{
-	if( idx < 0 || idx >= m_aSquads.Count() )
-		return NULL;
-
-	return m_aSquads[idx];
 }
 

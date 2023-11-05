@@ -17,8 +17,8 @@
 #include "rnl_team.h"
 #include "rnl_spawn_area.h"
 #include "rnl_shareddefs.h"
-
-class CRnLSquad;
+#include "rnl_player.h"
+#include "rnl_squad.h"
 
 //-----------------------------------------------------------------------------
 // Purpose: Team Manager
@@ -35,25 +35,29 @@ public:
 
 	// Initialization
 	virtual void Init( const char *pName, int iNumber, KeyValues* pKeyVals  );
-	virtual void	Update( void );
+	virtual void Update( void );
 
-	int				GetNumberOfSquads( void );
-	int				GetNextAvailableSquad( void );
-	CRnLSquad*		GetSquad( int idx );
+	virtual void AddPlayer(CBasePlayer* pPlayer);
+	virtual void RemovePlayer(CBasePlayer* pPlayer);
+	virtual bool JoinSquad(CRnLPlayer* pPlayer, int iSquad, int iKit);
 
-	void			SetBaseSpawn( CRnLSpawnArea* pArea );
+	int					GetNumberOfSquads( void ) const;
+	int					GetNextAvailableSquad( void ) const;
+	const CRnLSquad*	GetSquad( int idx ) const;
 
-	virtual int						LookupKitDescription( const char* pName );
-	virtual bool					IsKitDescriptionValid( int iIndex );
-	virtual CRnLLoadoutKitInfo&		GetKitDescription( int iIndex );
-	virtual int						GetKitDescriptionCount( void );
+	void				SetBaseSpawn( CRnLSpawnArea* pArea );
+
+	virtual int						LookupKitDescription( const char* pName ) const;
+	virtual bool					IsKitDescriptionValid( int iIndex ) const;
+	virtual const RnLLoadoutKitInfo& GetKitDescription( int iIndex ) const;
+	virtual int						GetKitDescriptionCount( void ) const;
 
 	virtual void					OnPlayerSpawn( CRnLPlayer* pPlayer );
 
 public:
-	CUtlVector<CRnLLoadoutKitInfo>	m_aClassDescriptions;
-	CUtlVector<CHandle<CRnLSquad>>	m_aSquads;
-	CRnLSpawnArea*					m_pBaseSpawnArea;
+	CUtlVector<RnLLoadoutKitInfo>		m_aClassDescriptions;
+	CUtlVector<CHandle<CRnLSquad>>		m_aSquads;
+	CNetworkHandle(CRnLSpawnArea,		m_hBaseSpawnArea);
 
 protected:
 	virtual bool					LoadClassDescriptions(KeyValues* pKey);

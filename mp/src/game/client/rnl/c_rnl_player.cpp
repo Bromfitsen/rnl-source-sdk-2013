@@ -70,9 +70,6 @@ END_RECV_TABLE()
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLLocalPlayerExclusive )
 	RecvPropInt( RECVINFO( m_iShotsFired ) ),
 	RecvPropVector( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
-
-	RecvPropInt( RECVINFO( m_iPreviousSquadNumber ) ),
-	RecvPropInt( RECVINFO( m_iPreviousKitNumber ) ),
 END_RECV_TABLE()
 
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLNonLocalPlayerExclusive )

@@ -43,6 +43,22 @@ DataTableProp PropDataTable(
 #endif
 }
 
+DataTableProp PropArray(
+	const char* pVarName,
+	int offset,
+	int sizeofVar,
+	int elements,
+	DataTableProp pArrayProp,
+	DataTableProxyFunc varProxy
+)
+{
+#if !defined (CLIENT_DLL)
+	return SendPropArray3(pVarName, offset, sizeofVar, elements, pArrayProp, varProxy);
+#else
+	return RecvPropArray3(pVarName, offset, sizeofVar, elements, pArrayProp, varProxy);
+#endif
+}
+
 DataTableProp PropUtlVector(
 	char* pVarName,
 	int offset,
@@ -63,5 +79,22 @@ DataTableProp PropUtlVector(
 	return SendPropUtlVector(pVarName, offset, sizeofVar, ensureFn, nMaxElements, pArrayProp, varProxy);
 #else
 	return RecvPropUtlVector(pVarName, offset, sizeofVar, resizeFn, ensureFn, nMaxElements, pArrayProp);
+#endif
+}
+
+DataTableProp PropInt(
+	char* pVarName,
+	int offset,
+	int sizeofVar,	// Handled by SENDINFO macro.
+	int nBits,					// Set to -1 to automatically pick (max) number of bits based on size of element.
+	int flags,
+	PropVarProxyFn varProxy
+
+)
+{
+#if !defined (CLIENT_DLL)
+	return SendPropInt(pVarName, offset, sizeofVar, nBits, flags, varProxy);
+#else
+	return RecvPropInt(pVarName, offset, sizeofVar, flags, varProxy);
 #endif
 }
