@@ -2,14 +2,14 @@
 #include "rnl_shareddefs.h"
 #include "rnl_weapon_parse.h"
 
-ConVar	sv_speed_walk("sv_speed_walk", "120", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_run("sv_speed_run", "240", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_sprint("sv_speed_sprint", "300", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_crouchwalk("sv_speed_crouchwalk", "60", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_crouchrun("sv_speed_crouchrun", "120", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_crouchsprint("sv_speed_crouchsprint", "190", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_pronewalk("sv_speed_pronewalk", "45", FCVAR_NOTIFY | FCVAR_REPLICATED);
-ConVar	sv_speed_pronerun("sv_speed_pronerun", "75", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_walk("sv_speed_walk", "65", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_run("sv_speed_run", "160", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_sprint("sv_speed_sprint", "235", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_crouchwalk("sv_speed_crouchwalk", "45", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_crouchrun("sv_speed_crouchrun", "65", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_crouchsprint("sv_speed_crouchsprint", "160", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_pronewalk("sv_speed_pronewalk", "30", FCVAR_NOTIFY | FCVAR_REPLICATED);
+ConVar	sv_speed_pronerun("sv_speed_pronerun", "55", FCVAR_NOTIFY | FCVAR_REPLICATED);
 ConVar	sv_speed_recovery("sv_speed_recovery", "140", FCVAR_NOTIFY | FCVAR_REPLICATED);
 ConVar	sv_speed_para("sv_speed_para", "100", FCVAR_NOTIFY | FCVAR_REPLICATED);
 

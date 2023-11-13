@@ -614,6 +614,7 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 		horzMove /= flMoraleFactor;
 	}
 
+	// KORNEEL Prone-sway is unaffected by morale?
 	if( pPlayer->IsProne() )
 	{
 		horzScale = 0.15f;
