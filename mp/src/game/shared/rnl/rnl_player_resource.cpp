@@ -86,12 +86,12 @@ void CRnLPlayerResource::UpdatePlayerData( void )
 
 void CRnLPlayerResource::ChangeSquad(int iPlayer, int iSquad)
 {
-	m_iKit.Set(iPlayer, iSquad);
+	m_iSquad.Set(iPlayer, iSquad);
 }
 
-void CRnLPlayerResource::ChangeKit(int iPlayer, int iSquad)
+void CRnLPlayerResource::ChangeKit(int iPlayer, int iKit)
 {
-	m_iSquad.Set(iPlayer, iSquad);
+	m_iKit.Set(iPlayer, iKit);
 }
 #endif
 

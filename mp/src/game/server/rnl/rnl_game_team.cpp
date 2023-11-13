@@ -222,7 +222,8 @@ void CRnLGameTeam::Update( void )
 			if (m_aSquads[i].IsValid())
 			{
 				CRnLSquad* pSquad = m_aSquads[i];
-				for (int j = 0; j < pSquad->GetMemberCount(); j++)
+				int SquadMemberCount = pSquad->GetMemberCount();
+				for (int j = 0; j < SquadMemberCount; j++)
 				{
 					CRnLPlayer* pPlayer = pSquad->GetMember(j);
 					if (!pPlayer)

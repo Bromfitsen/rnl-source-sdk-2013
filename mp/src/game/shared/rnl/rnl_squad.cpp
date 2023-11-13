@@ -347,6 +347,8 @@ int CRnLSquad::GetNextAvailableSlot( void ) const
 
 bool CRnLSquad::Load( CRnLGameTeam* OwnerTeam, KeyValues* pKey )
 {
+	m_hTeam = OwnerTeam;
+
 	if (pKey && OwnerTeam)
 	{
 		Q_strncpy(m_szSquadReferenceName, pKey->GetName(), MAX_TEAM_NAME_LENGTH);

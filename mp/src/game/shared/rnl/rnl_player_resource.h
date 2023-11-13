@@ -31,7 +31,7 @@ public:
 	virtual void UpdatePlayerData( void );
 
 	virtual void	ChangeSquad(int iPlayer, int iSquad);
-	virtual void	ChangeKit(int iPlayer, int iSquad);
+	virtual void	ChangeKit(int iPlayer, int iKit);
 #endif
 
 	int GetSquadMemberCount(int iTeam, int iSquad) const;
