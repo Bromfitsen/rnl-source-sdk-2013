@@ -1267,6 +1267,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 		"rnl_team",
 		"rnl_game_team",
 		"rnl_player_manager",
+		"rnl_squad",
 
 		"", // END Marker
 	};
