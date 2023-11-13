@@ -1627,6 +1627,10 @@ static ConCommand startgrenade2( "+grenade2", IN_Grenade2Down );
 static ConCommand startattack3("+attack3", IN_Attack3Down);
 static ConCommand endattack3("-attack3", IN_Attack3Up);
 
+// KORNEEL - Mild RnL stuff, just so we don't have to rename commands in configs (also makes more sense with this name)
+static ConCommand startironsights("+ironsights", IN_ZoomDown);
+static ConCommand endironsights("-ironsights", IN_ZoomUp);
+
 #ifdef TF_CLIENT_DLL
 static ConCommand toggle_duck( "toggle_duck", IN_DuckToggle );
 #endif
