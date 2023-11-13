@@ -15,11 +15,15 @@
 #if defined( CLIENT_DLL )
 
 	#include "c_rnl_player.h"
-
+	#include "prediction.h"
 #else
 
 	#include "rnl_player.h"
 
+#endif
+
+#ifdef CLIENT_DLL
+ConVar cl_rnl_weapon_pred_once("cl_rnl_weapon_pred_once", "1", FCVAR_ARCHIVE | FCVAR_CLIENTDLL, "Ensure Weapons on Predict once per prediction frame.");
 #endif
 
 // ----------------------------------------------------------------------------- //
@@ -29,9 +33,7 @@
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBase, DT_WeaponRnLBase )
 
 BEGIN_NETWORK_TABLE( CWeaponRnLBase, DT_WeaponRnLBase )
-#ifdef CLIENT_DLL
-  RecvPropInt( RECVINFO( m_iWeaponAnimationState ) ),
-#else
+#ifndef CLIENT_DLL
 	// world weapon models have no animations
   	SendPropExclude( "DT_AnimTimeMustBeFirst", "m_flAnimTime" ),
 	SendPropExclude( "DT_BaseAnimating", "m_nSequence" ),
@@ -39,14 +41,14 @@ BEGIN_NETWORK_TABLE( CWeaponRnLBase, DT_WeaponRnLBase )
 	SendPropExclude( "DT_BaseAnimating", "m_nNewSequenceParity" ),
 	SendPropExclude( "DT_BaseAnimating", "m_nResetEventsParity" ),
 	SendPropExclude( "DT_BaseEntity", "m_flSimulationTime" ),
-
-	SendPropInt( SENDINFO( m_iWeaponAnimationState ) ),
 #endif
+	PropInt( PROPINFO( m_iWeaponAnimationState ) ),
 END_NETWORK_TABLE()
+
 
 #ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponRnLBase )
-	DEFINE_PRED_FIELD( m_flTimeWeaponIdle, FIELD_FLOAT, FTYPEDESC_OVERRIDE | FTYPEDESC_NOERRORCHECK ),
+	DEFINE_PRED_FIELD( m_iWeaponAnimationState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
 END_PREDICTION_DATA()
 #endif
 
@@ -105,6 +107,22 @@ const CRnLWeaponInfo &CWeaponRnLBase::GetRnLWpnData() const
 	#endif
 
 	return *pRnLInfo;
+}
+
+bool CWeaponRnLBase::IsPredicted() const
+{
+#ifdef CLIENT_DLL
+	//RnL : Andrew : 
+	//   Weapons seem to suffer poorly from high ping prediction.
+	//   This is a work around to ensure we only run weapon prediction frames
+	//   once, regardless of whether it's reasonable to do so. 
+	if (cl_rnl_weapon_pred_once.GetBool())
+	{
+		return !prediction->InPrediction() || (prediction->InPrediction() && prediction->IsFirstTimePredicted());
+	}
+#endif
+
+	return true;
 }
 
 bool CWeaponRnLBase::CanPickup( CRnLPlayer* pPlayer )

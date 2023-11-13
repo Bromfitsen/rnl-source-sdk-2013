@@ -61,18 +61,14 @@ public:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponDevCam, DT_WeaponDevCam )
 
 BEGIN_NETWORK_TABLE( CWeaponDevCam, DT_WeaponDevCam )
-#if !defined( CLIENT_DLL )
-	SendPropBool( SENDINFO( m_bHeadBob ) ),
-#else
-	RecvPropBool( RECVINFO( m_bHeadBob ) ),
-#endif
+	PropBool( PROPINFO( m_bHeadBob ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponDevCam )
 #ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA( CWeaponDevCam )
 	DEFINE_PRED_FIELD( m_bHeadBob, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-#endif
 END_PREDICTION_DATA()
+#endif
 
 LINK_ENTITY_TO_CLASS( weapon_devcam, CWeaponDevCam );
 PRECACHE_WEAPON_REGISTER( weapon_devcam );

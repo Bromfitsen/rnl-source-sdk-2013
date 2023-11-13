@@ -25,7 +25,7 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 	DECLARE_ACTTABLE();
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	DECLARE_DATADESC();
 #endif
 	
@@ -43,18 +43,16 @@ private:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponAxisFists, DT_WeaponAxisFists )
 
 BEGIN_NETWORK_TABLE( CWeaponAxisFists, DT_WeaponAxisFists )
-#if !defined( CLIENT_DLL )
-#else
-#endif
 END_NETWORK_TABLE()
 
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	BEGIN_DATADESC( CWeaponAxisFists )
 	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA(CWeaponAxisFists)
+	END_PREDICTION_DATA()
 #endif
 
-BEGIN_PREDICTION_DATA( CWeaponAxisFists )
-END_PREDICTION_DATA()
 
 acttable_t CWeaponAxisFists::m_acttable[] = 
 {

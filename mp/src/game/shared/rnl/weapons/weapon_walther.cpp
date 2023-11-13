@@ -54,8 +54,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( WeaponWalther, DT_WeaponWalther )
 BEGIN_NETWORK_TABLE( CWeaponWalther, DT_WeaponWalther )
 END_NETWORK_TABLE()
 
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponWalther )
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponWalther::m_acttable[] = 
 {

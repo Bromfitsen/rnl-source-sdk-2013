@@ -27,19 +27,17 @@ static const Vector g_bludgeonMaxs(BLUDGEON_HULL_DIM,BLUDGEON_HULL_DIM,BLUDGEON_
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBaseMelee, DT_WeaponRnLBaseMelee );
 
 BEGIN_NETWORK_TABLE( CWeaponRnLBaseMelee, DT_WeaponRnLBaseMelee )
-#if !defined( CLIENT_DLL )
-	SendPropBool( SENDINFO( m_bRightHand ) ),
-#else
-	RecvPropBool( RECVINFO( m_bRightHand ) ),
-#endif
+	PropBool( PROPINFO( m_bRightHand ) ),
 END_NETWORK_TABLE()
 
-
-BEGIN_PREDICTION_DATA( CWeaponRnLBaseMelee )
-#ifdef CLIENT_DLL
-	DEFINE_PRED_FIELD( m_bRightHand, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
+#ifdef GAME_DLL
+	BEGIN_DATADESC(CWeaponRnLBaseMelee)
+	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA(CWeaponRnLBaseMelee)
+		DEFINE_PRED_FIELD(m_bRightHand, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE),
+	END_PREDICTION_DATA()
 #endif
-END_PREDICTION_DATA()
 
 LINK_ENTITY_TO_CLASS( weapon_basemelee, CWeaponRnLBaseMelee );
 
@@ -208,7 +206,7 @@ void CWeaponRnLBaseMelee::Hit( trace_t &traceHit, int iDamage )
 		ApplyMultiDamage();
 
 		// Now hit all triggers along the ray that... 
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 		TraceAttackToTriggers( info, traceHit.startpos, traceHit.endpos, hitDirection );
 #endif
 	}

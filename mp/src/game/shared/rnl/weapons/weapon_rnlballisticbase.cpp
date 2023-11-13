@@ -25,20 +25,18 @@
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBallisticBase, DT_WeaponRnLBallisticBase );
 
 BEGIN_NETWORK_TABLE( CWeaponRnLBallisticBase, DT_WeaponRnLBallisticBase )
-#if !defined( CLIENT_DLL )
-	SendPropInt( SENDINFO( m_iReloadState ) ),
-	SendPropTime( SENDINFO( m_flIronsightsPressedTime ) ),
-#else
-	RecvPropInt( RECVINFO( m_iReloadState ) ),
-	RecvPropTime( RECVINFO( m_flIronsightsPressedTime ) ),
-#endif
+	PropInt(PROPINFO(m_iReloadState)),
+	PropTime(PROPINFO(m_flIronsightsPressedTime)),
 END_NETWORK_TABLE()
 
-#ifdef CLIENT_DLL
-BEGIN_PREDICTION_DATA( CWeaponRnLBallisticBase )
-	DEFINE_PRED_FIELD( m_iReloadState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD_TOL( m_flIronsightsPressedTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE ),	
-END_PREDICTION_DATA()
+#ifdef GAME_DLL
+	BEGIN_DATADESC(CWeaponRnLBallisticBase)
+	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA( CWeaponRnLBallisticBase )
+		DEFINE_PRED_FIELD( m_iReloadState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
+		DEFINE_PRED_FIELD_TOL(m_flIronsightsPressedTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
+	END_PREDICTION_DATA()
 #endif
 
 LINK_ENTITY_TO_CLASS( weapon_baseballistic, CWeaponRnLBallisticBase );

@@ -69,21 +69,16 @@ private:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponThompson, DT_WeaponThompson )
 
 BEGIN_NETWORK_TABLE( CWeaponThompson, DT_WeaponThompson )
-#if !defined( CLIENT_DLL )
-	SendPropBool( SENDINFO( m_bAutoFire ) ),
-	SendPropInt( SENDINFO( m_iFireToggleTrasition ) ),
-#else
-	RecvPropBool( RECVINFO( m_bAutoFire ) ),
-	RecvPropInt( RECVINFO( m_iFireToggleTrasition ) ),
-#endif
+	PropBool( PROPINFO( m_bAutoFire ) ),
+	PropInt(PROPINFO( m_iFireToggleTrasition ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponThompson )
 #ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA( CWeaponThompson )
 	DEFINE_PRED_FIELD( m_bAutoFire, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_iFireToggleTrasition, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-#endif
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponThompson::m_acttable[] = 
 {

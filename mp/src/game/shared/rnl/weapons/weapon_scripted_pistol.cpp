@@ -87,8 +87,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( WeaponScriptedPistol, DT_WeaponScriptedPistol )
 BEGIN_NETWORK_TABLE( CWeaponScriptedPistol, DT_WeaponScriptedPistol )
 END_NETWORK_TABLE()
 
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponScriptedPistol )
 END_PREDICTION_DATA()
+#endif
 
 LINK_ENTITY_TO_CLASS( weapon_scripted_pistol, CWeaponScriptedPistol );
 //PRECACHE_WEAPON_REGISTER( weapon_colt );

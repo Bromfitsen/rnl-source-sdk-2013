@@ -35,7 +35,7 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 	DECLARE_ACTTABLE();
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	DECLARE_DATADESC();
 #endif
 	
@@ -67,23 +67,17 @@ static char* pGarandWithBayonetModel = "models/weapons/w_garand_bayonet.mdl";
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponM1Garand, DT_WeaponM1Garand )
 
 BEGIN_NETWORK_TABLE( CWeaponM1Garand, DT_WeaponM1Garand )
-#ifndef CLIENT_DLL
-	SendPropModelIndex( SENDINFO(m_iDeployedModelIndex) ),
-#else
-	RecvPropInt( RECVINFO(m_iDeployedModelIndex)),
-#endif
+	PropModelIndex( PROPINFO(m_iDeployedModelIndex) ),
 END_NETWORK_TABLE()
 
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	BEGIN_DATADESC( CWeaponM1Garand )
 	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA( CWeaponM1Garand )
+		DEFINE_PRED_FIELD( m_iDeployedModelIndex, FIELD_INTEGER, FTYPEDESC_INSENDTABLE | FTYPEDESC_MODELINDEX ),
+	END_PREDICTION_DATA()
 #endif
-
-BEGIN_PREDICTION_DATA( CWeaponM1Garand )
-#ifdef CLIENT_DLL
-	DEFINE_PRED_FIELD( m_iDeployedModelIndex, FIELD_INTEGER, FTYPEDESC_INSENDTABLE | FTYPEDESC_MODELINDEX ),
-#endif
-END_PREDICTION_DATA()
 
 acttable_t CWeaponM1Garand::m_acttable[] = 
 {

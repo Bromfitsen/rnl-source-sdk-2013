@@ -20,14 +20,12 @@ IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBaseSubMachineGun, DT_WeaponRnLBaseSubM
 BEGIN_NETWORK_TABLE( CWeaponRnLBaseSubMachineGun, DT_WeaponRnLBaseSubMachineGun )
 END_NETWORK_TABLE()
 
-#ifdef CLIENT_DLL
-	BEGIN_PREDICTION_DATA( CWeaponRnLBaseSubMachineGun )
-	END_PREDICTION_DATA()
-#endif
-
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	BEGIN_DATADESC( CWeaponRnLBaseSubMachineGun )
 	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA(CWeaponRnLBaseSubMachineGun)
+	END_PREDICTION_DATA()
 #endif
 
 LINK_ENTITY_TO_CLASS( weapon_basesubmachinegun, CWeaponRnLBaseSubMachineGun );

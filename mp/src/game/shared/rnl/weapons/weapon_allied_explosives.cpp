@@ -52,8 +52,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( WeaponAlliedExplosives, DT_WeaponAlliedExplosive
 BEGIN_NETWORK_TABLE(CWeaponAlliedExplosives, DT_WeaponAlliedExplosives)
 END_NETWORK_TABLE()
 
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponAlliedExplosives )
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponAlliedExplosives::m_acttable[] = 
 {

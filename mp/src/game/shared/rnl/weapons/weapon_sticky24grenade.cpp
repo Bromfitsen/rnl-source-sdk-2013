@@ -30,8 +30,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( Sticky24Grenade, DT_Sticky24Grenade )
 BEGIN_NETWORK_TABLE(CSticky24Grenade, DT_Sticky24Grenade)
 END_NETWORK_TABLE()
 
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CSticky24Grenade )
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CSticky24Grenade::m_acttable[] = 
 {
