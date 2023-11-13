@@ -27,6 +27,8 @@ class CRnLTeam : public CTeam
 
 public:
 
+	virtual bool	IsGameTeam() const { return false; }
+
 	// Initialization
 	virtual void	Init( const char *pName, int iNumber, KeyValues* pKeyVals );
 	virtual void	OnPlayerSpawn( CRnLPlayer* pPlayer ) {}

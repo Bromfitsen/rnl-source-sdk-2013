@@ -14,8 +14,10 @@
 #include "tier0/memdbgon.h"
 
 
-IMPLEMENT_CLIENTCLASS_DT(C_RnLTeam, DT_RnLTeam, CRnLTeam)
-END_RECV_TABLE()
+IMPLEMENT_NETWORKCLASS_ALIASED(RnLTeam, DT_RnLTeam);
+
+BEGIN_NETWORK_TABLE(CRnLTeam, DT_RnLTeam)
+END_NETWORK_TABLE()
 
 //-----------------------------------------------------------------------------
 // Purpose: Get a pointer to the specified TF team manager

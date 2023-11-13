@@ -14,6 +14,32 @@
 	#include "rnl_game_team.h"
 #endif
 
+IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam);
+
+// Datatable
+BEGIN_NETWORK_TABLE(CRnLGameTeam, DT_RnLGameTeam)
+#ifdef CLIENT_DLL
+	RecvPropTime(RECVINFO(m_fWaveSpawnTime)),
+#else
+	SendPropTime(SENDINFO(m_fWaveSpawnTime)),
+#endif
+	PropInt(PROPINFO(m_iSpawnTickets)),
+	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
+	PropUtlVectorDataTable(m_aClassDescriptions, RNL_KITS_MAX, DT_RnLLoadoutKitInfo),
+	PropUtlVector(PROPINFO_UTLVECTOR(m_aSquads), RNL_SQUADS_MAX, PropEHandle("m_aSquads::entry", 0, 0)),
+END_NETWORK_TABLE()
+
+LINK_ENTITY_TO_CLASS(rnl_game_team, CRnLGameTeam);
+
+CRnLGameTeam* GetRnLGameTeam(int iTeamNumber)
+{
+	CRnLTeam* pTeam = GetGlobalRnLTeam(iTeamNumber);
+	if (pTeam != nullptr && pTeam->IsGameTeam())
+	{
+		return (CRnLGameTeam*)pTeam;
+	}
+	return nullptr;
+}
 int CRnLGameTeam::GetNumberOfSquads( void ) const
 {
 	int count = 0;
@@ -73,4 +99,21 @@ const RnLLoadoutKitInfo& CRnLGameTeam::GetKitDescription( int iIndex ) const
 int CRnLGameTeam::GetKitDescriptionCount( void ) const
 {
 	return m_aClassDescriptions.Count();
+}
+
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+float CRnLGameTeam::GetWaveSpawnTimer(void) const
+{
+	return (m_fWaveSpawnTime - gpGlobals->curtime);
+}
+
+//-----------------------------------------------------------------------------
+// Purpose: 
+//-----------------------------------------------------------------------------
+int CRnLGameTeam::GetSpawnTickets(void) const
+{
+	return m_iSpawnTickets;
 }

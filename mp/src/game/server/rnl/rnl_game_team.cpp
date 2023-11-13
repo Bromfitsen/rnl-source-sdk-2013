@@ -134,20 +134,11 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 	}
 }
 
-IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam);
-
-// Datatable
-BEGIN_NETWORK_TABLE(CRnLGameTeam, DT_RnLGameTeam)
-	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
-	PropUtlVectorDataTable(m_aClassDescriptions, RNL_KITS_MAX, DT_RnLLoadoutKitInfo),
-	PropUtlVector(PROPINFO_UTLVECTOR(m_aSquads), RNL_SQUADS_MAX, PropEHandle("m_aSquads::entry", 0, 0)),
-END_NETWORK_TABLE()
-
-LINK_ENTITY_TO_CLASS(rnl_game_team, CRnLGameTeam );
-
 
 CRnLGameTeam::CRnLGameTeam()
 {
+	m_fWaveSpawnTime = 0.f;
+	m_iSpawnTickets = 0;
 	m_hBaseSpawnArea = NULL;
 }
 
@@ -186,6 +177,7 @@ void CRnLGameTeam::Init( const char *pName, int iNumber, KeyValues* pVal )
 	SetAllowPrecache(precacheAllowed);
 }
 
+#define SPAWN_TIMER_RESET_DELAY -0.2f
 extern void respawn(CBaseEntity* pEdict, bool fCopyCorpse);
 void CRnLGameTeam::Update( void )
 {
@@ -214,13 +206,9 @@ void CRnLGameTeam::Update( void )
 		}
 	}
 
-	CRnLGameRules* pRules = RnLGameRules();
-	CRnLGameManager* pManager = (pRules != nullptr) ? pRules->GetGameManager() : nullptr;
-
 	// Respawn any players that are waiting.
-	if (pManager != nullptr &&
-		(pManager->GetSpawnTimer(GetTeamNumber()) <= 0.0f) &&
-		(pManager->GetTicketsRemaining(GetTeamNumber()) > 0))
+	float NextWaveDelay = GetWaveSpawnTimer();
+	if (NextWaveDelay <= 0.0f && m_iSpawnTickets > 0)
 	{
 		for (int i = 0; i < m_aSquads.Count(); i++)
 		{
@@ -241,7 +229,20 @@ void CRnLGameTeam::Update( void )
 				}
 			}
 		}
+	}
 
+	if (NextWaveDelay < SPAWN_TIMER_RESET_DELAY)
+	{
+		CRnLGameRules* pRules = RnLGameRules();
+		CRnLGameManager* pManager = (pRules != nullptr) ? pRules->GetGameManager() : nullptr;
+
+		float flSpawnDelay = 15.0f;
+		if (pManager != nullptr)
+		{
+			flSpawnDelay = pManager->GetSpawnDelay(GetTeamNumber());
+		}
+
+		m_fWaveSpawnTime = gpGlobals->curtime + flSpawnDelay;
 	}
 }
 
@@ -281,7 +282,7 @@ bool CRnLGameTeam::JoinSquad(CRnLPlayer* pPlayer, int iSquad, int iKit)
 	}
 
 	CRnLSquad* Squad = m_aSquads[iSquad];
-	if (Squad == nullptr || !Squad->IsValid())
+	if (Squad == nullptr)
 	{
 		return false;
 	}
@@ -302,6 +303,16 @@ bool CRnLGameTeam::JoinSquad(CRnLPlayer* pPlayer, int iSquad, int iKit)
 		return false;
 	}
 	return true;
+}
+
+void CRnLGameTeam::SetWaveSpawnTimer(float fNextWave)
+{
+	m_fWaveSpawnTime.Set(fNextWave);
+}
+
+void CRnLGameTeam::SetSpawnTickets(int iTickets)
+{
+	m_iSpawnTickets.Set(iTickets);
 }
 
 void CRnLGameTeam::SetBaseSpawn( CRnLSpawnArea* pArea )

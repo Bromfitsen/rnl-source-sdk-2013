@@ -31,8 +31,12 @@ public:
 					C_RnLGameTeam();
 	virtual			~C_RnLGameTeam();
 
+	bool				IsGameTeam() const override { return true; }
 	int					GetNumberOfSquads( void ) const;
 	const CRnLSquad*	GetSquad(int idx) const;
+
+	float				GetWaveSpawnTimer(void) const;
+	int					GetSpawnTickets(void) const;
 
 	virtual int						LookupKitDescription(const char* pName) const;
 	virtual bool					IsKitDescriptionValid(int iIndex) const;
@@ -43,7 +47,11 @@ public:
 	CUtlVector<RnLLoadoutKitInfo>	m_aClassDescriptions;
 	CUtlVector<CHandle<CRnLSquad>>	m_aSquads;
 	CNetworkHandle(C_RnLSpawnArea,	m_hBaseSpawnArea);
+	CNetworkVar(float, m_fWaveSpawnTime);
+	CNetworkVar(int, m_iSpawnTickets);
 };
+
+C_RnLGameTeam* GetRnLGameTeam(int iTeamNumber);
 
 
 #endif // C_RNL_GAME_TEAM_H

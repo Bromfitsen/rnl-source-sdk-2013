@@ -24,6 +24,12 @@ IMPLEMENT_NETWORKCLASS_ALIASED(RnLPlayerResource, DT_RnLPlayerResource)
 
 // Datatable
 BEGIN_NETWORK_TABLE(CRnLPlayerResource, DT_RnLPlayerResource)
+#if !defined( CLIENT_DLL )
+	//SendPropExclude("DT_PlayerResource", "m_iScore"),
+	//SendPropExclude("DT_PlayerResource", "m_iScore"),
+	//SendPropExclude("DT_PlayerResource", "m_iDeaths"),
+	//SendPropExclude("DT_PlayerResource", "m_iHealth"),
+#endif
 	PropArray(PROPINFO_ARRAY3(m_iSquad), PropInt(PROPINFO_ARRAY(m_iSquad))),
 	PropArray(PROPINFO_ARRAY3(m_iKit), PropInt(PROPINFO_ARRAY(m_iKit))),
 END_NETWORK_TABLE()
