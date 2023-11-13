@@ -29,6 +29,7 @@
 #include "decals.h"
 #include "util_shared.h"
 #include "rnl_ammodef.h"
+#include "rnl_player_resource.h"
 #include "weapon_rnlbasemachinegun.h"
 #include "obstacle_pushaway.h"
 
@@ -488,22 +489,12 @@ float CRnLPlayer::GetRecoverTime()
 
 int CRnLPlayer::GetSquadNumber()
 {
-	return m_iSquadNumber;
-}
-
-void CRnLPlayer::SetSquadNumber( int iNum )
-{
-	m_iSquadNumber = iNum;
+	return GetRnLPlayerResource()->GetSquad(entindex());
 }
 
 int CRnLPlayer::GetKitNumber()
 {
-	return m_iKitNumber;
-}
-
-void CRnLPlayer::SetKitNumber( int iNum )
-{
-	m_iKitNumber = iNum;
+	return GetRnLPlayerResource()->GetKit(entindex());
 }
 
 float CRnLPlayer::GetDamageBasedSpeedModifier( int iType )

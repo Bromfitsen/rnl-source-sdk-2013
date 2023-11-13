@@ -14,16 +14,40 @@
 	#include "rnl_game_team.h"
 #endif
 
-int CRnLGameTeam::GetNumberOfSquads( void )
+int CRnLGameTeam::GetNumberOfSquads( void ) const
 {
-	return m_aSquads.Count();
+	int count = 0;
+	for (int i = 0; i < m_aSquads.Count(); i++)
+	{
+		if (m_aSquads[i].IsValid())
+		{
+			count++;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return count;
 }
 
-int CRnLGameTeam::LookupKitDescription( const char* pName )
+const CRnLSquad* CRnLGameTeam::GetSquad(int idx) const
+{
+	if (idx < 0 || idx >= RNL_SQUADS_MAX)
+		return NULL;
+
+	if (m_aSquads[idx].IsValid() == false)
+		return NULL;
+
+	return m_aSquads[idx];
+}
+
+int CRnLGameTeam::LookupKitDescription( const char* pName ) const
 {
 	for (int i = 0; i < m_aClassDescriptions.Count(); i++)
 	{
-		if (Q_stricmp(pName, m_aClassDescriptions[i].name.Get()) == 0)
+		if (m_aClassDescriptions[i].iKitId >= 0 &&
+			Q_stricmp(pName, m_aClassDescriptions[i].name.Get()) == 0)
 		{
 			return i;
 		}
@@ -31,20 +55,22 @@ int CRnLGameTeam::LookupKitDescription( const char* pName )
 	return -1;
 }
 
-bool CRnLGameTeam::IsKitDescriptionValid( int iIndex )
+bool CRnLGameTeam::IsKitDescriptionValid( int iIndex ) const
 {
 	if( iIndex < 0 || iIndex >= m_aClassDescriptions.Count() )
+		return false;
+	if (m_aClassDescriptions[iIndex].iKitId < 0)
 		return false;
 
 	return true;
 }
 
-CRnLLoadoutKitInfo& CRnLGameTeam::GetKitDescription( int iIndex )
+const RnLLoadoutKitInfo& CRnLGameTeam::GetKitDescription( int iIndex ) const
 {
 	return m_aClassDescriptions[iIndex];
 }
 
-int CRnLGameTeam::GetKitDescriptionCount( void )
+int CRnLGameTeam::GetKitDescriptionCount( void ) const
 {
 	return m_aClassDescriptions.Count();
 }

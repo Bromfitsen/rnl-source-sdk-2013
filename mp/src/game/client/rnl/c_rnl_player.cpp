@@ -70,9 +70,6 @@ END_RECV_TABLE()
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLLocalPlayerExclusive )
 	RecvPropInt( RECVINFO( m_iShotsFired ) ),
 	RecvPropVector( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
-
-	RecvPropInt( RECVINFO( m_iPreviousSquadNumber ) ),
-	RecvPropInt( RECVINFO( m_iPreviousKitNumber ) ),
 END_RECV_TABLE()
 
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLNonLocalPlayerExclusive )
@@ -93,9 +90,6 @@ IMPLEMENT_CLIENTCLASS_DT( C_RnLPlayer, DT_RnLPlayer, CRnLPlayer )
 	RecvPropInt( RECVINFO( m_iThrowGrenadeCounter ) ),
 	RecvPropEHandle( RECVINFO( m_hRagdoll ) ),
 	RecvPropEHandle( RECVINFO( m_hKnockDownRagdoll ) ),
-
-	RecvPropInt( RECVINFO( m_iSquadNumber ) ),
-	RecvPropInt( RECVINFO( m_iKitNumber ) ),
 
 	RecvPropInt( RECVINFO( m_iClimbheight ) ),
 	RecvPropInt( RECVINFO( m_nWeaponPosture ) ),

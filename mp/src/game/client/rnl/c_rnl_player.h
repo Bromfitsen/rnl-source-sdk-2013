@@ -106,10 +106,7 @@ public:
 	void AdjustWeaponSway( const QAngle& offset );
 
 	virtual int		GetSquadNumber();
-	virtual void	SetSquadNumber( int iNum );
-
 	virtual int		GetKitNumber();
-	virtual void	SetKitNumber( int iNum );
 	//RnL : MovementMod : End
 
 	//Andrew; Freeaim stuff
@@ -231,11 +228,6 @@ public:
 
 	CNetworkVar( int, m_iThrowGrenadeCounter );	// used to trigger grenade throw animations.
 	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
-
-	CNetworkVar( int, m_iSquadNumber );
-	CNetworkVar( int, m_iPreviousSquadNumber );
-	CNetworkVar( int, m_iKitNumber );
-	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
 
 	EHANDLE	m_hRagdoll;

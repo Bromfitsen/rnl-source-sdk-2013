@@ -119,7 +119,7 @@ CBasePlayer *BotPutInServer( bool bFrozen )
 		int iSquad = pTeam->GetNextAvailableSquad();
 		if( iSquad != -1 )
 		{
-			CRnLSquad* pSquad = pTeam->GetSquad( iSquad );
+			const CRnLSquad* pSquad = pTeam->GetSquad( iSquad );
 			if( pSquad )
 			{
 				int iSlot = pSquad->GetNextAvailableSlot();

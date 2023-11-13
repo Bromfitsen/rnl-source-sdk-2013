@@ -8,35 +8,29 @@
 
 #ifdef CLIENT_DLL
 	#include "c_rnl_player.h"
-	#include "c_rnl_game_team.h"
 #else
 	#include "rnl_player.h"
-	#include "rnl_game_team.h"
 #endif
 
 #ifdef CLIENT_DLL
 void SquadGUIGetIdealProportions(int iCurrSquad, int iTotalSquads, int& x, int& y, int& w, int& h);
 #endif
 
-class CRnLSquadMember
+#ifdef CLIENT_DLL
+class C_RnLGameTeam;
+#define CRnLGameTeam C_RnLGameTeam
+#else
+class CRnLGameTeam;
+#endif
+
+class RnLSquadKitInfo
 {
 public:
-	DECLARE_CLASS_NOBASE(CRnLSquadMember);
+	DECLARE_CLASS_NOBASE(RnLSquadKitInfo);
 	DECLARE_EMBEDDED_NETWORKVAR();
 
-	CRnLSquadMember() { }
-
-	CNetworkVar( int, iKitDesc );
-	CNetworkHandle(CRnLPlayer, m_Player);
-};
-
-class CRnLSquadKitInfo
-{
-public:
-	DECLARE_CLASS_NOBASE(CRnLSquadKitInfo);
-	DECLARE_EMBEDDED_NETWORKVAR();
-
-	CRnLSquadKitInfo() { }
+	RnLSquadKitInfo() { iKitID = -1; }
+	bool IsValid() const { return iKitID >= 0; }
 
 	CNetworkVar(int, iKitID);
 	CNetworkVar(int, iMaxCount);
@@ -47,66 +41,58 @@ class CRnLSquad : public CBaseEntity
 public:
 	DECLARE_CLASS(CRnLSquad, CBaseEntity);
 	DECLARE_NETWORKCLASS();
-	DECLARE_DATADESC();
 
-	CRnLSquad( void );
-	virtual ~CRnLSquad( void );
+	CRnLSquad();
+	virtual ~CRnLSquad();
 
 #ifndef CLIENT_DLL
-	int UpdateTransmitState();
-
-	virtual void Update( void );
-
 public:
-	virtual bool		Load(KeyValues* pKey);
+	virtual bool		Load(CRnLGameTeam* OwnerTeam, int iSquadId, KeyValues* pKey);
 
-	bool		AddPlayer(CRnLPlayer* pPlayer, int iKitId);
-	bool		RemovePlayer(CRnLPlayer* pPlayer);
+	virtual int			UpdateTransmitState(void) OVERRIDE;
 
-	const char* GetSquadName(void);
+	bool				AddPlayer(CRnLPlayer* pPlayer, int iKitId);
+	bool				RemovePlayer(CRnLPlayer* pPlayer);
+
+	const char*			GetSquadName(void) const;
 #endif
 public:
 
-	const char* GetSquadTitle(void);
+	bool				IsValid() const;
+	const char*			GetSquadTitle(void) const;
 
-	int					GetKitCount(void);
-	CRnLSquadKitInfo&	GetKitInfo(int indx);
+	int						GetKitCount(void) const;
+	const RnLSquadKitInfo&	GetKitInfo(int indx) const;
 
-	int					GetMemberCount(void);
-	int					GetMemberCount(int iKitId);
-	CRnLPlayer*			GetMember(int indx);
-	CRnLPlayer*			GetMember(int iKit, int idx);
-	CRnLPlayer*			GetNextMember(int iKitID, CRnLPlayer* CurrentMember = nullptr);
+	int					GetMemberCount(void) const;
+	int					GetMemberCount(int iKitId) const;
+	CRnLPlayer*			GetMember(int indx) const;
+	CRnLPlayer*			GetMember(int iKit, int idx) const;
+	CRnLPlayer*			GetNextMember(int iKitID, CRnLPlayer* CurrentMember = nullptr) const;
 
-	int			SquadSize( void );
-	bool		IsSquadFull( void );
-	int			GetNextAvailableSlot( void );
-	bool		AreRequirementsMet( void );
+	bool			IsSquadFull( void ) const;
+	int				GetNextAvailableSlot( void ) const;
+	bool			AreRequirementsMet( void ) const;
 
-	bool		IsKitAvailable( int iKit );
-	int			GetKitMaxCount(int iKit);
-	int			GetTotalAvailableKits( void );
-	int			GetKitDescription( int iKit );
+	bool			IsKitAvailable( int iKit ) const;
+	int				GetKitMaxCount(int iKit) const;
+	int				GetTotalAvailableKits( void ) const;
+	int				GetKitDescription( int iKit ) const;
 
-	CRnLPlayer* GetSquadLeader(void) { return m_hSquadLeader.Get(); }
-	int			GetEntIndex( void ) { return entindex(); }
-
-	CRnLGameTeam*	GetParentTeam( void ) { return m_hParentTeam; }
+	CRnLPlayer*		GetSquadLeader(void) const { return m_hSquadLeader.Get(); }
 
 #ifndef CLIENT_DLL
-	void			SetParentTeam(CRnLGameTeam* pEnt);
-
-protected:
-	virtual bool CanBeSquadLeader(CRnLPlayer* pEnt);
-	void		SetSquadLeader(CRnLPlayer* pEnt) { m_hSquadLeader = pEnt; }
+	virtual bool	CanBeSquadLeader(CRnLGameTeam* OwnerTeam, CRnLPlayer* pEnt) const;
+	void			SetSquadLeader(CRnLPlayer* pEnt) { m_hSquadLeader = pEnt; }
 #endif
 
 public:
-	CNetworkHandle( CRnLGameTeam, m_hParentTeam );
-	CNetworkHandle( CRnLPlayer, m_hSquadLeader );
-	CUtlVector<CRnLSquadKitInfo> m_KitInfo;
-	CUtlVector<CRnLSquadMember>	m_Members;
-	CNetworkString(m_szSquadTitle, MAX_TEAM_NAME_LENGTH);
+	CNetworkHandle(CRnLGameTeam,		m_hTeam);
+	CNetworkVar(int,					m_SquadId);
+	CNetworkString(						m_szSquadTitle, MAX_TEAM_NAME_LENGTH);
+	CNetworkHandle(CRnLPlayer,			m_hSquadLeader);
+	CUtlVector<RnLSquadKitInfo>			m_KitInfo;
+
 #ifndef CLIENT_DLL
 	char						m_szSquadReferenceName[MAX_TEAM_NAME_LENGTH];
 	float						m_flSquadLeaderSelectionTimer;

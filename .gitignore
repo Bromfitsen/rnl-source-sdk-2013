@@ -61,5 +61,8 @@ config.cfg
 *.sentinel
 *.enc
 *.bin
-/*/.vs/
-
+/**/.vs/
+/**/[Dd]ebug_mod_*/
+/**/[Rr]elease_mod_*/
+*.FileListAbsolute.txt
+*.lib

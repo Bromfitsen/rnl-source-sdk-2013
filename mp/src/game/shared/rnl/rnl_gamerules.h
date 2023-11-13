@@ -149,6 +149,8 @@ public:
 
 	//Timer Access
 #ifndef CLIENT_DLL
+		// Setup g_pPlayerResource (some mods use a different entity type here).
+	virtual void CreateStandardEntities();
 	virtual void				InitialiseGameManager( void );
 #endif
 	virtual CRnLGameManager*	GetGameManager( void );

@@ -108,9 +108,6 @@ BEGIN_SEND_TABLE_NOBASE( CRnLPlayer, DT_RnLLocalPlayerExclusive )
 	SendPropInt( SENDINFO( m_iShotsFired ), 8, SPROP_UNSIGNED ),
 	// send a hi-res origin to the local player for use in prediction
 	SendPropVector	(SENDINFO(m_vecOrigin), -1,  SPROP_NOSCALE|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_Origin ),
-
-	SendPropInt( SENDINFO( m_iPreviousSquadNumber ) ),
-	SendPropInt( SENDINFO( m_iPreviousKitNumber ) ),
 END_SEND_TABLE()
 
 BEGIN_SEND_TABLE_NOBASE( CRnLPlayer, DT_RnLNonLocalPlayerExclusive )
@@ -162,9 +159,6 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropInt(SENDINFO(m_iThrowGrenadeCounter), THROWGRENADE_COUNTER_BITS, SPROP_UNSIGNED),
 	SendPropEHandle( SENDINFO( m_hRagdoll ) ),
 	SendPropEHandle( SENDINFO( m_hKnockDownRagdoll ) ),
-
-	SendPropInt( SENDINFO( m_iSquadNumber ) ),
-	SendPropInt( SENDINFO( m_iKitNumber ) ),
 
 	SendPropInt( SENDINFO( m_iClimbheight ) ),
 	SendPropInt( SENDINFO( m_nWeaponPosture ) ),
@@ -235,9 +229,6 @@ CRnLPlayer::CRnLPlayer()
 	SetViewOffset( SDK_PLAYER_VIEW_OFFSET );
 
 	m_iThrowGrenadeCounter = 0;
-
-	m_iSquadNumber = RNL_SQUAD_INVALID;
-	m_iKitNumber = RNL_KIT_INVALID;
 
 	m_bSpawnInterpCounter = false;
 
@@ -364,9 +355,6 @@ void CRnLPlayer::Spawn()
 	BaseClass::Spawn();
 
 	m_pSwitchingToWeapon = NULL;
-
-	m_iPreviousSquadNumber = RNL_SQUAD_INVALID;
-	m_iPreviousKitNumber = RNL_KIT_INVALID;
 	m_vPlayerDamageInfo.Purge();
 
 	if( GetTeamNumber() == TEAM_SPECTATOR )
@@ -1308,25 +1296,6 @@ void CRnLPlayer::ChangeTeam( int iTeamNum )
 
 	if( iOldTeam != GetTeamNumber() )
 	{
-		if( m_iSquadNumber > -1 )
-		{
-			CRnLGameTeam* pOldTeam = (CRnLGameTeam*)GetGlobalRnLTeam( iOldTeam );
-			if( pOldTeam )
-			{
-				CRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
-				if( pOldSquad )
-				{
-					pOldSquad->RemovePlayer( this );
-				}
-			}
-		}
-
-		m_iPreviousSquadNumber = m_iSquadNumber;
-		m_iPreviousKitNumber = m_iKitNumber;
-
-		m_iSquadNumber = RNL_SQUAD_INVALID;
-		m_iKitNumber = RNL_KIT_INVALID;
-
 		if( IsAlive() && (iOldTeam == TEAM_AXIS || iOldTeam == TEAM_ALLIES) )
 			CommitSuicide( false, true );
 
@@ -1341,63 +1310,18 @@ void CRnLPlayer::ChangeTeam( int iTeamNum )
 
 bool CRnLPlayer::ChangeSquad( int iSquad, int iSlot )
 {
-	if ( !GetGlobalRnLTeam( GetTeamNumber() ) )
-		return false;
-
-	CRnLGameTeam* pTeam = dynamic_cast<CRnLGameTeam*>(GetGlobalRnLTeam( GetTeamNumber() ));
-
-	if( !pTeam )
-		return false;
-
-	if( iSquad < 0 || iSquad >= pTeam->GetNumberOfSquads() )
-		return false;
-
-	CRnLSquad* pSquad = pTeam->GetSquad( iSquad );
-	if( !pSquad )
-		return false;
-
-	if( !pSquad->IsKitAvailable( iSlot ) )
-		return false;
-
-	int oldVote = m_iSquadLeaderVote;
-	m_iSquadLeaderVote = 0;
-
-	if( m_iSquadNumber > RNL_SQUAD_INVALID )
+	CRnLTeam* pTeam = GetGlobalRnLTeam(GetTeamNumber());
+	if (pTeam == NULL ||
+		(pTeam->GetTeamNumber() != TEAM_AXIS && pTeam->GetTeamNumber() != TEAM_ALLIES))
 	{
-		CRnLGameTeam* pOldTeam = (CRnLGameTeam*)GetGlobalRnLTeam( GetTeamNumber() );
-		if( pOldTeam )
-		{
-			CRnLSquad* pOldSquad = pOldTeam->GetSquad( m_iSquadNumber );
-			if( pOldSquad )
-			{
-				if( pOldSquad == pSquad )
-					m_iSquadLeaderVote = oldVote;
-
-				pOldSquad->RemovePlayer( this );
-			}
-		}
+		return false;
 	}
 
-	// Immediately tell all clients that he's changing team. This has to be done
-	// first, so that all user messages that follow as a result of the team change
-	// come after this one, allowing the client to be prepared for them.
-	IGameEvent * event = gameeventmanager->CreateEvent( "player_squad" );
-	if ( event )
-	{
-		event->SetInt("userid", GetUserID());
-		event->SetInt("squad", iSquad);
-		event->SetInt("slot", iSlot);
-		event->SetBool("disconnect", IsDisconnecting());
+	CRnLGameTeam* pGameTeam = dynamic_cast<CRnLGameTeam*>(pTeam);
+	if( !pGameTeam)
+		return false;
 
-		gameeventmanager->FireEvent( event );
-	}
-
-	if( pSquad->AddPlayer( this, iSlot ) )
-		m_iSquadNumber = iSquad;
-	else
-		m_iSquadNumber = -1;
-	
-	return (m_iSquadNumber != -1);
+	return pGameTeam->JoinSquad(this, iSquad, iSlot);
 }
 
 bool CRnLPlayer::IsReadyToSpawn( void )
@@ -1407,7 +1331,7 @@ bool CRnLPlayer::IsReadyToSpawn( void )
 
 	if( GetTeamNumber() == TEAM_AXIS || GetTeamNumber() == TEAM_ALLIES )
 	{
-		if( m_iSquadNumber > RNL_SQUAD_INVALID && m_iKitNumber > RNL_KIT_INVALID )
+		if( GetSquadNumber() > RNL_SQUAD_INVALID && GetKitNumber() > RNL_KIT_INVALID)
 			return true;
 		else
 			return false;

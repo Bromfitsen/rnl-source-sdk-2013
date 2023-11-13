@@ -21,7 +21,7 @@
 //-----------------------------------------------------------------------------
 // Purpose: TF Input interface
 //-----------------------------------------------------------------------------
-class CSDKInput : public CInput
+class CRnLInput : public CInput
 {
 public:
 	typedef CInput BaseClass;
@@ -46,14 +46,14 @@ protected:
 */
 };
 
-static CSDKInput g_Input;
+static CRnLInput g_Input;
 
 // Expose this interface
 IInput *input = ( IInput * )&g_Input;
 /*
-void CSDKInput::CAM_Think( void )
+void CRnLInput::CAM_Think( void )
 {
-	VPROF("CSDKInput::CAM_Think");
+	VPROF("CRnLInput::CAM_Think");
 	//
 	if( CBasePlayer::GetLocalPlayer() != NULL )
 	{
@@ -68,7 +68,7 @@ void CSDKInput::CAM_Think( void )
 	BaseClass::CAM_Think();
 }
 
-int CSDKInput::CAM_IsThirdPerson()
+int CRnLInput::CAM_IsThirdPerson()
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
 	if( pLocalPlayer && pLocalPlayer->OverrideThirdPersonCamera() )
@@ -81,7 +81,7 @@ int CSDKInput::CAM_IsThirdPerson()
 	}
 }
 
-void CSDKInput::CAM_GetCameraOffset( Vector& ofs )
+void CRnLInput::CAM_GetCameraOffset( Vector& ofs )
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
 	if( pLocalPlayer && pLocalPlayer->OverrideThirdPersonCamera() )
@@ -94,7 +94,7 @@ void CSDKInput::CAM_GetCameraOffset( Vector& ofs )
 	}
 }
 */
-void CSDKInput::AdjustPitch( float speed, QAngle& viewangles )
+void CRnLInput::AdjustPitch( float speed, QAngle& viewangles )
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
 	if( pLocalPlayer )
@@ -105,7 +105,7 @@ void CSDKInput::AdjustPitch( float speed, QAngle& viewangles )
 	BaseClass::AdjustPitch( speed, pLocalPlayer->m_angWeaponAngle );
 }
 
-void CSDKInput::AdjustYaw( float speed, QAngle& viewangles )
+void CRnLInput::AdjustYaw( float speed, QAngle& viewangles )
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
 	if( pLocalPlayer )
@@ -123,7 +123,7 @@ void CSDKInput::AdjustYaw( float speed, QAngle& viewangles )
 //			mouse_x - 
 //			mouse_y - 
 //-----------------------------------------------------------------------------
-void CSDKInput::ApplyMouse( QAngle& viewangles, CUserCmd *cmd, float mouse_x, float mouse_y )
+void CRnLInput::ApplyMouse( QAngle& viewangles, CUserCmd *cmd, float mouse_x, float mouse_y )
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
 	if( pLocalPlayer )

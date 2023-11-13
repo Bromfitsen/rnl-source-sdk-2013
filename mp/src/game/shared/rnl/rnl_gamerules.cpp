@@ -24,6 +24,7 @@
 	#include "filesystem.h"
 	#include "rnl_campaign_manager.h"
 	#include "rnl_player.h"	// cjd @add
+	#include "rnl_player_resource.h"
 	#include "gameinterface.h"
 	#include "eventqueue.h"
 	#include "viewport_panel_names.h"
@@ -372,12 +373,12 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 
 		DevMsg( "Creating Teams\n" );
 
-		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
+		CRnLTeam *pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_UNASSIGNED) );
 		pTeam->Init( TeamNumberToName(TEAM_UNASSIGNED), TEAM_UNASSIGNED, NULL );
 		g_Teams.AddToTail( pTeam );
 
-		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_team" ));
+		pTeam = static_cast<CRnLTeam*>(CreateEntityByName( "rnl_game_team" ));
 		DevMsg( "Creating team with squad info: '%s'\n", TeamNumberToName(TEAM_SPECTATOR) );
 		pTeam->Init( TeamNumberToName(TEAM_SPECTATOR), TEAM_SPECTATOR, NULL );
 		g_Teams.AddToTail( pTeam );
@@ -889,6 +890,12 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 	extern ConVar mp_alliedtickets;
 	extern ConVar mp_axistickets;
 
+	void CRnLGameRules::CreateStandardEntities()
+	{
+		g_pPlayerResource = (CRnLPlayerResource*)CBaseEntity::Create("rnl_player_manager", vec3_origin, vec3_angle);
+		g_pPlayerResource->AddEFlags(EFL_KEEP_ON_RECREATE_ENTITIES);
+	}
+
 	void CRnLGameRules::InitialiseGameManager( void )
 	{
 		CBaseEntity* pEnt = gEntList.FindEntityByClassname( NULL, "rnl_game_manager" );
@@ -1259,6 +1266,7 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 		"rnl_gamerules",
 		"rnl_team",
 		"rnl_game_team",
+		"rnl_player_manager",
 		"rnl_squad",
 
 		"", // END Marker

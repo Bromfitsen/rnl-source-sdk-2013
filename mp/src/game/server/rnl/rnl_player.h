@@ -116,10 +116,7 @@ public:
 	void AdjustWeaponSway( const QAngle& offset );
 
 	virtual int		GetSquadNumber();
-	virtual void	SetSquadNumber( int iNum );
-
 	virtual int		GetKitNumber();
-	virtual void	SetKitNumber( int iNum );
 
 	virtual	void	ChangeTeam( int iTeamNum );
 	virtual bool	ChangeSquad( int iSquad, int iSlot );
@@ -146,10 +143,6 @@ public:
 	CNetworkHandle( CBaseEntity, m_hRagdoll );	// networked entity handle 
 	CNetworkHandle( CBaseEntity, m_hKnockDownRagdoll );	// networked entity handle 
 
-	CNetworkVar( int, m_iSquadNumber );
-	CNetworkVar( int, m_iPreviousSquadNumber );
-	CNetworkVar( int, m_iKitNumber );
-	CNetworkVar( int, m_iPreviousKitNumber );
 	CNetworkVar( float, m_flDeathViewTime );
 
 	//Damage Report and TK Kick
