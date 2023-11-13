@@ -18,11 +18,7 @@ IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam);
 
 // Datatable
 BEGIN_NETWORK_TABLE(CRnLGameTeam, DT_RnLGameTeam)
-#ifdef CLIENT_DLL
-	RecvPropTime(RECVINFO(m_fWaveSpawnTime)),
-#else
-	SendPropTime(SENDINFO(m_fWaveSpawnTime)),
-#endif
+	PropTime(PROPINFO(m_fWaveSpawnTime)),
 	PropInt(PROPINFO(m_iSpawnTickets)),
 	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
 	PropUtlVectorDataTable(m_aClassDescriptions, RNL_KITS_MAX, DT_RnLLoadoutKitInfo),

@@ -80,30 +80,22 @@ static char* pDeployedMG42Model = "models/weapons/w_mg42_deployed.mdl";
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponMG42, DT_WeaponMG42 )
 
 BEGIN_NETWORK_TABLE( CWeaponMG42, DT_WeaponMG42 )
-#ifndef CLIENT_DLL
-	SendPropModelIndex( SENDINFO(m_iDeployedModelIndex) ),
-	SendPropInt( SENDINFO( m_iBarrelHeat ) ),
-	SendPropFloat( SENDINFO( m_flLastHeatCheck ) ),
-	SendPropBool( SENDINFO ( m_bBarrelVeryHot ) ),
-	SendPropFloat( SENDINFO( m_flNextHeatSound ) ),
-#else
-	RecvPropInt( RECVINFO(m_iDeployedModelIndex)),
-	RecvPropInt( RECVINFO( m_iBarrelHeat ) ),
-	RecvPropFloat( RECVINFO( m_flLastHeatCheck ) ),
-	RecvPropBool( RECVINFO( m_bBarrelVeryHot ) ),
-	RecvPropFloat( RECVINFO( m_flNextHeatSound ) ),
-#endif
+	PropModelIndex( PROPINFO(m_iDeployedModelIndex) ),
+	PropInt(PROPINFO( m_iBarrelHeat ) ),
+	PropTime(PROPINFO( m_flLastHeatCheck ) ),
+	PropBool(PROPINFO( m_bBarrelVeryHot ) ),
+	PropTime(PROPINFO( m_flNextHeatSound ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponMG42 )
 #ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA( CWeaponMG42 )
 	DEFINE_PRED_FIELD( m_iDeployedModelIndex, FIELD_INTEGER, FTYPEDESC_INSENDTABLE | FTYPEDESC_MODELINDEX ),
 	DEFINE_PRED_FIELD( m_iBarrelHeat, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flLastHeatCheck, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
+	DEFINE_PRED_FIELD_TOL(m_flLastHeatCheck, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 	DEFINE_PRED_FIELD( m_bBarrelVeryHot, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flNextHeatSound, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
-#endif
+	DEFINE_PRED_FIELD_TOL(m_flNextHeatSound, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponMG42::m_acttable[] = 
 {

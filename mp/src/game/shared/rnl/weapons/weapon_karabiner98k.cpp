@@ -34,7 +34,7 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 	DECLARE_ACTTABLE();
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	DECLARE_DATADESC();
 #endif
 	
@@ -79,29 +79,20 @@ const char *pK98kWithBayonetModel = "models/weapons/w_k98_bayonet.mdl";
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponKarabiner98k, DT_WeaponKarabiner98k );
 
 BEGIN_NETWORK_TABLE( CWeaponKarabiner98k, DT_WeaponKarabiner98k )
-#ifndef CLIENT_DLL
-	SendPropModelIndex( SENDINFO(m_iDeployedModelIndex) ),
-	// K98 specific
-	SendPropBool( SENDINFO( m_bCycleBolt ) ),
-	SendPropInt( SENDINFO( m_iCycleTransition ) ),
-#else
-	RecvPropInt( RECVINFO(m_iDeployedModelIndex)),
-	RecvPropBool( RECVINFO( m_bCycleBolt ) ),
-	RecvPropInt( RECVINFO( m_iCycleTransition ) ),
-#endif
+	PropModelIndex( PROPINFO(m_iDeployedModelIndex) ),
+	PropBool(PROPINFO( m_bCycleBolt ) ),
+	PropInt(PROPINFO( m_iCycleTransition ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponKarabiner98k )
-#ifdef CLIENT_DLL
-	DEFINE_PRED_FIELD( m_iDeployedModelIndex, FIELD_INTEGER, FTYPEDESC_INSENDTABLE | FTYPEDESC_MODELINDEX ),
-	DEFINE_PRED_FIELD( m_bCycleBolt, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_iCycleTransition, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-#endif
-END_PREDICTION_DATA()
-
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	BEGIN_DATADESC( CWeaponKarabiner98k )
 	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA(CWeaponKarabiner98k)
+		DEFINE_PRED_FIELD(m_iDeployedModelIndex, FIELD_INTEGER, FTYPEDESC_INSENDTABLE | FTYPEDESC_MODELINDEX),
+		DEFINE_PRED_FIELD(m_bCycleBolt, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE),
+		DEFINE_PRED_FIELD(m_iCycleTransition, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	END_PREDICTION_DATA()
 #endif
 
 acttable_t CWeaponKarabiner98k::m_acttable[] = 

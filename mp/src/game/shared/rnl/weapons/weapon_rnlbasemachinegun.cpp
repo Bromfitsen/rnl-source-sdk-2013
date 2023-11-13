@@ -28,30 +28,22 @@
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBaseMachineGun, DT_WeaponRnLBaseMachineGun )
 
 BEGIN_NETWORK_TABLE( CWeaponRnLBaseMachineGun, DT_WeaponRnLBaseMachineGun )
-#if !defined( CLIENT_DLL )
-	SendPropBool( SENDINFO( m_bDeployed ) ),
-	SendPropInt( SENDINFO( m_iBarrelAnimState ) ),
-	SendPropInt( SENDINFO( m_iTracerCount ) ),
-	SendPropFloat( SENDINFO( m_flLastShotTime ) ),
-	SendPropFloat( SENDINFO( m_flAccuracyPenalty ) ),
-#else
-	RecvPropBool( RECVINFO( m_bDeployed ) ),
-	RecvPropInt( RECVINFO( m_iBarrelAnimState ) ),
-	RecvPropInt( RECVINFO( m_iTracerCount ) ),
-	RecvPropFloat( RECVINFO( m_flLastShotTime ) ),
-	RecvPropFloat( RECVINFO( m_flAccuracyPenalty ) ),
-#endif
+	PropBool(PROPINFO(m_bDeployed)),
+	PropInt(PROPINFO(m_iBarrelAnimState)),
+	PropInt(PROPINFO(m_iTracerCount)),
+	PropFloat(PROPINFO(m_flLastShotTime)),
+	PropFloat(PROPINFO(m_flAccuracyPenalty)),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponRnLBaseMachineGun )
 #ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA( CWeaponRnLBaseMachineGun )
 	DEFINE_PRED_FIELD( m_bDeployed, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_iBarrelAnimState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_iTracerCount, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flLastShotTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
+	DEFINE_PRED_FIELD_TOL(m_flLastShotTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 	DEFINE_PRED_FIELD( m_flAccuracyPenalty, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
-#endif
 END_PREDICTION_DATA()
+#endif
 
 CWeaponRnLBaseMachineGun::CWeaponRnLBaseMachineGun()
 {

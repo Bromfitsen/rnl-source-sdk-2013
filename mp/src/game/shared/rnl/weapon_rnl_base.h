@@ -62,7 +62,7 @@ public:
 	virtual void ReturnToDefaultPosture() {}
 
 	// All predicted weapons need to implement and return true
-	virtual bool	IsPredicted() const { return true; }
+	virtual bool	IsPredicted() const;
 	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
 	
 	// Get RnL weapon specific weapon data.

@@ -20,10 +20,10 @@ IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBasePistol, DT_WeaponRnLBasePistol );
 BEGIN_NETWORK_TABLE( CWeaponRnLBasePistol, DT_WeaponRnLBasePistol )
 END_NETWORK_TABLE()
 
-
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponRnLBasePistol )
 END_PREDICTION_DATA()
-
+#endif
 
 LINK_ENTITY_TO_CLASS( weapon_basepistol, CWeaponRnLBasePistol );
 

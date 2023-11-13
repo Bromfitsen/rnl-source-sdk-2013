@@ -54,13 +54,12 @@ private:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponMP40, DT_WeaponMP40 )
 
 BEGIN_NETWORK_TABLE( CWeaponMP40, DT_WeaponMP40 )
-#if !defined( CLIENT_DLL )
-#else
-#endif
 END_NETWORK_TABLE()
 
+#ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CWeaponMP40 )
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponMP40::m_acttable[] = 
 {

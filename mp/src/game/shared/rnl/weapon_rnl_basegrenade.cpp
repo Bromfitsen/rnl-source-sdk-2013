@@ -36,27 +36,18 @@ ConVar	mp_melontastic	( "mp_melontastic", "0", FCVAR_NOTIFY | FCVAR_REPLICATED, 
 IMPLEMENT_NETWORKCLASS_ALIASED( BaseRnLGrenade, DT_BaseRnLGrenade )
 
 BEGIN_NETWORK_TABLE(CBaseRnLGrenade, DT_BaseRnLGrenade)
-
-#ifndef CLIENT_DLL
-	SendPropBool( SENDINFO(m_bRedraw) ),
-	SendPropInt( SENDINFO(m_iGrenadeState) ),
-	SendPropFloat( SENDINFO(m_flFuseEnd), 0, SPROP_NOSCALE ),
-	SendPropFloat( SENDINFO( m_fThrowTime ) ),
-#else
-	RecvPropBool( RECVINFO(m_bRedraw) ),
-	RecvPropInt( RECVINFO(m_iGrenadeState) ),
-	RecvPropFloat( RECVINFO(m_flFuseEnd) ),
-	RecvPropFloat( RECVINFO( m_fThrowTime ) ),
-#endif
-
+	PropBool( PROPINFO(m_bRedraw) ),
+	PropInt(PROPINFO(m_iGrenadeState) ),
+	PropTime(PROPINFO(m_flFuseEnd)),
+	PropTime(PROPINFO( m_fThrowTime ) ),
 END_NETWORK_TABLE()
 
 #ifdef CLIENT_DLL
 BEGIN_PREDICTION_DATA( CBaseRnLGrenade )
 	DEFINE_PRED_FIELD( m_bRedraw, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
 	DEFINE_PRED_FIELD( m_iGrenadeState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flFuseEnd, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_fThrowTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
+	DEFINE_PRED_FIELD_TOL(m_flFuseEnd, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
+	DEFINE_PRED_FIELD_TOL(m_fThrowTime, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 END_PREDICTION_DATA()
 #endif
 

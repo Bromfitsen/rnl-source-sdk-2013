@@ -27,23 +27,19 @@ static const Vector g_bludgeonMaxs(BLUDGEON_HULL_DIM,BLUDGEON_HULL_DIM,BLUDGEON_
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBaseRifle, DT_WeaponRnLBaseRifle );
 
 BEGIN_NETWORK_TABLE( CWeaponRnLBaseRifle, DT_WeaponRnLBaseRifle )
-#if !defined( CLIENT_DLL )
-	SendPropBool( SENDINFO( m_bDeployed ) ),
-	SendPropInt( SENDINFO( m_iBayoAnimState ) ),
-#else
-	RecvPropBool( RECVINFO( m_bDeployed ) ),
-	RecvPropInt( RECVINFO( m_iBayoAnimState ) ),
-#endif
+	PropBool( PROPINFO( m_bDeployed ) ),
+	PropInt(PROPINFO( m_iBayoAnimState ) ),
 END_NETWORK_TABLE()
 
-
-BEGIN_PREDICTION_DATA( CWeaponRnLBaseRifle )
-#ifdef CLIENT_DLL
-	DEFINE_PRED_FIELD( m_bDeployed, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_iBayoAnimState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
+#ifdef GAME_DLL
+	BEGIN_DATADESC(CWeaponRnLBaseRifle)
+	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA( CWeaponRnLBaseRifle )
+		DEFINE_PRED_FIELD( m_bDeployed, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
+		DEFINE_PRED_FIELD( m_iBayoAnimState, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
+	END_PREDICTION_DATA()
 #endif
-END_PREDICTION_DATA()
-
 
 LINK_ENTITY_TO_CLASS( weapon_baserifle, CWeaponRnLBaseRifle );
 
@@ -187,7 +183,7 @@ void CWeaponRnLBaseRifle::Hit( trace_t &traceHit, Activity nHitActivity )
 		ApplyMultiDamage();
 
 		// Now hit all triggers along the ray that... 
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 		TraceAttackToTriggers( info, traceHit.startpos, traceHit.endpos, hitDirection );
 #endif
 	}

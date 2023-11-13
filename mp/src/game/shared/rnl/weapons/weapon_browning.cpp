@@ -6,6 +6,7 @@
 //#include "player.h"
 
 #include "cbase.h"
+#include "datamap.h"
 #include "weapon_rnlbasemachinegun.h"
 #include "rnl_fx_shared.h"
 
@@ -74,27 +75,20 @@ private:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponBrowning, DT_WeaponBrowning )
 
 BEGIN_NETWORK_TABLE( CWeaponBrowning, DT_WeaponBrowning )
-#ifndef CLIENT_DLL	
-	SendPropInt( SENDINFO( m_iBarrelHeat ) ),
-	SendPropFloat( SENDINFO( m_flLastHeatCheck ) ),
-	SendPropBool( SENDINFO ( m_bBarrelVeryHot ) ),
-	SendPropFloat( SENDINFO( m_flNextHeatSound ) ),
-#else
-	RecvPropInt( RECVINFO( m_iBarrelHeat ) ),
-	RecvPropFloat( RECVINFO( m_flLastHeatCheck ) ),
-	RecvPropBool( RECVINFO( m_bBarrelVeryHot ) ),
-	RecvPropFloat( RECVINFO( m_flNextHeatSound ) ),
-#endif
+	PropInt( PROPINFO( m_iBarrelHeat ) ),
+	PropTime(PROPINFO( m_flLastHeatCheck ) ),
+	PropBool(PROPINFO( m_bBarrelVeryHot ) ),
+	PropTime(PROPINFO( m_flNextHeatSound ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponBrowning )
 #ifdef CLIENT_DLL
+BEGIN_PREDICTION_DATA( CWeaponBrowning )
 	DEFINE_PRED_FIELD( m_iBarrelHeat, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flLastHeatCheck, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
+	DEFINE_PRED_FIELD_TOL(m_flLastHeatCheck, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 	DEFINE_PRED_FIELD( m_bBarrelVeryHot, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_flNextHeatSound, FIELD_FLOAT, FTYPEDESC_INSENDTABLE ),
-#endif
+	DEFINE_PRED_FIELD_TOL(m_flLastHeatCheck, FIELD_FLOAT, FTYPEDESC_INSENDTABLE, TD_MSECTOLERANCE),
 END_PREDICTION_DATA()
+#endif
 
 acttable_t CWeaponBrowning::m_acttable[] = 
 {

@@ -25,15 +25,8 @@
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponRnLBaseExplosive, DT_WeaponRnLBaseExplosive )
 
 BEGIN_NETWORK_TABLE(CWeaponRnLBaseExplosive, DT_WeaponRnLBaseExplosive)
-
-#ifndef CLIENT_DLL
-	SendPropBool( SENDINFO(m_bPlanting) ),
-	SendPropEHandle( SENDINFO( m_pPlantingTarget ) ),
-#else
-	RecvPropBool( RECVINFO(m_bPlanting) ),
-	RecvPropEHandle( RECVINFO( m_pPlantingTarget ) ),
-#endif
-
+	PropBool( PROPINFO(m_bPlanting) ),
+	PropEHandle(PROPINFO( m_pPlantingTarget ) ),
 END_NETWORK_TABLE()
 
 #ifndef CLIENT_DLL

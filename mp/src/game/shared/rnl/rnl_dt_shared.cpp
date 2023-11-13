@@ -98,3 +98,30 @@ DataTableProp PropInt(
 	return RecvPropInt(pVarName, offset, sizeofVar, flags, varProxy);
 #endif
 }
+
+
+DataTableProp PropTime(
+	const char* pVarName,
+	int offset,
+	int sizeofVar
+)
+{
+#if !defined (CLIENT_DLL)
+	return SendPropTime(pVarName, offset, sizeofVar);
+#else
+	return RecvPropTime(pVarName, offset, sizeofVar);
+#endif
+}
+
+DataTableProp PropModelIndex(
+	const char* pVarName,
+	int offset,
+	int sizeofVar
+)
+{
+#if !defined (CLIENT_DLL)
+	return SendPropModelIndex(pVarName, offset, sizeofVar);
+#else
+	return RecvPropInt(pVarName, offset, sizeofVar);
+#endif
+}

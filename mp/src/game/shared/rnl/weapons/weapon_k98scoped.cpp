@@ -5,6 +5,7 @@
 //=============================================================================//
 //#include "player.h"
 #include "cbase.h"
+#include "predictable_entity.h"
 #include "rnl_fx_shared.h"
 #include "weapon_rnlbaserifle.h"
 #include "gamemovement.h"
@@ -26,7 +27,7 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 	DECLARE_ACTTABLE();
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	DECLARE_DATADESC();
 #endif
 	
@@ -60,26 +61,18 @@ private:
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponKarabiner98Scoped, DT_WeaponKarabiner98Scoped );
 
 BEGIN_NETWORK_TABLE( CWeaponKarabiner98Scoped, DT_WeaponKarabiner98Scoped )
-#if !defined( CLIENT_DLL )
-	// K98 specific
-	SendPropBool( SENDINFO( m_bCycleBolt ) ),
-	SendPropInt( SENDINFO( m_iCycleTransition ) ),
-#else
-	RecvPropBool( RECVINFO( m_bCycleBolt ) ),
-	RecvPropInt( RECVINFO( m_iCycleTransition ) ),
-#endif
+	PropBool( PROPINFO( m_bCycleBolt ) ),
+	PropInt(PROPINFO( m_iCycleTransition ) ),
 END_NETWORK_TABLE()
 
-BEGIN_PREDICTION_DATA( CWeaponKarabiner98Scoped )
-#ifdef CLIENT_DLL
-	DEFINE_PRED_FIELD( m_bCycleBolt, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE ),
-	DEFINE_PRED_FIELD( m_iCycleTransition, FIELD_INTEGER, FTYPEDESC_INSENDTABLE ),
-#endif
-END_PREDICTION_DATA()
-
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	BEGIN_DATADESC( CWeaponKarabiner98Scoped )
 	END_DATADESC()
+#elif defined(CLIENT_DLL)
+	BEGIN_PREDICTION_DATA(CWeaponKarabiner98Scoped)
+		DEFINE_PRED_FIELD(m_bCycleBolt, FIELD_BOOLEAN, FTYPEDESC_INSENDTABLE),
+		DEFINE_PRED_FIELD(m_iCycleTransition, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	END_PREDICTION_DATA()
 #endif
 
 acttable_t CWeaponKarabiner98Scoped::m_acttable[] = 

@@ -23,7 +23,7 @@ public:
 	DECLARE_CLASS( CWeaponRnLBaseSubMachineGun, CWeaponRnLBallisticBase );
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
-#ifdef SERVER_DLL
+#ifdef GAME_DLL
 	DECLARE_DATADESC();
 #endif
 	

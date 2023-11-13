@@ -9,6 +9,7 @@
 
 #include "cbase.h"
 #include "rnl_basetimer.h"
+#include "rnl_dt_shared.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"
@@ -19,11 +20,7 @@ LINK_ENTITY_TO_CLASS( rnl_timer, CRnLBaseTimer );
 IMPLEMENT_NETWORKCLASS_ALIASED( RnLBaseTimer, DT_RnLBaseTimer )
 
 BEGIN_NETWORK_TABLE_NOBASE( CRnLBaseTimer, DT_RnLBaseTimer )
-#ifdef CLIENT_DLL
-	RecvPropTime( RECVINFO( m_flTimerEndTime ) ),
-#else
-	SendPropTime( SENDINFO( m_flTimerEndTime ) ),
-#endif
+	PropTime( PROPINFO( m_flTimerEndTime ) ),
 END_NETWORK_TABLE()
 
 #ifndef CLIENT_DLL

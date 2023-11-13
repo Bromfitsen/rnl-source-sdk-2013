@@ -49,6 +49,10 @@
 
 #include "dt_utlvector_send.h"
 
+#ifndef BEGIN_PREDICTION_DATA_NO_BASE
+#define BEGIN_PREDICTION_DATA_NO_BASE( className ) BEGIN_PREDICTION_DATA( className )
+#endif
+
 #define PROPINFO_ARRAY(varName)					SENDINFO_ARRAY(varName)
 #define PROPINFO_ARRAY3(varName)				SENDINFO_ARRAY3(varName)
 #define PROPINFO_UTLVECTOR(varName)				SENDINFO_UTLVECTOR(varName)		
@@ -127,6 +131,17 @@ DataTableProp PropInt(
 	int nBits,					// Set to -1 to automatically pick (max) number of bits based on size of element.
 	int flags,
 	PropVarProxyFn varProxy
+);
+
+DataTableProp PropTime(
+	const char* pVarName,
+	int offset,
+	int sizeofVar = SIZEOF_IGNORE);
+
+DataTableProp PropModelIndex(
+	const char* pVarName,
+	int offset,
+	int sizeofVar = SIZEOF_IGNORE
 );
 
 #ifdef CLIENT_DLL
