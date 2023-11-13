@@ -47,7 +47,7 @@ public:
 
 #ifndef CLIENT_DLL
 public:
-	virtual bool		Load(CRnLGameTeam* OwnerTeam, KeyValues* pKey);
+	virtual bool		Load(CRnLGameTeam* OwnerTeam, int iSquadId, KeyValues* pKey);
 
 	virtual int			UpdateTransmitState(void) OVERRIDE;
 

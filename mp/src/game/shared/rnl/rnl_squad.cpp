@@ -312,10 +312,11 @@ bool CRnLSquad::IsKitAvailable( int iKit ) const
 
 int CRnLSquad::GetKitDescription( int iKit ) const
 {
-	if( iKit < 0 || iKit >= m_KitInfo.Count() )
-		return false;
-
-	return (m_KitInfo[iKit].iKitID);
+	if (m_KitInfo.IsValidIndex(iKit))
+	{
+		return (m_KitInfo[iKit].iKitID);
+	}
+	return RNL_KIT_INVALID;
 }
 
 int CRnLSquad::GetTotalAvailableKits( void ) const
@@ -345,12 +346,15 @@ int CRnLSquad::GetNextAvailableSlot( void ) const
 	return -1;
 }
 
-bool CRnLSquad::Load( CRnLGameTeam* OwnerTeam, KeyValues* pKey )
+bool CRnLSquad::Load( CRnLGameTeam* OwnerTeam, int iSquadId, KeyValues* pKey )
 {
+	m_SquadId = iSquadId;
 	m_hTeam = OwnerTeam;
-
+	
 	if (pKey && OwnerTeam)
 	{
+		ChangeTeam(OwnerTeam->GetTeamNumber());
+
 		Q_strncpy(m_szSquadReferenceName, pKey->GetName(), MAX_TEAM_NAME_LENGTH);
 		Q_strncpy(m_szSquadTitle.GetForModify(), pKey->GetString("name"), MAX_TEAM_NAME_LENGTH);
 

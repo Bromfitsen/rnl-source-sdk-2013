@@ -159,7 +159,8 @@ int CRnLGameTeam::GetNextAvailableSquad( void ) const
 {
 	for( int i = 0; i < m_aSquads.Count(); i++)
 	{
-		if(m_aSquads[i].IsValid() &&
+		CRnLSquad* pSquad = m_aSquads[i];
+		if(pSquad != nullptr &&
 			!m_aSquads[i]->IsSquadFull())
 			return i;
 	}
@@ -190,49 +191,53 @@ void CRnLGameTeam::Update( void )
 {
 	for (int i = 0; i < m_aSquads.Count(); i++)
 	{
-		if (m_aSquads[i].IsValid())
-		{
-			// Clear the current squad leader.
-			if (m_aSquads[i]->GetSquadLeader() == nullptr)
-			{
-				for (int j = 0; j < m_aPlayers.Count(); j++)
-				{
-					CRnLPlayer* pPlayer = ToRnLPlayer(m_aPlayers[j]);
-					if (!pPlayer || pPlayer->GetSquadNumber() != m_aSquads[i]->m_SquadId)
-						continue;
+		CRnLSquad* pSquad = m_aSquads[i];
+		if (pSquad == nullptr)
+			continue;
 
-					if (m_aSquads[i]->CanBeSquadLeader(this, pPlayer))
-					{
-						m_aSquads[i]->SetSquadLeader(pPlayer);
-						NetworkStateChanged(&m_aSquads);
-						break;
-					}
+		// Clear the current squad leader.
+		if (pSquad->GetSquadLeader() == nullptr)
+		{
+			for (int j = 0; j < m_aPlayers.Count(); j++)
+			{
+				CRnLPlayer* pPlayer = ToRnLPlayer(m_aPlayers[j]);
+				if (!pPlayer || pPlayer->GetSquadNumber() != pSquad->m_SquadId)
+					continue;
+
+				if (pSquad->CanBeSquadLeader(this, pPlayer))
+				{
+					pSquad->SetSquadLeader(pPlayer);
+					NetworkStateChanged(&m_aSquads);
+					break;
 				}
 			}
 		}
 	}
 
+	CRnLGameRules* pRules = RnLGameRules();
+	CRnLGameManager* pManager = (pRules != nullptr) ? pRules->GetGameManager() : nullptr;
+
 	// Respawn any players that are waiting.
-	if (RnLGameRules() && RnLGameRules()->GetGameManager() &&
-		(RnLGameRules()->GetGameManager()->GetSpawnTimer(GetTeamNumber()) <= 0.0f) &&
-		(RnLGameRules()->GetGameManager()->GetTicketsRemaining(GetTeamNumber()) > 0))
+	if (pManager != nullptr &&
+		(pManager->GetSpawnTimer(GetTeamNumber()) <= 0.0f) &&
+		(pManager->GetTicketsRemaining(GetTeamNumber()) > 0))
 	{
 		for (int i = 0; i < m_aSquads.Count(); i++)
 		{
-			if (m_aSquads[i].IsValid())
-			{
-				CRnLSquad* pSquad = m_aSquads[i];
-				int SquadMemberCount = pSquad->GetMemberCount();
-				for (int j = 0; j < SquadMemberCount; j++)
-				{
-					CRnLPlayer* pPlayer = pSquad->GetMember(j);
-					if (!pPlayer)
-						continue;
+			CRnLSquad* pSquad = m_aSquads[i];
+			if (pSquad == nullptr)
+				continue;
 
-					if (!pPlayer->IsAlive() && pPlayer->IsReadyToSpawn())
-					{
-						respawn(pPlayer, false);
-					}
+			int SquadMemberCount = pSquad->GetMemberCount();
+			for (int j = 0; j < SquadMemberCount; j++)
+			{
+				CRnLPlayer* pPlayer = pSquad->GetMember(j);
+				if (!pPlayer)
+					continue;
+
+				if (!pPlayer->IsAlive() && pPlayer->IsReadyToSpawn())
+				{
+					respawn(pPlayer, false);
 				}
 			}
 		}
@@ -253,7 +258,11 @@ void CRnLGameTeam::RemovePlayer(CBasePlayer* pPlayer)
 		int iSquad = pRnLPlayer->GetSquadNumber();
 		if (m_aSquads.IsValidIndex(iSquad))
 		{
-			m_aSquads[iSquad]->RemovePlayer(pRnLPlayer);
+			CRnLSquad* pSquad = m_aSquads[iSquad];
+			if (pSquad != nullptr)
+			{
+				pSquad->RemovePlayer(pRnLPlayer);
+			}
 		}
 	}
 	BaseClass::RemovePlayer(pPlayer);
@@ -272,7 +281,7 @@ bool CRnLGameTeam::JoinSquad(CRnLPlayer* pPlayer, int iSquad, int iKit)
 	}
 
 	CRnLSquad* Squad = m_aSquads[iSquad];
-	if (!Squad->IsValid())
+	if (Squad == nullptr || !Squad->IsValid())
 	{
 		return false;
 	}
@@ -303,20 +312,29 @@ void CRnLGameTeam::SetBaseSpawn( CRnLSpawnArea* pArea )
 void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 {
 	int iSquad = pPlayer->GetSquadNumber();
-	if( iSquad < 0 || iSquad > m_aSquads.Count() ||
-		m_aSquads[iSquad].IsValid() == false)
-		return;
-
-	int iDesc = m_aSquads[iSquad]->GetKitDescription(pPlayer->GetKitNumber());
-
-	if( iDesc < 0 || iDesc > m_aClassDescriptions.Count() )
-		return;
-
-	pPlayer->SetModel( m_aClassDescriptions[iDesc].model.file );
-
-	for( int i = 0; i < m_aClassDescriptions[iDesc].model.vecBodyGroups.Count(); i++ )
+	if (!m_aSquads.IsValidIndex(iSquad))
 	{
-		pPlayer->SetBodygroup( pPlayer->FindBodygroupByName( m_aClassDescriptions[iDesc].model.vecBodyGroups[i].groupName.Get() ), m_aClassDescriptions[iDesc].model.vecBodyGroups[i].iVal );
+		return;
+	}
+
+	CRnLSquad* pSquad = m_aSquads[iSquad];
+	if (pSquad == nullptr)
+	{
+		return;
+	}
+	int iDesc = pSquad->GetKitDescription(pPlayer->GetKitNumber());
+
+	if (!m_aClassDescriptions.IsValidIndex(iDesc))
+	{
+		return;
+	}
+	const RnLLoadoutKitInfo& Kit = m_aClassDescriptions[iDesc];
+
+	pPlayer->SetModel(Kit.model.file );
+
+	for( int i = 0; i < Kit.model.vecBodyGroups.Count(); i++ )
+	{
+		pPlayer->SetBodygroup( pPlayer->FindBodygroupByName(Kit.model.vecBodyGroups[i].groupName.Get() ), Kit.model.vecBodyGroups[i].iVal );
 	}
 
 	if(m_hBaseSpawnArea)
@@ -325,10 +343,10 @@ void CRnLGameTeam::OnPlayerSpawn( CRnLPlayer* pPlayer )
 	}
 
 	CBaseCombatWeapon* pWeapon = NULL;
-	for( int i = 0; i < m_aClassDescriptions[iDesc].weapons.Count(); i++ )
+	for( int i = 0; i < Kit.weapons.Count(); i++ )
 	{
 		char weaponFullName[128];
-		Q_snprintf(weaponFullName, 127, "weapon_%s", WeaponIDToAlias(m_aClassDescriptions[iDesc].weapons[i]));
+		Q_snprintf(weaponFullName, 127, "weapon_%s", WeaponIDToAlias(Kit.weapons[i]));
 		pWeapon = (CBaseCombatWeapon*)(pPlayer->GiveNamedItem(weaponFullName));
 
 		if( pWeapon )
@@ -439,11 +457,13 @@ bool CRnLGameTeam::LoadSquadDescriptions(KeyValues* pKey)
 		if (m_aSquads.Count() < RNL_SQUADS_MAX)
 		{
 			CRnLSquad* pSquad = (CRnLSquad*)CreateEntityByName("rnl_squad");
-			int SquadIndex = m_aSquads.AddToTail(pSquad);
+			if (pSquad != nullptr)
+			{
+				int SquadIndex = m_aSquads.Count();
+				m_aSquads.AddToTail(pSquad);
 
-			pSquad->m_SquadId = SquadIndex;
-			pSquad->ChangeTeam(GetTeamNumber());
-			pSquad->Load(this, pSquadInfo);
+				pSquad->Load(this, SquadIndex, pSquadInfo);
+			}
 		}
 
 		pSquadInfo = pSquadInfo->GetNextKey();
