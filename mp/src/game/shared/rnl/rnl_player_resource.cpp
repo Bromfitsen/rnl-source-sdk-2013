@@ -5,6 +5,8 @@
 // $NoKeywords: $
 //=============================================================================//
 #include "cbase.h"
+#include "igameresources.h"
+
 #include "rnl_dt_shared.h"
 #ifdef CLIENT_DLL
 #include "c_rnl_player.h"
@@ -31,6 +33,16 @@ END_DATADESC()
 
 LINK_ENTITY_TO_CLASS( rnl_player_manager, CRnLPlayerResource);
 
+
+CRnLPlayerResource* GetRnLPlayerResource(void)
+{
+#ifdef CLIENT_DLL
+	return (CRnLPlayerResource*)g_PR;
+#else
+	return (CRnLPlayerResource*)g_pPlayerResource;
+#endif
+}
+
 #ifndef CLIENT_DLL
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -39,8 +51,8 @@ void CRnLPlayerResource::Spawn( void )
 {
 	for (int i = 0; i < MAX_PLAYERS + 1; i++)
 	{
-		m_iSquad.Set(i, -1);
-		m_iKit.Set(i, -1);
+		m_iSquad.Set(i, RNL_SQUAD_INVALID);
+		m_iKit.Set(i, RNL_KIT_INVALID);
 	}
 
 	BaseClass::Spawn();
@@ -56,9 +68,8 @@ void CRnLPlayerResource::UpdatePlayerData( void )
 		CRnLPlayer* pPlayer = (CRnLPlayer*)UTIL_PlayerByIndex(i);
 		if (pPlayer && pPlayer->IsConnected())
 		{
-			m_iSquad.Set(i, pPlayer->GetSquadNumber());
-			m_iKit.Set(i, pPlayer->GetKitNumber());
-
+			// Update Values here...
+			
 			// Don't update transform / orientation everytime
 			if (!(m_nUpdateCounter % 20))
 			{
@@ -71,4 +82,80 @@ void CRnLPlayerResource::UpdatePlayerData( void )
 
 	BaseClass::UpdatePlayerData();
 }
+
+
+void CRnLPlayerResource::ChangeSquad(int iPlayer, int iSquad)
+{
+	m_iKit.Set(iPlayer, iSquad);
+}
+
+void CRnLPlayerResource::ChangeKit(int iPlayer, int iSquad)
+{
+	m_iSquad.Set(iPlayer, iSquad);
+}
 #endif
+
+
+int CRnLPlayerResource::GetSquadMemberIndex(int iTeam, int iSquad, int iMemberIndex) const
+{
+	for (int i = 1; i <= gpGlobals->maxClients; i++)
+	{
+		if (GetTeam(i) == iTeam &&
+			GetSquad(i) == iSquad)
+		{
+			if (iMemberIndex == 0)
+			{
+				return i;
+			}
+			iMemberIndex--;
+		}
+	}
+	return -1;
+}
+
+int CRnLPlayerResource::GetSquadMemberCount(int iTeam, int iSquad) const
+{
+	int MemberCount = 0;
+	for (int i = 1; i <= gpGlobals->maxClients; i++)
+	{
+		if (GetTeam(i) == iTeam &&
+			GetSquad(i) == iSquad)
+		{
+			MemberCount++;
+		}
+	}
+	return MemberCount;
+}
+
+int CRnLPlayerResource::GetKitMemberCount(int iTeam, int iSquad, int iKit) const
+{
+	int MemberCount = 0;
+	for (int i = 1; i <= gpGlobals->maxClients; i++)
+	{
+		if (GetTeam(i) == iTeam &&
+			GetSquad(i) == iSquad &&
+			GetKit(i) == iKit)
+		{
+			MemberCount++;
+		}
+	}
+	return MemberCount;
+}
+
+int CRnLPlayerResource::GetKitMemberIndex(int iTeam, int iSquad, int iKit, int iMemberIndex) const
+{
+	for (int i = 1; i <= gpGlobals->maxClients; i++)
+	{
+		if (GetTeam(i) == iTeam &&
+			GetSquad(i) == iSquad &&
+			GetKit(i) == iKit)
+		{
+			if (iMemberIndex == 0)
+			{
+				return i;
+			}
+			iMemberIndex--;
+		}
+	}
+	return -1;
+}

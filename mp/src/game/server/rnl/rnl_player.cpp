@@ -160,9 +160,6 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropEHandle( SENDINFO( m_hRagdoll ) ),
 	SendPropEHandle( SENDINFO( m_hKnockDownRagdoll ) ),
 
-	SendPropInt( SENDINFO( m_iSquadNumber ) ),
-	SendPropInt( SENDINFO( m_iKitNumber ) ),
-
 	SendPropInt( SENDINFO( m_iClimbheight ) ),
 	SendPropInt( SENDINFO( m_nWeaponPosture ) ),
 	SendPropVector( SENDINFO( m_vecLeanOffset ) ),
@@ -232,9 +229,6 @@ CRnLPlayer::CRnLPlayer()
 	SetViewOffset( SDK_PLAYER_VIEW_OFFSET );
 
 	m_iThrowGrenadeCounter = 0;
-
-	m_iSquadNumber = RNL_SQUAD_INVALID;
-	m_iKitNumber = RNL_KIT_INVALID;
 
 	m_bSpawnInterpCounter = false;
 
@@ -1337,7 +1331,7 @@ bool CRnLPlayer::IsReadyToSpawn( void )
 
 	if( GetTeamNumber() == TEAM_AXIS || GetTeamNumber() == TEAM_ALLIES )
 	{
-		if( m_iSquadNumber > RNL_SQUAD_INVALID && m_iKitNumber > RNL_KIT_INVALID )
+		if( GetSquadNumber() > RNL_SQUAD_INVALID && GetKitNumber() > RNL_KIT_INVALID)
 			return true;
 		else
 			return false;

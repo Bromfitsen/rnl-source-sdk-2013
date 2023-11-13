@@ -70,7 +70,6 @@ public:
 	CRnLPlayer*			GetMember(int iKit, int idx) const;
 	CRnLPlayer*			GetNextMember(int iKitID, CRnLPlayer* CurrentMember = nullptr) const;
 
-	int				SquadSize( void ) const;
 	bool			IsSquadFull( void ) const;
 	int				GetNextAvailableSlot( void ) const;
 	bool			AreRequirementsMet( void ) const;
@@ -88,11 +87,11 @@ public:
 #endif
 
 public:
+	CNetworkHandle(CRnLGameTeam,		m_hTeam);
 	CNetworkVar(int,					m_SquadId);
 	CNetworkString(						m_szSquadTitle, MAX_TEAM_NAME_LENGTH);
 	CNetworkHandle(CRnLPlayer,			m_hSquadLeader);
 	CUtlVector<RnLSquadKitInfo>			m_KitInfo;
-	CUtlVector<CHandle<CRnLPlayer>>		m_aPlayers;
 
 #ifndef CLIENT_DLL
 	char						m_szSquadReferenceName[MAX_TEAM_NAME_LENGTH];

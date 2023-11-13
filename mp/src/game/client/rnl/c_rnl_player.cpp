@@ -91,9 +91,6 @@ IMPLEMENT_CLIENTCLASS_DT( C_RnLPlayer, DT_RnLPlayer, CRnLPlayer )
 	RecvPropEHandle( RECVINFO( m_hRagdoll ) ),
 	RecvPropEHandle( RECVINFO( m_hKnockDownRagdoll ) ),
 
-	RecvPropInt( RECVINFO( m_iSquadNumber ) ),
-	RecvPropInt( RECVINFO( m_iKitNumber ) ),
-
 	RecvPropInt( RECVINFO( m_iClimbheight ) ),
 	RecvPropInt( RECVINFO( m_nWeaponPosture ) ),
 	RecvPropVector( RECVINFO( m_vecLeanOffset ) ),

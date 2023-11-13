@@ -173,8 +173,6 @@ void CWeaponThompson::ItemPostFrame()
  
 	if ( pPlayer->m_nButtons & IN_ATTACK )
 	{
-		//British Bomber : Why don't we just use m_flNextPrimaryAttack it's already
-		// there to be used?
 		if ( gpGlobals->curtime >= m_flNextPrimaryAttack )
 		{
 				PrimaryAttack();

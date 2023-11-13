@@ -15,6 +15,7 @@
 #include "rnl_squad.h"
 #include "rnl_gamerules.h"
 #include "rnl_game_manager.h"
+#include "rnl_player_resource.h"
 
 #ifdef CLIENT_DLL
 #include "c_rnl_game_team.h"
@@ -66,44 +67,6 @@ void SquadGUIGetIdealProportions(int iCurrSquad, int iTotalSquads, int& x, int& 
 }
 #endif
 
-#ifdef CLIENT_DLL
-//-----------------------------------------------------------------------------
-// Purpose: RecvProxy that converts the Team's player UtlVector to entindexes
-//-----------------------------------------------------------------------------
-void PlayerArray_Proxy(const CRecvProxyData* pData, void* pStruct, void* pOut)
-{
-	CRnLSquad* pSquad = (CRnLSquad*)pOut;
-	pSquad->m_aPlayers[pData->m_iElement] = CHandle<CRnLPlayer>::FromIndex(pData->m_Value.m_Int);
-}
-
-void PlayerArray_Length(void* pStruct, int objectID, int currentArrayLength)
-{
-	CRnLSquad* pSquad = (CRnLSquad*)pStruct;
-	if (pSquad->m_aPlayers.Size() != currentArrayLength)
-		pSquad->m_aPlayers.SetSize(currentArrayLength);
-}
-#else
-//-----------------------------------------------------------------------------
-// Purpose: SendProxy that converts the Team's player UtlVector to entindexes
-//-----------------------------------------------------------------------------
-void PlayerArray_Proxy(const SendProp* pProp, const void* pStruct, const void* pData, DVariant* pOut, int iElement, int objectID)
-{
-	CRnLSquad* pSquad = (CRnLSquad*)pData;
-
-	// If this assertion fails, then SendProxyArrayLength_PlayerArray must have failed.
-	Assert(iElement < pSquad->m_aPlayers.Size());
-
-	CHandle<CRnLPlayer>& Handle = pSquad->m_aPlayers[iElement];
-	pOut->m_Int = Handle.ToInt();
-}
-
-int PlayerArray_Length(const void* pStruct, int objectID)
-{
-	CRnLSquad* pSquad = (CRnLSquad*)pStruct;
-	return pSquad->m_aPlayers.Count();
-}
-#endif
-
 BEGIN_NETWORK_TABLE_NOBASE(RnLSquadKitInfo, DT_RnLSquadKitInfo)
 	PropInt(PROPINFO(iKitID)),
 	PropInt(PROPINFO(iMaxCount)),
@@ -114,17 +77,11 @@ IMPLEMENT_NETWORKCLASS(CRnLSquad, DT_RnLSquad);
 
 // Datatable
 BEGIN_NETWORK_TABLE(CRnLSquad, DT_RnLSquad)
+	PropEHandle(PROPINFO(m_hTeam)),
 	PropInt(PROPINFO(m_SquadId)),
 	PropString(PROPINFO(m_szSquadTitle)),
 	PropEHandle(PROPINFO(m_hSquadLeader)),
 	PropUtlVectorDataTable(m_KitInfo, RNL_KITS_PER_SQUAD_MAX,DT_RnLSquadKitInfo),
-	PropArray2(
-		PlayerArray_Length,
-		PropInt("player_array_element", 0, 4, NUM_NETWORKED_EHANDLE_BITS, SPROP_UNSIGNED, PlayerArray_Proxy),
-		MAX_PLAYERS,
-		0,
-		"player_array"
-	)
 END_NETWORK_TABLE()
 
 
@@ -169,11 +126,9 @@ bool CRnLSquad::AddPlayer( CRnLPlayer* pPlayer, int iKit )
 	if( GetMemberCount(iKit) >= m_KitInfo[iKit].iMaxCount)
 		return false;
 
-	pPlayer->SetSquadNumber(m_SquadId);
-	pPlayer->SetKitNumber(iKit);
-
-	m_aPlayers.AddToTail(pPlayer);
-	NetworkStateChanged();
+	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
+	pRnLPR->ChangeSquad(pPlayer->entindex(), m_SquadId);
+	pRnLPR->ChangeKit(pPlayer->entindex(), iKit);
 
 	// Immediately tell all clients that he's changing team. This has to be done
 	// first, so that all user messages that follow as a result of the team change
@@ -200,16 +155,17 @@ bool CRnLSquad::RemovePlayer( CRnLPlayer* pPlayer )
 	if (m_hSquadLeader.Get() == pPlayer)
 	{
 		m_hSquadLeader = NULL;
+		NetworkStateChanged();
 	}
 
-	if (!m_aPlayers.FindAndRemove(pPlayer))
+	if (pPlayer->GetSquadNumber() != m_SquadId)
 	{
 		return false;
 	}
-	NetworkStateChanged();
 
-	pPlayer->SetSquadNumber(RNL_SQUAD_INVALID);
-	pPlayer->SetKitNumber(RNL_KIT_INVALID);
+	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
+	pRnLPR->ChangeSquad(pPlayer->entindex(), RNL_SQUAD_INVALID);
+	pRnLPR->ChangeKit(pPlayer->entindex(), RNL_KIT_INVALID);
 	return true;
 }
 #endif
@@ -238,41 +194,58 @@ const RnLSquadKitInfo& CRnLSquad::GetKitInfo(int indx) const
 
 int CRnLSquad::GetMemberCount(void) const
 {
-	return m_aPlayers.Count();
+	if (!m_hTeam)
+	{
+		return 0;
+	}
+
+	return GetRnLPlayerResource()->GetSquadMemberCount(m_hTeam->GetTeamNumber(), m_SquadId);
 }
 
 int CRnLSquad::GetMemberCount(int iKit) const
 {
-	int count = 0;
-	for (int i = 0; i < m_aPlayers.Count(); i++)
+	if (!m_hTeam)
 	{
-		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
-		if (pRnLPlayer != NULL &&
-			pRnLPlayer->GetKitNumber() == iKit)
-		{
-			count++;
-		}
+		return 0;
 	}
-	return count;
+
+	return GetRnLPlayerResource()->GetKitMemberCount(m_hTeam->GetTeamNumber(), m_SquadId, iKit);
 }
 
 CRnLPlayer* CRnLSquad::GetMember(int indx) const
 {
-	if (!m_aPlayers.IsValidIndex(indx))
+	if (!m_hTeam)
 	{
-		return NULL;
+		return nullptr;
 	}
 
-	return m_aPlayers[indx];
+	int PlayerIndex = GetRnLPlayerResource()->GetSquadMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, indx);
+	if (PlayerIndex < 0)
+	{
+		return nullptr;
+	}
+	return (CRnLPlayer*)UTIL_PlayerByIndex(PlayerIndex);
 }
 
 CRnLPlayer* CRnLSquad::GetNextMember(int iKit, CRnLPlayer* CurrentMember) const
 {
-	for (int i = 0; i < m_aPlayers.Count(); i++)
+	if (!m_hTeam)
 	{
-		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
-		if (pRnLPlayer != NULL &&
-			pRnLPlayer->GetKitNumber() == iKit)
+		return nullptr;
+	}
+
+	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
+	int MaxKitMembers = pRnLPR->GetKitMemberCount(m_hTeam->GetTeamNumber(), m_SquadId, iKit);
+	for (int i = 0; i < MaxKitMembers; i++)
+	{
+		int PlayerIndex = pRnLPR->GetKitMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, iKit, i);
+		if (PlayerIndex < 0)
+		{
+			continue;
+		}
+
+		CRnLPlayer* pRnLPlayer = (CRnLPlayer*)UTIL_PlayerByIndex(PlayerIndex);
+		if (pRnLPlayer != nullptr)
 		{
 			if (CurrentMember == nullptr)
 			{
@@ -289,20 +262,18 @@ CRnLPlayer* CRnLSquad::GetNextMember(int iKit, CRnLPlayer* CurrentMember) const
 
 CRnLPlayer* CRnLSquad::GetMember(int iKit, int idx) const
 {
-	for (int i = 0; i < m_aPlayers.Count(); i++)
+	if (!m_hTeam)
 	{
-		CRnLPlayer* pRnLPlayer = m_aPlayers[i];
-		if (pRnLPlayer != NULL &&
-			pRnLPlayer->GetKitNumber() == iKit)
-		{
-			if (idx == 0)
-			{
-				return pRnLPlayer;
-			}
-			idx--;
-		}
+		return nullptr;
 	}
-	return NULL;
+
+	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
+	int PlayerIndex = pRnLPR->GetKitMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, iKit, idx);
+	if (PlayerIndex < 0)
+	{
+		return nullptr;
+	}
+	return (CRnLPlayer*)UTIL_PlayerByIndex(PlayerIndex);
 }
 
 int CRnLSquad::GetKitMaxCount(int iKit) const
@@ -312,12 +283,6 @@ int CRnLSquad::GetKitMaxCount(int iKit) const
 	if (m_KitInfo[iKit].iKitID < 0)
 		return 0;
 	return m_KitInfo[iKit].iMaxCount;
-}
-
-
-int CRnLSquad::SquadSize( void ) const
-{
-	return m_aPlayers.Count();
 }
 
 bool CRnLSquad::IsSquadFull( void ) const

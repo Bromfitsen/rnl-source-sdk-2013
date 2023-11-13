@@ -24,6 +24,7 @@
 	#include "filesystem.h"
 	#include "rnl_campaign_manager.h"
 	#include "rnl_player.h"	// cjd @add
+	#include "rnl_player_resource.h"
 	#include "gameinterface.h"
 	#include "eventqueue.h"
 	#include "viewport_panel_names.h"
@@ -888,6 +889,12 @@ CRnLGameManager* CRnLGameRules::GetGameManager( void )
 #ifndef CLIENT_DLL
 	extern ConVar mp_alliedtickets;
 	extern ConVar mp_axistickets;
+
+	void CRnLGameRules::CreateStandardEntities()
+	{
+		g_pPlayerResource = (CRnLPlayerResource*)CBaseEntity::Create("rnl_player_manager", vec3_origin, vec3_angle);
+		g_pPlayerResource->AddEFlags(EFL_KEEP_ON_RECREATE_ENTITIES);
+	}
 
 	void CRnLGameRules::InitialiseGameManager( void )
 	{
