@@ -58,7 +58,7 @@ public:
 #endif
 public:
 
-	bool				IsValid() const;
+	int					GetSquadId() const;
 	const char*			GetSquadTitle(void) const;
 
 	int						GetKitCount(void) const;

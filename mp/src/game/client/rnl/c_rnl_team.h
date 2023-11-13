@@ -14,6 +14,8 @@
 #include "c_team.h"
 #include "shareddefs.h"
 
+#define CRnLTeam C_RnLTeam
+
 //-----------------------------------------------------------------------------
 // Purpose: TF's Team manager
 //-----------------------------------------------------------------------------
@@ -27,6 +29,7 @@ public:
 					C_RnLTeam();
 	virtual			~C_RnLTeam();
 
+	virtual bool	IsGameTeam() const { return false; }
 	virtual	bool	LoadClassDescriptions( KeyValues* pKey ) { return true; }
 };
 

@@ -91,14 +91,6 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 	}
 }
 
-IMPLEMENT_NETWORKCLASS_ALIASED(RnLGameTeam, DT_RnLGameTeam)
-
-BEGIN_NETWORK_TABLE(C_RnLGameTeam, DT_RnLGameTeam)
-	PropEHandle(PROPINFO(m_hBaseSpawnArea)),
-	PropUtlVectorDataTable(m_aClassDescriptions,RNL_KITS_MAX,DT_RnLLoadoutKitInfo),
-	PropUtlVector(PROPINFO_UTLVECTOR(m_aSquads), RNL_SQUADS_MAX, PropEHandle("m_aSquads::entry", 0, 0)),
-END_NETWORK_TABLE()
-
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------

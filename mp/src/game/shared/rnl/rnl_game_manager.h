@@ -31,14 +31,14 @@ public:
 	virtual void Activate( void );
 
 	//Shared Spawn Timer Stuff
-	virtual float GetSpawnTimer( int iTeam );
-	virtual float GetAxisSpawnTimer( void );
-	virtual float GetAlliedSpawnTimer( void );
+	virtual float GetSpawnTimer( int iTeam ) const;
+	virtual float GetAxisSpawnTimer( void ) const;
+	virtual float GetAlliedSpawnTimer( void ) const;
 
 	//Shared Ticket Stuff
-	virtual int GetTicketsRemaining( int iTeam );
-	virtual int GetAxisTicketsRemaining( void );
-	virtual int GetAlliedTicketsRemaining( void );
+	virtual int GetTicketsRemaining( int iTeam ) const;
+	virtual int GetAxisTicketsRemaining( void ) const;
+	virtual int GetAlliedTicketsRemaining( void ) const;
 
 #ifndef CLIENT_DLL
 	int UpdateTransmitState();
@@ -47,6 +47,7 @@ public:
 	virtual float GetHoldToWinTime( void );
 
 	//Server side spawn timer handling
+	virtual float GetSpawnDelay(int iTeam);
 	virtual void SetSpawnTimer( int iTeam, float flDuration );
 	virtual void SetAxisSpawnTimer( float flDuration );
 	virtual void SetAlliedSpawnTimer( float flDuration );
@@ -68,15 +69,8 @@ public:
 	void InputAddTickets( inputdata_t &input );
 	void InputAddAxisTickets( inputdata_t &input );
 	void InputAddAlliedTickets( inputdata_t &input );
-#endif
 
 protected:
-	CNetworkVar( float, m_fAlliedSpawnTime );
-	CNetworkVar( float, m_fAxisSpawnTime );
-
-	CNetworkVar( int, m_iAlliedTickets );
-	CNetworkVar( int, m_iAxisTickets );
-#ifndef CLIENT_DLL
 	float m_fHoldToWinDuration;
 
 	float m_fAlliedSpawnDelay;

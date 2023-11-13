@@ -102,11 +102,6 @@ CRnLSquad::~CRnLSquad()
 {
 }
 
-bool CRnLSquad::IsValid() const
-{
-	return m_SquadId > -1;
-}
-
 #ifndef CLIENT_DLL
 int CRnLSquad::UpdateTransmitState(void)
 {
@@ -322,6 +317,11 @@ int CRnLSquad::GetKitDescription( int iKit ) const
 int CRnLSquad::GetTotalAvailableKits( void ) const
 {
 	return m_KitInfo.Count();
+}
+
+int CRnLSquad::GetSquadId() const
+{
+	return m_SquadId;
 }
 
 const char* CRnLSquad::GetSquadTitle(void) const
