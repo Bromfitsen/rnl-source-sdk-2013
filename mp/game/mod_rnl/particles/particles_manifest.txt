@@ -3,15 +3,15 @@ particles_manifest
 
 // hl2 particles
 
-	"file"		"particles/error.pcf"
-	"file"		"particles/antlion_blood.pcf"
+//	"file"		"particles/error.pcf"
+//	"file"		"particles/antlion_blood.pcf"
 //	"file"		"particles/blood_impact.pcf"
-	"file"		"particles/water_impact.pcf"
-	"file"		"particles/fire_01.pcf"
-	"file"		"particles/burning_fx.pcf"
-	"file"		"particles/combineball.pcf"
-	"file"		"particles/rocket_fx.pcf"
-	"file"		"particles/Vortigaunt_FX.pcf"
+//	"file"		"particles/water_impact.pcf"
+//	"file"		"particles/fire_01.pcf"
+//	"file"		"particles/burning_fx.pcf"
+//	"file"		"particles/combineball.pcf"
+//	"file"		"particles/rocket_fx.pcf"
+//	"file"		"particles/Vortigaunt_FX.pcf"
 	"file"		"!particles/impact_fx.pcf"
 
 
@@ -19,7 +19,7 @@ particles_manifest
 
 //	"file"		"particles/e_smoke_01.pcf"
 //	"file"		"particles/e_smoke_02.pcf"
-	"file"		"!particles/e_blood_impact.pcf"
+//	"file"		"!particles/e_blood_impact.pcf"
 	"file"		"!particles/e_foliage_fx.pcf"
 	"file"		"!particles/impact_fx.pcf"
 	"file"		"particles/weapon_smoke.pcf"
