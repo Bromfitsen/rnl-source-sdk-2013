@@ -125,3 +125,19 @@ DataTableProp PropModelIndex(
 	return RecvPropInt(pVarName, offset, sizeofVar);
 #endif
 }
+
+DataTableProp PropQAngles(
+	char* pVarName,
+	int offset,
+	int sizeofVar,
+	int nBits,
+	int flags,
+	PropVarProxyFn varProxy
+)
+{
+#if !defined (CLIENT_DLL)
+	return SendPropQAngles(pVarName, offset, sizeofVar, nBits, flags, varProxy);
+#else
+	return RecvPropQAngles(pVarName, offset, sizeofVar, flags, varProxy);
+#endif
+}
