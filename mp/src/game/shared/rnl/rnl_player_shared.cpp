@@ -213,7 +213,7 @@ void CRnLPlayer::SetMovementPostureDuration(float flTime)
 //-----------------------------------------------------------------------------
 QAngle CRnLPlayer::GetMovementPostureAngle(void) const
 {
-	return (m_angMovementPostureAngle.Get());
+	return m_angMovementPostureAngle;
 }
 
 //-----------------------------------------------------------------------------
@@ -694,6 +694,31 @@ void CRnLPlayer::AdjustWeaponAngle( const QAngle &angleOffset )
 	//m_angWeaponSway = angleOffset;
 #endif
 	m_angWeaponAngle += angleOffset;
+}
+
+void CRnLPlayer::SetWeaponPosture(int iPosture)
+{
+	if (m_nWeaponPosture != iPosture)
+	{
+#ifdef CLIENT_DLL
+		if (prediction->IsFirstTimePredicted())
+		{
+			m_flWeaponPostureTime = gpGlobals->curtime;
+
+			Msg("Client changed posture. Old: %i, new: %i\n", m_nWeaponPosture, iPosture);
+		}
+		else
+		{
+			Msg("Client TESTING changed posture %i\n", iPosture);
+		}
+
+		//m_flWeaponPostureTime = gpGlobals->curtime;
+#else
+		Msg("Server changed posture %i\n", iPosture);
+#endif
+
+		m_nWeaponPosture = iPosture;
+	}
 }
 
 void CRnLPlayer::AdjustViewAngles( const QAngle &angleOffset )
