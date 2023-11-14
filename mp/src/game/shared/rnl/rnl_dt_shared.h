@@ -37,6 +37,7 @@
 #define PropVarProxyFn RecvVarProxyFn
 
 #define DataTableProxy_TableToTable		DataTableRecvProxy_StaticDataTable
+#define DataTableProxy_QAngles			RecvProxy_VectorToVector
 
 #endif // CLIENT_DLL
 
@@ -66,6 +67,7 @@
 #define PropVarProxyFn SendVarProxyFn
 
 #define DataTableProxy_TableToTable		SendProxy_DataTableToDataTable
+#define DataTableProxy_QAngles			SendProxy_QAngles
 
 #endif // !CLIENT_DLL
 
@@ -151,6 +153,15 @@ DataTableProp PropModelIndex(
 #define PropArray2(arrayLengthSendProxy, varTemplate, elementCount, elementStride, arrayName) \
 	SendPropArray2(arrayLengthSendProxy, varTemplate, elementCount, elementStride, arrayName)
 #endif
+
+DataTableProp PropQAngles(
+	char* pVarName,
+	int offset,
+	int sizeofVar = SIZEOF_IGNORE,	// Handled by SENDINFO macro.
+	int nBits = 32,					// Set to -1 to automatically pick (max) number of bits based on size of element.
+	int flags = 0,
+	PropVarProxyFn varProxy = DataTableProxy_QAngles
+);
 
 #endif // RNL_DATATABLE_SHARED_H
 

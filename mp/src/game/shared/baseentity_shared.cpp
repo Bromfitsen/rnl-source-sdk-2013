@@ -1600,6 +1600,10 @@ public:
 typedef CTraceFilterSimpleList CBulletsTraceFilter;
 #endif
 
+#ifdef HL2MP
+ConVar sv_showimpacts("sv_showimpacts", "0", FCVAR_REPLICATED | FCVAR_CHEAT, "Shows client (red) and server (blue) bullet impact point");
+#endif
+
 void CBaseEntity::FireBullets( const FireBulletsInfo_t &info )
 {
 	static int	tracerCount;
@@ -1827,6 +1831,45 @@ void CBaseEntity::FireBullets( const FireBulletsInfo_t &info )
 #endif //#ifdef GAME_DLL
 			bHitWater = true;
 		}
+
+#ifdef HL2MP
+		if (sv_showimpacts.GetBool())
+		{
+#ifdef CLIENT_DLL
+			// draw red client bullet lines
+			debugoverlay->AddLineOverlay(tr.startpos, tr.endpos, 255, 0, 0, true, 4.0);
+#else
+			// draw blue server impact markers
+			NDebugOverlay::Box(tr.endpos, Vector(-1, -1, -1), Vector(1, 1, 1), 0, 0, 255, 127, 4);
+			// draw blue server impact markers
+			NDebugOverlay::Box(tr.startpos, Vector(-1, -1, -1), Vector(1, 1, 1), 0, 0, 255, 127, 4);
+			// draw blue server bullet lines
+			//NDebugOverlay::Line( tr.startpos, tr.endpos, 0, 0, 255, true, 4 );
+#endif
+			if (tr.fraction < 1.0f)
+			{
+#ifdef CLIENT_DLL
+				// draw red client impact markers
+				debugoverlay->AddBoxOverlay(tr.endpos, Vector(-2, -2, -2), Vector(2, 2, 2), QAngle(0, 0, 0), 255, 0, 0, 127, 4);
+
+				if (tr.m_pEnt && tr.m_pEnt->IsPlayer())
+				{
+					C_BasePlayer* player = ToBasePlayer(tr.m_pEnt);
+					player->DrawClientHitboxes(4, true);
+				}
+#else
+				// draw blue server impact markers
+				NDebugOverlay::Box(tr.endpos, Vector(-2, -2, -2), Vector(2, 2, 2), 0, 0, 255, 127, 4);
+
+				if (tr.m_pEnt && tr.m_pEnt->IsPlayer())
+				{
+					CBasePlayer* player = ToBasePlayer(tr.m_pEnt);
+					player->DrawServerHitboxes(4, true);
+				}
+#endif
+			}
+		}
+#endif
 
 		// Now hit all triggers along the ray that respond to shots...
 		// Clip the ray to the first collided solid returned from traceline

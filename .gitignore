@@ -66,3 +66,4 @@ config.cfg
 /**/[Rr]elease_mod_*/
 *.FileListAbsolute.txt
 *.lib
+/**/screenshots/
