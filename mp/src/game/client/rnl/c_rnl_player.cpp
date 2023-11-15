@@ -61,14 +61,15 @@ public:
 
 IMPLEMENT_CLIENTCLASS_EVENT( C_TEPlayerAnimEvent, DT_TEPlayerAnimEvent, CTEPlayerAnimEvent );
 
-BEGIN_RECV_TABLE_NOBASE( C_TEPlayerAnimEvent, DT_TEPlayerAnimEvent )
-	RecvPropEHandle( RECVINFO( m_hPlayer ) ),
-	RecvPropInt( RECVINFO( m_iEvent ) ),
-	RecvPropInt( RECVINFO( m_nData ) )
+BEGIN_RECV_TABLE_NOBASE(C_TEPlayerAnimEvent, DT_TEPlayerAnimEvent)
+RecvPropEHandle(RECVINFO(m_hPlayer)),
+RecvPropInt(RECVINFO(m_iEvent)),
+RecvPropInt(RECVINFO(m_nData))
 END_RECV_TABLE()
 
+LINK_ENTITY_TO_CLASS(player, C_RnLPlayer);
+
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLLocalPlayerExclusive )
-	RecvPropInt( RECVINFO( m_iShotsFired ) ),
 	RecvPropVector( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
 END_RECV_TABLE()
 
@@ -105,7 +106,6 @@ END_RECV_TABLE()
 BEGIN_PREDICTION_DATA(C_RnLPlayer)
 	DEFINE_PRED_TYPEDESCRIPTION(m_RnLLocal, C_RnLPlayerLocalData),
 	DEFINE_PRED_FIELD(m_flCycle, FIELD_FLOAT, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE | FTYPEDESC_NOERRORCHECK),
-	DEFINE_PRED_FIELD(m_iShotsFired, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
 	DEFINE_PRED_FIELD(m_nWeaponPosture, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
 	DEFINE_PRED_FIELD(m_vecLeanOffset, FIELD_VECTOR, FTYPEDESC_INSENDTABLE),
 

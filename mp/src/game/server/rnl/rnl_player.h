@@ -137,7 +137,6 @@ public:
 
 	CNetworkVar( int, m_iThrowGrenadeCounter );	// used to trigger grenade throw animations.
 	CNetworkQAngle( m_angEyeAngles );	// Copied from EyeAngles() so we can send it to the client.
-	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
 
 	// Tracks our ragdoll entity.
 	CNetworkHandle( CBaseEntity, m_hRagdoll );	// networked entity handle 
@@ -183,7 +182,7 @@ public:
 	CNetworkVar( int, m_nWeaponPosture );
 
 	int		GetWeaponPosture( void ) { return m_nWeaponPosture; }
-	void	SetWeaponPosture( int iPosture ) { m_nWeaponPosture = iPosture; }
+	void	SetWeaponPosture(int iPosture);
 
 	void	AdjustViewAngles( const QAngle &angleOffset );
 

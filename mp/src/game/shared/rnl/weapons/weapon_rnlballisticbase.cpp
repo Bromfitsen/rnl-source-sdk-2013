@@ -56,7 +56,6 @@ bool CWeaponRnLBallisticBase::Deploy( )
 	CRnLPlayer *pPlayer = GetPlayerOwner();
 	if( pPlayer )
 	{
-		pPlayer->m_iShotsFired = 0;
 		pPlayer->SetWeaponPosture( WEAPON_POSTURE_SHOULDER );
 		pPlayer->DoAnimationEvent( PLAYERANIMEVENT_DRAW );
 	}
@@ -269,7 +268,6 @@ void CWeaponRnLBallisticBase::PrimaryAttack( void )
 #	endif
 #endif
 		FX_FireBullets( pPlayer->entindex(), pPlayer->Weapon_ShootPosition(), (/*pPlayer->EyeAngles()*/pPlayer->GetWeaponAngle() + pPlayer->GetPunchAngle())/* + pPlayer->GetAimingOffset()*/, GetWeaponID(), bPrimaryMode?Primary_Mode:Secondary_Mode,	CBaseEntity::GetPredictionRandomSeed() & 255, GetSpread() );
-		pPlayer->m_iShotsFired++;
 		pPlayer->DoMuzzleFlash();
 		AddViewKick( CBaseEntity::GetPredictionRandomSeed() & 255 );// JJAS: here we call the recoil system to work
 
@@ -892,6 +890,7 @@ void CWeaponRnLBallisticBase::WeaponIdle( void )
 	}
 }
 
+// KORNEEL - Surely, this should not be entirely on the server..
 void CWeaponRnLBallisticBase::HandleFoVTransitions( void )
 {
 #ifndef CLIENT_DLL
@@ -978,6 +977,11 @@ bool CWeaponRnLBallisticBase::OnIronsightsHeld( void )
 	int iPosture = pPlayer->GetWeaponPosture();
 	if( iPosture == WEAPON_POSTURE_SHOULDER )
 	{
+#ifdef CLIENT_DLL
+		Msg("CLIENT: Started holding down ironsights %i, %i, %i, %i, %d\n", prediction->InPrediction() ? 1 : 0, prediction->IsFirstTimePredicted() ? 1 : 0, gpGlobals->framecount, gpGlobals->simTicksThisFrame, gpGlobals->interpolation_amount);
+#else
+		Msg("SERVER: Started holding down ironsights \n");
+#endif
 		m_flIronsightsPressedTime = 0.0f;
 		NextFirePos();
 		return true;
@@ -1073,6 +1077,11 @@ void CWeaponRnLBallisticBase::NextFirePos()
 		break;
 	case WEAPON_POSTURE_SHOULDER:
 		iPosition = WEAPON_POSTURE_IRONSIGHTS;
+#ifdef CLIENT_DLL
+		Msg("Client changing view animation to IS\n");
+#else
+		Msg("Server changing view animation to IS\n");
+#endif
 		HandleViewAnimation( WEAPON_ANIMATION_SHOULDER_TO_IS );
 		break;
 	case WEAPON_POSTURE_IRONSIGHTS:

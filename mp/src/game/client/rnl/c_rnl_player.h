@@ -145,7 +145,7 @@ public:
 
 	int		GetWeaponPosture( void ) { return m_nWeaponPosture; }
 	float	GetWeaponPostureDuration( void ) { return (gpGlobals->curtime - m_flWeaponPostureTime); }
-	void	SetWeaponPosture( int iPosture ) { if( m_nWeaponPosture != iPosture ){ m_flWeaponPostureTime = gpGlobals->curtime; m_nWeaponPosture = iPosture; } }
+	void	SetWeaponPosture(int iPosture);
 
 	void	AdjustViewAngles( const QAngle &angleOffset );
 
@@ -226,9 +226,8 @@ public:
 	QAngle	m_angEyeAngles;
 	CInterpolatedVar< QAngle >	m_iv_angEyeAngles;
 
-	CNetworkVar( int, m_iThrowGrenadeCounter );	// used to trigger grenade throw animations.
-	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
-	CNetworkVar( float, m_flDeathViewTime );
+	int m_iThrowGrenadeCounter;	// used to trigger grenade throw animations.
+	float m_flDeathViewTime;
 
 	EHANDLE	m_hRagdoll;
 	EHANDLE	m_hKnockDownRagdoll;
@@ -238,7 +237,7 @@ public:
 	//Our acctual movement posture
 	int m_nMovementPosture;
 	int m_nMovementPostureFrom;
-	CNetworkQAngle(m_angMovementPostureAngle);
+	QAngle m_angMovementPostureAngle;
 
 	QAngle m_angWeaponAngle;
 	QAngle m_angFreeLookAngle;

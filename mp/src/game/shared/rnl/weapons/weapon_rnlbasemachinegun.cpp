@@ -90,11 +90,6 @@ void CWeaponRnLBaseMachineGun::HandleShotDelay( void )
 {
 	if( ( m_flLastShotTime + 1.0 ) < gpGlobals->curtime  )
 	{
-		CRnLPlayer *pPlayer = GetPlayerOwner(); 
-		if ( pPlayer )
-		{
-			pPlayer->m_iShotsFired = 0;
-		}
 		m_flAccuracyPenalty = 0.0f;
 	}
 

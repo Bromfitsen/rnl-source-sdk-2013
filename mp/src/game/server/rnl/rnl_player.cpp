@@ -105,7 +105,6 @@ LINK_ENTITY_TO_CLASS( player, CRnLPlayer );
 PRECACHE_REGISTER(player);
 
 BEGIN_SEND_TABLE_NOBASE( CRnLPlayer, DT_RnLLocalPlayerExclusive )
-	SendPropInt( SENDINFO( m_iShotsFired ), 8, SPROP_UNSIGNED ),
 	// send a hi-res origin to the local player for use in prediction
 	SendPropVector	(SENDINFO(m_vecOrigin), -1,  SPROP_NOSCALE|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_Origin ),
 END_SEND_TABLE()
