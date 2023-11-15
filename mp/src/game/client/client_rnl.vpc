@@ -63,6 +63,8 @@ $Project "RnL - Client"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.h"
+				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.h"
 			}
 			
 			$Folder	"Shared"
@@ -85,7 +87,6 @@ $Project "RnL - Client"
 			}
 			$Folder	"Gameplay"
 			{
-				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_gamerules.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_gamerules.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_basetimer.cpp"

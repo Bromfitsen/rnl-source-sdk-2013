@@ -17,11 +17,9 @@
 // After this many seconds, the grenade will be thrown instead of rolled
 #define RNL_GRENADE_THROW_DELAY 0.25f
 
-#define SDK_PLAYER_VIEW_OFFSET	Vector( 0, 0, 53.5 )
+#define RNL_PLAYER_VIEW_OFFSET	Vector( 0, 0, 53.5 )
 
 #define LOWEST_CONTROLLED_CLIMB 40
-
-#define RNL_VOICE_DISTANCE	1000.0f	// cjd @add
 
 #define RNL_DEFAULT_PLAYER_MODEL "models/gman.mdl"
 

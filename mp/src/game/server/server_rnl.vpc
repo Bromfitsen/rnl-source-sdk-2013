@@ -72,6 +72,9 @@ $Project "RnL - Server"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playeranimstate.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_playerlocaldata.h"
+				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.cpp"
+				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.h"
+				$File	"$SRCDIR\game\shared\rnl\rnl_hitgroupdata.cpp"
 			}
 			
 			$Folder	"Shared"
@@ -96,13 +99,10 @@ $Project "RnL - Server"
 			}
 			$Folder	"Gameplay"
 			{
-				$File	"$SRCDIR\game\shared\rnl\rnl_gamemovement.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_gamerules.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_gamerules.h"
 				$File	"$SRCDIR\game\shared\rnl\rnl_basetimer.cpp"
 				$File	"$SRCDIR\game\shared\rnl\rnl_basetimer.h"
-    
-				$File	"$SRCDIR\game\shared\rnl\rnl_hitgroupdata.cpp"
 				
 				$File	"rnl\rnl_mine.cpp"
     			$File	"rnl\rnl_mine_entity.cpp"

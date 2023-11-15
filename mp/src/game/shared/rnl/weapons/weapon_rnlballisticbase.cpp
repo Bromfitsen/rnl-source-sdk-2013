@@ -103,6 +103,7 @@ bool CWeaponRnLBallisticBase::Holster( CBaseCombatWeapon *pSwitchingTo )
 	CRnLPlayer *pOwner = GetPlayerOwner();
 	if (pOwner)
 	{
+		pOwner->SetWeaponSway(QAngle(0, 0, 0));
 		pOwner->SetNextAttack( gpGlobals->curtime + flSequenceDuration );
 		pOwner->DoAnimationEvent( PLAYERANIMEVENT_HOLSTER );
 	}
@@ -395,7 +396,8 @@ void CWeaponRnLBallisticBase::AddViewKick( int iSeed )
 
 	g_flViewKickStamp = m_flNextPrimaryAttack;
 	*/
-	
+#endif
+
 	//Don't allow the camera to go above straight up in any situation
 	//Or past the MG's recoil limit (could be bypassed by Free Look)
 	QAngle angCurrentViewAngles = pPlayer->GetWeaponAngle();
@@ -403,9 +405,8 @@ void CWeaponRnLBallisticBase::AddViewKick( int iSeed )
 	if ( (IsMachineGun() && angCurrentViewAngles[PITCH] < -10.0f) || angCurrentViewAngles[PITCH] < -85.0f )
 		return;
 
-	pPlayer->AdjustWeaponAngle( kickAngle );
-	pPlayer->AdjustViewAngles( kickAngle * random->RandomFloat( 0.75f, 1.25f ) );
-#endif
+	pPlayer->WeaponKick( kickAngle );
+	pPlayer->ViewPunch( kickAngle * random->RandomFloat( 0.75f, 1.25f ) );
 }
 
 float CWeaponRnLBallisticBase::GetRecoil( void )
@@ -507,7 +508,7 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 
 	if( pPlayer->IsSprinting() )
 	{
-		pPlayer->AdjustWeaponSway( QAngle( 0, 0, 0 ) );
+		pPlayer->SetWeaponSway( QAngle( 0, 0, 0 ) );
 		return;
 	}
 
@@ -590,14 +591,10 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 			else
 				horzScale = 0.40f;
 
-#ifdef CLIENT_DLL
 			if( pPlayer->GetWeaponPostureDuration() > 5.0f )
 				vertScale = 1.80f;
 			else
-				vertScale = 0.25 + (pPlayer->GetWeaponPostureDuration() / 3.03);
-#else
-			vertScale = 1.50f;
-#endif	
+				vertScale = 0.25 + (pPlayer->GetWeaponPostureDuration() / 3.03);	
 		}
 	}
 
@@ -631,7 +628,7 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 	offset[YAW] =	horzScale * (sin( flTime * 2.35f ) * horzMove * flMovementPercent);
 	offset[PITCH] =	vertScale * (sin( flTime * 0.85f ) * vertMove * flMovementPercent);
 
-	pPlayer->AdjustWeaponSway( offset );
+	pPlayer->WeaponSway( offset );
 }
 
 #ifndef CLIENT_DLL
@@ -882,9 +879,7 @@ void CWeaponRnLBallisticBase::ReloadTransition( int iState )
 
 void CWeaponRnLBallisticBase::WeaponIdle( void )
 {
-#ifdef CLIENT_DLL
 	HandleViewSway();
-#endif
 
 	if ( IsViewModelSequenceFinished() )
 	{
@@ -1574,6 +1569,12 @@ float CWeaponRnLBallisticBase::CalcViewmodelBob( void )
 //-----------------------------------------------------------------------------
 void CWeaponRnLBallisticBase::AddViewmodelBob( CBaseViewModel *viewmodel, Vector &origin, QAngle &angles )
 {
+	CBaseCombatCharacter* pOwner = GetOwner();
+	if (pOwner == nullptr || !pOwner->IsAlive())
+	{
+		return;
+	}
+
 	Vector right;
 	AngleVectors( angles, NULL, &right, NULL );
 

@@ -67,6 +67,8 @@ protected:
 	const Vector& GetPlayerViewOffset() const;
 	void DuckAndProne(void);
 	bool CanProne() const;
+
+	virtual void DecayPunchAngle(void) override;
 };
 
 // ---------------------------------------------------------------------------------------- //
@@ -1590,6 +1592,74 @@ bool CRnLGameMovement::CanUnprone( bool bToStand )
 		return false;
 
 	return true;
+}
+
+ConVar sv_rnl_weapon_kick_damping("sv_rnl_weapon_kick_damping", "9.0", FCVAR_REPLICATED, "Damping force applied to weapon kick.");
+ConVar sv_rnl_weapon_kick_spring("sv_rnl_weapon_kick_spring", "65.0f", FCVAR_REPLICATED, "Strength of the returning force applied to weapon kick.");
+
+void RnLSpringDecayHelper(QAngle& Angle, QAngle& Vel, float Damping, float Strength)
+{
+	if (Angle.LengthSqr() > 0.001 || Vel.LengthSqr() > 0.001)
+	{
+		Angle += Vel * gpGlobals->frametime;
+		float damping = 1 - (sv_rnl_weapon_kick_damping.GetFloat() * gpGlobals->frametime);
+
+		if (damping < 0)
+		{
+			damping = 0;
+		}
+		Vel *= damping;
+
+		// torsional spring
+		// UNDONE: Per-axis spring constant?
+		float springForceMagnitude = sv_rnl_weapon_kick_spring.GetFloat() * gpGlobals->frametime;
+		springForceMagnitude = clamp(springForceMagnitude, 0.f, 2.f);
+		Vel -= Angle * springForceMagnitude;
+
+		// don't wrap around
+		Angle.Init(
+			clamp(Angle.x, -89.f, 89.f),
+			clamp(Angle.y, -179.f, 179.f),
+			clamp(Angle.z, -89.f, 89.f));
+	}
+	else
+	{
+		Angle.Init();
+		Vel.Init();
+	}
+}
+
+void CRnLGameMovement::DecayPunchAngle(void)
+{
+	BaseClass::DecayPunchAngle();
+	
+	CRnLPlayer* pRnLPlayer = ToRnLPlayer(player);
+	if (!pRnLPlayer)
+	{
+		return;
+	}
+
+	// ------------------
+	//  Weapon Kick Damping
+	//  -----------------------------
+	QAngle Angle = pRnLPlayer->m_RnLLocal.m_vecKickAngle;
+	QAngle Velocity = pRnLPlayer->m_RnLLocal.m_vecKickAngleVel;
+	
+	RnLSpringDecayHelper(Angle, Velocity, sv_rnl_weapon_kick_damping.GetFloat(), sv_rnl_weapon_kick_spring.GetFloat());
+	
+	pRnLPlayer->m_RnLLocal.m_vecKickAngle = Angle;
+	pRnLPlayer->m_RnLLocal.m_vecKickAngleVel = Velocity;
+
+	// ------------------
+	//  Weapon Sway Damping
+	//  -----------------------------
+	Angle = pRnLPlayer->m_RnLLocal.m_vecSwayAngle;
+	Velocity = pRnLPlayer->m_RnLLocal.m_vecSwayAngleVel;
+
+	RnLSpringDecayHelper(Angle, Velocity, sv_rnl_weapon_kick_damping.GetFloat(), sv_rnl_weapon_kick_spring.GetFloat());
+
+	pRnLPlayer->m_RnLLocal.m_vecSwayAngle = Angle;
+	pRnLPlayer->m_RnLLocal.m_vecSwayAngleVel = Velocity;
 }
 
 // Expose our interface.

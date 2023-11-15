@@ -152,6 +152,26 @@ bool CRnLPlayer::IsProning(void) const
 
 
 //MovementMod : Functions to grab everything we needs
+// 
+int CRnLPlayer::GetWeaponPosture(void) const
+{
+	return m_nWeaponPosture;
+}
+
+float CRnLPlayer::GetWeaponPostureDuration(void) const
+{
+	return (gpGlobals->curtime - m_RnLLocal.m_flWeaponPostureEntranceTime);
+}
+
+void CRnLPlayer::SetWeaponPosture(int iPosture, bool bForce)
+{
+	if (m_nWeaponPosture != iPosture || bForce)
+	{
+		m_RnLLocal.m_flWeaponPostureEntranceTime = gpGlobals->curtime;
+		m_nWeaponPosture = iPosture;
+	}
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: Get the current movement posture
 // Output : RnLMovementPostures_t
@@ -174,7 +194,7 @@ RnLMovementPostures_t CRnLPlayer::GetMovementPostureFrom(void) const
 // Purpose: Change to the given movement posture
 // Output :
 //-----------------------------------------------------------------------------
-void CRnLPlayer::SetMovementPosture(RnLMovementPostures_t iType)
+void CRnLPlayer::SetMovementPosture(RnLMovementPostures_t iType, bool bForce)
 {
 	if (iType < 0 || iType >= MOVEMENT_POSTURE_MAX)
 	{
@@ -186,7 +206,7 @@ void CRnLPlayer::SetMovementPosture(RnLMovementPostures_t iType)
 		m_nMovementPostureFrom = m_nMovementPosture;
 	}
 	m_nMovementPosture = iType;
-	m_RnLLocal.m_flMovementPostureEntranceTime = 0;
+	m_RnLLocal.m_flMovementPostureEntranceTime = gpGlobals->curtime;
 }
 
 //-----------------------------------------------------------------------------
@@ -196,15 +216,6 @@ void CRnLPlayer::SetMovementPosture(RnLMovementPostures_t iType)
 float CRnLPlayer::GetMovementPostureDuration(void) const
 {
 	return (gpGlobals->curtime - m_RnLLocal.m_flMovementPostureEntranceTime);
-}
-
-//-----------------------------------------------------------------------------
-// Purpose: Manually set the movement time on this if needed
-// Output :
-//-----------------------------------------------------------------------------
-void CRnLPlayer::SetMovementPostureDuration(float flTime)
-{
-	m_RnLLocal.m_flMovementPostureEntranceTime = flTime;
 }
 
 //-----------------------------------------------------------------------------
@@ -666,35 +677,50 @@ Vector CRnLPlayer::EyePosition( )
 	return vecPos;
 }
 
-QAngle CRnLPlayer::GetWeaponAngle( void )
+QAngle CRnLPlayer::GetWeaponAngle( void ) const
 {
+	QAngle WeaponAngle = m_RnLLocal.w_angle; ; ;
 #ifdef CLIENT_DLL
-	return m_angWeaponAngle + m_angWeaponSway;// + m_angMoraleEffect;
-#else
-	return m_angWeaponAngle;
+	if (!IsLocalPlayer())
+	{
+		WeaponAngle = m_angWeaponAngles;
+	}
 #endif
+	VectorAdd(WeaponAngle, m_RnLLocal.m_vecKickAngle, WeaponAngle);
+	VectorAdd(WeaponAngle, m_RnLLocal.m_vecSwayAngle, WeaponAngle);
+	return WeaponAngle;
 }
 
-void CRnLPlayer::SetWeaponAngle( const QAngle& angle )
+QAngle CRnLPlayer::GetWeaponKick(void) const
 {
-	m_angWeaponAngle = angle;
+	return m_RnLLocal.m_vecKickAngle;
 }
 
-void CRnLPlayer::AdjustWeaponSway( const QAngle& offset )
+void CRnLPlayer::SetWeaponKick(const QAngle& kickAngle)
 {
-#ifdef CLIENT_DLL
-	m_angWeaponSway = offset;
-#endif
+	m_RnLLocal.m_vecKickAngle = kickAngle;
 }
 
-// adjusts view angles by the angle supplied
-void CRnLPlayer::AdjustWeaponAngle( const QAngle &angleOffset )
+void CRnLPlayer::WeaponKick(const QAngle& offset)
 {
-#ifdef CLIENT_DLL
-	//m_angWeaponSway = angleOffset;
-#endif
-	m_angWeaponAngle += angleOffset;
+	m_RnLLocal.m_vecKickAngleVel += (offset * 20.0f);
 }
+
+QAngle CRnLPlayer::GetWeaponSway(void) const
+{
+	return m_RnLLocal.m_vecSwayAngle;
+}
+
+void CRnLPlayer::SetWeaponSway(const QAngle& swayAngle)
+{
+	m_RnLLocal.m_vecSwayAngle = swayAngle;
+}
+
+void CRnLPlayer::WeaponSway(const QAngle& offset)
+{
+	m_RnLLocal.m_vecSwayAngleVel += offset;
+}
+
 
 void CRnLPlayer::AdjustViewAngles( const QAngle &angleOffset )
 {
@@ -819,7 +845,7 @@ bool CRnLPlayer::UpdateBullet( int iIndex )
 		// draw blue server impact markers
 		NDebugOverlay::Box( tr.startpos, Vector(-1,-1,-1), Vector(1,1,1), 0,0,255,127, 4 );
 		// draw blue server bullet lines
-		//NDebugOverlay::Line( tr.startpos, tr.endpos, 0, 0, 255, true, 4 );
+		NDebugOverlay::Line( tr.startpos, tr.endpos, 0, 0, 255, true, 4 );
 #endif
 	}
 

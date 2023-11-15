@@ -160,6 +160,16 @@ CON_COMMAND_F( bot_add, "Add a bot.", FCVAR_CHEAT )
 }
 
 
+void Bot_SetViewAngle(CRnLPlayer* pBot, QAngle ViewAngle)
+{
+	// Clear out any fixangle that has been set
+	pBot->pl.fixangle = FIXANGLE_NONE;
+	pBot->pl.v_angle = ViewAngle;
+	pBot->m_RnLLocal.w_angle = ViewAngle;
+	pBot->m_angWeaponAngles = ViewAngle;
+	pBot->SetLocalAngles(ViewAngle);
+}
+
 //-----------------------------------------------------------------------------
 // Purpose: Run through all the Bots in the game and let them think.
 //-----------------------------------------------------------------------------
@@ -233,8 +243,7 @@ static void RunPlayerMove( CRnLPlayer *fakeclient, CUserCmd &cmd, float frametim
 	// save off the last good usercmd
 	fakeclient->SetLastUserCommand( cmd );
 
-	// Clear out any fixangle that has been set
-	fakeclient->pl.fixangle = FIXANGLE_NONE;
+	Bot_SetViewAngle(fakeclient, cmd.viewangles);
 
 	// Restore the globals..
 	gpGlobals->frametime = flOldFrametime;
@@ -320,7 +329,7 @@ void Bot_UpdateDirection( CRnLBot *pBot )
 		pBot->m_LastAngles = angle;
 	}
 	
-	pBot->SetLocalAngles( angle );
+	Bot_SetViewAngle(pBot, angle);
 }
 
 
@@ -356,7 +365,7 @@ void Bot_FlipOut( CRnLBot *pBot, CUserCmd &cmd )
 
 			pBot->m_LastAngles[ 2 ] = 0;
 
-			pBot->SetLocalAngles( pBot->m_LastAngles );
+			Bot_SetViewAngle(pBot, pBot->m_LastAngles);
 		}
 	}
 }

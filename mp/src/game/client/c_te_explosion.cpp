@@ -50,27 +50,33 @@ IterationRetval_t CRagdollExplosionEnumerator::EnumElement( IHandleEntity *pHand
 
 CRagdollExplosionEnumerator::~CRagdollExplosionEnumerator()
 {
-	for (int i = 0; i < m_Entities.Count(); i++ )
+	for (int i = 0; i < m_Entities.Count(); i++)
 	{
-		C_BaseEntity *pEnt = m_Entities[i];
-		C_BaseAnimating *pModel = static_cast< C_BaseAnimating * >( pEnt );
+		C_BaseEntity* pEnt = m_Entities[i];
+		C_BaseAnimating* pModel = static_cast<C_BaseAnimating*>(pEnt);
 
 		Vector	position = pEnt->CollisionProp()->GetCollisionOrigin();
 
-		Vector	dir		= position - m_vecOrigin;
-		float	dist	= VectorNormalize( dir );
-		float	force	= m_flMagnitude - ( ( m_flMagnitude / m_flRadius ) * dist );
+		Vector	dir = position - m_vecOrigin;
+		float	dist = VectorNormalize(dir);
+		float	force = m_flMagnitude - ((m_flMagnitude / m_flRadius) * dist);
 
-		if ( force <= 1.0f )
+		if (force <= 1.0f)
 			continue;
 
 		trace_t	tr;
-		UTIL_TraceLine( m_vecOrigin, position, MASK_SHOT_HULL, NULL, COLLISION_GROUP_NONE, &tr );
+		UTIL_TraceLine(m_vecOrigin, position, MASK_SHOT_HULL, NULL, COLLISION_GROUP_NONE, &tr);
+
+		// RnL : Andrew : Missed for some reason, don't apply impacts.
+		if (tr.fraction >= 1.f || tr.m_pEnt == nullptr)
+		{
+			continue;
+		}
 
 		// debugoverlay->AddLineOverlay( m_vecOrigin, position, 0,255,0, true, 18.0 );
 
-		if ( tr.fraction < 1.0f && tr.m_pEnt != pModel )
-			continue;	
+		if (tr.fraction < 1.0f && tr.m_pEnt != pModel)
+			continue;
 
 		dir *= force; // scale force
 
@@ -79,7 +85,7 @@ CRagdollExplosionEnumerator::~CRagdollExplosionEnumerator()
 		// move expolsion center a bit down, so things fly higher 
 		tr.startpos.z -= 32.0f;
 
-		pModel->ImpactTrace( &tr, DMG_BLAST, NULL );
+		pModel->ImpactTrace(&tr, DMG_BLAST, NULL);
 	}
 }
 

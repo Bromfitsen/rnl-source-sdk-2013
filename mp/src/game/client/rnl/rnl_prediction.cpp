@@ -6,13 +6,11 @@
 //=============================================================================//
 #include "cbase.h"
 #include "prediction.h"
-#include "c_baseplayer.h"
-#include "igamemovement.h"
+#include "c_rnl_player.h"
+#include "rnl_gamemovement.h"
 
-
-static CMoveData g_MoveData;
-CMoveData *g_pMoveData = &g_MoveData;
-
+static CRnLMoveData g_MoveData;
+CMoveData* g_pMoveData = &g_MoveData;
 
 class CRnLPrediction : public CPrediction
 {
@@ -35,6 +33,26 @@ void CRnLPrediction::SetupMove( C_BasePlayer *player, CUserCmd *ucmd, IMoveHelpe
 
 	// Call the default SetupMove code.
 	BaseClass::SetupMove( player, ucmd, pHelper, move );
+
+	CRnLPlayer* pPlayer = ToRnLPlayer(player);
+	CRnLMoveData* pRnLMove = static_cast<CRnLMoveData*>(move);
+	if (pPlayer)
+	{
+		if (ucmd->mod_data.Count() > 0)
+		{
+			bf_read readBuffer(ucmd->mod_data.Base(), ucmd->mod_data.Count());
+			if (readBuffer.ReadOneBit() > 0)
+			{
+				QAngle weaponAngle;
+				readBuffer.ReadBitAngles(weaponAngle);
+				pRnLMove->m_vecWeaponAngles = weaponAngle;
+			}
+			else
+			{
+				pRnLMove->m_vecWeaponAngles = ucmd->viewangles;
+			}
+		}
+	}
 }
 
 //-----------------------------------------------------------------------------

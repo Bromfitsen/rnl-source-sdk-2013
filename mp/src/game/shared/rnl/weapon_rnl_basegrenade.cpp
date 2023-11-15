@@ -249,7 +249,7 @@ void CBaseRnLGrenade::ItemPostFrame()
 
 		if( GetWeaponID() == WEAPON_MK2GRENADE || GetWeaponID() == WEAPON_M18GRENADE )
 		{
-			QAngle angThrow = pPlayer->LocalEyeAngles();
+			QAngle angThrow = pPlayer->GetWeaponAngle();
 			angThrow[YAW] += 90;
 			Vector vForward, vRight, vUp;
 

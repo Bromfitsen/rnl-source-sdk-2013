@@ -7,15 +7,15 @@
 
 #include "cbase.h"
 #include "player_command.h"
-#include "igamemovement.h"
 #include "in_buttons.h"
 #include "ipredictionsystem.h"
 #include "rnl_player.h"
+#include "rnl_gamemovement.h"
 #include "iservervehicle.h"
 
 
-static CMoveData g_MoveData;
-CMoveData *g_pMoveData = &g_MoveData;
+static CRnLMoveData g_MoveData;
+CMoveData* g_pMoveData = &g_MoveData;
 
 IPredictionSystem *IPredictionSystem::g_pPredictionSystems = NULL;
 
@@ -60,7 +60,13 @@ void CRnLPlayerMove::StartCommand( CBasePlayer *player, CUserCmd *cmd )
 //-----------------------------------------------------------------------------
 void CRnLPlayerMove::SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move )
 {
-	CRnLPlayer* pPlayer = ToRnLPlayer( player );
+	// Push physics object surround player
+	player->AvoidPhysicsProps( ucmd );
+
+	BaseClass::SetupMove( player, ucmd, pHelper, move );
+
+	CRnLPlayer* pPlayer = ToRnLPlayer(player);
+	CRnLMoveData* pRnLMove = static_cast<CRnLMoveData*>(move);
 	if (pPlayer)
 	{
 		if (ucmd->mod_data.Count() > 0)
@@ -70,19 +76,15 @@ void CRnLPlayerMove::SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper
 			{
 				QAngle weaponAngle;
 				readBuffer.ReadBitAngles(weaponAngle);
-				pPlayer->m_angWeaponAngle = weaponAngle;
+				pRnLMove->m_vecWeaponAngles = weaponAngle;
 			}
 			else
 			{
-				pPlayer->m_angWeaponAngle = ucmd->viewangles;
+				pRnLMove->m_vecWeaponAngles = ucmd->viewangles;
 			}
 		}
 	}
 
-	// Push physics object surround player
-	player->AvoidPhysicsProps( ucmd );
-
-	BaseClass::SetupMove( player, ucmd, pHelper, move );
 
 	IServerVehicle *pVehicle = player->GetVehicle();
 	if (pVehicle && gpGlobals->frametime != 0)
@@ -100,6 +102,14 @@ void CRnLPlayerMove::SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper
 //-----------------------------------------------------------------------------
 void CRnLPlayerMove::FinishMove( CBasePlayer *player, CUserCmd *ucmd, CMoveData *move )
 {
+	CRnLPlayer* pRnLPlayer = ToRnLPlayer(player);
+	CRnLMoveData* pRnLMove = static_cast<CRnLMoveData*>(move);
+	if (pRnLPlayer)
+	{
+		pRnLPlayer->m_RnLLocal.w_angle = pRnLMove->m_vecWeaponAngles;
+		pRnLPlayer->m_angWeaponAngles = pRnLMove->m_vecWeaponAngles;
+	}
+
 	// Call the default FinishMove code.
 	BaseClass::FinishMove( player, ucmd, move );
 

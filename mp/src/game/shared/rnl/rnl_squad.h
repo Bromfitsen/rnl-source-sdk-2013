@@ -29,10 +29,9 @@ public:
 	DECLARE_CLASS_NOBASE(RnLSquadKitInfo);
 	DECLARE_EMBEDDED_NETWORKVAR();
 
-	RnLSquadKitInfo() { iKitID = -1; }
-	bool IsValid() const { return iKitID >= 0; }
+	RnLSquadKitInfo() { iClassId = -1; }
 
-	CNetworkVar(int, iKitID);
+	CNetworkVar(int, iClassId);
 	CNetworkVar(int, iMaxCount);
 };
 

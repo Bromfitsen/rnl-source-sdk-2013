@@ -113,20 +113,21 @@ CON_COMMAND_F( rnl_spew_server_team_data, "Don't you ever dare use this or your 
 			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
 				const RnLSquadKitInfo& info = pSquad->GetKitInfo(k);
-				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
+				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iClassId );
 
 				if (pPlayer)
 					ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "				%s: (max %d)\n", desc.name, info.iMaxCount  ) );
 				else
 					Msg( "				%s: (max %d)\n", desc.name, info.iMaxCount );
 
-				CRnLPlayer* pMember = pSquad->GetNextMember(info.iKitID, nullptr);
+				CRnLPlayer* pMember = pSquad->GetNextMember(k, nullptr);
 				while (pMember != nullptr)
 				{
 					if (pPlayer)
 						ClientPrint( pPlayer, HUD_PRINTCONSOLE, UTIL_VarArgs( "					%s\n", pMember->GetPlayerName()  ) );
 					else
 						Msg( "					%s\n", pMember->GetPlayerName() );
+					pMember = pSquad->GetNextMember(k, pMember);
 				}
 			}
 

@@ -49,10 +49,9 @@ public:
 	//RnL : MovementMod : Begin
 	//MovementMod : 
 	virtual RnLMovementPostures_t	GetMovementPosture(void) const;
-	virtual void			SetMovementPosture(RnLMovementPostures_t iType);
+	virtual void					SetMovementPosture(RnLMovementPostures_t iType, bool bForce = false);
 	virtual RnLMovementPostures_t	GetMovementPostureFrom(void) const;
 	virtual float			GetMovementPostureDuration(void) const;
-	virtual void			SetMovementPostureDuration(float flTime);
 	virtual QAngle			GetMovementPostureAngle(void) const;
 	virtual void			SetMovementPostureAngle(QAngle angle);
 
@@ -100,10 +99,13 @@ public:
 	virtual void		SetStepSoundTime( stepsoundtimes_t iStepSoundTime, bool bWalking );
 	virtual Vector		EyePosition( void );
 	
-	virtual QAngle		GetWeaponAngle( void );
-	virtual void		SetWeaponAngle( const QAngle& angle );
-	void AdjustWeaponAngle( const QAngle &angleOffset );
-	void AdjustWeaponSway( const QAngle& offset );
+	QAngle		GetWeaponAngle( void ) const;
+	QAngle		GetWeaponKick(void) const;
+	void		SetWeaponKick(const QAngle& kickAngle);
+	void		WeaponKick(const QAngle& offset);
+	QAngle		GetWeaponSway(void) const;
+	void		SetWeaponSway(const QAngle& swayAngle);
+	void		WeaponSway(const QAngle& offset);
 
 	virtual int		GetSquadNumber();
 	virtual int		GetKitNumber();
@@ -143,9 +145,9 @@ public:
 	//RnL : MovementMod : Begin
 	int		GetClimbheight( void ) { return m_iClimbheight; }
 
-	int		GetWeaponPosture( void ) { return m_nWeaponPosture; }
-	float	GetWeaponPostureDuration( void ) { return (gpGlobals->curtime - m_flWeaponPostureTime); }
-	void	SetWeaponPosture( int iPosture ) { if( m_nWeaponPosture != iPosture ){ m_flWeaponPostureTime = gpGlobals->curtime; m_nWeaponPosture = iPosture; } }
+	int		GetWeaponPosture(void) const;
+	float	GetWeaponPostureDuration(void) const;
+	void	SetWeaponPosture(int iPosture, bool bForce = false);
 
 	void	AdjustViewAngles( const QAngle &angleOffset );
 
@@ -222,9 +224,11 @@ public:
 public:
 
 	IRnLPlayerAnimState *m_PlayerAnimState;
-
-	QAngle	m_angEyeAngles;
+	
+	QAngle m_angEyeAngles;
+	QAngle m_angWeaponAngles;
 	CInterpolatedVar< QAngle >	m_iv_angEyeAngles;
+	CInterpolatedVar< QAngle >	m_iv_angWeaponAngles;
 
 	CNetworkVar( int, m_iThrowGrenadeCounter );	// used to trigger grenade throw animations.
 	CNetworkVar( int, m_iShotsFired );	// number of shots fired recently
@@ -240,9 +244,7 @@ public:
 	int m_nMovementPostureFrom;
 	CNetworkQAngle(m_angMovementPostureAngle);
 
-	QAngle m_angWeaponAngle;
 	QAngle m_angFreeLookAngle;
-	QAngle m_angWeaponSway;
 	bool m_bInFreelook;
 	bool m_bInFreeAim;
 	float m_flPreviousMouseUpdateTime;
@@ -260,8 +262,6 @@ public:
 	CNetworkVector( m_vecLeanOffset );
 
 	float	m_fAfterClimbDrawDelay;
-
-	float	m_flWeaponPostureTime;
 
 	Vector	m_vThirdPersonOverrideOffset;
 	QAngle	m_aThirdPersonOverrideAngle;

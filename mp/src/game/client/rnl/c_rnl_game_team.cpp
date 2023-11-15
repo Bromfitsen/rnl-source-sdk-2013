@@ -75,15 +75,15 @@ CON_COMMAND_F( rnl_spew_client_team_data, "Don't you ever dare use this or your 
 			for( int k = 0; k < pSquad->GetKitCount(); k++ )
 			{
 				const RnLSquadKitInfo& info = pSquad->GetKitInfo(k);
-				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iKitID );
+				const RnLLoadoutKitInfo& desc = pGameTeam->GetKitDescription( info.iClassId );
 
 				Msg( "				%s: (max %d)\n", desc.name.Get(), info.iMaxCount );
 
-				CRnLPlayer* pMember = pSquad->GetNextMember(info.iKitID, nullptr);
+				CRnLPlayer* pMember = pSquad->GetNextMember(k, nullptr);
 				while (pMember != nullptr)
 				{
 					Msg( "					%s\n", pMember->GetPlayerName() );
-					pMember = pSquad->GetNextMember(info.iKitID, nullptr);
+					pMember = pSquad->GetNextMember(k, nullptr);
 				}
 			}
 

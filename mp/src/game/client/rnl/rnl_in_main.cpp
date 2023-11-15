@@ -94,26 +94,32 @@ void CRnLInput::CAM_GetCameraOffset( Vector& ofs )
 	}
 }
 */
-void CRnLInput::AdjustPitch( float speed, QAngle& viewangles )
+void CRnLInput::AdjustPitch(float speed, QAngle& viewangles)
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
-	if( pLocalPlayer )
+	if (pLocalPlayer)
 	{
-		pLocalPlayer->AdjustPitch( speed, viewangles );
+		pLocalPlayer->AdjustPitch(speed, viewangles);
+		BaseClass::AdjustPitch(speed, pLocalPlayer->m_RnLLocal.w_angle);
 	}
-
-	BaseClass::AdjustPitch( speed, pLocalPlayer->m_angWeaponAngle );
+	else
+	{
+		BaseClass::AdjustPitch(speed, viewangles);
+	}
 }
 
-void CRnLInput::AdjustYaw( float speed, QAngle& viewangles )
+void CRnLInput::AdjustYaw(float speed, QAngle& viewangles)
 {
 	CRnLPlayer* pLocalPlayer = CRnLPlayer::GetLocalRnLPlayer();
-	if( pLocalPlayer )
+	if (pLocalPlayer)
 	{
-		pLocalPlayer->AdjustYaw( speed, viewangles );
+		pLocalPlayer->AdjustYaw(speed, viewangles);
+		BaseClass::AdjustYaw(speed, pLocalPlayer->m_RnLLocal.w_angle);
 	}
-
-	BaseClass::AdjustYaw( speed, viewangles );
+	else
+	{
+		BaseClass::AdjustYaw(speed, viewangles);
+	}
 }
 
 //-----------------------------------------------------------------------------

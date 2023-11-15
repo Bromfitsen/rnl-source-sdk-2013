@@ -113,7 +113,7 @@ END_SEND_TABLE()
 BEGIN_SEND_TABLE_NOBASE( CRnLPlayer, DT_RnLNonLocalPlayerExclusive )
 	// send a lo-res origin to other players
 	SendPropVector	(SENDINFO(m_vecOrigin), -1,  SPROP_COORD_MP_LOWPRECISION|SPROP_CHANGES_OFTEN, 0.0f, HIGH_DEFAULT, SendProxy_Origin ),
-	SendPropQAngles	(SENDINFO(m_angWeaponAngle), 13, SPROP_CHANGES_OFTEN ),
+	SendPropQAngles(SENDINFO(m_angWeaponAngles), 13, SPROP_CHANGES_OFTEN),
 	//Tony; spawn interp.
 	SendPropBool( SENDINFO( m_bSpawnInterpCounter) ),
 END_SEND_TABLE()
@@ -141,7 +141,6 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropExclude( "DT_BaseAnimating", "m_flPoseParameter" ),
 	SendPropExclude( "DT_BaseAnimating", "m_flPlaybackRate" ),	
 	SendPropExclude( "DT_BaseAnimating", "m_nSequence" ),
-	SendPropExclude( "DT_BaseEntity", "m_angRotation" ),
 	SendPropExclude( "DT_BaseAnimatingOverlay", "overlay_vars" ),
 	SendPropExclude( "DT_BaseEntity", "m_vecOrigin" ),
 	
@@ -154,8 +153,8 @@ IMPLEMENT_SERVERCLASS_ST( CRnLPlayer, DT_RnLPlayer )
 	SendPropDataTable( "rnlnonlocaldata", 0, &REFERENCE_SEND_TABLE(DT_RnLNonLocalPlayerExclusive), SendProxy_SendNonLocalPlayerDataTable),
 	SendPropDataTable(SENDINFO_DT(m_RnLLocal), &REFERENCE_SEND_TABLE(DT_RnLLocal), SendProxy_SendLocalDataTable),
 
-	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 0), 11 ),
-	SendPropAngle( SENDINFO_VECTORELEM(m_angEyeAngles, 1), 11 ),
+	SendPropAngle(SENDINFO_VECTORELEM(m_angEyeAngles, 0), 11),
+	SendPropAngle(SENDINFO_VECTORELEM(m_angEyeAngles, 1), 11),
 	SendPropInt(SENDINFO(m_iThrowGrenadeCounter), THROWGRENADE_COUNTER_BITS, SPROP_UNSIGNED),
 	SendPropEHandle( SENDINFO( m_hRagdoll ) ),
 	SendPropEHandle( SENDINFO( m_hKnockDownRagdoll ) ),
@@ -224,9 +223,8 @@ CRnLPlayer::CRnLPlayer()
 	m_PlayerAnimState = CreatePlayerAnimState( this, this, LEGANIM_9WAY, true );
 
 	UseClientSideAnimation();
-	m_angEyeAngles.Init();
 
-	SetViewOffset( SDK_PLAYER_VIEW_OFFSET );
+	SetViewOffset(RNL_PLAYER_VIEW_OFFSET);
 
 	m_iThrowGrenadeCounter = 0;
 
@@ -302,7 +300,7 @@ void CRnLPlayer::PostThink()
 	// Store the eye angles pitch so the client can compute its animation state correctly.
 	m_angEyeAngles = EyeAngles();
 
-    m_PlayerAnimState->Update( m_angEyeAngles[YAW], m_angEyeAngles[PITCH] );
+    m_PlayerAnimState->Update(m_angEyeAngles[YAW], m_angEyeAngles[PITCH] );
 }
 
 
@@ -376,13 +374,13 @@ void CRnLPlayer::Spawn()
 		SetMoraleLevel( 70 );
 		SetStamina( 100.0f );
 
-		SetWeaponPosture( WEAPON_POSTURE_SHOULDER );
+		SetWeaponPosture( WEAPON_POSTURE_SHOULDER, true);
 		SetMovementPosture( MOVEMENT_POSTURE_STAND );
 
 		RemoveEffects( EF_NOINTERP );
 
 		StopSprinting();
-		SetMaxSpeed( 250.0f );
+		SetMaxSpeed(sv_speed_sprint.GetFloat());
 		m_flNextMovingWoundedSound = 0;
 		SetDamageBasedSpeedModifier( 0, 0.0f );
 		SetDamageBasedSpeedModifier( 1, 0.0f );

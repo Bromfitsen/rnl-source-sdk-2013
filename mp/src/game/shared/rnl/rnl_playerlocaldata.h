@@ -13,6 +13,7 @@
 
 #include "networkvar.h"
 #include "rnl_dt_shared.h"
+#include "playernet_vars.h"
 
 
 #ifdef CLIENT_DLL
@@ -34,6 +35,8 @@ public:
 	DECLARE_PREDICTABLE();
 
 	CRnLPlayerLocalData();
+
+	QAngle w_angle;
 
 	CNetworkVar( float,	m_flViewRollOffset );
 	CNetworkVar( bool,	m_bIsSprinting );
@@ -68,6 +71,21 @@ public:
 	CNetworkVar(float, m_flMovementPostureOffset);
 	CNetworkVar(float, m_flMovementPostureVelocity);
 	CNetworkVar(float, m_flMovementPostureTarget);
+
+	// Weapon Variables
+	CNetworkVar(float, m_flWeaponPostureEntranceTime);
+
+	CNetworkQAngle(m_vecSwayAngle);		// auto-decaying view angle adjustment
+	CNetworkQAngle(m_vecSwayAngleVel);	// velocity of auto-decaying view angle adjustment
+	CNetworkQAngle(m_vecKickAngle);		// auto-decaying view angle adjustment
+	CNetworkQAngle(m_vecKickAngleVel);	// velocity of auto-decaying view angle adjustment
+
+#ifdef CLIENT_DLL
+	CInterpolatedVar< QAngle >	m_iv_vecSwayAngle;
+	CInterpolatedVar< QAngle >	m_iv_vecSwayAngleVel;
+	CInterpolatedVar< QAngle >	m_iv_vecKickAngle;
+	CInterpolatedVar< QAngle >	m_iv_vecKickAngleVel;
+#endif
 };
 
 

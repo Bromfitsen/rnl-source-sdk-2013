@@ -74,7 +74,7 @@ END_RECV_TABLE()
 
 BEGIN_RECV_TABLE_NOBASE( C_RnLPlayer, DT_RnLNonLocalPlayerExclusive )
 	RecvPropVector( RECVINFO_NAME( m_vecNetworkOrigin, m_vecOrigin ) ),
-	RecvPropQAngles( RECVINFO( m_angWeaponAngle ) ),
+	RecvPropQAngles(RECVINFO(m_angWeaponAngles)),
 	//Tony; spawn interp.
 	RecvPropBool( RECVINFO( m_bSpawnInterpCounter) ),
 END_RECV_TABLE()
@@ -85,8 +85,8 @@ IMPLEMENT_CLIENTCLASS_DT( C_RnLPlayer, DT_RnLPlayer, CRnLPlayer )
 
 	RecvPropDataTable( RECVINFO_DT(m_RnLLocal),0, &REFERENCE_RECV_TABLE(DT_RnLLocal) ),
 
-	RecvPropFloat( RECVINFO( m_angEyeAngles[0] ) ),
-	RecvPropFloat( RECVINFO( m_angEyeAngles[1] ) ),
+	RecvPropFloat(RECVINFO(m_angEyeAngles[0])),
+	RecvPropFloat(RECVINFO(m_angEyeAngles[1])),
 	RecvPropInt( RECVINFO( m_iThrowGrenadeCounter ) ),
 	RecvPropEHandle( RECVINFO( m_hRagdoll ) ),
 	RecvPropEHandle( RECVINFO( m_hKnockDownRagdoll ) ),
@@ -106,6 +106,9 @@ BEGIN_PREDICTION_DATA(C_RnLPlayer)
 	DEFINE_PRED_TYPEDESCRIPTION(m_RnLLocal, C_RnLPlayerLocalData),
 	DEFINE_PRED_FIELD(m_flCycle, FIELD_FLOAT, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE | FTYPEDESC_NOERRORCHECK),
 	DEFINE_PRED_FIELD(m_iShotsFired, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
+	//DEFINE_PRED_FIELD_TOL(m_angEyeAngles, FIELD_VECTOR, FTYPEDESC_INSENDTABLE, 0.125f),
+	//DEFINE_PRED_FIELD_TOL(m_angWeaponAngles, FIELD_VECTOR, FTYPEDESC_INSENDTABLE, 0.125f),
+	DEFINE_PRED_FIELD(m_vecLeanOffset, FIELD_VECTOR, FTYPEDESC_INSENDTABLE),
 	DEFINE_PRED_FIELD(m_nWeaponPosture, FIELD_INTEGER, FTYPEDESC_INSENDTABLE),
 	DEFINE_PRED_FIELD(m_vecLeanOffset, FIELD_VECTOR, FTYPEDESC_INSENDTABLE),
 
@@ -366,16 +369,19 @@ IRagdoll* C_RnLPlayer::GetRepresentativeRagdoll() const
 	}
 }
 
-C_RnLPlayer::C_RnLPlayer() : 
-	m_iv_angEyeAngles( "C_RnLPlayer::m_iv_angEyeAngles" )
+C_RnLPlayer::C_RnLPlayer() 
+	: m_iv_angEyeAngles("C_RnLPlayer::m_iv_angEyeAngles")
+	, m_iv_angWeaponAngles("C_RnLPlayer::m_iv_angWeaponAngles")
 {
 	m_PlayerAnimState = CreatePlayerAnimState( this, this, LEGANIM_9WAY, true );
 
 	m_angEyeAngles.Init();
-	AddVar( &m_angEyeAngles, &m_iv_angEyeAngles, LATCH_SIMULATION_VAR );
+	m_angWeaponAngles.Init();
+
+	AddVar(&m_angEyeAngles, &m_iv_angEyeAngles, LATCH_SIMULATION_VAR);
+	AddVar(&m_angWeaponAngles, &m_iv_angWeaponAngles, LATCH_SIMULATION_VAR);
 
 	m_bInFreelook = false;
-	m_angWeaponAngle.Init();
 	m_angFreeLookAngle.Init();
 	m_flPreviousMouseUpdateTime = 0;
 	m_flFreeLookResyncTime = 0;
@@ -458,10 +464,10 @@ void C_RnLPlayer::UpdateClientSideAnimation()
 {
 	// Update the animation data. It does the local check here so this works when using
 	// a third-person camera (and we don't have valid player angles).
-	if ( this == C_RnLPlayer::GetLocalRnLPlayer() )
-		m_PlayerAnimState->Update( EyeAngles()[YAW], m_angEyeAngles[PITCH] );
+	if (this == C_RnLPlayer::GetLocalRnLPlayer())
+		m_PlayerAnimState->Update(EyeAngles()[YAW], m_angEyeAngles[PITCH]);
 	else
-		m_PlayerAnimState->Update( m_angEyeAngles[YAW], m_angEyeAngles[PITCH] );
+		m_PlayerAnimState->Update(m_angEyeAngles[YAW], m_angEyeAngles[PITCH]);
 
 	BaseClass::UpdateClientSideAnimation();
 }
@@ -498,15 +504,17 @@ void C_RnLPlayer::ResetPlayerView( const QAngle& angle )
 	m_bInFreelook = false;
 	m_bInFreeAim = false;
 	m_flFreeLookResyncTime = 0.0f;
-	m_angWeaponAngle = angle;
+	m_RnLLocal.w_angle = angle;
 	m_angFreeLookAngle = angle;
 	m_angEyeAngles = angle;
-	m_angWeaponSway.Init();
 	
-	if( this == GetLocalPlayer() )
-		engine->SetViewAngles( m_angWeaponAngle );
-	
-	SetLocalViewAngles( m_angWeaponAngle );
+	SetLocalViewAngles(angle);
+
+	if (this == GetLocalPlayer())
+	{
+		QAngle engineAngle = angle;
+		engine->SetViewAngles(engineAngle);
+	}
 }
 
 static float flParaSound = 0.0f;
@@ -655,7 +663,6 @@ void C_RnLPlayer::ClientRespawn()
 	m_pSwitchingToWeapon = NULL;
 
 	m_flDeathViewTime = 0.0f;
-	m_flWeaponPostureTime = 0.0f;
 
 	ResetPlayerView( EyeAngles() );
 
@@ -779,7 +786,7 @@ void C_RnLPlayer::PreMouseMove( QAngle& inAngles )
 			else if( m_bInFreeAim )
 			{
 				m_bInFreeAim = false;
-				inAngles = m_angWeaponAngle;
+				inAngles = m_RnLLocal.w_angle;
 			}
 		}
 
@@ -805,7 +812,7 @@ void C_RnLPlayer::PreMouseMove( QAngle& inAngles )
 				m_bInFreelook = false;
 				m_flFreeLookResyncTime = gpGlobals->curtime + 0.5f;
 			}
-			inAngles = m_angWeaponAngle;
+			inAngles = m_RnLLocal.w_angle;
 		}  
 		else
 		{
@@ -814,7 +821,7 @@ void C_RnLPlayer::PreMouseMove( QAngle& inAngles )
 				m_bInFreelook = false;
 				m_flFreeLookResyncTime = gpGlobals->curtime + 0.5f;
 			}
-			m_angWeaponAngle = inAngles;
+			m_RnLLocal.w_angle = inAngles;
 		}
 	}
 }
@@ -856,33 +863,41 @@ void C_RnLPlayer::PostMouseMove( QAngle& outAngles )
 				pWeapon->GetFreeAimBounds( freeAimExtents, freeAimDeadZone, freeAimLockExtents );
 
 			freeAimDeadZone *= cl_freeaimdeadzone.GetFloat();
-			m_angWeaponAngle = outAngles;
-			if( IsDeployed() )
+			m_RnLLocal.w_angle = outAngles;
+			if (IsDeployed())
+			{
 				outAngles = GetMovementPostureAngle();
+			}
 			else
+			{
 				outAngles = EyeAngles();
+			}
 
-			m_angWeaponAngle[ROLL] = outAngles[ROLL];
+			m_RnLLocal.w_angle[ROLL] = m_RnLLocal.w_angle[ROLL];
 
-			ClampAngles( m_angWeaponAngle, outAngles, true, true, freeAimExtents, freeAimLockExtents, flMouseUpdateDelta );
+			ClampAngles(m_RnLLocal.w_angle, outAngles, true, true, freeAimExtents, freeAimLockExtents, flMouseUpdateDelta );
 
-			if( freeAimLockExtents == AIM_LOCK_NONE )
+			if (freeAimLockExtents == AIM_LOCK_NONE)
 			{
 				float kSpringConstant = cl_freeaimstiffness.GetFloat();
 				//Spring
-				float pitchDiff = m_angWeaponAngle[PITCH] - outAngles[PITCH];
-				float yawDiff = UTIL_AngleDiff( m_angWeaponAngle[YAW], outAngles[YAW] );
+				float pitchDiff = m_RnLLocal.w_angle[PITCH] - outAngles[PITCH];
+				float yawDiff = UTIL_AngleDiff(m_RnLLocal.w_angle[YAW], outAngles[YAW]);
 
-				if( fabs( pitchDiff ) > freeAimDeadZone.y )
+				if (fabs(pitchDiff) > freeAimDeadZone.y)
+				{
 					outAngles[PITCH] += (pitchDiff * kSpringConstant) * flMouseUpdateDelta;
+				}
 
-				if( fabs(yawDiff) > freeAimDeadZone.x )
+				if (fabs(yawDiff) > freeAimDeadZone.x)
+				{
 					outAngles[YAW] += (yawDiff * kSpringConstant) * flMouseUpdateDelta;
+				}
 			}
 		}
 		else
 		{
-			m_angWeaponAngle = outAngles;
+			m_RnLLocal.w_angle = outAngles;
 		}
 	}
 	else
@@ -890,7 +905,7 @@ void C_RnLPlayer::PostMouseMove( QAngle& outAngles )
 		m_bInFreelook = false;
 		m_bInFreeAim = false;
 		m_flFreeLookResyncTime = 0.0f;
-		m_angWeaponAngle = outAngles;
+		m_RnLLocal.w_angle = outAngles;
 		m_angFreeLookAngle = outAngles;
 	}
 
@@ -936,7 +951,7 @@ void C_RnLPlayer::OverrideView( CViewSetup *pSetup )
 		}
 		else if( IsProne() && m_bInFreeAim && GetWeaponPosture() == WEAPON_POSTURE_SUPERSIGHTS )
 		{
-			pSetup->angles = m_angWeaponAngle;
+			pSetup->angles = m_RnLLocal.w_angle;
 		}
 	}
 
@@ -1311,7 +1326,7 @@ void C_RnLPlayer::CalcInEyeCamView(Vector& eyeOrigin, QAngle& eyeAngles, float& 
 
 	m_flObserverChaseDistance = 0.0;
 
-	eyeAngles = pPlayerTarget->m_angEyeAngles;
+	eyeAngles = pPlayerTarget->EyeAngles();
 	eyeOrigin = pPlayerTarget->EyePosition();
 
 	// Apply punch angle

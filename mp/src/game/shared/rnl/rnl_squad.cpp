@@ -68,7 +68,7 @@ void SquadGUIGetIdealProportions(int iCurrSquad, int iTotalSquads, int& x, int& 
 #endif
 
 BEGIN_NETWORK_TABLE_NOBASE(RnLSquadKitInfo, DT_RnLSquadKitInfo)
-	PropInt(PROPINFO(iKitID)),
+	PropInt(PROPINFO(iClassId)),
 	PropInt(PROPINFO(iMaxCount)),
 END_NETWORK_TABLE()
 
@@ -167,19 +167,7 @@ bool CRnLSquad::RemovePlayer( CRnLPlayer* pPlayer )
 
 int CRnLSquad::GetKitCount(void) const
 {
-	int count = 0;
-	for (int i = 0; i < m_KitInfo.Count(); i++)
-	{
-		if (m_KitInfo[i].iKitID >= 0)
-		{
-			count++;
-		}
-		else
-		{
-			break;
-		}
-	}
-	return count;
+	return m_KitInfo.Count();
 }
 
 const RnLSquadKitInfo& CRnLSquad::GetKitInfo(int indx) const
@@ -189,32 +177,17 @@ const RnLSquadKitInfo& CRnLSquad::GetKitInfo(int indx) const
 
 int CRnLSquad::GetMemberCount(void) const
 {
-	if (!m_hTeam)
-	{
-		return 0;
-	}
-
-	return GetRnLPlayerResource()->GetSquadMemberCount(m_hTeam->GetTeamNumber(), m_SquadId);
+	return GetRnLPlayerResource()->GetSquadMemberCount(GetTeamNumber(), m_SquadId);
 }
 
 int CRnLSquad::GetMemberCount(int iKit) const
 {
-	if (!m_hTeam)
-	{
-		return 0;
-	}
-
-	return GetRnLPlayerResource()->GetKitMemberCount(m_hTeam->GetTeamNumber(), m_SquadId, iKit);
+	return GetRnLPlayerResource()->GetKitMemberCount(GetTeamNumber(), m_SquadId, iKit);
 }
 
 CRnLPlayer* CRnLSquad::GetMember(int indx) const
 {
-	if (!m_hTeam)
-	{
-		return nullptr;
-	}
-
-	int PlayerIndex = GetRnLPlayerResource()->GetSquadMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, indx);
+	int PlayerIndex = GetRnLPlayerResource()->GetSquadMemberIndex(GetTeamNumber(), m_SquadId, indx);
 	if (PlayerIndex < 0)
 	{
 		return nullptr;
@@ -224,16 +197,11 @@ CRnLPlayer* CRnLSquad::GetMember(int indx) const
 
 CRnLPlayer* CRnLSquad::GetNextMember(int iKit, CRnLPlayer* CurrentMember) const
 {
-	if (!m_hTeam)
-	{
-		return nullptr;
-	}
-
 	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
-	int MaxKitMembers = pRnLPR->GetKitMemberCount(m_hTeam->GetTeamNumber(), m_SquadId, iKit);
+	int MaxKitMembers = pRnLPR->GetKitMemberCount(GetTeamNumber(), m_SquadId, iKit);
 	for (int i = 0; i < MaxKitMembers; i++)
 	{
-		int PlayerIndex = pRnLPR->GetKitMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, iKit, i);
+		int PlayerIndex = pRnLPR->GetKitMemberIndex(GetTeamNumber(), m_SquadId, iKit, i);
 		if (PlayerIndex < 0)
 		{
 			continue;
@@ -257,13 +225,8 @@ CRnLPlayer* CRnLSquad::GetNextMember(int iKit, CRnLPlayer* CurrentMember) const
 
 CRnLPlayer* CRnLSquad::GetMember(int iKit, int idx) const
 {
-	if (!m_hTeam)
-	{
-		return nullptr;
-	}
-
 	CRnLPlayerResource* pRnLPR = GetRnLPlayerResource();
-	int PlayerIndex = pRnLPR->GetKitMemberIndex(m_hTeam->GetTeamNumber(), m_SquadId, iKit, idx);
+	int PlayerIndex = pRnLPR->GetKitMemberIndex(GetTeamNumber(), m_SquadId, iKit, idx);
 	if (PlayerIndex < 0)
 	{
 		return nullptr;
@@ -275,18 +238,18 @@ int CRnLSquad::GetKitMaxCount(int iKit) const
 {
 	if (iKit < 0 || iKit >= m_KitInfo.Count())
 		return 0;
-	if (m_KitInfo[iKit].iKitID < 0)
-		return 0;
 	return m_KitInfo[iKit].iMaxCount;
 }
 
 bool CRnLSquad::IsSquadFull( void ) const
 {
-	for( int i = 0; i < m_KitInfo.Count(); i++ )
+	for (int i = 0; i < m_KitInfo.Count(); i++)
 	{
-		if(m_KitInfo[i].IsValid() &&
-			GetMemberCount(m_KitInfo[i].iKitID) < m_KitInfo[i].iMaxCount)
+		int iKitMaxCount = GetKitMaxCount(i);
+		if (GetMemberCount(i) < iKitMaxCount)
+		{
 			return false;
+		}
 	}
 	return true;
 }
@@ -298,18 +261,16 @@ bool CRnLSquad::AreRequirementsMet( void ) const
 
 bool CRnLSquad::IsKitAvailable( int iKit ) const
 {
-	if( iKit < 0 || iKit >= m_KitInfo.Count() ||
-		m_KitInfo[iKit].iKitID < 0)
-		return false;
+	int iKitMaxCount = GetKitMaxCount(iKit);
 
-	return (GetMemberCount(iKit) < m_KitInfo[iKit].iMaxCount);
+	return (GetMemberCount(iKit) < iKitMaxCount);
 }
 
 int CRnLSquad::GetKitDescription( int iKit ) const
 {
 	if (m_KitInfo.IsValidIndex(iKit))
 	{
-		return (m_KitInfo[iKit].iKitID);
+		return (m_KitInfo[iKit].iClassId);
 	}
 	return RNL_KIT_INVALID;
 }
@@ -337,10 +298,12 @@ const char* CRnLSquad::GetSquadName(void) const
 
 int CRnLSquad::GetNextAvailableSlot( void ) const
 {
-	for( int i = 0; i < m_KitInfo.Count(); i++ )
+	for (int i = 0; i < m_KitInfo.Count(); i++)
 	{
-		if( GetMemberCount(m_KitInfo[i].iKitID) < m_KitInfo[i].iMaxCount)
+		if (IsKitAvailable(i))
+		{
 			return i;
+		}
 	}
 
 	return -1;
@@ -372,7 +335,7 @@ bool CRnLSquad::Load( CRnLGameTeam* OwnerTeam, int iSquadId, KeyValues* pKey )
 					int KidIndex = m_KitInfo.AddToTail();
 					RnLSquadKitInfo& Kit = m_KitInfo[KidIndex];
 
-					Kit.iKitID = iClassId;
+					Kit.iClassId = iClassId;
 					Kit.iMaxCount = pClassKV->GetInt();
 
 					CurrentKitIndex++;
