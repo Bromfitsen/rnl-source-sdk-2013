@@ -978,7 +978,7 @@ bool CWeaponRnLBallisticBase::OnIronsightsHeld( void )
 	if( iPosture == WEAPON_POSTURE_SHOULDER )
 	{
 #ifdef CLIENT_DLL
-		Msg("CLIENT: Started holding down ironsights %i, %i\n", prediction->InPrediction() ? 1 : 0, prediction->IsFirstTimePredicted() ? 1 : 0);
+		Msg("CLIENT: Started holding down ironsights %i, %i, %i, %i, %d\n", prediction->InPrediction() ? 1 : 0, prediction->IsFirstTimePredicted() ? 1 : 0, gpGlobals->framecount, gpGlobals->simTicksThisFrame, gpGlobals->interpolation_amount);
 #else
 		Msg("SERVER: Started holding down ironsights \n");
 #endif

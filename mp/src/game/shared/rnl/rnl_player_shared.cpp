@@ -701,16 +701,19 @@ void CRnLPlayer::SetWeaponPosture(int iPosture)
 	if (m_nWeaponPosture != iPosture)
 	{
 #ifdef CLIENT_DLL
-		if (prediction->IsFirstTimePredicted())
+		//if (prediction->IsFirstTimePredicted())
 		{
 			m_flWeaponPostureTime = gpGlobals->curtime;
 
-			Msg("Client changed posture. Old: %i, new: %i\n", m_nWeaponPosture, iPosture);
+			//Msg("Client changed posture. Old: %i, new: %i\n", m_nWeaponPosture, iPosture);
 		}
-		else
+		//else
 		{
-			Msg("Client TESTING changed posture %i\n", iPosture);
+			//Msg("Client TESTING changed posture %i\n", iPosture);
 		}
+
+		Msg("CLIENT: Changed posture %i, %i, %i, %i, %d\n", prediction->InPrediction() ? 1 : 0, prediction->IsFirstTimePredicted() ? 1 : 0, gpGlobals->framecount, gpGlobals->simTicksThisFrame, gpGlobals->interpolation_amount);
+
 
 		//m_flWeaponPostureTime = gpGlobals->curtime;
 #else
