@@ -511,20 +511,21 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 		return;
 	}
 
-	float flCurrentSpeed = pPlayer->GetAbsVelocity().Length();
-	int iPosture = pPlayer->GetWeaponPosture(); 
+	const float flCurrentSpeed = pPlayer->GetAbsVelocity().Length();
+	const int iPosture = pPlayer->GetWeaponPosture(); 
 
-	float flStaminaFactor = 2.0f - (pPlayer->GetStamina() / 100.0f);
-	float flMoraleFactor = (pPlayer->GetMoraleLevel() / 65.0f); // Max ~1.5f
-	bool isDucked = pPlayer->IsDucked(); // TODO_KORNEEL Make sure the false does not include proning!
-	bool isProne = pPlayer->IsProne();
+	const float flStaminaFactor = 2.0f - (pPlayer->GetStamina() / 100.0f);
+	const float flMoraleFactor = (pPlayer->GetMoraleLevel() / 65.0f); // Max ~1.5f
+	const bool isDucked = pPlayer->IsDucked();
+	const bool isProne = pPlayer->IsProne();
 
 	// get a percentage of current speed, 160 is max speed that still has weapon sway (running)
-	float flMovementPercent = clamp(flCurrentSpeed / (SPEED_RUN + 10.0f), 0.0f, 1.0f);
+	const float flMovementPercent = clamp(flCurrentSpeed / (SPEED_RUN + 10.0f), 0.0f, 1.0f);
 
 	float movementModifierMin;
 	float movementModifierMax;
 
+	// Don't care about prone, because can't IS/SS while in prone
 	switch (iPosture)
 	{
 	case WEAPON_POSTURE_IRONSIGHTS:
@@ -540,21 +541,13 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 		movementModifierMax = isDucked ? 0.15f : 0.2f;
 	}
 
-	float flMovementModifier = Lerp(flMovementPercent, movementModifierMin, movementModifierMax);
+	const float flMovementModifier = Lerp(flMovementPercent, movementModifierMin, movementModifierMax);
 
-	float vertMove = 7.25f;
-	float horzMove = 8.75f;
+	const float vertMove = 7.25f;
+	const float horzMove = 8.75f;
 
 	float vertScale = isProne ? 0.35f : 0.90f;
 	float horzScale = isProne ? 0.15f : 0.90f;
-
-	float flSpeed = 1.0;
-
-	// TODO_KORNEEL This causes a sudden jump. Make smoother
-	if( flMoraleFactor < 0.75 )
-		flSpeed = 2.0;
-
-	float flTime = pPlayer->GetTimeBase() * flSpeed;
 
 	if (iPosture == WEAPON_POSTURE_IRONSIGHTS)
 	{
@@ -574,8 +567,8 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 #endif	
 	}
 
-	vertScale *= (2.0f - flMoraleFactor);
-	horzScale *= (2.0f - flMoraleFactor);
+	vertScale *= (2.0f - flMoraleFactor) * flStaminaFactor;
+	horzScale *= (2.0f - flMoraleFactor) * flStaminaFactor;
 
 	if( IsBayonetDeployed() )
 	{
@@ -583,15 +576,13 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 		vertScale += 0.05f;
 	}
 
-	horzScale *= flStaminaFactor;
-	vertScale *= flStaminaFactor;
-
-	const float speedHor = 2.35f;
-	const float speedVer = 0.85f;
+	// TODO_KORNEEL This causes a sudden jump. Make smoother
+	const float speedModifier = flMoraleFactor < 0.75 ? 2.0f : 1.0f;
+	const float flTime = pPlayer->GetTimeBase() * speedModifier;
 
 	QAngle offset(0, 0, 0);
-	offset[YAW] =	horzScale * (sin(flTime * speedHor) * horzMove * flMovementModifier);
-	offset[PITCH] =	vertScale * (sin(flTime * speedVer) * vertMove * flMovementModifier);
+	offset[YAW] =	horzScale * (sin(flTime * 2.35f) * horzMove * flMovementModifier);
+	offset[PITCH] =	vertScale * (sin(flTime * 0.85f) * vertMove * flMovementModifier);
 
 	pPlayer->AdjustWeaponSway( offset );
 }
