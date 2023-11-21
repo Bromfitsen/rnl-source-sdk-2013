@@ -515,8 +515,9 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 	int iPosture = pPlayer->GetWeaponPosture(); 
 
 	float flStaminaFactor = 2.0f - (pPlayer->GetStamina() / 100.0f);
-	float flMoraleFactor = (pPlayer->GetMoraleLevel() / 65.0f);
+	float flMoraleFactor = (pPlayer->GetMoraleLevel() / 65.0f); // Max ~1.5f
 	bool isDucked = pPlayer->IsDucked(); // TODO_KORNEEL Make sure the false does not include proning!
+	bool isProne = pPlayer->IsProne();
 
 	// get a percentage of current speed, 160 is max speed that still has weapon sway (running)
 	float flMovementPercent = clamp(flCurrentSpeed / (SPEED_RUN + 10.0f), 0.0f, 1.0f);
@@ -541,15 +542,15 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 
 	float flMovementModifier = Lerp(flMovementPercent, movementModifierMin, movementModifierMax);
 
-	QAngle offset( 0, 0, 0 );
 	float vertMove = 7.25f;
 	float horzMove = 8.75f;
 
-	float vertScale = 0.90f;
-	float horzScale = 0.90f;
+	float vertScale = isProne ? 0.35f : 0.90f;
+	float horzScale = isProne ? 0.15f : 0.90f;
 
 	float flSpeed = 1.0;
 
+	// TODO_KORNEEL This causes a sudden jump. Make smoother
 	if( flMoraleFactor < 0.75 )
 		flSpeed = 2.0;
 
@@ -557,7 +558,7 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 
 	if (iPosture == WEAPON_POSTURE_IRONSIGHTS)
 	{
-		vertScale = 1.75f;
+		vertScale = 1.5f;
 	}
 	else if(iPosture == WEAPON_POSTURE_SUPERSIGHTS)
 	{
@@ -573,25 +574,8 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 #endif	
 	}
 
-	Msg("vertscale: %f\n", vertScale);
-
-	if( flMoraleFactor < 1.0 )
-	{
-		vertScale *= (1.0 + flMoraleFactor);
-		horzMove *= (1.0 + flMoraleFactor);
-	}
-	else
-	{
-		vertScale /= flMoraleFactor;
-		horzMove /= flMoraleFactor;
-	}
-
-	// KORNEEL Prone-sway is unaffected by morale?
-	if( pPlayer->IsProne() )
-	{
-		horzScale = 0.15f;
-		vertScale = 0.35f;
-	}
+	vertScale *= (2.0f - flMoraleFactor);
+	horzScale *= (2.0f - flMoraleFactor);
 
 	if( IsBayonetDeployed() )
 	{
@@ -602,11 +586,12 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 	horzScale *= flStaminaFactor;
 	vertScale *= flStaminaFactor;
 
-	const float speedHor = 2.35f; // +(flMovementPercent * 10.0f);
-	const float speedVer = 0.85f; // +(flMovementPercent * 10.0f);
+	const float speedHor = 2.35f;
+	const float speedVer = 0.85f;
 
-	offset[YAW] =	horzScale * (sin( flTime * speedHor) * horzMove * flMovementModifier);
-	offset[PITCH] =	vertScale * (sin( flTime * speedVer) * vertMove * flMovementModifier);
+	QAngle offset(0, 0, 0);
+	offset[YAW] =	horzScale * (sin(flTime * speedHor) * horzMove * flMovementModifier);
+	offset[PITCH] =	vertScale * (sin(flTime * speedVer) * vertMove * flMovementModifier);
 
 	pPlayer->AdjustWeaponSway( offset );
 }
