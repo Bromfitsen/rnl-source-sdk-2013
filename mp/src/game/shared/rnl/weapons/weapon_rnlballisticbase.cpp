@@ -512,59 +512,34 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 	}
 
 	float flCurrentSpeed = pPlayer->GetAbsVelocity().Length();
-	int iPosture = pPlayer->GetWeaponPosture();
-
-	if( pPlayer->IsDucked() )
-	{
-		if( (iPosture == WEAPON_POSTURE_IRONSIGHTS || iPosture == WEAPON_POSTURE_SUPERSIGHTS) )
-		{
-			// Ducking IS/SS
-			if( flCurrentSpeed < 5.0f )
-				flCurrentSpeed = 5.0f;
-			// Duck Walking IS/SS
-			else if( flCurrentSpeed > 20.0f )
-				flCurrentSpeed = 20.0f;
-		}
-		else
-		{
-			// Ducking
-			if( flCurrentSpeed < 10.0f )
-				flCurrentSpeed = 10.0f;
-			// Duck Walking
-			else if( flCurrentSpeed > 30.0f )
-				flCurrentSpeed = 30.0f;
-		}
-	}
-	else
-	{
-		if( (iPosture == WEAPON_POSTURE_IRONSIGHTS || iPosture == WEAPON_POSTURE_SUPERSIGHTS) )
-		{
-			// Standing IS/SS
-			if( flCurrentSpeed < 10.0f )
-				flCurrentSpeed = 10.0f;
-			// Walking IS/SS
-			else if( flCurrentSpeed > 30.0f )
-				flCurrentSpeed = 30.0f;
-		}
-		else
-		{
-			// Standing
-			if( flCurrentSpeed < 20.0f )
-				flCurrentSpeed = 20.0f;
-			// Walking
-			else if( flCurrentSpeed > 40.0f )
-				flCurrentSpeed = 40.0f;
-		}
-	}
+	int iPosture = pPlayer->GetWeaponPosture(); 
 
 	float flStaminaFactor = 2.0f - (pPlayer->GetStamina() / 100.0f);
 	float flMoraleFactor = (pPlayer->GetMoraleLevel() / 65.0f);
+	bool isDucked = pPlayer->IsDucked(); // TODO_KORNEEL Make sure the false does not include proning!
 
-	// get a percentage of current speed, 240 is max speed (sprinting)
-	float flMovementPercent = flCurrentSpeed / 260.0f;
+	// get a percentage of current speed, 160 is max speed that still has weapon sway (running)
+	float flMovementPercent = clamp(flCurrentSpeed / (SPEED_RUN + 10.0f), 0.0f, 1.0f);
 
-	if( flMovementPercent < 0.0 )
-		flMovementPercent = 0.0;
+	float movementModifierMin;
+	float movementModifierMax;
+
+	switch (iPosture)
+	{
+	case WEAPON_POSTURE_IRONSIGHTS:
+		movementModifierMin = isDucked ? 0.020f : 0.035f;
+		movementModifierMax = isDucked ? 0.055f : 0.075f;
+		break;
+	case WEAPON_POSTURE_SUPERSIGHTS:
+		movementModifierMin = isDucked ? 0.02f : 0.03f;
+		movementModifierMax = isDucked ? 0.15f : 0.25f;
+		break;
+	default:
+		movementModifierMin = isDucked ? 0.05f : 0.1f;
+		movementModifierMax = isDucked ? 0.15f : 0.2f;
+	}
+
+	float flMovementModifier = Lerp(flMovementPercent, movementModifierMin, movementModifierMax);
 
 	QAngle offset( 0, 0, 0 );
 	float vertMove = 7.25f;
@@ -579,27 +554,26 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 		flSpeed = 2.0;
 
 	float flTime = pPlayer->GetTimeBase() * flSpeed;
-	if( iPosture == WEAPON_POSTURE_IRONSIGHTS || iPosture == WEAPON_POSTURE_SUPERSIGHTS )
+
+	if (iPosture == WEAPON_POSTURE_IRONSIGHTS)
 	{
-		if( iPosture == WEAPON_POSTURE_IRONSIGHTS )
-			vertScale = 1.75f;
+		vertScale = 1.75f;
+	}
+	else if(iPosture == WEAPON_POSTURE_SUPERSIGHTS)
+	{
+		if( flCurrentSpeed < 20 )
+			horzScale = 0.20f;
 		else
-		{
-			if( flCurrentSpeed < 20 )
-				horzScale = 0.20f;
-			else
-				horzScale = 0.40f;
+			horzScale = 0.40f;
 
 #ifdef CLIENT_DLL
-			if( pPlayer->GetWeaponPostureDuration() > 5.0f )
-				vertScale = 1.80f;
-			else
-				vertScale = 0.25 + (pPlayer->GetWeaponPostureDuration() / 3.03);
+		vertScale = clamp(0.25f + (pPlayer->GetWeaponPostureDuration() / 3.03f), 0.25f, 1.8f);
 #else
-			vertScale = 1.50f;
+		vertScale = 1.50f;
 #endif	
-		}
 	}
+
+	Msg("vertscale: %f\n", vertScale);
 
 	if( flMoraleFactor < 1.0 )
 	{
@@ -628,8 +602,11 @@ void CWeaponRnLBallisticBase::HandleViewSway( void )
 	horzScale *= flStaminaFactor;
 	vertScale *= flStaminaFactor;
 
-	offset[YAW] =	horzScale * (sin( flTime * 2.35f ) * horzMove * flMovementPercent);
-	offset[PITCH] =	vertScale * (sin( flTime * 0.85f ) * vertMove * flMovementPercent);
+	const float speedHor = 2.35f; // +(flMovementPercent * 10.0f);
+	const float speedVer = 0.85f; // +(flMovementPercent * 10.0f);
+
+	offset[YAW] =	horzScale * (sin( flTime * speedHor) * horzMove * flMovementModifier);
+	offset[PITCH] =	vertScale * (sin( flTime * speedVer) * vertMove * flMovementModifier);
 
 	pPlayer->AdjustWeaponSway( offset );
 }
