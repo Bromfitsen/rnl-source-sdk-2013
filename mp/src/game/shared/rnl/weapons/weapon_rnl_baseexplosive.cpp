@@ -108,6 +108,7 @@ bool CWeaponRnLBaseExplosive::Holster( CBaseCombatWeapon *pSwitchingTo )
 	// Send holster animation
 	HandleViewAnimation( WEAPON_ANIMATION_HOLSTER );
 
+
 	return true;
 }
 

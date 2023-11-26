@@ -66,8 +66,9 @@ public:
 
 	virtual void	Equip( CBaseCombatCharacter *pOwner );
 
-	virtual bool	CanDeploy( void );
-	virtual bool	CanHolster( void );
+	bool	CanDeploy( void ) override;
+	bool	CanHolster( void ) override;
+	bool	CanRearm( CRnLPlayer* pPlayer ) override { return false; }
 
 	bool IsGrenadePrimed( ) { return m_iGrenadeState == GRENADE_STARTFUSE; };
 	virtual bool IsSmokeGrenade( void ) { return false; }

@@ -37,9 +37,11 @@ public:
 
 	virtual void	Precache();
 
-	bool			Deploy();
-	bool			CanDeploy();
-	bool			Holster( CBaseCombatWeapon *pSwitchingTo );
+	virtual bool	Deploy();
+	virtual bool	Holster( CBaseCombatWeapon *pSwitchingTo );
+
+	virtual bool	CanDeploy();
+	virtual bool	CanRearm(CRnLPlayer* pPlayer) { return false; }
 
 	void			PrimaryAttack();
 	virtual void	ItemPostFrame();
@@ -48,6 +50,8 @@ public:
 	virtual bool	ShouldUseWeaponActivities( void ) { return true; }
 	virtual void	HandleViewAnimation( int iAnim );
 	virtual void	WeaponIdle( void );
+
+	
 
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();

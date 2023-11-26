@@ -50,6 +50,7 @@ public:
 
 	virtual bool CanPickup( CRnLPlayer* pPlayer );
 	virtual bool CanHolster( void );
+	virtual bool CanRearm( CRnLPlayer* pPlayer );
 
 	CNetworkVar( int, m_iWeaponAnimationState );
 	virtual void	SetAnimationState( int iState ) { m_iWeaponAnimationState = iState; }

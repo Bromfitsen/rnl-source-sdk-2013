@@ -55,7 +55,7 @@ public:
 	virtual bool CheckChamber();
 
 	// dont let it holster if in IS
-	bool CanHolster( void );
+	bool CanHolster( void ) override;
 	
 	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents );
 

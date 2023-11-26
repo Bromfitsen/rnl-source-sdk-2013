@@ -42,7 +42,7 @@ public:
 	void SetLastShotTime( float time, float penalty ) { m_flLastShotTime = time; m_flAccuracyPenalty += penalty; }
 
 	//A NO NO if we are deployededed
-	virtual bool CanHolster( void );
+	bool CanHolster( void ) override;
 
 	virtual bool CanClimb( void ) { return !(m_bDeployed); }
 

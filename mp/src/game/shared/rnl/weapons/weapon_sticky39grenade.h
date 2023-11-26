@@ -29,7 +29,7 @@ public:
 	DECLARE_ACTTABLE();
 
 	CSticky39Grenade() {}
-	bool CanHolster( void );
+	bool CanHolster( void ) override;
 
 	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_STICKY39GRENADE; }
 	virtual bool IsSmokeGrenade( void ) { return true; }
