@@ -67,3 +67,4 @@ config.cfg
 *.FileListAbsolute.txt
 *.lib
 /**/screenshots/
+mp/src/utils/sapi51/Samples/VB/TTSAppVB/ttsapp.RES
