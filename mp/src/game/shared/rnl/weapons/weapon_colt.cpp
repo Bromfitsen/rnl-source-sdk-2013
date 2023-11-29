@@ -47,8 +47,6 @@ public:
 private:
 
 	CWeaponColt( const CWeaponColt & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponColt, DT_WeaponColt )

@@ -26,7 +26,7 @@ public:
 	bool StartSprinting( void ) override { return false; }
 	bool ShouldUseWeaponActivities( void ) override { return true; }
 
-	bool IsDeployed() { return m_bDeployed; }
+	bool IsDeployed() const { return m_bDeployed; }
 	void ToggleDeploy();
 	bool CheckUnDeploy( void );
 

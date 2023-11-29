@@ -52,8 +52,6 @@ private:
 	
 
 	CWeaponKarabiner98Scoped( const CWeaponKarabiner98Scoped & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponKarabiner98Scoped, DT_WeaponKarabiner98Scoped );

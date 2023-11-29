@@ -70,8 +70,6 @@ private:
 #ifdef CLIENT_DLL
 	float m_flNextHeatSmoke;
 #endif
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponBrowning, DT_WeaponBrowning )

@@ -43,13 +43,17 @@ public:
 	~CWeaponM1Garand() override = default;
 
 	void Precache( void ) override;
-	int	GetWorldModelIndex( void ) override;
-	const char *GetWorldModel( void ) const override;
+	
 	bool PlayLastBulletSound( void ) override;
 	void ItemPostFrame( void ) override;
+
 	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M1GARAND; }
 
+	const char* GetWorldModel(void) const override;
+
 #ifdef CLIENT_DLL
+	int	GetWorldModelIndex(void) override;
+
 	Vector	GetIronsightsOffset() override { return Vector( garand_ironsightsx.GetFloat(), garand_ironsightsy.GetFloat(), garand_ironsightsz.GetFloat() ); }
 	Vector	GetShoulderOffset() override { return Vector( garand_shoulderx.GetFloat(), garand_shouldery.GetFloat(), garand_shoulderz.GetFloat() ); }
 #endif
@@ -124,6 +128,7 @@ void CWeaponM1Garand::Precache()
 	m_iDeployedModelIndex	= CBaseEntity::PrecacheModel( pGarandWithBayonetModel );
 }
 
+#if defined(CLIENT_DLL)
 int	CWeaponM1Garand::GetWorldModelIndex( void )
 {
 	if( IsBayonetDeployed() )
@@ -135,6 +140,7 @@ int	CWeaponM1Garand::GetWorldModelIndex( void )
 		return m_iWorldModelIndex;
 	}
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
