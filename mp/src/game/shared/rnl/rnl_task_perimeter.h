@@ -22,15 +22,13 @@ public:
 #endif
 
 	CRnLTaskCapturePerimeter();
+	~CRnLTaskCapturePerimeter() override = default;
 
-	virtual RnLTaskType		GetTaskType()	{ return RNL_TASK_TYPE_CAPTURE; }
-
-	virtual void OnRequiredCountAcheived( int iTeam )	{}
-	virtual void OnRequiredCountLost( int iTeam )		{}
+	RnLTaskType	GetTaskType() override { return RNL_TASK_TYPE_CAPTURE; }
 
 #ifndef CLIENT_DLL
-	void Spawn( void );
-	virtual void Think();
+	void Spawn( void ) override;
+	virtual void Think() override;
 #endif
 
 private:
