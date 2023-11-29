@@ -27,10 +27,10 @@ public:
 	DECLARE_NETWORKCLASS(); 
 	DECLARE_PREDICTABLE();
 
-							CWeaponRnLBase();
-	virtual 				~CWeaponRnLBase();
+	CWeaponRnLBase();
+	~CWeaponRnLBase() override;
 
-	virtual void			Precache( void );
+	void Precache( void ) override;
 
 #ifdef GAME_DLL
 	DECLARE_DATADESC();
@@ -83,9 +83,9 @@ public:
 
 	// TODO_KORNEEL Remove these.. Check weapon type instead
 	// Michael Lebson
-	virtual bool			IsGrenade() const { return false; }
-	virtual bool			IsMachineGun() const { return false; }
-	virtual bool			IsBayonetDeployed() const { return false; }
+	virtual bool	IsGrenade() const { return false; }
+	virtual bool	IsMachineGun() const { return false; }
+	virtual bool	IsBayonetDeployed() const { return false; }
 
 #ifdef GAME_DLL
 	virtual void	SendReloadEvents( bool bMidReload = false );

@@ -39,19 +39,20 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponThompson();
+	~CWeaponThompson() override = default;
 
-	void ItemPostFrame();
+	void ItemPostFrame() override;
+	void HandleViewAnimation(int iAnim) override;
+
 	void ToggleFireMode( void );
-	virtual void HandleViewAnimation( int iAnim );
-
 	void StartFireModeToggle();
 	bool HandleFireModeToggle();
 
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_THOMPSON; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_THOMPSON; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( thompson_ironsightsx.GetFloat(), thompson_ironsightsy.GetFloat(), thompson_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( thompson_shoulderx.GetFloat(), thompson_shouldery.GetFloat(), thompson_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() override { return Vector( thompson_ironsightsx.GetFloat(), thompson_ironsightsy.GetFloat(), thompson_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( thompson_shoulderx.GetFloat(), thompson_shouldery.GetFloat(), thompson_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -61,9 +62,6 @@ private:
 	CNetworkVar( bool, m_bAutoFire );
 
 	CWeaponThompson( const CWeaponThompson & );
-
-	void Fire( float flSpread );
-
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponThompson, DT_WeaponThompson )
