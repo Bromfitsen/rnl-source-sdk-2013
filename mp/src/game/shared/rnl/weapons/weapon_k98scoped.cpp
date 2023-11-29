@@ -33,17 +33,15 @@ public:
 	
 	CWeaponKarabiner98Scoped();
 	
-	void PrimaryAttack();
-
-	void ItemPostFrame();
+	void PrimaryAttack() override;
+	void ItemPostFrame() override;
+	void HandleViewAnimation(int iAnim) override;
+	
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_K98SCOPED; }
 
 	void StartCycleBolt();
 	bool HandleCycleBolt();
 	void CycleBolt();
-	
-	void HandleViewAnimation( int iAnim );
-
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_K98SCOPED; }
 
 private:
 	// K98 specific

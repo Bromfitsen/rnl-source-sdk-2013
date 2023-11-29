@@ -35,12 +35,12 @@ public:
 #ifdef GAME_DLL
 	DECLARE_DATADESC();
 #else
-	virtual bool ShouldPredict();
+	bool ShouldPredict() override;
 #endif
 
 	// TF Sprinting functions
-	virtual bool StartSprinting( void ) { return true; };
-	virtual bool StopSprinting( void ) { return true; };
+	bool StartSprinting( void ) override { return true; };
+	bool StopSprinting( void ) override { return true; };
 
 	virtual void NextFirePos( void ) {}
 	virtual void PrevFirePos( void ) {}
@@ -51,9 +51,8 @@ public:
 	virtual bool CanPickup( CRnLPlayer* pPlayer );
 	virtual bool CanHolster( void );
 
-	CNetworkVar( int, m_iWeaponAnimationState );
-	virtual void	SetAnimationState( int iState ) { m_iWeaponAnimationState = iState; }
-	virtual int		GetAnimationState( void )		{ return m_iWeaponAnimationState; }
+	virtual void SetAnimationState( int iState ) { m_iWeaponAnimationState = iState; }
+	virtual int	 GetAnimationState( void )		{ return m_iWeaponAnimationState; }
 
 	virtual bool ShouldUseWeaponActivities( void ) { return false; }
 
@@ -62,7 +61,7 @@ public:
 	virtual void ReturnToDefaultPosture() {}
 
 	// All predicted weapons need to implement and return true
-	virtual bool	IsPredicted() const;
+	bool	IsPredicted() const override;
 	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
 	
 	// Get RnL weapon specific weapon data.
@@ -72,7 +71,7 @@ public:
 	CRnLPlayer* GetPlayerOwner() const;
 
 	// overwrite drop here
-	void Drop( const Vector &vecVelocity );
+	void Drop( const Vector &vecVelocity ) override;
 
 	virtual bool	ShouldUseFreeAim();
 	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents ) {}
@@ -81,8 +80,8 @@ public:
 	// override to play custom empty sounds
 	virtual bool	PlayEmptySound();
 	virtual bool	PlayLastBulletSound();
-	void	SetNewFov( int iNewFov );
 
+	// TODO_KORNEEL Remove these.. Check weapon type instead
 	// Michael Lebson
 	virtual bool			IsGrenade() const { return false; }
 	virtual bool			IsMachineGun() const { return false; }
@@ -96,6 +95,8 @@ public:
 #endif
 
 private:
+	CNetworkVar(int, m_iWeaponAnimationState);
+
 	CWeaponRnLBase( const CWeaponRnLBase & );
 };
 

@@ -30,15 +30,14 @@ public:
 #endif
 	
 	CWeaponM1Carbine();
+	~CWeaponM1Carbine() override = default;
 
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_M1CARBINE; }
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M1CARBINE; }
 
 private:
 
 	CWeaponM1Carbine( const CWeaponM1Carbine & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponM1Carbine, DT_WeaponM1Carbine )

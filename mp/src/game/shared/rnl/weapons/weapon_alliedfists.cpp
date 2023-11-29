@@ -30,14 +30,14 @@ public:
 #endif
 	
 	CWeaponAlliedFists();
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_ALLIEDFISTS; }
+	~CWeaponAlliedFists() override = default;
+
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_ALLIEDFISTS; }
 
 private:
 
 	CWeaponAlliedFists( const CWeaponAlliedFists & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponAlliedFists, DT_WeaponAlliedFists )

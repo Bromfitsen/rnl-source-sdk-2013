@@ -68,7 +68,7 @@ PRECACHE_WEAPON_REGISTER( weapon_sticky24grenade );
 
 bool CSticky24Grenade::CanHolster( void )
 {
-	return ((m_iWeaponAnimationState != WEAPON_ANIMATION_HOLSTER && m_iWeaponAnimationState != WEAPON_ANIMATION_DRAW) || IsSequenceFinished() ) && (m_iGrenadeState <= GRENADE_PREP);
+	return ((GetAnimationState() != WEAPON_ANIMATION_HOLSTER && GetAnimationState() != WEAPON_ANIMATION_DRAW) || IsSequenceFinished() ) && (m_iGrenadeState <= GRENADE_PREP);
 }
 
 #ifdef GAME_DLL

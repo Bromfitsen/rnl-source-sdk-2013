@@ -30,16 +30,17 @@ public:
 	DECLARE_ACTTABLE();
 
 	CM18Grenade() {}
+	~CM18Grenade() override = default;
 
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_M18GRENADE; }
-	virtual bool IsSmokeGrenade( void ) { return true; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M18GRENADE; }
+	bool IsSmokeGrenade( void ) override { return true; }
 
 #ifdef CLIENT_DLL
 
 #else
 	DECLARE_DATADESC();
 
-	virtual void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll );
+	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) override;
 	
 #endif
 

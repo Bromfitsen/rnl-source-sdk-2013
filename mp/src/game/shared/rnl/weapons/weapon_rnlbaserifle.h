@@ -28,33 +28,30 @@ public:
 #endif
 	
 	CWeaponRnLBaseRifle();
-	virtual ~CWeaponRnLBaseRifle();
+	~CWeaponRnLBaseRifle() override;
 
-	void SecondaryAttack( bool bIsSecondary );
-	virtual bool StartSprinting( void );
+	void SecondaryAttack( bool bIsSecondary ); // TODO_KORNEEL What is up with this near-override with weird param?
+	bool StartSprinting( void ) override;
 
 	bool HandleBayonetTransition( void );
 	void BayonetTransition( int iState );
-	bool IsBayonetDeployed() { return m_bDeployed; }
+	bool IsBayonetDeployed() const { return m_bDeployed; }
+	int GetBayonetState(void) const { return m_iBayoAnimState; }
 
-	virtual void HandleViewAnimation( int iAnim );
+	void HandleViewAnimation( int iAnim ) override;
 
-	void ImpactEffect( trace_t &traceHit );
-	bool ImpactWater( const Vector &start, const Vector &end );
-	void Hit( trace_t &traceHit, Activity nHitActivity );
+	void ImpactEffectMelee( trace_t &traceHit );
+	bool ImpactWaterMelee( const Vector &start, const Vector &end );
+	void HitMelee( trace_t &traceHit, Activity nHitActivity );
 
 	Activity ChooseIntersectionPointAndActivity( trace_t &hitTrace, const Vector &mins, const Vector &maxs, CBasePlayer *pOwner );
-	virtual float	GetRange( void )					{	return	96.0f;	}
+	virtual float GetMeleeRange( void ) const {	return	96.0f;	}
 
-	int GetBayonetState( void ) { return m_iBayoAnimState; }
-
-	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_NONE; }
 
 protected:
 
 	CWeaponRnLBaseRifle( const CWeaponRnLBaseRifle & );
-
-	void Fire( float flSpread );
 
 	CNetworkVar( bool, m_bDeployed );
 	CNetworkVar( int, m_iBayoAnimState );

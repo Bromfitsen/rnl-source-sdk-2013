@@ -28,19 +28,23 @@ public:
 #endif
 	
 	CWeaponRnLBallisticBase();
+	~CWeaponRnLBallisticBase() override;
 
-	void PrimaryAttack( void );
-	void WeaponIdle( void );
-	void AddViewKick( int iSeed );
-	virtual bool StartSprinting( void );
-	virtual void HandleViewAnimation( int iAnim );
-	virtual void HandleFoVTransitions( void );
-	virtual bool HandleReloadTransitions( void );
-	virtual bool HandlePostureTransitions( void );
-	bool Reload();
+	void PrimaryAttack( void ) override;
+	void WeaponIdle( void ) override;
+	
+	bool StartSprinting( void ) override;
+	void HandleViewAnimation( int iAnim ) override;
 
-	bool Deploy();
-	bool Holster( CBaseCombatWeapon *pSwitchingTo = NULL );
+	virtual void AddViewKick(int iSeed);
+
+	bool Reload() override;
+
+	bool Deploy() override;
+
+	// dont let it holster if in IS
+	bool CanHolster(void) override;
+	bool Holster( CBaseCombatWeapon *pSwitchingTo = NULL ) override;
 
 	virtual void NextFirePos();
 	virtual void PrevFirePos();
@@ -53,9 +57,6 @@ public:
 
 	void ReloadTransition( int iState );
 	virtual bool CheckChamber();
-
-	// dont let it holster if in IS
-	bool CanHolster( void );
 	
 	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents );
 
@@ -81,16 +82,18 @@ public:
 	virtual	float	CalcViewmodelBob( void );
 
 protected:
-	virtual bool OnIronsightsUnheld( void );
-	virtual bool OnIronsightsHeld( void );
+	void HandleFoVTransitions(void);
+	bool HandleReloadTransitions(void);
+	bool HandlePostureTransitions(void);
+
+	bool OnIronsightsUnheld( void );
+	bool OnIronsightsHeld( void );
 
 	CNetworkVar( float, m_flIronsightsPressedTime );
 
 private:
 
 	CWeaponRnLBallisticBase( const CWeaponRnLBallisticBase & );
-
-	void Fire( float flSpread );
 
 	CNetworkVar( int, m_iReloadState );
 

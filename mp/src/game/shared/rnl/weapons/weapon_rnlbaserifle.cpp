@@ -51,7 +51,7 @@ CWeaponRnLBaseRifle::~CWeaponRnLBaseRifle()
 {
 }
 
-void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary )
+void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary ) // TODO_KORNEEL What is up with this non-override with weird param?
 {
 	if( !m_bDeployed )
 		return;
@@ -68,7 +68,7 @@ void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary )
 
 	pPlayer->EyeVectors( &forward, NULL, NULL );
 
-	Vector swingEnd = swingStart + forward * GetRange();
+	Vector swingEnd = swingStart + forward * GetMeleeRange();
 	UTIL_TraceLine( swingStart, swingEnd, MASK_SHOT_HULL, pPlayer, COLLISION_GROUP_NONE, &traceHit );
 	Activity nHitActivity = ACT_VM_HITCENTER;
 
@@ -114,10 +114,10 @@ void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary )
 		nHitActivity = bIsSecondary ? ACT_VM_MISSCENTER2 : ACT_VM_MISSCENTER;
 
 		// We want to test the first swing again
-		Vector testEnd = swingStart + forward * GetRange();
+		Vector testEnd = swingStart + forward * GetMeleeRange();
 
 		// See if we happened to hit water
-		ImpactWater( swingStart, testEnd );
+		ImpactWaterMelee( swingStart, testEnd );
 #ifdef CLIENT_DLL
 		FX_WeaponSound( pPlayer->entindex(), MELEE_MISS, swingStart, (CRnLWeaponInfo *)GetFileWeaponInfoFromHandle( GetWeaponFileInfoHandle() ) );
 #else
@@ -126,7 +126,7 @@ void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary )
 	}
 	else
 	{
-		Hit( traceHit, nHitActivity );
+		HitMelee( traceHit, nHitActivity );
 
 #ifndef CLIENT_DLL
 		// Play the correct softimpact sound for the material hit.
@@ -153,7 +153,7 @@ void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary )
 	m_flNextPrimaryAttack = m_flNextSecondaryAttack = gpGlobals->curtime + SequenceDuration();
 }
 
-void CWeaponRnLBaseRifle::Hit( trace_t &traceHit, Activity nHitActivity )
+void CWeaponRnLBaseRifle::HitMelee( trace_t &traceHit, Activity nHitActivity )
 {
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 
@@ -189,7 +189,7 @@ void CWeaponRnLBaseRifle::Hit( trace_t &traceHit, Activity nHitActivity )
 	}
 
 	// Apply an impact effect
-	ImpactEffect( traceHit );
+	ImpactEffectMelee( traceHit );
 }
 
 bool CWeaponRnLBaseRifle::StartSprinting( void )
@@ -318,10 +318,10 @@ void CWeaponRnLBaseRifle::BayonetTransition( int iState )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponRnLBaseRifle::ImpactEffect( trace_t &traceHit )
+void CWeaponRnLBaseRifle::ImpactEffectMelee( trace_t &traceHit )
 {
 	// See if we hit water (we don't do the other impact effects in this case)
-	if ( ImpactWater( traceHit.startpos, traceHit.endpos ) )
+	if ( ImpactWaterMelee( traceHit.startpos, traceHit.endpos ) )
 		return;
 
 	//FIXME: need new decals
@@ -332,7 +332,7 @@ void CWeaponRnLBaseRifle::ImpactEffect( trace_t &traceHit )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-bool CWeaponRnLBaseRifle::ImpactWater( const Vector &start, const Vector &end )
+bool CWeaponRnLBaseRifle::ImpactWaterMelee( const Vector &start, const Vector &end )
 {
 	//FIXME: This doesn't handle the case of trying to splash while being underwater, but that's not going to look good
 	//		 right now anyway...
