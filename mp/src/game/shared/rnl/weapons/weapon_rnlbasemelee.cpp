@@ -92,7 +92,7 @@ void CWeaponRnLBaseMelee::PrimaryAttack()
 
 	pPlayer->EyeVectors( &forward, NULL, NULL );
 
-	Vector swingEnd = swingStart + forward * GetRange();
+	Vector swingEnd = swingStart + forward * GetMeleeRange();
 	UTIL_TraceLine( swingStart, swingEnd, MASK_SHOT_HULL, pPlayer, COLLISION_GROUP_NONE, &traceHit );
 
 #ifndef CLIENT_DLL
@@ -142,10 +142,10 @@ void CWeaponRnLBaseMelee::PrimaryAttack()
 	if ( traceHit.fraction == 1.0f )
 	{
 		// We want to test the first swing again
-		Vector testEnd = swingStart + forward * GetRange();
+		Vector testEnd = swingStart + forward * GetMeleeRange();
 
 		// See if we happened to hit water
-		ImpactWater( swingStart, testEnd );
+		ImpactWaterMelee( swingStart, testEnd );
 #ifdef CLIENT_DLL
 		FX_WeaponSound( pPlayer->entindex(), MELEE_MISS, swingStart, (CRnLWeaponInfo *)GetFileWeaponInfoFromHandle( GetWeaponFileInfoHandle() ) );
 #else
@@ -154,7 +154,7 @@ void CWeaponRnLBaseMelee::PrimaryAttack()
 	}
 	else
 	{
-		Hit( traceHit, iDamage );
+		HitMelee( traceHit, iDamage );
 
 #ifndef CLIENT_DLL
 		// Play the correct softimpact sound for the material hit.
@@ -176,7 +176,7 @@ void CWeaponRnLBaseMelee::PrimaryAttack()
 	}
 }
 
-void CWeaponRnLBaseMelee::Hit( trace_t &traceHit, int iDamage )
+void CWeaponRnLBaseMelee::HitMelee( trace_t &traceHit, int iDamage )
 {
 	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 
@@ -212,16 +212,16 @@ void CWeaponRnLBaseMelee::Hit( trace_t &traceHit, int iDamage )
 	}
 
 	// Apply an impact effect
-	ImpactEffect( traceHit );
+	ImpactEffectMelee( traceHit );
 }
 
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-void CWeaponRnLBaseMelee::ImpactEffect( trace_t &traceHit )
+void CWeaponRnLBaseMelee::ImpactEffectMelee( trace_t &traceHit )
 {
 	// See if we hit water (we don't do the other impact effects in this case)
-	if ( ImpactWater( traceHit.startpos, traceHit.endpos ) )
+	if ( ImpactWaterMelee( traceHit.startpos, traceHit.endpos ) )
 		return;
 
 	//FIXME: need new decals
@@ -232,7 +232,7 @@ void CWeaponRnLBaseMelee::ImpactEffect( trace_t &traceHit )
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-bool CWeaponRnLBaseMelee::ImpactWater( const Vector &start, const Vector &end )
+bool CWeaponRnLBaseMelee::ImpactWaterMelee( const Vector &start, const Vector &end )
 {
 	//FIXME: This doesn't handle the case of trying to splash while being underwater, but that's not going to look good
 	//		 right now anyway...

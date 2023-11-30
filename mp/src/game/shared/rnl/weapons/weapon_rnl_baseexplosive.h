@@ -35,19 +35,21 @@ public:
 
 	CWeaponRnLBaseExplosive();
 
-	virtual void	Precache();
+	void Precache() override;
 
-	bool			Deploy();
-	bool			CanDeploy();
-	bool			Holster( CBaseCombatWeapon *pSwitchingTo );
+	bool Deploy() override;
+	bool CanDeploy() override;
+	bool Holster( CBaseCombatWeapon *pSwitchingTo ) override;
 
-	void			PrimaryAttack();
-	virtual void	ItemPostFrame();
+	void PrimaryAttack() override;
+	void ItemPostFrame() override ;
 
-	virtual void	PlantExplosive( void ) { }
-	virtual bool	ShouldUseWeaponActivities( void ) { return true; }
-	virtual void	HandleViewAnimation( int iAnim );
-	virtual void	WeaponIdle( void );
+	void HandleViewAnimation(int iAnim) override;
+	void WeaponIdle(void) override;
+
+	bool ShouldUseWeaponActivities(void) override { return true; }
+
+	virtual void PlantExplosive( void ) { }
 
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();

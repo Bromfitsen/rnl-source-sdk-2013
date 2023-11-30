@@ -30,17 +30,17 @@ public:
 #endif
 	
 	CWeaponGewehr43();
-	void Precache();
-	bool PlayLastBulletSound();
+	~CWeaponGewehr43() override = default;
 
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_G43; }
+	void Precache() override;
+	bool PlayLastBulletSound() override;
+
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_G43; }
 
 private:
 
 	CWeaponGewehr43( const CWeaponGewehr43 & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponGewehr43, DT_WeaponGewehr43 )

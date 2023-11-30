@@ -43,25 +43,24 @@ public:
 	~CRnLPlayer();
 
 	static CRnLPlayer *CreatePlayer( const char *className, edict_t *ed );
-	static CRnLPlayer* Instance( int iEnt );
 
 	// This passes the event to the client's and server's CPlayerAnimState.
 	void DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
 
-	virtual void PreThink() OVERRIDE;
-	virtual void PostThink() OVERRIDE;
-	virtual void ItemPostFrame( void ) OVERRIDE;
-	virtual void Spawn() OVERRIDE;
-	virtual void InitialSpawn() OVERRIDE;
-	virtual void Precache() OVERRIDE;
-	virtual int	 OnTakeDamage( const CTakeDamageInfo &info ) OVERRIDE;
-	virtual void Event_Killed( const CTakeDamageInfo &info ) OVERRIDE;
-	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) OVERRIDE;
-	virtual void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles ) OVERRIDE;
+	virtual void PreThink() override;
+	virtual void PostThink() override;
+	virtual void ItemPostFrame( void ) override;
+	virtual void Spawn() override;
+	virtual void InitialSpawn() override;
+	virtual void Precache() override;
+	virtual int	 OnTakeDamage( const CTakeDamageInfo &info ) override;
+	virtual void Event_Killed( const CTakeDamageInfo &info ) override;
+	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) override;
+	virtual void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles ) override;
 
-	virtual CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 ) OVERRIDE;
+	virtual CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 ) override;
 
-	virtual bool BumpWeapon( CBaseCombatWeapon *pWeapon ) OVERRIDE;
+	virtual bool BumpWeapon( CBaseCombatWeapon *pWeapon ) override;
 
 	//RnL : MovementMod : Begin
 	//MovementMod : Add these to gain access to the movement posture stuff

@@ -23,17 +23,17 @@ public:
 	CWeaponRnLBaseMachineGun();
 	virtual ~CWeaponRnLBaseMachineGun();
 
-	virtual bool			StartSprinting( void ) { return false; }
-	virtual bool ShouldUseWeaponActivities( void ) { return true; }
+	bool StartSprinting( void ) override { return false; }
+	bool ShouldUseWeaponActivities( void ) override { return true; }
 
-	bool IsDeployed() { return m_bDeployed; }
+	bool IsDeployed() const { return m_bDeployed; }
 	void ToggleDeploy();
 	bool CheckUnDeploy( void );
 
-	bool Deploy();
+	bool Deploy() override;
 
 	void HandleShotDelay( void );
-	float GetRecoil( void );
+	float GetRecoil( void ) override ;
 
 	void HandleViewAnimation( int iAnim );
 
@@ -42,21 +42,21 @@ public:
 	void SetLastShotTime( float time, float penalty ) { m_flLastShotTime = time; m_flAccuracyPenalty += penalty; }
 
 	//A NO NO if we are deployededed
-	virtual bool CanHolster( void );
+	bool CanHolster( void ) override;
 
-	virtual bool CanClimb( void ) { return !(m_bDeployed); }
+	bool CanClimb( void ) override { return !(m_bDeployed); }
 
-	virtual float GetSpread( void );
+	float GetSpread( void ) override;
 
-	virtual bool	ShouldUseFreeAim() { return m_bDeployed; }
-	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents );
+	bool	ShouldUseFreeAim() override { return m_bDeployed; }
+	void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents ) override;
 
 	virtual float		GetStandOffset() { return 10.0f; }
 	virtual const char*	GetTracerType( void ) { return "Tracer"; }
 
 	//Michael Lebson
-	virtual bool			IsMachineGun() const { return true; }
-	virtual bool			ShouldMakeTracer();
+	bool			IsMachineGun() const override { return true; }
+	virtual bool	ShouldMakeTracer();
 
 #ifndef CLIENT_DLL
 	//virtual void HandleSuppression( void );
@@ -65,8 +65,6 @@ public:
 private:
 
 	CWeaponRnLBaseMachineGun( const CWeaponRnLBaseMachineGun & );
-
-	void Fire( float flSpread );
 
 	CNetworkVar( bool, m_bDeployed );
 	CNetworkVar( int, m_iBarrelAnimState );

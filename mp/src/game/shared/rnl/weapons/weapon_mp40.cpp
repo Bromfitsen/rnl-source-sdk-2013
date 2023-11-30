@@ -34,21 +34,20 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponMP40();
+	~CWeaponMP40() override = default;
 
-	void ItemPostFrame();
+	void ItemPostFrame() override;
 
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_MP40; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_MP40; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( mp40_ironsightsx.GetFloat(), mp40_ironsightsy.GetFloat(), mp40_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( mp40_shoulderx.GetFloat(), mp40_shouldery.GetFloat(), mp40_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() override { return Vector( mp40_ironsightsx.GetFloat(), mp40_ironsightsy.GetFloat(), mp40_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( mp40_shoulderx.GetFloat(), mp40_shouldery.GetFloat(), mp40_shoulderz.GetFloat() ); }
 #endif
 
 private:
 
 	CWeaponMP40( const CWeaponMP40 & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponMP40, DT_WeaponMP40 )

@@ -32,21 +32,21 @@ public:
 	DECLARE_ACTTABLE();
 	
 	CWeaponColt();
-	void Precache();
-	bool PlayLastBulletSound();
+	~CWeaponColt() override = default;
 
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_COLT; }
+	void Precache() override;
+	bool PlayLastBulletSound() override;
+
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_COLT; }
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( colt_ironsightsx.GetFloat(), colt_ironsightsy.GetFloat(), colt_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( colt_shoulderx.GetFloat(), colt_shouldery.GetFloat(), colt_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() override { return Vector( colt_ironsightsx.GetFloat(), colt_ironsightsy.GetFloat(), colt_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( colt_shoulderx.GetFloat(), colt_shouldery.GetFloat(), colt_shoulderz.GetFloat() ); }
 #endif
 
 private:
 
 	CWeaponColt( const CWeaponColt & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponColt, DT_WeaponColt )
@@ -105,7 +105,7 @@ LINK_ENTITY_TO_CLASS( weapon_colt, CWeaponColt );
 
 PRECACHE_WEAPON_REGISTER( weapon_colt );
 
-CWeaponColt::CWeaponColt()
+CWeaponColt::CWeaponColt()  : CWeaponRnLBasePistol()
 {
 
 }
