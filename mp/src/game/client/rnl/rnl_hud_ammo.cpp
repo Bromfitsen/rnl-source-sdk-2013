@@ -26,13 +26,13 @@ class CHudAmmo : public CHudElement, public vgui::Panel
 
 public:
 	CHudAmmo( const char *pElementName );
-	void Init( void );
-	void VidInit( void );
-	void LevelInit( void );
-	void ApplySchemeSettings( vgui::IScheme *scheme );
-	void Reset();
-	bool ShouldDraw();	
-	void Paint();
+	void Init( void ) OVERRIDE;
+	void VidInit( void ) OVERRIDE;
+	void LevelInit( void ) OVERRIDE;
+	void ApplySchemeSettings( vgui::IScheme *scheme ) OVERRIDE;
+	void Reset() OVERRIDE;
+	bool ShouldDraw() OVERRIDE;
+	void Paint() OVERRIDE;
 
 private:
 	CHudTexture *m_pAmmoIcons[MAX_AMMO_TYPES][2];

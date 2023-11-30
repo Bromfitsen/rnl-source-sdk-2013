@@ -11,7 +11,7 @@ public:
 
 public:
 	void CreateMine( const char* pszModelName );
-	void Spawn( void );
+	void Spawn( void ) OVERRIDE;
 	void ExplodeThink( void );
 
 	// Input function

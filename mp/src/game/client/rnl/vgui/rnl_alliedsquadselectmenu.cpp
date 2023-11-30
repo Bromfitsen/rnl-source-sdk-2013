@@ -167,10 +167,11 @@ void CRnLAlliedSquadSelectMenu::ShowPanel(bool bShow)
 		}
 
 		SetVisible( false );
-		SetMouseInputEnabled( false );
-		SetKeyBoardInputEnabled( false );
 
 		Reset();
+
+		SetMouseInputEnabled( false );
+		SetKeyBoardInputEnabled( false );
 
 		CSpectatorGUI *specPanel = (CSpectatorGUI*)gViewPortInterface->FindPanelByName( PANEL_SPECGUI );
 		CRnLPlayer* pRnLPlayer = CRnLPlayer::GetLocalRnLPlayer();

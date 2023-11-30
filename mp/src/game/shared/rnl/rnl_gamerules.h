@@ -124,33 +124,35 @@ public:
 	CRnLGameRules();
 	virtual ~CRnLGameRules();
 	
-	virtual const	unsigned char *GetEncryptionKey() { return (unsigned char *)"?rmh$SFV"; }
-	virtual bool	ShouldCollide( int collisionGroup0, int collisionGroup1 );
+	const	unsigned char *GetEncryptionKey() OVERRIDE { return (unsigned char *)"?rmh$SFV"; }
+	bool	ShouldCollide( int collisionGroup0, int collisionGroup1 ) OVERRIDE;
 
-	virtual int		PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarget );
-	virtual bool	IsTeamplay( void ) { return true;	}
+#ifndef CLIENT_DLL
+	int		PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarget ) OVERRIDE;
+	bool	IsTeamplay( void ) OVERRIDE { return true;	}
+#endif
 
-	virtual bool	IsConnectedUserInfoChangeAllowed(CBasePlayer* pPlayer) OVERRIDE;
+	bool	IsConnectedUserInfoChangeAllowed(CBasePlayer* pPlayer) OVERRIDE;
 
 	// Get the view vectors for this mod.
-	virtual const CViewVectors* GetViewVectors() const OVERRIDE;
+	const CViewVectors* GetViewVectors() const OVERRIDE;
 
 	KeyValues*		GetTeamData( int iTeam );
 	int				GetTeamCount( int iTeam );
 
 	//IRnLObjectiveListener
-	virtual void			RegisterObjective( IRnLObjective* pObjective );
-	virtual void			RemoveObjective( IRnLObjective* pObjective );
-	virtual IRnLObjective*	GetObjective( IRnLObjective* pCurrent );
+	void			RegisterObjective( IRnLObjective* pObjective ) OVERRIDE;
+	void			RemoveObjective( IRnLObjective* pObjective ) OVERRIDE;
+	IRnLObjective*	GetObjective( IRnLObjective* pCurrent ) OVERRIDE;
 	virtual IRnLObjective*	GetObjective( const char* pszName );
-	virtual void			ObjectiveStateChange( IRnLObjective* pObjective );
+	void			ObjectiveStateChange( IRnLObjective* pObjective ) OVERRIDE;
 
 	inline rnl_gamerules_roundstate_t State_Get( void ) { return m_iRoundState; }
 
 	//Timer Access
 #ifndef CLIENT_DLL
 		// Setup g_pPlayerResource (some mods use a different entity type here).
-	virtual void CreateStandardEntities();
+	void CreateStandardEntities() OVERRIDE;
 	virtual void				InitialiseGameManager( void );
 #endif
 	virtual CRnLGameManager*	GetGameManager( void );
@@ -172,20 +174,20 @@ public:
 
 	DECLARE_SERVERCLASS_NOBASE(); // This makes datatables able to access our private vars.
 
-	virtual bool Init();
-	virtual void InitDefaultAIRelationships(void);
-	virtual bool ClientCommand( CBaseEntity *pEdict, const CCommand &args );
-	virtual void ClientSettingsChanged( CBasePlayer *pPlayer );
-	virtual void RadiusDamage( const CTakeDamageInfo &info, const Vector &vecSrcIn, float flRadius, int iClassIgnore );
-	virtual bool FPlayerCanRespawn( CBasePlayer *pPlayer );
-	virtual CBaseEntity *GetPlayerSpawnSpot( CBasePlayer *pPlayer );
-	virtual void Think();
-	virtual void GetNextLevelName( char *szNextMap, int bufsize );
+	bool Init() OVERRIDE;
+	void InitDefaultAIRelationships(void) OVERRIDE;
+	bool ClientCommand( CBaseEntity *pEdict, const CCommand &args ) OVERRIDE;
+	void ClientSettingsChanged( CBasePlayer *pPlayer ) OVERRIDE;
+	void RadiusDamage(const CTakeDamageInfo& info, const Vector& vecSrc, float flRadius, int iClassIgnore, CBaseEntity* pEntityIgnore) OVERRIDE;
+	bool FPlayerCanRespawn( CBasePlayer *pPlayer ) OVERRIDE;
+	CBaseEntity *GetPlayerSpawnSpot( CBasePlayer *pPlayer ) OVERRIDE;
+	void Think() OVERRIDE;
+	void GetNextLevelName( char *szNextMap, int bufsize, bool bRandom = false ) OVERRIDE;
 
-	virtual const char *GetChatPrefix( bool bTeamOnly, CBasePlayer *pPlayer );
+	const char *GetChatPrefix( bool bTeamOnly, CBasePlayer *pPlayer ) OVERRIDE;
 
 	//
-	virtual void RoundStart( void );
+	virtual void RoundStart( void ) ;
 	virtual void RoundEnd( int iWinningTeam = -1, bool bForceMapChange = false );
 	virtual void RoundRespawn( void );
 	virtual void CheckRoundRestart( void );
@@ -205,7 +207,7 @@ public:
 
 	
 public:
-	virtual const char *GetGameDescription( void ) { return "Resistance and Liberation"; }  // this is the game name that gets seen in the server browser
+	const char *GetGameDescription( void ) OVERRIDE { return "Resistance and Liberation"; }  // this is the game name that gets seen in the server browser
 
 	//State Machine lifted from Teamplay Roundbased
 	static CRnLGameRulesRoundStateInfo* State_LookupInfo( rnl_gamerules_roundstate_t state );	// Find the state info for the specified state.

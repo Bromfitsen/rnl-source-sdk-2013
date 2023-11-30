@@ -30,10 +30,10 @@ public:
 #endif
 	
 	CWeaponM1Carbine();
-	~CWeaponM1Carbine() override = default;
+	~CWeaponM1Carbine() = default;
 
-	void ItemPostFrame() override;
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M1CARBINE; }
+	void ItemPostFrame() OVERRIDE;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_M1CARBINE; }
 
 private:
 

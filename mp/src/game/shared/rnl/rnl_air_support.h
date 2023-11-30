@@ -32,8 +32,8 @@ public:
 
 	CRnLAirSupport();
 
-	virtual void Precache( void );
-	virtual void Spawn( void );
+	void Precache( void ) OVERRIDE;
+	void Spawn( void ) OVERRIDE;
 	//virtual void UpdateOnRemove();
 
 #ifdef CLIENT_DLL

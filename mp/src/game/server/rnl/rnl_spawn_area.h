@@ -28,15 +28,15 @@ public:
 	
 	bool OnPlayerSpawn( CBasePlayer* pPlayer );
 
-	void Activate();
-	void Spawn();
-	void Think();
+	void Activate() OVERRIDE;
+	void Spawn() OVERRIDE;
+	void Think() OVERRIDE;
 
-	int UpdateTransmitState(){ return SetTransmitState( FL_EDICT_ALWAYS ); }
+	int UpdateTransmitState() OVERRIDE { return SetTransmitState( FL_EDICT_ALWAYS ); }
 	//Andrew : Let the mappers specify which direction for the player to
 	//         be facing when they spawn.
 	QAngle GetPlayerDirection( void ){ return m_angPlayerFaceDir; }
-	void Reset( void ){ ChangeTeam( m_iIntitialOwner ); }
+	void Reset( void ) { ChangeTeam( m_iIntitialOwner ); }
 
 private:
 

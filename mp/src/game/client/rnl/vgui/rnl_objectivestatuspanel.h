@@ -55,10 +55,10 @@ public:
 	CRnLObjectiveStatusPanel( bool primaryObjectives, CRnLMapPanel *pMapParent, vgui::Panel *pParent, const char *pName );
 	~CRnLObjectiveStatusPanel();
 
-	virtual void Paint( void );
-	virtual void PaintBackground( void ) {}
-	virtual void Update( void );
-	virtual void Initialise( KeyValues* pMapInfo );
+	 void Paint( void ) OVERRIDE;
+	 void PaintBackground( void ) OVERRIDE {}
+	 void Update( void );
+	 void Initialise( KeyValues* pMapInfo );
 
 private:
 	CRnLMapPanel*				m_pMapParent;

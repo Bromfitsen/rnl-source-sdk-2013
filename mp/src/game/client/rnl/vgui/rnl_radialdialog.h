@@ -27,23 +27,23 @@ public:
 	CRnLRadialDialog( IViewPort *pViewPort );
 	~CRnLRadialDialog();
 
-	virtual const char *GetName( void ) { return PANEL_RADIAL; }
-	virtual void SetData(KeyValues *data) {}
-	virtual void Reset();
-	virtual void Update();
-	virtual bool NeedsUpdate( void );
-	virtual bool HasInputElements( void ) { return false; }
-	virtual void ShowPanel( bool bShow );
+	const char *GetName( void ) OVERRIDE { return PANEL_RADIAL; }
+	void SetData(KeyValues *data) OVERRIDE {}
+	void Reset() OVERRIDE;
+	void Update() OVERRIDE;
+	bool NeedsUpdate( void ) OVERRIDE;
+	bool HasInputElements( void ) OVERRIDE { return false; }
+	void ShowPanel( bool bShow ) OVERRIDE;
 
 	// both vgui::Frame and IViewPortPanel define these, so explicitly define them here as passthroughs to vgui
-	vgui::VPANEL GetVPanel( void ) { return BaseClass::GetVPanel(); }
-  	virtual bool IsVisible() { return BaseClass::IsVisible(); }
-  	virtual void SetParent( vgui::VPANEL parent ) { BaseClass::SetParent( parent ); }
+	vgui::VPANEL GetVPanel( void ) OVERRIDE { return BaseClass::GetVPanel(); }
+  	bool IsVisible() OVERRIDE  { return BaseClass::IsVisible(); }
+	void SetParent( vgui::VPANEL parent ) OVERRIDE { BaseClass::SetParent( parent ); }
 	
 protected:
 
-	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
-	virtual void PostApplySchemeSettings( vgui::IScheme *pScheme );
+	 void ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
+	 void PostApplySchemeSettings( vgui::IScheme *pScheme );
 
 private:
 	float m_fNextUpdateTime;

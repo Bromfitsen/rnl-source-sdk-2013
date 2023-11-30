@@ -28,17 +28,17 @@ public:
 #endif
 	
 	CWeaponRnLBaseRifle();
-	~CWeaponRnLBaseRifle() override;
+	virtual ~CWeaponRnLBaseRifle();
 
-	void SecondaryAttack( bool bIsSecondary ); // TODO_KORNEEL What is up with this near-override with weird param?
-	bool StartSprinting( void ) override;
+	void SecondaryAttack( void ) OVERRIDE; // TODO_KORNEEL What is up with this near-override with weird param?
+	bool StartSprinting( void ) OVERRIDE;
 
 	bool HandleBayonetTransition( void );
 	void BayonetTransition( int iState );
 	bool IsBayonetDeployed() const { return m_bDeployed; }
 	int GetBayonetState(void) const { return m_iBayoAnimState; }
 
-	void HandleViewAnimation( int iAnim ) override;
+	void HandleViewAnimation( int iAnim ) OVERRIDE;
 
 	void ImpactEffectMelee( trace_t &traceHit );
 	bool ImpactWaterMelee( const Vector &start, const Vector &end );

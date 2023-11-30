@@ -39,21 +39,21 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponBAR();
-	~CWeaponBAR() override = default;
+	~CWeaponBAR() = default;
 
-	void ItemPostFrame() override;
-	void HandleViewAnimation( int iAnim ) override;
+	void ItemPostFrame() OVERRIDE;
+	void HandleViewAnimation( int iAnim ) OVERRIDE;
 
 	void ToggleFireMode(void);
 
 	void StartFireModeToggle();
 	bool HandleFireModeToggle();
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_BAR; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_BAR; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset() override { return Vector( bar_ironsightsx.GetFloat(), bar_ironsightsy.GetFloat(), bar_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( bar_shoulderx.GetFloat(), bar_shouldery.GetFloat(), bar_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( bar_ironsightsx.GetFloat(), bar_ironsightsy.GetFloat(), bar_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( bar_shoulderx.GetFloat(), bar_shouldery.GetFloat(), bar_shoulderz.GetFloat() ); }
 #endif
 
 private:

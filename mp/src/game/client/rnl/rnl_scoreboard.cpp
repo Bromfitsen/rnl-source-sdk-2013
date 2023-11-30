@@ -131,7 +131,7 @@ void CRnLScoreboard::InitScoreboardSections()
 	// fill out the structure of the scoreboard
 	AddHeader();
 
-	if ( RnLGameRules() && RnLGameRules()->IsTeamplay() )
+	if ( RnLGameRules() )
 	{
 		m_iSectionId = 2;
 

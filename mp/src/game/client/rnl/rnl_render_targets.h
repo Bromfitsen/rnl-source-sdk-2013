@@ -24,8 +24,8 @@ class CRnLRenderTargets : public CBaseClientRenderTargets
 	// no networked vars
 	DECLARE_CLASS_GAMEROOT( CRnLRenderTargets, CBaseClientRenderTargets );
 public:
-	virtual void InitClientRenderTargets( IMaterialSystem* pMaterialSystem, IMaterialSystemHardwareConfig* pHardwareConfig );
-	virtual void ShutdownClientRenderTargets();
+	void InitClientRenderTargets( IMaterialSystem* pMaterialSystem, IMaterialSystemHardwareConfig* pHardwareConfig ) OVERRIDE;
+	void ShutdownClientRenderTargets() OVERRIDE;
 
 private:
 	

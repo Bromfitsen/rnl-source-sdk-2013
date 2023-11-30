@@ -51,7 +51,7 @@ CWeaponRnLBaseRifle::~CWeaponRnLBaseRifle()
 {
 }
 
-void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary ) // TODO_KORNEEL What is up with this non-override with weird param?
+void CWeaponRnLBaseRifle::SecondaryAttack(void) // TODO_KORNEEL What is up with this non-override with weird param?
 {
 	if( !m_bDeployed )
 		return;
@@ -111,7 +111,7 @@ void CWeaponRnLBaseRifle::SecondaryAttack( bool bIsSecondary ) // TODO_KORNEEL W
 	// -------------------------
 	if ( traceHit.fraction == 1.0f )
 	{
-		nHitActivity = bIsSecondary ? ACT_VM_MISSCENTER2 : ACT_VM_MISSCENTER;
+		nHitActivity = ACT_VM_MISSCENTER2;
 
 		// We want to test the first swing again
 		Vector testEnd = swingStart + forward * GetMeleeRange();

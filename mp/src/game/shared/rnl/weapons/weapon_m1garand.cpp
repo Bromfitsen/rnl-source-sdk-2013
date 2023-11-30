@@ -40,22 +40,21 @@ public:
 #endif
 	
 	CWeaponM1Garand();
-	~CWeaponM1Garand() override = default;
+	~CWeaponM1Garand() = default;
 
-	void Precache( void ) override;
+	void Precache( void ) OVERRIDE;
 	
-	bool PlayLastBulletSound( void ) override;
-	void ItemPostFrame( void ) override;
+	bool PlayLastBulletSound( void ) OVERRIDE;
+	void ItemPostFrame( void ) OVERRIDE;
+	const char* GetWorldModel(void) const OVERRIDE;
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M1GARAND; }
-
-	const char* GetWorldModel(void) const override;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_M1GARAND; }
 
 #ifdef CLIENT_DLL
-	int	GetWorldModelIndex(void) override;
+	int	GetWorldModelIndex(void) OVERRIDE;
 
-	Vector	GetIronsightsOffset() override { return Vector( garand_ironsightsx.GetFloat(), garand_ironsightsy.GetFloat(), garand_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( garand_shoulderx.GetFloat(), garand_shouldery.GetFloat(), garand_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( garand_ironsightsx.GetFloat(), garand_ironsightsy.GetFloat(), garand_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( garand_shoulderx.GetFloat(), garand_shouldery.GetFloat(), garand_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -218,7 +217,7 @@ void CWeaponM1Garand::ItemPostFrame()
 		{
 			if ( gpGlobals->curtime >= m_flNextSecondaryAttack )
 			{
-				SecondaryAttack( true );
+				SecondaryAttack();
 			}
 		}
 

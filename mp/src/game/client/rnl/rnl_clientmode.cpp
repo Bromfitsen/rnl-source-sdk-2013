@@ -77,10 +77,10 @@ static void __MsgFunc_BlurVision( bf_read &msg )
 class CRnLModeManager : public IVModeManager
 {
 public:
-	virtual void	Init();
-	virtual void	SwitchMode( bool commander, bool force ) {}
-	virtual void	LevelInit( const char *newmap );
-	virtual void	LevelShutdown( void );
+	void	Init() OVERRIDE;
+	void	SwitchMode( bool commander, bool force ) OVERRIDE {}
+	void	LevelInit( const char *newmap ) OVERRIDE;
+	void	LevelShutdown( void ) OVERRIDE;
 	virtual void	ActivateMouse( bool isactive ) {}
 };
 

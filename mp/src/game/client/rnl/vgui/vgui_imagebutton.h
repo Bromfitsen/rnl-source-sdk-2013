@@ -17,13 +17,12 @@ class ImageButton : public vgui::ImagePanel
 public:
 	ImageButton( Panel *parent, const char *panelName, const char *normalImage, const char *mouseOverImage = NULL, const char *mouseClickImage = NULL, const char *pCmd=NULL ); //: ImagePanel( parent, panelName );
  
-	virtual void OnCursorEntered(); // When the mouse hovers over this panel, change images
-	virtual void OnCursorExited(); // When the mouse leaves this panel, change back
+	void OnCursorEntered() OVERRIDE; // When the mouse hovers over this panel, change images
+	void OnCursorExited() OVERRIDE; // When the mouse leaves this panel, change back
  
-	virtual void OnMouseReleased( vgui::MouseCode code );
- 
-	virtual void OnMousePressed( vgui::MouseCode code );
- 
+	void OnMousePressed(vgui::MouseCode code) OVERRIDE;
+	void OnMouseReleased( vgui::MouseCode code ) OVERRIDE;
+	
 	void SetNormalImage( void );
 	void SetMouseOverImage( void );
 	void SetMouseClickImage( void );
@@ -43,7 +42,7 @@ private:
 	bool hasMouseOverImage; // If this changes images when the mouse is hovering over it
 	bool hasMouseClickImage; // If this changes images when the mouse is clicking it
  
-	virtual void SetImage( vgui::IImage *image ); //Private because this really shouldnt be changed
+	void SetImage( vgui::IImage *image ) OVERRIDE; //Private because this really shouldnt be changed
 };
  
 } //namespace vgui

@@ -32,31 +32,31 @@ class CHudWeaponSelection : public CBaseHudWeaponSelection, public vgui::Panel
 public:
 	CHudWeaponSelection(const char *pElementName );
 
-	virtual bool ShouldDraw();
-	virtual void OnWeaponPickup( C_BaseCombatWeapon *pWeapon );
+	bool ShouldDraw() OVERRIDE;
+	void OnWeaponPickup( C_BaseCombatWeapon *pWeapon ) OVERRIDE;
 
-	virtual void CycleToNextWeapon( void );
-	virtual void CycleToPrevWeapon( void );
+	void CycleToNextWeapon( void ) OVERRIDE;
+	void CycleToPrevWeapon( void ) OVERRIDE;
 
-	virtual C_BaseCombatWeapon *GetWeaponInSlot( int iSlot, int iSlotPos );
-	virtual void SelectWeaponSlot( int iSlot );
+	C_BaseCombatWeapon *GetWeaponInSlot( int iSlot, int iSlotPos ) OVERRIDE;
+	void SelectWeaponSlot( int iSlot ) OVERRIDE;
 
-	virtual C_BaseCombatWeapon	*GetSelectedWeapon( void )
+	C_BaseCombatWeapon	*GetSelectedWeapon( void ) OVERRIDE
 	{ 
 		return m_hSelectedWeapon;
 	}
 
-	virtual void OpenSelection( void );
-	virtual void HideSelection( void );
+	void OpenSelection( void ) OVERRIDE;
+	void HideSelection( void ) OVERRIDE;
 
-	virtual void LevelInit();
+	void LevelInit() OVERRIDE;
 
 protected:
-	virtual void OnThink();
-	virtual void Paint();
-	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
+	void OnThink() OVERRIDE;
+	void Paint() OVERRIDE;
+	void ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
 
-	virtual bool IsWeaponSelectable()
+	bool IsWeaponSelectable() OVERRIDE
 	{ 
 		if (IsInSelectionMode())
 			return true;
@@ -70,7 +70,7 @@ private:
 
 	void FastWeaponSwitch( int iWeaponSlot );
 
-	virtual	void SetSelectedWeapon( C_BaseCombatWeapon *pWeapon ) 
+	void SetSelectedWeapon( C_BaseCombatWeapon *pWeapon )
 	{ 
 		m_hSelectedWeapon = pWeapon;
 	}

@@ -35,19 +35,19 @@ public:
 
 	CWeaponRnLBaseExplosive();
 
-	void Precache() override;
+	void Precache() OVERRIDE;
 
-	bool Deploy() override;
-	bool CanDeploy() override;
-	bool Holster( CBaseCombatWeapon *pSwitchingTo ) override;
+	bool Deploy() OVERRIDE;
+	bool CanDeploy() OVERRIDE;
+	bool Holster( CBaseCombatWeapon *pSwitchingTo ) OVERRIDE;
 
-	void PrimaryAttack() override;
-	void ItemPostFrame() override ;
+	void PrimaryAttack() OVERRIDE;
+	void ItemPostFrame() OVERRIDE;
 
-	void HandleViewAnimation(int iAnim) override;
-	void WeaponIdle(void) override;
+	void HandleViewAnimation(int iAnim) OVERRIDE;
+	void WeaponIdle(void) OVERRIDE;
 
-	bool ShouldUseWeaponActivities(void) override { return true; }
+	bool ShouldUseWeaponActivities(void) OVERRIDE { return true; }
 
 	virtual void PlantExplosive( void ) { }
 

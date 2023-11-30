@@ -18,7 +18,7 @@ public:
 	virtual ~CRnLEventLog() {};
 
 public:
-	bool PrintEvent( IGameEvent * event )	// override virtual function
+	bool PrintEvent( IGameEvent * event ) OVERRIDE	// override virtual function
 	{
 		if ( BaseClass::PrintEvent( event ) )
 		{

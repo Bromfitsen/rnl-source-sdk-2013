@@ -26,13 +26,13 @@ public:
 #endif
 
 	CRnLTaskBase();
-	~CRnLTaskBase() override;
+	virtual ~CRnLTaskBase();
 	
-	virtual void Spawn( void );
-	virtual void UpdateOnRemove();
+	void Spawn( void ) OVERRIDE;
+	void UpdateOnRemove() OVERRIDE;
 #ifndef CLIENT_DLL
-	virtual int UpdateTransmitState() { return SetTransmitState( FL_EDICT_ALWAYS ); }
-	virtual void Activate( void );
+	int UpdateTransmitState() OVERRIDE { return SetTransmitState( FL_EDICT_ALWAYS ); }
+	void Activate( void ) OVERRIDE;
 #endif
 
 	//IRnLTask

@@ -43,18 +43,18 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponBrowning();
-	~CWeaponBrowning() override = default;
+	~CWeaponBrowning() = default;
 
-	void Precache() override;
-	void ItemPostFrame() override;
+	void Precache() OVERRIDE;
+	void ItemPostFrame() OVERRIDE;
 
-	float GetStandOffset() override { return browning_standoffset.GetFloat(); }
+	float GetStandOffset() OVERRIDE { return browning_standoffset.GetFloat(); }
 	
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_BROWNING; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_BROWNING; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset() override { return Vector( browning_ironsightsx.GetFloat(), browning_ironsightsy.GetFloat(), browning_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( browning_shoulderx.GetFloat(), browning_shouldery.GetFloat(), browning_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( browning_ironsightsx.GetFloat(), browning_ironsightsy.GetFloat(), browning_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( browning_shoulderx.GetFloat(), browning_shouldery.GetFloat(), browning_shoulderz.GetFloat() ); }
 #endif
 
 private:

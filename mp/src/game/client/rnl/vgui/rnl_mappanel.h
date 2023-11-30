@@ -39,15 +39,15 @@ public:
 	~CRnLMapPanel();
 
 	// IGameEventListener interface:
-	virtual void FireGameEvent( IGameEvent *event);
+	void FireGameEvent( IGameEvent *event) OVERRIDE;
 
-	virtual void Paint( void );
-	virtual void PaintBackground( void ) {}
-	virtual void Update( void );
-	virtual void Initialise( const char* mapname );
-	virtual Vector2D WorldToMapCoords( Vector worldPos );
-	virtual void DrawArrow( Vector2D panelPos, Vector2D endPos, int iArrowSize );
-	virtual float GetMapAngle( int iTeam );
+	void Paint( void ) OVERRIDE;
+	void PaintBackground( void ) OVERRIDE {}
+	void Update( void ) ;
+	void Initialise( const char* mapname );
+	Vector2D WorldToMapCoords( Vector worldPos );
+	void DrawArrow( Vector2D panelPos, Vector2D endPos, int iArrowSize );
+	float GetMapAngle( int iTeam ) ;
 
 private:
 	MapToWorldInfo				m_mapToWorldInfo[2];

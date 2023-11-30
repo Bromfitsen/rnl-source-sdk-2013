@@ -31,9 +31,9 @@ public:
 	void CAM_GetCameraOffset( Vector& ofs );
 */
 protected:
-	void AdjustPitch( float speed, QAngle& viewangles );
-	void AdjustYaw( float speed, QAngle& viewangles );
-	void ApplyMouse( QAngle& viewangles, CUserCmd *cmd, float mouse_x, float mouse_y );
+	void AdjustPitch( float speed, QAngle& viewangles ) OVERRIDE;
+	void AdjustYaw( float speed, QAngle& viewangles ) OVERRIDE;
+	void ApplyMouse( QAngle& viewangles, CUserCmd *cmd, float mouse_x, float mouse_y ) OVERRIDE;
 /*
 	void CAM_ThirdpersonOverride( void );
 */

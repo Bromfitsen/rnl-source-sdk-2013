@@ -33,11 +33,11 @@ public:
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();
 
-	virtual int UpdateTransmitState() { return SetTransmitState( FL_EDICT_ALWAYS ); }
+	int UpdateTransmitState() OVERRIDE { return SetTransmitState( FL_EDICT_ALWAYS ); }
 #endif
 
-	virtual void Activate();
-	virtual bool KeyValue( const char *szKeyName, const char *szValue );
+	void Activate() OVERRIDE;
+	bool KeyValue( const char *szKeyName, const char *szValue ) OVERRIDE;
 	virtual bool AreRequirementsMet( void );
 
 public:

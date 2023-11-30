@@ -18,8 +18,8 @@ class CRnLEntityFilter : public CMapLoadEntityFilter
 {
 public:
 	CRnLEntityFilter(const char** filterEntityList);
-	virtual bool ShouldCreateEntity( const char *pClassname );
-	virtual CBaseEntity* CreateNextEntity( const char *pClassname );
+	bool ShouldCreateEntity( const char *pClassname ) OVERRIDE;
+	CBaseEntity* CreateNextEntity( const char *pClassname ) OVERRIDE;
 
 protected:
 	const char** m_pszPreserveEntityList;
@@ -29,8 +29,8 @@ class CRnLRespawnEntityFilter : public CRnLEntityFilter
 {
 public:
 	CRnLRespawnEntityFilter(const char** filterEntityList);
-	virtual bool ShouldCreateEntity( const char *pClassname );
-	virtual CBaseEntity* CreateNextEntity( const char *pClassname );
+	bool ShouldCreateEntity( const char *pClassname ) OVERRIDE;
+	CBaseEntity* CreateNextEntity( const char *pClassname ) OVERRIDE;
 
 public:
 	int m_iIterator; // Iterator into g_MapEntityRefs.

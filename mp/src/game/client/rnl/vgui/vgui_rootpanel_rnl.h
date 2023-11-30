@@ -34,14 +34,14 @@ public:
 	virtual				~C_SDKRootPanel( void );
 
 	// Draw Panel effects here
-	virtual void		PostChildPaint();
+	void		PostChildPaint() OVERRIDE;
 
 	// Clear list of Panel Effects
 	virtual void		LevelInit( void );
 	virtual void		LevelShutdown( void );
 
 	// Run effects and let them decide whether to remove themselves
-	void				OnTick( void );
+	void				OnTick( void ) OVERRIDE;
 
 private:
 

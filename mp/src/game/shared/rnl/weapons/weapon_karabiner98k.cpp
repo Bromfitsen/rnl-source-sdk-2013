@@ -40,27 +40,23 @@ public:
 	
 	CWeaponKarabiner98k();
 	
-	void Precache( void );
-	
-	void PrimaryAttack();
-
-	void ItemPostFrame();
+	void Precache( void ) OVERRIDE;
+	void PrimaryAttack() OVERRIDE;
+	void ItemPostFrame() OVERRIDE;
 
 	void StartCycleBolt();
 	bool HandleCycleBolt();
 	void CycleBolt();
 	
-	void HandleViewAnimation( int iAnim );
-
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_K98K; }
-
-	const char* GetWorldModel(void) const override;
+	void HandleViewAnimation( int iAnim ) OVERRIDE;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_K98K; }
+	const char* GetWorldModel(void) const OVERRIDE;
 
 #ifdef CLIENT_DLL
-	int	GetWorldModelIndex(void) override;
+	int	GetWorldModelIndex(void) OVERRIDE;
 
-	Vector	GetIronsightsOffset() override { return Vector( k98_ironsightsx.GetFloat(), k98_ironsightsy.GetFloat(), k98_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( k98_shoulderx.GetFloat(), k98_shouldery.GetFloat(), k98_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( k98_ironsightsx.GetFloat(), k98_ironsightsy.GetFloat(), k98_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( k98_shoulderx.GetFloat(), k98_shouldery.GetFloat(), k98_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -258,7 +254,7 @@ void CWeaponKarabiner98k::ItemPostFrame()
 		{
 			if ( gpGlobals->curtime >= m_flNextSecondaryAttack )
 			{
-				SecondaryAttack( true );
+				SecondaryAttack();
 			}
 		}
 

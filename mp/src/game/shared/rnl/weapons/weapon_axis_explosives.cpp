@@ -36,12 +36,12 @@ public:
 #endif
 
 	CWeaponAxisExplosives() {}
-	~CWeaponAxisExplosives() override = default;
+	~CWeaponAxisExplosives() = default;
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_AXISEXPLOSIVES; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_AXISEXPLOSIVES; }
 
 #ifndef CLIENT_DLL
-	void PlantExplosive() override;
+	void PlantExplosive() OVERRIDE;
 #endif
 private:
 

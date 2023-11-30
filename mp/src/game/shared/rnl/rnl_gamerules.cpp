@@ -403,7 +403,7 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 		BaseClass::InitDefaultAIRelationships();
 	}
 
-	void CRnLGameRules::GetNextLevelName( char *szNextMap, int bufsize )
+	void CRnLGameRules::GetNextLevelName( char *szNextMap, int bufsize, bool bRandom )
 	{
 		if( GetRnLCampaignManager() && GetRnLCampaignManager()->UsingCampaigns() )
 		{
@@ -411,7 +411,7 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 			return;
 		}
 
-		BaseClass::GetNextLevelName( szNextMap, bufsize );
+		BaseClass::GetNextLevelName( szNextMap, bufsize, bRandom );
 	}
 
 	//-----------------------------------------------------------------------------
@@ -445,7 +445,7 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 	// Purpose: Player has just spawned. Equip them.
 	//-----------------------------------------------------------------------------
 
-	void CRnLGameRules::RadiusDamage( const CTakeDamageInfo &info, const Vector &vecSrcIn, float flRadius, int iClassIgnore )
+	void CRnLGameRules::RadiusDamage( const CTakeDamageInfo &info, const Vector &vecSrcIn, float flRadius, int iClassIgnore, CBaseEntity* pEntityIgnore)
 	{
 		RadiusDamage( info, vecSrcIn, flRadius, iClassIgnore, false );
 	}
@@ -798,12 +798,12 @@ const char *CRnLGameRules::GetChatPrefix( bool bTeamOnly, CBasePlayer *pPlayer )
 
 #endif
 
+#ifndef CLIENT_DLL
 //-----------------------------------------------------------------------------
 // Purpose: Find the relationship between players (teamplay vs. deathmatch)
 //-----------------------------------------------------------------------------
 int CRnLGameRules::PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarget )
 {
-#ifndef CLIENT_DLL
 	// half life multiplay has a simple concept of Player Relationships.
 	// you are either on another player's team, or you are not.
 	if ( !pPlayer || !pTarget || !pTarget->IsPlayer() || IsTeamplay() == false )
@@ -812,10 +812,9 @@ int CRnLGameRules::PlayerRelationship( CBaseEntity *pPlayer, CBaseEntity *pTarge
 	if ( (*GetTeamID(pPlayer) != '\0') && (*GetTeamID(pTarget) != '\0') && !stricmp( GetTeamID(pPlayer), GetTeamID(pTarget) ) )
 		return GR_TEAMMATE;
 
-#endif
-
 	return GR_NOTTEAMMATE;
 }
+#endif
 
 bool CRnLGameRules::IsConnectedUserInfoChangeAllowed(CBasePlayer* pPlayer)
 {

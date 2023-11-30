@@ -42,10 +42,10 @@ public:
 	CRnLGameMovement();
 
 protected:
-	void			PlayerMove(	void );
+	void			PlayerMove(	void ) OVERRIDE;
 
 	// Handle MOVETYPE_WALK.
-	void			FullWalkMove();
+	void			FullWalkMove() OVERRIDE;
 
 	void			StaminaThink();
 	void			StaminaRecoveringState( float flRecovTime, float& flRecoverAmt, float& flMoveSpeed );
@@ -53,7 +53,7 @@ protected:
 
 	void			HandleLeaning();
 
-	virtual void	FullLadderMove( void );
+	void	FullLadderMove( void ) OVERRIDE;
 	//BB this is climbing mumbo-jumbo
 	// Handle MOVETYPE_CLIMBING.
 	// Can't be bothered using/creating a new MOVETYPE so custom is used

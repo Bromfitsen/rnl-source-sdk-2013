@@ -38,16 +38,16 @@ public:
 
 	CWeaponDevCam();
 
-	bool		Deploy() override;
-	bool		Holster( CBaseCombatWeapon *pSwitchingTo = NULL ) override;
+	bool		Deploy() OVERRIDE;
+	bool		Holster( CBaseCombatWeapon *pSwitchingTo = NULL ) OVERRIDE;
 	
-	void		ItemPostFrame( void ) override;
+	void		ItemPostFrame( void ) OVERRIDE;
 
-	bool		StartSprinting( void ) override { return m_bHeadBob; }
+	bool		StartSprinting( void ) OVERRIDE { return m_bHeadBob; }
 
 	bool		AllowsAutoSwitchTo() { return false; }
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_DEVCAM; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_DEVCAM; }
 
 	CNetworkVar( bool, m_bHeadBob );
 

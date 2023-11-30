@@ -30,78 +30,79 @@ public:
 	DECLARE_PREDICTABLE();
 	DECLARE_INTERPOLATION();
 
+	static C_RnLPlayer* GetLocalRnLPlayer();
+
 	C_RnLPlayer();
 	~C_RnLPlayer();
 
-	virtual void Spawn( void );
-	virtual ShadowType_t ShadowCastType( void );
-	static C_RnLPlayer* GetLocalRnLPlayer();
+	void Spawn( void ) OVERRIDE;
+	ShadowType_t ShadowCastType( void ) OVERRIDE;
 
-	virtual const QAngle& GetRenderAngles();
-	virtual const Vector& GetRenderOrigin( void );
-	virtual void UpdateClientSideAnimation();
-	virtual void PostDataUpdate( DataUpdateType_t updateType );
-	virtual void OnDataChanged( DataUpdateType_t updateType );
-	virtual void ItemPostFrame( void );
+	const QAngle& GetRenderAngles() OVERRIDE;
+	const Vector& GetRenderOrigin( void ) OVERRIDE;
+	void UpdateClientSideAnimation() OVERRIDE;
+	void PostDataUpdate( DataUpdateType_t updateType ) OVERRIDE;
+	void OnDataChanged( DataUpdateType_t updateType ) OVERRIDE;
+	void ItemPostFrame( void ) OVERRIDE;
 
-	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) override;
+	void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) OVERRIDE;
 
 	//RnL : MovementMod : Begin
 	//MovementMod : 
-	virtual RnLMovementPostures_t	GetMovementPosture(void) const;
-	virtual void			SetMovementPosture(RnLMovementPostures_t iType);
-	virtual RnLMovementPostures_t	GetMovementPostureFrom(void) const;
-	virtual float			GetMovementPostureDuration(void) const;
-	virtual void			SetMovementPostureDuration(float flTime);
-	virtual QAngle			GetMovementPostureAngle(void) const;
-	virtual void			SetMovementPostureAngle(QAngle angle);
+	RnLMovementPostures_t	GetMovementPosture(void) const;
+	void			SetMovementPosture(RnLMovementPostures_t iType);
+	RnLMovementPostures_t	GetMovementPostureFrom(void) const;
+	float			GetMovementPostureDuration(void) const;
+	void			SetMovementPostureDuration(float flTime);
+	QAngle			GetMovementPostureAngle(void) const;
+	void			SetMovementPostureAngle(QAngle angle);
 
 	// adam: new stance changing method
-	virtual float GetMovementPostureOffset(void) const;
-	virtual void SetMovementPostureOffset(float flOffset);
-	virtual float GetMovementPostureTarget(void) const;
-	virtual void SetMovementPostureTarget(float fTarget);
-	virtual float GetMovementPostureVelocity(void) const;
-	virtual void SetMovementPostureVelocity(float fTarget);
-	virtual bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
+	float GetMovementPostureOffset(void) const;
+	void SetMovementPostureOffset(float flOffset);
+	float GetMovementPostureTarget(void) const;
+	void SetMovementPostureTarget(float fTarget);
+	float GetMovementPostureVelocity(void) const;
+	void SetMovementPostureVelocity(float fTarget);
+	bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
 
 	//RnL : MovementMod : Begin
 	//Moved
 	virtual bool IsStanding(void) const;
 	virtual bool IsStandingUp(void) const;
 
-	virtual bool IsDucked(void) const;
-	virtual bool IsDucking(void) const;
+	bool IsDucked(void) const OVERRIDE;
+	bool IsDucking(void) const OVERRIDE;
 
-	virtual bool IsProne(void) const;
-	virtual bool IsProning(void) const;
+	bool IsProne(void) const;
+	bool IsProning(void) const;
 
 	//RnL : MovementMod : End
 	// 
 	//RnL : MovementMod : Begin
-	virtual bool		ShouldDrawViewModel( void );
-	virtual bool		OverrideCamera( void );
+	bool		ShouldDrawViewModel( void );
+	bool		OverrideCamera( void );
 
-	virtual bool		OverrideThirdPersonCamera( void );
-	virtual bool		GetThirdPersonOverride( CViewSetup *pSetup );
-	virtual bool		GetThirdPersonOverride( Vector& pos, QAngle& angle, Vector2D& limits, int& lockToExtents );
+	bool		OverrideThirdPersonCamera( void );
+	bool		GetThirdPersonOverride( CViewSetup *pSetup );
+	bool		GetThirdPersonOverride( Vector& pos, QAngle& angle, Vector2D& limits, int& lockToExtents );
 	
-	virtual bool		OverrideFirstPersonCamera( void );
-	virtual bool		GetFirstPersonOverride( CViewSetup *pSetup );
-	virtual bool		GetFirstPersonOverride( Vector& pos, QAngle& angle, Vector2D& limits, int& lockToExtents );
+	bool		OverrideFirstPersonCamera( void );
+	bool		GetFirstPersonOverride( CViewSetup *pSetup );
+	bool		GetFirstPersonOverride( Vector& pos, QAngle& angle, Vector2D& limits, int& lockToExtents );
 
-	virtual void		ResetPlayerView( const QAngle& angle );
+	void		ResetPlayerView( const QAngle& angle );
 
 	// Michael Lebson (from EP1)
-	void				ClientThink( void );
+	void ClientThink( void ) OVERRIDE;
 	int GetPlayerTargetID( void ) { return m_iPlayerTargetID; }
 
-	virtual void		GetStepSoundVelocities( float *velwalk, float *velrun );
-	virtual void		SetStepSoundTime( stepsoundtimes_t iStepSoundTime, bool bWalking );
-	virtual Vector		EyePosition( void );
+	void		GetStepSoundVelocities( float *velwalk, float *velrun ) OVERRIDE;
+	void		SetStepSoundTime( stepsoundtimes_t iStepSoundTime, bool bWalking ) OVERRIDE;
+	Vector		EyePosition( void ) OVERRIDE;
 	
-	virtual QAngle		GetWeaponAngle( void );
-	virtual void		SetWeaponAngle( const QAngle& angle );
+	QAngle		GetWeaponAngle( void );
+	void		SetWeaponAngle( const QAngle& angle );
 	void AdjustWeaponAngle( const QAngle &angleOffset );
 	void AdjustWeaponSway( const QAngle& offset );
 
@@ -110,35 +111,35 @@ public:
 	//RnL : MovementMod : End
 
 	//Andrew; Freeaim stuff
-	virtual void PreMouseMove( QAngle& inAngles );
-	virtual void PostMouseMove( QAngle& outAngles );
+	void PreMouseMove( QAngle& inAngles );
+	void PostMouseMove( QAngle& outAngles );
 
-	virtual void AdjustYaw( float& speed, QAngle& viewangles );
-	virtual void AdjustPitch( float& speed, QAngle& viewangles );
+	void AdjustYaw( float& speed, QAngle& viewangles );
+	void AdjustPitch( float& speed, QAngle& viewangles );
 
 	// Called when not in tactical mode. Allows view to be overriden for things like driving a tank.
-	virtual void		OverrideView( CViewSetup *pSetup );
+	void		OverrideView( CViewSetup *pSetup ) OVERRIDE;
 	//Andrew; End Freeaim stuff
 
 	// knock down view vars
 	float fRagdollViewTime;
 	bool bLastRagdollView;
 
-	virtual void CalcViewRoll( QAngle& eyeAngles ) OVERRIDE;
-	virtual void CalcViewModelView( const Vector& eyeOrigin, const QAngle& eyeAngles);
-	virtual void CalcPlayerView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov );
-	virtual void CalcInEyeCamView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov );
-	virtual void CalcVehicleView(IClientVehicle *pVehicle, Vector& eyeOrigin, QAngle& eyeAngles, float& zNear, float& zFar, float& fov );
+	void CalcViewRoll( QAngle& eyeAngles ) OVERRIDE;
+	void CalcViewModelView( const Vector& eyeOrigin, const QAngle& eyeAngles)  OVERRIDE;
+	void CalcPlayerView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov );
+	void CalcInEyeCamView( Vector& eyeOrigin, QAngle& eyeAngles, float& fov ) OVERRIDE;
+	void CalcVehicleView(IClientVehicle *pVehicle, Vector& eyeOrigin, QAngle& eyeAngles, float& zNear, float& zFar, float& fov );
 // Called by shared code.
 public:
 	
 	// IRnLPlayerAnimState overrides.
-	virtual CWeaponRnLBase* RnLAnim_GetActiveWeapon();
-	virtual bool CanMove();
+	CWeaponRnLBase* RnLAnim_GetActiveWeapon() OVERRIDE;
+	bool CanMove() OVERRIDE;
 
 	void DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
-	virtual bool	ShouldDraw();
-	virtual int		InternalDrawModel( int flags );
+	bool ShouldDraw() OVERRIDE;
+	int	 InternalDrawModel( int flags ) OVERRIDE;
 
 	//RnL : MovementMod : Begin
 	int		GetClimbheight( void ) { return m_iClimbheight; }

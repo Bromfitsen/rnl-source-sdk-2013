@@ -31,8 +31,8 @@ public:
 	CRnLEquipmentParachute();
 	~CRnLEquipmentParachute();
 
-	void Precache();
-	void Spawn( void );
+	void Precache() OVERRIDE;
+	void Spawn( void ) OVERRIDE;
 
 	void Deploy( void );
 

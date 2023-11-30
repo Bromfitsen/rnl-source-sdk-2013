@@ -21,7 +21,7 @@ class CRnLFilterOwnerTeam : public CBaseFilter
 public:
 	int	m_iTeamValue;
 
-	void Spawn()
+	void Spawn() OVERRIDE
 	{
 		BaseClass::Spawn();
 		m_iTeamValue = TEAM_UNASSIGNED;
@@ -50,7 +50,7 @@ public:
 		SetNextThink( gpGlobals->curtime + 0.1 );
 	}
 
-	bool PassesFilterImpl( CBaseEntity *pCaller, CBaseEntity *pEntity )
+	bool PassesFilterImpl( CBaseEntity *pCaller, CBaseEntity *pEntity ) OVERRIDE
 	{
 	 	return ( pEntity->GetTeamNumber() == m_iTeamValue );
 	}

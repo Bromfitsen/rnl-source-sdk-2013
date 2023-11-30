@@ -29,21 +29,21 @@ public:
 	DECLARE_ACTTABLE();
 
 	CSticky39Grenade() {}
-	~CSticky39Grenade() override = default;
+	~CSticky39Grenade() = default;
 
-	bool CanHolster( void ) override;
+	bool CanHolster( void ) OVERRIDE;
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_STICKY39GRENADE; }
-	bool IsSmokeGrenade( void ) override { return true; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_STICKY39GRENADE; }
+	bool IsSmokeGrenade( void ) OVERRIDE { return true; }
 
-	bool ShouldDrop( void ) override { return m_iGrenadeState == GRENADE_STARTFUSE; }
+	bool ShouldDrop( void ) OVERRIDE { return m_iGrenadeState == GRENADE_STARTFUSE; }
 
 #ifdef CLIENT_DLL
 
 #else
 	DECLARE_DATADESC();
 
-	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) override;
+	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) OVERRIDE;
 	
 #endif
 

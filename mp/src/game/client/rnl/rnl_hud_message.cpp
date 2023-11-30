@@ -38,9 +38,9 @@ public:
 		SetHiddenBits( 0 );
 	};
 
-	void	Init( void );
-	void	VidInit( void );
-	void	Paint( void );
+	void	Init( void ) OVERRIDE;
+	void	VidInit( void ) OVERRIDE;
+	void	Paint( void ) OVERRIDE;
 	
 	// Callback function for the "GameMessage" user message
 	void	MsgFunc_GameMessage( bf_read &msg );

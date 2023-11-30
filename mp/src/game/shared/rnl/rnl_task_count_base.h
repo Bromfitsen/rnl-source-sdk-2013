@@ -23,12 +23,12 @@ public:
 #endif
 
 	CRnLTaskCountBase();
-	~CRnLTaskCountBase() override = default;
+	virtual ~CRnLTaskCountBase() = default;
 	
-	void Spawn( void ) override;
-	void UpdateOnRemove() override;
+	void Spawn( void ) OVERRIDE;
+	void UpdateOnRemove() OVERRIDE;
 #ifndef CLIENT_DLL
-	void Activate( void ) override;
+	void Activate( void ) OVERRIDE;
 #endif
 	
 public:

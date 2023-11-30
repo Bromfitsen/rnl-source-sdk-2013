@@ -42,12 +42,12 @@ public:
 
 	CRnLObjectiveBase();
 	
-	virtual void Spawn( void );
-	virtual void UpdateOnRemove();
+	void Spawn( void ) OVERRIDE;
+	void UpdateOnRemove() OVERRIDE;
 #ifndef CLIENT_DLL
-	virtual int UpdateTransmitState() { return SetTransmitState( FL_EDICT_ALWAYS ); }
-	virtual void Activate( void );
-	virtual bool KeyValue( const char *szKeyName, const char *szValue ); 
+	int UpdateTransmitState() OVERRIDE { return SetTransmitState( FL_EDICT_ALWAYS ); }
+	void Activate( void ) OVERRIDE;
+	bool KeyValue( const char *szKeyName, const char *szValue ) OVERRIDE;
 	void InputSetControllingTeam( inputdata_t &input );
 	void InputSetVisibleOnMap( inputdata_t &input );
 	void InputSetIconVisibleOnMap( inputdata_t &input );
@@ -59,18 +59,18 @@ public:
 
 	//IRnLObjective
 public:
-	virtual int				GetTaskCount( void );
-	virtual IRnLTask*		GetTask( int index );
-	virtual void			OnTaskStateChanged( IRnLTask* pTask );
+	int				GetTaskCount( void ) OVERRIDE;
+	IRnLTask*		GetTask( int index ) OVERRIDE;
+	void			OnTaskStateChanged( IRnLTask* pTask ) OVERRIDE;
 
-	virtual bool			IsPrimary( void )					{ return m_bPrimary; }
-	virtual int				GetObjectiveState()					{ return m_iObjectiveState; }
-	virtual int				GetObjectivePrevState()				{ return m_iObjectivePrevState; }
-	virtual const char*		GetObjectiveName()					{ return m_szObjectiveName.Get(); }
-	virtual bool			IsObjectiveVisibleOnMap()			{ return m_bVisibleOnMap; } 
-	virtual bool			IsObjectiveIconVisibleOnMap()		{ return m_bIconVisibleOnMap; } 
+	bool			IsPrimary( void ) OVERRIDE { return m_bPrimary; }
+	int				GetObjectiveState() OVERRIDE { return m_iObjectiveState; }
+	int				GetObjectivePrevState() OVERRIDE { return m_iObjectivePrevState; }
+	const char*		GetObjectiveName() OVERRIDE { return m_szObjectiveName.Get(); }
+	bool			IsObjectiveVisibleOnMap() OVERRIDE { return m_bVisibleOnMap; }
+	virtual bool	IsObjectiveIconVisibleOnMap() { return m_bIconVisibleOnMap; }
 	
-	virtual void			Reset( void );
+	void			Reset( void ) OVERRIDE;
 public:
 	virtual int		CalculateState( void );
 	virtual void	SetVisibleOnMap( bool bState )	{ m_bVisibleOnMap = bState; }

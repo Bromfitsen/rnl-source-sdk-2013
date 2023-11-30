@@ -31,10 +31,10 @@ class CHudPlayerID : public CHudElement, public vgui::Panel
 
 public:
 	CHudPlayerID( const char *pElementName );
-	virtual void Init( void );
+	void Init( void ) OVERRIDE;
 
 protected:
-	virtual void Paint();
+	void Paint() OVERRIDE;
 
 private:
 	CPanelAnimationVar( vgui::HFont, m_hTextFont, "TextFont", "Default" );

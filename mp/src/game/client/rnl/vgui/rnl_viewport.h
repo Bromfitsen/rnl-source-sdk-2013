@@ -28,12 +28,12 @@ private:
 
 public:
 
-	IViewPortPanel* CreatePanelByName(const char *szPanelName);
-	void CreateDefaultPanels( void );
+	IViewPortPanel* CreatePanelByName(const char *szPanelName) OVERRIDE;
+	void CreateDefaultPanels( void ) OVERRIDE;
 
-	virtual void ApplySchemeSettings( vgui::IScheme *pScheme );
+	void ApplySchemeSettings( vgui::IScheme *pScheme ) OVERRIDE;
 		
-	int GetDeathMessageStartHeight( void );
+	int GetDeathMessageStartHeight( void ) OVERRIDE;
 };
 
 
