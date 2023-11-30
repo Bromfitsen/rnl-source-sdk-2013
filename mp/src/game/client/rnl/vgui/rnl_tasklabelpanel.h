@@ -27,7 +27,7 @@ public:
 	CRnLTaskLabelPanel( CRnLTaskStatusPanel *pStatusPanelParent, vgui::Panel *pParent, const char *pName );
 	~CRnLTaskLabelPanel();
 
-	virtual void Paint( void );
+	void Paint( void ) OVERRIDE;
 
 private:
 	CRnLTaskStatusPanel*		m_pStatusPanelParent;

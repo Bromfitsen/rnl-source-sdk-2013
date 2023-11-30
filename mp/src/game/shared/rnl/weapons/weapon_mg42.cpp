@@ -43,22 +43,21 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponMG42();
-	~CWeaponMG42() override = default;
+	~CWeaponMG42() = default;
 
-	void Precache() override;
-	void ItemPostFrame() override;
-	
-	const char	*GetWorldModel( void ) const override;
+	void Precache() OVERRIDE;
+	void ItemPostFrame() OVERRIDE;
+	const char	*GetWorldModel( void ) const OVERRIDE;
 
-	float		GetStandOffset() override { return mg42_standoffset.GetFloat(); }
+	float		GetStandOffset() OVERRIDE { return mg42_standoffset.GetFloat(); }
 	
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_MG42; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_MG42; }
 
 #ifdef CLIENT_DLL
-	int	GetWorldModelIndex(void) override;
+	int	GetWorldModelIndex(void) OVERRIDE;
 
-	Vector	GetIronsightsOffset() override { return Vector( mg42_ironsightsx.GetFloat(), mg42_ironsightsy.GetFloat(), mg42_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( mg42_shoulderx.GetFloat(), mg42_shouldery.GetFloat(), mg42_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( mg42_ironsightsx.GetFloat(), mg42_ironsightsy.GetFloat(), mg42_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( mg42_shoulderx.GetFloat(), mg42_shouldery.GetFloat(), mg42_shoulderz.GetFloat() ); }
 #endif
 
 private:

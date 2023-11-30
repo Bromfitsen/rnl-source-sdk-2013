@@ -27,9 +27,9 @@ public:
 	DECLARE_DATADESC();
 
 	//Bog standard stuff
-	void Precache( void );
-	void Spawn( void );
-	void Think();
+	void Precache( void ) OVERRIDE;
+	void Spawn( void ) OVERRIDE;
+	void Think() OVERRIDE;
 
 	//Start and stop Mr. Field
 	void InputEnable( inputdata_t &inputdata );

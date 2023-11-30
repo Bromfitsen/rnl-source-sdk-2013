@@ -30,13 +30,13 @@ public:
 #endif
 	
 	CWeaponGewehr43();
-	~CWeaponGewehr43() override = default;
+	~CWeaponGewehr43() = default;
 
-	void Precache() override;
-	bool PlayLastBulletSound() override;
+	void Precache() OVERRIDE;
+	bool PlayLastBulletSound() OVERRIDE;
 
-	void ItemPostFrame() override;
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_G43; }
+	void ItemPostFrame() OVERRIDE;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_G43; }
 
 private:
 

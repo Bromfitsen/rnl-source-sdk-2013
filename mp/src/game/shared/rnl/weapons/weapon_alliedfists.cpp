@@ -30,10 +30,10 @@ public:
 #endif
 	
 	CWeaponAlliedFists();
-	~CWeaponAlliedFists() override = default;
+	~CWeaponAlliedFists() = default;
 
-	void ItemPostFrame() override;
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_ALLIEDFISTS; }
+	void ItemPostFrame() OVERRIDE;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_ALLIEDFISTS; }
 
 private:
 

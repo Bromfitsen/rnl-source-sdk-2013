@@ -39,20 +39,20 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponThompson();
-	~CWeaponThompson() override = default;
+	~CWeaponThompson() = default;
 
-	void ItemPostFrame() override;
-	void HandleViewAnimation(int iAnim) override;
+	void ItemPostFrame() OVERRIDE;
+	void HandleViewAnimation(int iAnim) OVERRIDE;
 
 	void ToggleFireMode( void );
 	void StartFireModeToggle();
 	bool HandleFireModeToggle();
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_THOMPSON; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_THOMPSON; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset() override { return Vector( thompson_ironsightsx.GetFloat(), thompson_ironsightsy.GetFloat(), thompson_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( thompson_shoulderx.GetFloat(), thompson_shouldery.GetFloat(), thompson_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( thompson_ironsightsx.GetFloat(), thompson_ironsightsy.GetFloat(), thompson_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( thompson_shoulderx.GetFloat(), thompson_shouldery.GetFloat(), thompson_shoulderz.GetFloat() ); }
 #endif
 
 private:

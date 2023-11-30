@@ -85,10 +85,10 @@ public:
 	CRnLTaskStatusPanel( CRnLMapPanel *pMapParent, vgui::Panel *pParent, const char *pName );
 	~CRnLTaskStatusPanel();
 
-	virtual void Paint( void );
-	virtual void PaintBackground( void ) {}
-	virtual void Update( void );
-	virtual void Initialise( KeyValues* pMapInfo );
+	void Paint( void ) OVERRIDE;
+	void PaintBackground( void ) OVERRIDE {}
+	void Update( void );
+	void Initialise( KeyValues* pMapInfo );
 	virtual CRnLMapPanel* GetMapParent( void ) { return m_pMapParent; }
 	CUtlVector<RnLTaskStatusInfo>& GetTaskInfo( void ) { return m_TaskInfo; }
 

@@ -22,7 +22,7 @@ public:
 
 	CHudChatLine( vgui::Panel *parent, const char *panelName );
 
-	virtual void	ApplySchemeSettings(vgui::IScheme *pScheme);
+	void	ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
 private:
 	CHudChatLine( const CHudChatLine & ); // not defined, not accessible
 };
@@ -37,7 +37,7 @@ class CHudChatInputLine : public CBaseHudChatInputLine
 public:
 	CHudChatInputLine( CBaseHudChat *parent, char const *panelName ) : CBaseHudChatInputLine( parent, panelName ) {}
 
-	virtual void	ApplySchemeSettings(vgui::IScheme *pScheme);
+	void	ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
 };
 
 class CHudChat : public CBaseHudChat
@@ -47,20 +47,20 @@ class CHudChat : public CBaseHudChat
 public:
 	CHudChat( const char *pElementName );
 
-	virtual void	CreateChatInputLine( void );
+	void	CreateChatInputLine( void ) OVERRIDE;
 
-	virtual void	Init( void );
-	virtual void	Reset( void );
-	int				GetChatInputOffset( void );
-	void			CreateChatLines( void );
+	void	Init( void ) OVERRIDE;
+	void	Reset( void ) OVERRIDE;
+	int				GetChatInputOffset( void ) OVERRIDE;
+	void			CreateChatLines( void ) OVERRIDE;
 
-	virtual bool	ShouldDraw( void );
+	bool	ShouldDraw( void ) OVERRIDE;
 
-	virtual Color	GetTextColorForClient( TextColor colorNum, int clientIndex );
-	virtual Color	GetClientColor( int clientIndex );
+	Color	GetTextColorForClient( TextColor colorNum, int clientIndex ) OVERRIDE;
+	Color	GetClientColor( int clientIndex ) OVERRIDE;
 
-	virtual int		GetFilterForString( const char *pString );
-	virtual bool IsVisible();
+	int	GetFilterForString( const char *pString ) OVERRIDE;
+	bool IsVisible() OVERRIDE;
 
 };
 

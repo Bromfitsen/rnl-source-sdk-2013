@@ -47,40 +47,40 @@ public:
 	// This passes the event to the client's and server's CPlayerAnimState.
 	void DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
 
-	virtual void PreThink() override;
-	virtual void PostThink() override;
-	virtual void ItemPostFrame( void ) override;
-	virtual void Spawn() override;
-	virtual void InitialSpawn() override;
-	virtual void Precache() override;
-	virtual int	 OnTakeDamage( const CTakeDamageInfo &info ) override;
-	virtual void Event_Killed( const CTakeDamageInfo &info ) override;
-	virtual void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) override;
-	virtual void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles ) override;
+	void PreThink() OVERRIDE;
+	void PostThink() OVERRIDE;
+	void ItemPostFrame( void ) OVERRIDE;
+	void Spawn() OVERRIDE;
+	void InitialSpawn() OVERRIDE;
+	void Precache() OVERRIDE;
+	int	 OnTakeDamage( const CTakeDamageInfo &info ) OVERRIDE;
+	void Event_Killed( const CTakeDamageInfo &info ) OVERRIDE;
+	void TraceAttack(const CTakeDamageInfo& info, const Vector& vecDir, trace_t* ptr, CDmgAccumulator* pAccumulator = NULL) OVERRIDE;
+	void LeaveVehicle( const Vector &vecExitPoint, const QAngle &vecExitAngles ) OVERRIDE;
 
-	virtual CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 ) override;
+	CBaseEntity		*GiveNamedItem( const char *szName, int iSubType = 0 ) OVERRIDE;
 
-	virtual bool BumpWeapon( CBaseCombatWeapon *pWeapon ) override;
+	bool BumpWeapon( CBaseCombatWeapon *pWeapon ) OVERRIDE;
 
 	//RnL : MovementMod : Begin
 	//MovementMod : Add these to gain access to the movement posture stuff
-	virtual RnLMovementPostures_t	GetMovementPosture(void) const;
-	virtual void			SetMovementPosture(RnLMovementPostures_t iType);
-	virtual RnLMovementPostures_t	GetMovementPostureFrom(void) const;
-	virtual float			GetMovementPostureDuration(void) const;
-	virtual void			SetMovementPostureDuration(float flTime);
-	virtual QAngle			GetMovementPostureAngle(void) const;
-	virtual void			SetMovementPostureAngle(QAngle angle);
+	RnLMovementPostures_t	GetMovementPosture(void) const;
+	void			SetMovementPosture(RnLMovementPostures_t iType);
+	RnLMovementPostures_t	GetMovementPostureFrom(void) const;
+	float			GetMovementPostureDuration(void) const;
+	void			SetMovementPostureDuration(float flTime);
+	QAngle			GetMovementPostureAngle(void) const;
+	void			SetMovementPostureAngle(QAngle angle);
 
 
 	// adam: new stance changing method
-	virtual float GetMovementPostureOffset(void) const;
-	virtual void SetMovementPostureOffset(float flOffset);
-	virtual float GetMovementPostureTarget(void) const;
-	virtual void SetMovementPostureTarget(float fTarget);
-	virtual float GetMovementPostureVelocity(void) const;
-	virtual void SetMovementPostureVelocity(float fTarget);
-	virtual bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
+	float GetMovementPostureOffset(void) const;
+	void SetMovementPostureOffset(float flOffset);
+	float GetMovementPostureTarget(void) const;
+	void SetMovementPostureTarget(float fTarget);
+	float GetMovementPostureVelocity(void) const;
+	void SetMovementPostureVelocity(float fTarget);
+	bool IsPostureChanging(float flVelLimit = 0.01, float flDiffLimit = 0.01) const;
 
 	//Moved to public
 	// Accessors for gamemovement
@@ -102,31 +102,31 @@ public:
 	void	RemoveEquipment(RnLEquipmentTypes_t iType );
 	void	OpenParachute( void );
 
-	virtual bool ClientCommand( const CCommand &args );
+	bool ClientCommand( const CCommand &args ) OVERRIDE;
 
 	//RnL : MovementMod : Begin
-	virtual void GetStepSoundVelocities( float *velwalk, float *velrun );
-	virtual void SetStepSoundTime( stepsoundtimes_t iStepSoundTime, bool bWalking );
-	virtual Vector		EyePosition( void );
+	void GetStepSoundVelocities( float *velwalk, float *velrun ) OVERRIDE;
+	void SetStepSoundTime( stepsoundtimes_t iStepSoundTime, bool bWalking ) OVERRIDE;
+	Vector EyePosition( void ) OVERRIDE;
 	
-	virtual QAngle		GetWeaponAngle( void );
-	virtual void		SetWeaponAngle( const QAngle& angle );
+	QAngle		GetWeaponAngle( void );
+	void		SetWeaponAngle( const QAngle& angle );
 	void AdjustWeaponAngle( const QAngle &angleOffset );
 	void AdjustWeaponSway( const QAngle& offset );
 
-	virtual int		GetSquadNumber();
-	virtual int		GetKitNumber();
+	int		GetSquadNumber();
+	int		GetKitNumber();
 
-	virtual	void	ChangeTeam( int iTeamNum );
-	virtual bool	ChangeSquad( int iSquad, int iSlot );
+	void	ChangeTeam( int iTeamNum ) OVERRIDE;
+	bool	ChangeSquad( int iSquad, int iSlot );
 
-	virtual int		GetSquadLeaderVote( void ) { return m_iSquadLeaderVote; }
+	int		GetSquadLeaderVote( void ) { return m_iSquadLeaderVote; }
 	//RnL : MovementMod : End
 	
 	CWeaponRnLBase* GetActiveRnLWeapon() const;
-	virtual void	CreateViewModel( int viewmodelindex = 0 );
+	void	CreateViewModel( int viewmodelindex = 0 ) OVERRIDE;
 
-	virtual void	CheatImpulseCommands( int iImpulse );
+	void	CheatImpulseCommands( int iImpulse ) OVERRIDE;
 
 	//MovementMod : Our  movement posture
 	CNetworkVar(int, m_nMovementPosture);
@@ -153,8 +153,8 @@ public:
 	void FadeToBlackThink( void );
 
 	// Round gamerules
-	virtual bool	IsReadyToSpawn( void );
-	virtual void	ResetPerRoundStats( void );
+	bool	IsReadyToSpawn( void ) OVERRIDE;
+	void	ResetPerRoundStats( void ) OVERRIDE;
 
 	// cjd @add
 	void	PlayVocalization( const char *pszVocalizationName, bool bRadio = false );
@@ -167,8 +167,8 @@ public:
 // In shared code.
 public:
 	// IRnLPlayerAnimState overrides.
-	virtual CWeaponRnLBase* RnLAnim_GetActiveWeapon();
-	virtual bool CanMove();
+	CWeaponRnLBase* RnLAnim_GetActiveWeapon() OVERRIDE;
+	bool CanMove() OVERRIDE;
 
 	//RnL : MovementMod : Begin
 	CNetworkQAngle( m_angWeaponAngle );

@@ -22,19 +22,19 @@ public:
 #endif
 
 	CRnLTaskCaptureArea();
-	~CRnLTaskCaptureArea() override = default;
+	~CRnLTaskCaptureArea() = default;
 
-	RnLTaskType	GetTaskType() override { return RNL_TASK_TYPE_CAPTURE; }
+	RnLTaskType	GetTaskType() OVERRIDE { return RNL_TASK_TYPE_CAPTURE; }
 
 #ifndef CLIENT_DLL
-	void Spawn( void ) override;
-	void Think() override;
+	void Spawn( void ) OVERRIDE;
+	void Think() OVERRIDE;
 
-	void PostClientActive( void ) override;
-	void UpdateOnRemove( void ) override;
+	void PostClientActive( void ) OVERRIDE;
+	void UpdateOnRemove( void ) OVERRIDE;
 
-	void StartTouch(CBaseEntity *pOther) override;
-	void EndTouch(CBaseEntity *pOther) override;
+	void StartTouch(CBaseEntity *pOther) OVERRIDE;
+	void EndTouch(CBaseEntity *pOther) OVERRIDE;
 #endif
 
 private:

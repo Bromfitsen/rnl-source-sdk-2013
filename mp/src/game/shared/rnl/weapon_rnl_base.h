@@ -28,19 +28,19 @@ public:
 	DECLARE_PREDICTABLE();
 
 	CWeaponRnLBase();
-	~CWeaponRnLBase() override;
+	virtual ~CWeaponRnLBase();
 
-	void Precache( void ) override;
+	void Precache( void ) OVERRIDE;
 
 #ifdef GAME_DLL
 	DECLARE_DATADESC();
 #else
-	bool ShouldPredict() override;
+	bool ShouldPredict() OVERRIDE;
 #endif
 
 	// TF Sprinting functions
-	bool StartSprinting( void ) override { return true; };
-	bool StopSprinting( void ) override { return true; };
+	bool StartSprinting( void ) OVERRIDE { return true; };
+	bool StopSprinting( void ) OVERRIDE { return true; };
 
 	virtual void NextFirePos( void ) {}
 	virtual void PrevFirePos( void ) {}
@@ -48,7 +48,7 @@ public:
 	virtual void HandleViewSway( void ) {}
 	virtual bool CheckResting( void ) { return false; }
 
-	virtual bool CanPickup( CRnLPlayer* pPlayer );
+	virtual bool CanPickup( CRnLPlayer* pPlayer ) ;
 	virtual bool CanHolster( void );
 
 	virtual void SetAnimationState( int iState ) { m_iWeaponAnimationState = iState; }
@@ -61,7 +61,7 @@ public:
 	virtual void ReturnToDefaultPosture() {}
 
 	// All predicted weapons need to implement and return true
-	bool	IsPredicted() const override;
+	bool	IsPredicted() const OVERRIDE;
 	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
 	
 	// Get RnL weapon specific weapon data.
@@ -71,7 +71,7 @@ public:
 	CRnLPlayer* GetPlayerOwner() const;
 
 	// overwrite drop here
-	void Drop( const Vector &vecVelocity ) override;
+	void Drop( const Vector &vecVelocity ) OVERRIDE;
 
 	virtual bool	ShouldUseFreeAim();
 	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents ) {}

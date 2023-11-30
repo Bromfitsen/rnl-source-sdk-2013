@@ -23,8 +23,8 @@ public:
 	CRnLLoadingPanel();	
 	~CRnLLoadingPanel();
 
-	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
-	virtual void FireGameEvent( IGameEvent *event );
+	void ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
+	void FireGameEvent( IGameEvent *event ) OVERRIDE;
 
 private:
 	MESSAGE_FUNC( OnActivate, "activate" );

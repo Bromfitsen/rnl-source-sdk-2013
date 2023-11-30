@@ -32,31 +32,31 @@ public:
 
 	CRnLScoreboard(IViewPort *pViewPort);
 	~CRnLScoreboard();
-	virtual void Update();
-	virtual bool NeedsUpdate( void );
-	virtual void Reset();
-	virtual void ShowPanel( bool bShow );
+	void Update() OVERRIDE;
+	bool NeedsUpdate( void ) OVERRIDE;
+	void Reset() OVERRIDE;
+	void ShowPanel( bool bShow ) OVERRIDE;
 
 
 protected:
 	// scoreboard overrides
-	virtual void InitScoreboardSections();
-	virtual void UpdateTeamInfo();
-	virtual bool GetPlayerScoreInfo(int playerIndex, KeyValues *outPlayerInfo);
-	virtual void UpdatePlayerInfo();
+	void InitScoreboardSections() OVERRIDE;
+	void UpdateTeamInfo() OVERRIDE;
+	bool GetPlayerScoreInfo(int playerIndex, KeyValues *outPlayerInfo) OVERRIDE;
+	void UpdatePlayerInfo() OVERRIDE;
 
 	// vgui overrides for rounded corner background
-	virtual void PaintBackground();
-	virtual void PaintBorder();
-	virtual void ApplySchemeSettings( vgui::IScheme *pScheme );
+	void PaintBackground() OVERRIDE;
+	void PaintBorder() OVERRIDE;
+	void ApplySchemeSettings( vgui::IScheme *pScheme ) OVERRIDE;
 
 	// sorts players within a section
 	static bool StaticPlayerSortFunc(vgui::SectionedListPanel *list, int itemID1, int itemID2);
 
 private:
-	virtual void AddHeader(); // add the start header of the scoreboard
-	virtual int AddSection(int iSectionType, int iTeamNumber = TEAM_INVALID, const char *szSquadName = ""); // add a new section header for a team
-	virtual void FillScoreBoard();
+	void AddHeader() OVERRIDE; // add the start header of the scoreboard
+	int AddSection(int iSectionType, int iTeamNumber = TEAM_INVALID, const char *szSquadName = ""); // add a new section header for a team
+	void FillScoreBoard();
 
 	/* Michael Lebson
 	Keep track of the team sections, number of players

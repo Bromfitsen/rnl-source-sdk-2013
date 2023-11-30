@@ -32,16 +32,16 @@ public:
 	DECLARE_ACTTABLE();
 	
 	CWeaponColt();
-	~CWeaponColt() override = default;
+	~CWeaponColt() = default;
 
-	void Precache() override;
-	bool PlayLastBulletSound() override;
+	void Precache() OVERRIDE;
+	bool PlayLastBulletSound() OVERRIDE;
 
-	void ItemPostFrame() override;
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_COLT; }
+	void ItemPostFrame() OVERRIDE;
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_COLT; }
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset() override { return Vector( colt_ironsightsx.GetFloat(), colt_ironsightsy.GetFloat(), colt_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset() override { return Vector( colt_shoulderx.GetFloat(), colt_shouldery.GetFloat(), colt_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() OVERRIDE { return Vector( colt_ironsightsx.GetFloat(), colt_ironsightsy.GetFloat(), colt_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() OVERRIDE { return Vector( colt_shoulderx.GetFloat(), colt_shouldery.GetFloat(), colt_shoulderz.GetFloat() ); }
 #endif
 
 private:

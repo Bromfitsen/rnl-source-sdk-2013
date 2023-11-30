@@ -16,14 +16,14 @@ public:
 	DECLARE_CLASS( CRnLMineBrush , CBaseTrigger );
 	DECLARE_DATADESC();
 
-	void Precache();
-	void Spawn( void );
+	void Precache() OVERRIDE;
+	void Spawn( void ) OVERRIDE;
 
 	void InputToggleMine( inputdata_t &inputdata );
 	void LaunchMine( void );
 
 	// custom filter, only accepts players
-	bool PassesTriggerFilters( CBaseEntity *pOther );
+	bool PassesTriggerFilters( CBaseEntity *pOther ) OVERRIDE;
 private:
 	
 	int m_iMineDamage;

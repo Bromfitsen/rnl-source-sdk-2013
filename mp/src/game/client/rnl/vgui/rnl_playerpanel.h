@@ -23,8 +23,8 @@ public:
 	// constructor
 	CRnLPlayerPlayerPanel( CRnLMapPanel *pMapParent, vgui::Panel *pParent, const char *pName );
 
-	virtual void Paint( void );
-	virtual void PaintBackground( void ) {}
+	void Paint( void ) OVERRIDE;
+	void PaintBackground( void ) OVERRIDE {}
 
 private:
 	void DrawPlayer( Vector2D panelPos, float angle, float size, int iTeam );

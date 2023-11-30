@@ -45,29 +45,29 @@ public:
 
 	CBaseRnLGrenade();
 
-	void	Precache() override;
+	void	Precache() OVERRIDE;
 
-	bool	CanDeploy(void) override;
-	bool	CanHolster(void) override;
-	bool	CanClimb(void) override;
+	bool	CanDeploy(void) OVERRIDE;
+	bool	CanHolster(void) OVERRIDE;
+	bool	CanClimb(void) OVERRIDE;
 
-	bool	Deploy() override;
-	bool	Holster( CBaseCombatWeapon *pSwitchingTo ) override;
-	void	Equip(CBaseCombatCharacter* pOwner) override;
+	bool	Deploy() OVERRIDE;
+	bool	Holster( CBaseCombatWeapon *pSwitchingTo ) OVERRIDE;
+	void	Equip(CBaseCombatCharacter* pOwner) OVERRIDE;
 
-	void	PrimaryAttack() override;
+	void	PrimaryAttack() OVERRIDE;
 
-	bool	Reload() override;
+	bool	Reload() OVERRIDE;
 
-	void	ItemPostFrame() override;
+	void	ItemPostFrame() OVERRIDE;
 
-	void	WeaponIdle() override;
-	void	HandleViewAnimation(int iAnim) override;
+	void	WeaponIdle() OVERRIDE;
+	void	HandleViewAnimation(int iAnim) OVERRIDE;
 
 	// Michael Lebson
-	bool IsGrenade() const override { return true; }
+	bool IsGrenade() const OVERRIDE { return true; }
 
-	Activity GetDrawActivity(void) override { return ACT_VM_SHOULDERDRAW; }
+	Activity GetDrawActivity(void) OVERRIDE { return ACT_VM_SHOULDERDRAW; }
 	
 	
 	virtual void	ThrowGrenade();
@@ -87,9 +87,8 @@ public:
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();
 
-	virtual bool AllowsAutoSwitchFrom( void ) const;
-
-	int		CapabilitiesGet();
+	bool AllowsAutoSwitchFrom( void ) const OVERRIDE;
+	int	CapabilitiesGet() OVERRIDE;
 	
 	// Each derived grenade class implements this.
 	virtual void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float m_fDelay, bool roll );

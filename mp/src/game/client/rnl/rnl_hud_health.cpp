@@ -45,11 +45,11 @@ class CHudHealth : public CHudElement, public CHudNumericDisplay
 
 public:
 	CHudHealth( const char *pElementName );
-	virtual void Init( void );
-	virtual void VidInit( void );
-	virtual void Reset( void );
-	virtual void OnThink();
-			void MsgFunc_Damage( bf_read &msg );
+	void Init( void ) OVERRIDE;
+	void VidInit( void ) OVERRIDE;
+	void Reset( void ) OVERRIDE;
+	void OnThink() OVERRIDE;
+	void MsgFunc_Damage( bf_read &msg );
 
 private:
 	// old variables

@@ -30,10 +30,10 @@ public:
 	CWeaponRnLBaseMelee();
 	virtual ~CWeaponRnLBaseMelee();
 
-	void PrimaryAttack( void ) override;
+	void PrimaryAttack( void ) OVERRIDE;
 	void SecondaryAttack( bool bIsSecondary ) { PrimaryAttack(); } // TODO_KORNEEL What is up with this non-override with weird param?
 
-	virtual void HandleViewAnimation( int iAnim );
+	void HandleViewAnimation( int iAnim ) OVERRIDE;
 
 	void ImpactEffectMelee( trace_t &traceHit );
 	bool ImpactWaterMelee( const Vector &start, const Vector &end );
@@ -42,7 +42,7 @@ public:
 	Activity ChooseIntersectionPointAndActivity( trace_t &hitTrace, const Vector &mins, const Vector &maxs, CBasePlayer *pOwner );
 	virtual float	GetMeleeRange( void )					{	return	40.0f;	}
 
-	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_NONE; }
 
 protected:
 

@@ -28,11 +28,11 @@ public:
 #endif
 	
 	CWeaponRnLBaseSubMachineGun();
-	~CWeaponRnLBaseSubMachineGun() override;
+	virtual ~CWeaponRnLBaseSubMachineGun();
 
-	void PrimaryAttack( void ) override;
+	void PrimaryAttack( void ) OVERRIDE;
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_NONE; }
 
 private:
 	CWeaponRnLBaseSubMachineGun( const CWeaponRnLBaseSubMachineGun & );

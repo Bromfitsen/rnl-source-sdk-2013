@@ -27,11 +27,11 @@ public:
 	DECLARE_DATADESC();
 
 #ifndef CLIENT_DLL
-	virtual void Spawn( void );
-	virtual void UpdatePlayerData( void );
+	void Spawn( void ) OVERRIDE;
+	void UpdatePlayerData( void ) OVERRIDE;
 
-	virtual void	ChangeSquad(int iPlayer, int iSquad);
-	virtual void	ChangeKit(int iPlayer, int iKit);
+	void	ChangeSquad(int iPlayer, int iSquad);
+	void	ChangeKit(int iPlayer, int iKit);
 #endif
 
 	int GetSquadMemberCount(int iTeam, int iSquad) const;

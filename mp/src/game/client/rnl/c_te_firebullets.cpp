@@ -17,7 +17,7 @@ public:
 	DECLARE_CLASS( C_TEFireBullets, C_BaseTempEntity );
 	DECLARE_CLIENTCLASS();
 
-	virtual void	PostDataUpdate( DataUpdateType_t updateType );
+	void	PostDataUpdate( DataUpdateType_t updateType ) OVERRIDE;
 
 public:
 	int		m_iPlayer;

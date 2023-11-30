@@ -24,22 +24,22 @@ public:
 #endif
 
 	CRnLTaskDestructable();
-	~CRnLTaskDestructable() override = default;
+	~CRnLTaskDestructable() = default;
 
 #ifdef CLIENT_DLL
-	bool ShouldDraw( void ) override;
-	void OnDataChanged( DataUpdateType_t type ) override;
+	bool ShouldDraw( void ) OVERRIDE;
+	void OnDataChanged( DataUpdateType_t type ) OVERRIDE;
 #endif
 	
-	void Precache( void ) override;
-	void Spawn( void ) override;
-	void UpdateOnRemove() override;
+	void Precache( void ) OVERRIDE;
+	void Spawn( void ) OVERRIDE;
+	void UpdateOnRemove() OVERRIDE;
 
-	RnLTaskType	GetTaskType() override { return RNL_TASK_TYPE_DESTROY; }
+	RnLTaskType	GetTaskType() OVERRIDE { return RNL_TASK_TYPE_DESTROY; }
 
 #ifndef CLIENT_DLL
-	virtual void Activate( void ) override;
-	virtual int OnTakeDamage( const CTakeDamageInfo &info ) override;
+	void Activate( void ) OVERRIDE;
+	int OnTakeDamage( const CTakeDamageInfo &info ) OVERRIDE;
 
 	virtual bool CanAttachExplosive( CRnLPlayer* pPlayer );
 	virtual bool AttachExplosive( CRnLBaseExplosive* pTnT  );

@@ -28,9 +28,9 @@ class CRnLPlayerMove : public CPlayerMove
 DECLARE_CLASS( CRnLPlayerMove, CPlayerMove );
 
 public:
-	virtual void	StartCommand( CBasePlayer *player, CUserCmd *cmd );
-	virtual void	SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move );
-	virtual void	FinishMove( CBasePlayer *player, CUserCmd *ucmd, CMoveData *move );
+	void	StartCommand( CBasePlayer *player, CUserCmd *cmd ) OVERRIDE;
+	void	SetupMove( CBasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move ) OVERRIDE;
+	void	FinishMove( CBasePlayer *player, CUserCmd *ucmd, CMoveData *move ) OVERRIDE;
 };
 
 // PlayerMove Interface

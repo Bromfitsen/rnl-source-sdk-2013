@@ -26,12 +26,12 @@ public:
 	*/
 	CRnLResupplyAmmo();
 
-	void	Spawn( void );
-	void	Precache( void );
-	bool	CreateVPhysics( void );
+	void	Spawn( void ) OVERRIDE;
+	void	Precache( void ) OVERRIDE;
+	bool	CreateVPhysics( void ) OVERRIDE;
 
-	int		ObjectCaps( void ) { return (BaseClass::ObjectCaps() | (FCAP_IMPULSE_USE|FCAP_USE_IN_RADIUS)); };
-	void	Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE useType, float value );
+	int		ObjectCaps( void ) OVERRIDE { return (BaseClass::ObjectCaps() | (FCAP_IMPULSE_USE|FCAP_USE_IN_RADIUS)); };
+	void	Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_TYPE useType, float value ) OVERRIDE;
 
 	void	InputKill( inputdata_t &data );
 

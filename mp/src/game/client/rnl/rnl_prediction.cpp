@@ -19,8 +19,8 @@ class CRnLPrediction : public CPrediction
 DECLARE_CLASS( CRnLPrediction, CPrediction );
 
 public:
-	virtual void	SetupMove( C_BasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move );
-	virtual void	FinishMove( C_BasePlayer *player, CUserCmd *ucmd, CMoveData *move );
+	void SetupMove( C_BasePlayer *player, CUserCmd *ucmd, IMoveHelper *pHelper, CMoveData *move ) OVERRIDE;
+	void FinishMove( C_BasePlayer *player, CUserCmd *ucmd, CMoveData *move ) OVERRIDE;
 };
 
 //-----------------------------------------------------------------------------

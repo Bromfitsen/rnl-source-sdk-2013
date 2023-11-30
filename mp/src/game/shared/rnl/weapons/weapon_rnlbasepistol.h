@@ -25,11 +25,11 @@ public:
 	DECLARE_PREDICTABLE();
 	
 	CWeaponRnLBasePistol();
-	~CWeaponRnLBasePistol() override;
+	~CWeaponRnLBasePistol();
 
-	bool ShouldUseWeaponActivities( void ) override { return true; }
+	bool ShouldUseWeaponActivities( void ) OVERRIDE { return true; }
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_NONE; }
 
 private:
 

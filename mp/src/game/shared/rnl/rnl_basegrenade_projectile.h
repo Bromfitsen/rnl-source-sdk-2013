@@ -25,8 +25,7 @@ public:
 	DECLARE_CLASS( CBaseGrenadeProjectile, CBaseGrenade );
 	DECLARE_NETWORKCLASS(); 
 
-	virtual void Spawn();
-
+	void Spawn() OVERRIDE;
 
 public:
 
@@ -38,8 +37,8 @@ public:
 #ifdef CLIENT_DLL
 	CBaseGrenadeProjectile() {}
 	CBaseGrenadeProjectile( const CBaseGrenadeProjectile& ) {}
-	virtual int DrawModel( int flags );
-	virtual void PostDataUpdate( DataUpdateType_t type );
+	int DrawModel( int flags ) OVERRIDE;
+	void PostDataUpdate( DataUpdateType_t type ) OVERRIDE;
 	
 	float m_flSpawnTime;
 #else

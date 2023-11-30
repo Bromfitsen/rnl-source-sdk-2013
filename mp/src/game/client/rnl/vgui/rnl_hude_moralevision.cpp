@@ -35,13 +35,13 @@ class CHudMoraleVision : public vgui::Panel, public CHudElement
 public:
 			CHudMoraleVision( const char *pElementName );
 	
-	void	Init( void );
-	void	LevelInit( void );
-	bool	ShouldDraw( void );
+	void	Init( void ) OVERRIDE;
+	void	LevelInit( void ) OVERRIDE;
+	bool	ShouldDraw( void ) OVERRIDE;
 
 protected:
-	virtual void ApplySchemeSettings(vgui::IScheme *scheme);
-	virtual void Paint( void );
+	void ApplySchemeSettings(vgui::IScheme *scheme) OVERRIDE;
+	void Paint( void ) OVERRIDE;
 
 private:
 

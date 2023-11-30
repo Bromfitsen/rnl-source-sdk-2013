@@ -31,7 +31,7 @@ public:
 					C_RnLGameTeam();
 	virtual			~C_RnLGameTeam();
 
-	bool				IsGameTeam() const override { return true; }
+	bool				IsGameTeam() const OVERRIDE { return true; }
 	int					GetNumberOfSquads( void ) const;
 	const CRnLSquad*	GetSquad(int idx) const;
 

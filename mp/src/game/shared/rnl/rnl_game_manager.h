@@ -26,9 +26,9 @@ public:
 	CRnLGameManager();
 	virtual ~CRnLGameManager();
 
-	virtual void Spawn( void );
-	virtual void Precache( void );
-	virtual void Activate( void );
+	void Spawn( void ) OVERRIDE;
+	void Precache( void ) OVERRIDE;
+	void Activate( void ) OVERRIDE;
 
 	//Shared Spawn Timer Stuff
 	virtual float GetSpawnTimer( int iTeam ) const;
@@ -41,7 +41,7 @@ public:
 	virtual int GetAlliedTicketsRemaining( void ) const;
 
 #ifndef CLIENT_DLL
-	int UpdateTransmitState();
+	int UpdateTransmitState() OVERRIDE;
 	void Update();
 	
 	virtual float GetHoldToWinTime( void );

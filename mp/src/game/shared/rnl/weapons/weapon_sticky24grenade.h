@@ -29,20 +29,20 @@ public:
 	DECLARE_ACTTABLE();
 
 	CSticky24Grenade() {}
-	~CSticky24Grenade() override = default;
+	~CSticky24Grenade() = default;
 
-	bool CanHolster( void ) override;
+	bool CanHolster( void ) OVERRIDE;
 
-	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_STICKY24GRENADE; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_STICKY24GRENADE; }
 
-	bool ShouldDrop( void ) override { return m_iGrenadeState == GRENADE_STARTFUSE; }
+	bool ShouldDrop( void ) OVERRIDE { return m_iGrenadeState == GRENADE_STARTFUSE; }
 
 #ifdef CLIENT_DLL
 
 #else
 	DECLARE_DATADESC();
 
-	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) override;
+	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) OVERRIDE;
 	
 #endif
 

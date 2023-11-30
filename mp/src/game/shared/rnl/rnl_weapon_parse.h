@@ -66,7 +66,7 @@ public:
 	
 	CRnLWeaponInfo();
 	
-	virtual void Parse( ::KeyValues *pKeyValuesData, const char *szWeaponName );
+	void Parse( ::KeyValues *pKeyValuesData, const char *szWeaponName ) OVERRIDE;
 
 	int		m_iScriptedWeaponType;
 

@@ -25,13 +25,13 @@ public:
 	DECLARE_CLASS( CRnLBaseExplosive, CBaseGrenade );
 	DECLARE_NETWORKCLASS(); 
 
-	virtual void Spawn();
+	void Spawn() OVERRIDE;
 
 #ifdef CLIENT_DLL
 	CRnLBaseExplosive() {}
 
-	virtual int DrawModel( int flags );
-	virtual void PostDataUpdate( DataUpdateType_t type );
+	int DrawModel( int flags ) OVERRIDE;
+	void PostDataUpdate( DataUpdateType_t type ) OVERRIDE;
 #else
 	DECLARE_DATADESC();
 

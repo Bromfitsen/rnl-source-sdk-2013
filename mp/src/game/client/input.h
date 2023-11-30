@@ -129,7 +129,7 @@ protected:
 	void		ComputeSideMove( CUserCmd *cmd );
 	void		AdjustAngles ( float frametime );
 	void		ClampAngles( QAngle& viewangles );
-	void		AdjustPitch( float speed, QAngle& viewangles );
+	virtual void AdjustPitch( float speed, QAngle& viewangles );
 	virtual void AdjustYaw( float speed, QAngle& viewangles );
 	float		DetermineKeySpeed( float frametime );
 	void		GetAccumulatedMouseDeltasAndResetAccumulators( float *mx, float *my );

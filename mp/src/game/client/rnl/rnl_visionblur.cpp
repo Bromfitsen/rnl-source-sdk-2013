@@ -21,13 +21,13 @@ public:
 		m_flSpeed( 1.0f ),
 		m_bUpdated( false ) {}
 
-	virtual void Init( void );
-	virtual void Shutdown( void ) {}
-	virtual void SetParameters( KeyValues *params );
-	virtual void Enable( bool bEnable ) {};
-	virtual bool IsEnabled( ) { return true; }
+	void Init( void ) OVERRIDE;
+	void Shutdown( void ) OVERRIDE {}
+	void SetParameters( KeyValues *params ) OVERRIDE;
+	void Enable( bool bEnable ) OVERRIDE {};
+	bool IsEnabled( ) OVERRIDE { return true; }
 
-	virtual void Render( int x, int y, int w, int h );
+	void Render( int x, int y, int w, int h ) OVERRIDE;
 
 private:
 	ITexture	*m_pBlurTexture;

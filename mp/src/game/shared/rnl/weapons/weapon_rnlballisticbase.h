@@ -28,37 +28,37 @@ public:
 #endif
 	
 	CWeaponRnLBallisticBase();
-	~CWeaponRnLBallisticBase() override;
+	~CWeaponRnLBallisticBase();
 
-	void PrimaryAttack( void ) override;
-	void WeaponIdle( void ) override;
+	void PrimaryAttack( void ) OVERRIDE;
+	void WeaponIdle( void ) OVERRIDE;
 	
-	bool StartSprinting( void ) override;
-	void HandleViewAnimation( int iAnim ) override;
+	bool StartSprinting( void ) OVERRIDE;
+	void HandleViewAnimation( int iAnim ) OVERRIDE;
 
 	virtual void AddViewKick(int iSeed);
 
-	bool Reload() override;
+	bool Reload() OVERRIDE;
 
-	bool Deploy() override;
+	bool Deploy() OVERRIDE;
 
 	// dont let it holster if in IS
-	bool CanHolster(void) override;
-	bool Holster( CBaseCombatWeapon *pSwitchingTo = NULL ) override;
+	bool CanHolster(void) OVERRIDE;
+	bool Holster( CBaseCombatWeapon *pSwitchingTo = NULL ) OVERRIDE;
 
-	virtual void NextFirePos();
-	virtual void PrevFirePos();
+	void NextFirePos() OVERRIDE;
+	void PrevFirePos() OVERRIDE;
 
-	virtual void HandleViewSway( void );
-	virtual bool CheckResting( void );
+	void HandleViewSway( void ) OVERRIDE;
+	bool CheckResting( void ) OVERRIDE;
 
 	virtual int GetDefaultPosture() { return 1; }
-	virtual void ReturnToDefaultPosture( void );
+	void ReturnToDefaultPosture( void ) OVERRIDE;
 
 	void ReloadTransition( int iState );
 	virtual bool CheckChamber();
 	
-	virtual void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents );
+	void	GetFreeAimBounds( Vector2D& maxExtents, Vector2D& deadZone, int& lockToExtents ) OVERRIDE;
 
 	virtual float	GetSpread( void );
 	virtual float	GetRecoil( void );
@@ -76,10 +76,10 @@ public:
 	virtual void UpdatePostureFoV();
 #endif
 
-	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const OVERRIDE { return WEAPON_NONE; }
 	void GetWeaponAttachment( int attachmentId, Vector &outVector, Vector *dir );
-	virtual void	AddViewmodelBob( CBaseViewModel *viewmodel, Vector &origin, QAngle &angles );
-	virtual	float	CalcViewmodelBob( void );
+	void	AddViewmodelBob( CBaseViewModel *viewmodel, Vector &origin, QAngle &angles ) OVERRIDE;
+	float	CalcViewmodelBob( void ) OVERRIDE;
 
 protected:
 	void HandleFoVTransitions(void);

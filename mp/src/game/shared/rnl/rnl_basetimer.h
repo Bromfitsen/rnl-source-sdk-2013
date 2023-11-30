@@ -28,9 +28,9 @@ public:
 	CRnLBaseTimer();
 	virtual ~CRnLBaseTimer();
 
-	virtual void Spawn( void );
-	virtual void Precache( void );
-	virtual void Activate( void );
+	void Spawn( void ) OVERRIDE;
+	void Precache( void ) OVERRIDE;
+	void Activate( void ) OVERRIDE;
 
 	// Returns seconds to display.
 	virtual float GetTimeRemaining( void );
@@ -39,7 +39,7 @@ public:
 	virtual void SetTimeRemaining( int iTimerSeconds ); // Set the initial length of the timer
 	virtual void AddTimerSeconds( int iSecondsToAdd, int iTeamResponsible = TEAM_UNASSIGNED ); // Add time to an already running ( or paused ) timer
 
-	int UpdateTransmitState();
+	int UpdateTransmitState() OVERRIDE;
 
 	void InputSetTime( inputdata_t &input );
 	void InputAddTime( inputdata_t &input );

@@ -31,20 +31,20 @@ public:
 					ClientModeRnLNormal();
 	virtual			~ClientModeRnLNormal();
 
-	virtual void	Init();
-	virtual void	InitViewport();
-	virtual void	VGui_Shutdown();
+	void	Init() OVERRIDE;
+	void	InitViewport() OVERRIDE;
+	void	VGui_Shutdown() OVERRIDE;
 
-	virtual bool	ShouldDrawViewModel( void );
-	virtual float	GetViewModelFOV( void );
+	bool	ShouldDrawViewModel( void ) OVERRIDE;
+	float	GetViewModelFOV( void ) OVERRIDE;
 
-	int				GetDeathMessageStartHeight( void );
+	int GetDeathMessageStartHeight( void );
 
-	virtual void	PostRenderVGui();
+	void PostRenderVGui() OVERRIDE;
 
-	virtual void FireGameEvent( IGameEvent *event );
+	void FireGameEvent( IGameEvent *event ) OVERRIDE;
 
-	virtual bool CreateMove( float flInputSampleTime, CUserCmd *cmd );
+	bool CreateMove( float flInputSampleTime, CUserCmd *cmd ) OVERRIDE;
 
 private:
 	

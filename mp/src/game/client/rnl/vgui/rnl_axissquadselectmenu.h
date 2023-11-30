@@ -36,31 +36,31 @@ public:
 	CRnLAxisSquadSelectMenu( IViewPort *pViewPort );
 	virtual ~CRnLAxisSquadSelectMenu();
 
-	virtual const char *GetName( void ) { return PANEL_SQUAD_AXIS; }
-	virtual void SetData(KeyValues *data);
-	virtual void Reset();
-	virtual void Update();
-	virtual bool NeedsUpdate( void );
-	virtual bool HasInputElements( void ) { return true; }
-	virtual void ShowPanel( bool bShow );
+	const char *GetName( void ) OVERRIDE { return PANEL_SQUAD_AXIS; }
+	void SetData(KeyValues *data) OVERRIDE;
+	void Reset() OVERRIDE;
+	void Update() OVERRIDE;
+	bool NeedsUpdate( void ) OVERRIDE;
+	bool HasInputElements( void ) OVERRIDE { return true; }
+	void ShowPanel( bool bShow ) OVERRIDE;
 
 	// both vgui::Frame and IViewPortPanel define these, so explicitly define them here as passthroughs to vgui
-	vgui::VPANEL GetVPanel( void ) { return BaseClass::GetVPanel(); }
-	virtual bool IsVisible() { return BaseClass::IsVisible(); }
-	virtual void SetParent( vgui::VPANEL parent ) { BaseClass::SetParent( parent ); }
+	vgui::VPANEL GetVPanel( void ) OVERRIDE { return BaseClass::GetVPanel(); }
+	bool IsVisible() OVERRIDE { return BaseClass::IsVisible(); }
+	void SetParent( vgui::VPANEL parent ) OVERRIDE { BaseClass::SetParent( parent ); }
 
 	// IGameEventListener interface:
-	virtual void FireGameEvent( IGameEvent *event);
+	void FireGameEvent( IGameEvent *event) OVERRIDE;
 
 	MESSAGE_FUNC_PARAMS( OnSquadListItemSelected, "ItemSelected", data);
 
 	// command callbacks
-	void OnCommand( const char *command );
+	void OnCommand( const char *command ) OVERRIDE;
 
 protected:
 
-	virtual void ApplySchemeSettings(vgui::IScheme *pScheme);
-	virtual void PaintBackground( void );
+	void ApplySchemeSettings(vgui::IScheme *pScheme) OVERRIDE;
+	void PaintBackground( void ) OVERRIDE;
 
 	vgui::ImageButton *m_pCancelButton;
 
