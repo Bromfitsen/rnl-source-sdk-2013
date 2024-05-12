@@ -146,8 +146,8 @@ bool CBaseRnLGrenade::Holster( CBaseCombatWeapon *pSwitchingTo )
 #ifndef CLIENT_DLL
 	if( pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
 	{
-		pPlayer->Weapon_Drop( this, NULL, NULL );
-		UTIL_Remove(this);
+		//pPlayer->Weapon_Drop( this, NULL, NULL );
+		//UTIL_Remove(this);
 	}
 #endif
 
@@ -323,8 +323,10 @@ void CBaseRnLGrenade::ItemPostFrame()
 			// if we're officially out of grenades, ditch this weapon
 			if( pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
 			{
-				pPlayer->Weapon_Drop( this, NULL, NULL );
-				UTIL_Remove(this);
+				pPlayer->SwitchToNextBestWeapon(this);
+
+				//pPlayer->Weapon_Drop( this, NULL, NULL );
+				//UTIL_Remove(this);
 			}
 			else
 				Deploy();

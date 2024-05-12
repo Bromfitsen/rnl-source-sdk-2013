@@ -68,7 +68,7 @@ public:
 
 	bool	CanDeploy( void ) override;
 	bool	CanHolster( void ) override;
-	bool	CanRearm( CRnLPlayer* pPlayer ) override { return false; }
+	bool	CanRearm( CRnLPlayer* pPlayer ) override { return true; }
 
 	bool IsGrenadePrimed( ) { return m_iGrenadeState == GRENADE_STARTFUSE; };
 	virtual bool IsSmokeGrenade( void ) { return false; }

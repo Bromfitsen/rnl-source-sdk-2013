@@ -153,6 +153,8 @@ void CRnLResupplyCrate::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_
 	{
 		pWeapon = dynamic_cast<CWeaponRnLBase*>(pPlayer->GetWeapon( i ));
 
+		Assert(!pWeapon || pWeapon->GetPlayerOwner() == pPlayer); // Why are we passing player into CanRearm? 
+
 		if( pWeapon && pWeapon->CanRearm(pPlayer) )
 		{
 			if (pWeapon == pPlayer->GetActiveRnLWeapon())
