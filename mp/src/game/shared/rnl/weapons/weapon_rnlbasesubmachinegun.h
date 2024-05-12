@@ -28,15 +28,14 @@ public:
 #endif
 	
 	CWeaponRnLBaseSubMachineGun();
-	virtual ~CWeaponRnLBaseSubMachineGun();
-	void PrimaryAttack( void );
+	~CWeaponRnLBaseSubMachineGun() override;
 
-	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
+	void PrimaryAttack( void ) override;
+
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_NONE; }
 
 private:
 	CWeaponRnLBaseSubMachineGun( const CWeaponRnLBaseSubMachineGun & );
-
-	void Fire( float flSpread );
 };
 
 #endif //WEAPON_RNLBASESUBMACHINEGUN_H

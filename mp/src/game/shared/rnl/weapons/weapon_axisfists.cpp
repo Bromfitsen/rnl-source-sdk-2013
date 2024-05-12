@@ -30,14 +30,14 @@ public:
 #endif
 	
 	CWeaponAxisFists();
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_AXISFISTS; }
+	~CWeaponAxisFists() override = default;
+
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_AXISFISTS; }
 
 private:
 
 	CWeaponAxisFists( const CWeaponAxisFists & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponAxisFists, DT_WeaponAxisFists )

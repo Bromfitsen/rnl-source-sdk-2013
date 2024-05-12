@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -35,21 +35,22 @@ public:
 
 	CWeaponRnLBaseExplosive();
 
-	virtual void	Precache();
+	void Precache() override;
 
-	virtual bool	Deploy();
-	virtual bool	Holster( CBaseCombatWeapon *pSwitchingTo );
+	bool Deploy() override;
+	bool CanDeploy() override;
+	bool Holster( CBaseCombatWeapon *pSwitchingTo ) override;
+	bool CanRearm(CRnLPlayer* pPlayer) override { return false; }
 
-	virtual bool	CanDeploy();
-	virtual bool	CanRearm(CRnLPlayer* pPlayer) { return false; }
+	void PrimaryAttack() override;
+	void ItemPostFrame() override ;
 
-	void			PrimaryAttack();
-	virtual void	ItemPostFrame();
+	void HandleViewAnimation(int iAnim) override;
+	void WeaponIdle(void) override;
 
-	virtual void	PlantExplosive( void ) { }
-	virtual bool	ShouldUseWeaponActivities( void ) { return true; }
-	virtual void	HandleViewAnimation( int iAnim );
-	virtual void	WeaponIdle( void );
+	bool ShouldUseWeaponActivities(void) override { return true; }
+
+	virtual void PlantExplosive( void ) { }
 
 	
 

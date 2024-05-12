@@ -32,21 +32,21 @@ public:
 	DECLARE_ACTTABLE();
 	
 	CWeaponWalther();
-	void Precache();
-	bool PlayLastBulletSound();
+	~CWeaponWalther() override = default;
 
-	void ItemPostFrame();
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_WALTHER; }
+	void Precache() override;
+	bool PlayLastBulletSound() override;
+
+	void ItemPostFrame() override;
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_WALTHER; }
+
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( walther_ironsightsx.GetFloat(), walther_ironsightsy.GetFloat(), walther_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( walther_shoulderx.GetFloat(), walther_shouldery.GetFloat(), walther_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() override { return Vector( walther_ironsightsx.GetFloat(), walther_ironsightsy.GetFloat(), walther_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( walther_shoulderx.GetFloat(), walther_shouldery.GetFloat(), walther_shoulderz.GetFloat() ); }
 #endif
 
 private:
-
 	CWeaponWalther( const CWeaponWalther & );
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponWalther, DT_WeaponWalther )

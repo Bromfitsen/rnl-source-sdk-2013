@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -29,19 +29,21 @@ public:
 	DECLARE_ACTTABLE();
 
 	CSticky39Grenade() {}
+	~CSticky39Grenade() override = default;
+
 	bool CanHolster( void ) override;
 
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_STICKY39GRENADE; }
-	virtual bool IsSmokeGrenade( void ) { return true; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_STICKY39GRENADE; }
+	bool IsSmokeGrenade( void ) override { return true; }
 
-	virtual bool ShouldDrop( void ) { return m_iGrenadeState == GRENADE_STARTFUSE; }
+	bool ShouldDrop( void ) override { return m_iGrenadeState == GRENADE_STARTFUSE; }
 
 #ifdef CLIENT_DLL
 
 #else
 	DECLARE_DATADESC();
 
-	virtual void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll );
+	void EmitGrenade( Vector vecSrc, QAngle vecAngles, Vector vecVel, AngularImpulse angImpulse, CBasePlayer *pPlayer, float flDelay, bool roll ) override;
 	
 #endif
 

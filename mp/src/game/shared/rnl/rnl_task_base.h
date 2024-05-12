@@ -26,7 +26,7 @@ public:
 #endif
 
 	CRnLTaskBase();
-	~CRnLTaskBase();
+	~CRnLTaskBase() override;
 	
 	virtual void Spawn( void );
 	virtual void UpdateOnRemove();
@@ -42,7 +42,6 @@ public:
 	virtual int				GetTaskPrevState()						{ return m_TaskPrevState; }
 	virtual RnLTaskType		GetTaskType()							{ return RNL_TASK_TYPE_UNKNOWN; }
 	virtual Vector			GetTaskOrigin()							{ return m_vTaskOrigin; }
-	virtual void			GetTaskExtents( Vector& min, Vector& max);
 	virtual bool			IsTaskVisibleOnMap()					{ return m_bVisibleOnMap; } 
 	virtual void			Reset( void );
 	virtual void			OnStateChange( int iState, int iTeam )	{}
@@ -50,6 +49,7 @@ public:
 	virtual void SetVisibleOnMap( bool bState )	{ m_bVisibleOnMap = bState; }
 	virtual void SetTaskState( int iState );
 
+	virtual void			GetTaskExtents(Vector& min, Vector& max);
 	virtual void			SetTaskExtents( Vector min, Vector max);
 
 	const char*				GetTaskName( void )						{ return m_szTaskName.Get(); }

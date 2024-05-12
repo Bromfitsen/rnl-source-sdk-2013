@@ -40,26 +40,28 @@ public:
 #endif
 	
 	CWeaponM1Garand();
+	~CWeaponM1Garand() override = default;
 
-	void Precache( void );
-	virtual int	GetWorldModelIndex( void );
-	virtual const char *GetWorldModel( void );
-	bool PlayLastBulletSound( void );
-	bool HandleReloadTransitions( void );
-	void ItemPostFrame( void );
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_M1GARAND; }
+	void Precache( void ) override;
+	
+	bool PlayLastBulletSound( void ) override;
+	void ItemPostFrame( void ) override;
+
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_M1GARAND; }
+
+	const char* GetWorldModel(void) const override;
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( garand_ironsightsx.GetFloat(), garand_ironsightsy.GetFloat(), garand_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( garand_shoulderx.GetFloat(), garand_shouldery.GetFloat(), garand_shoulderz.GetFloat() ); }
+	int	GetWorldModelIndex(void) override;
+
+	Vector	GetIronsightsOffset() override { return Vector( garand_ironsightsx.GetFloat(), garand_ironsightsy.GetFloat(), garand_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( garand_shoulderx.GetFloat(), garand_shouldery.GetFloat(), garand_shoulderz.GetFloat() ); }
 #endif
 
 private:
 
 	CWeaponM1Garand( const CWeaponM1Garand & );
 	CNetworkVar( int, m_iDeployedModelIndex );
-
-	void Fire( float flSpread );
 };
 
 static char* pGarandWithBayonetModel = "models/weapons/w_garand_bayonet.mdl";
@@ -126,6 +128,7 @@ void CWeaponM1Garand::Precache()
 	m_iDeployedModelIndex	= CBaseEntity::PrecacheModel( pGarandWithBayonetModel );
 }
 
+#if defined(CLIENT_DLL)
 int	CWeaponM1Garand::GetWorldModelIndex( void )
 {
 	if( IsBayonetDeployed() )
@@ -137,11 +140,12 @@ int	CWeaponM1Garand::GetWorldModelIndex( void )
 		return m_iWorldModelIndex;
 	}
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-const char *CWeaponM1Garand::GetWorldModel( void )
+const char *CWeaponM1Garand::GetWorldModel( void ) const
 {
 	if( IsBayonetDeployed() )
 	{
@@ -161,16 +165,6 @@ bool CWeaponM1Garand::PlayLastBulletSound()
 	EmitSound( filter, entindex(), "Weapon_Garand.Ping" );
 
 	return 0;
-}
-
-bool CWeaponM1Garand::HandleReloadTransitions( void )
-{
-	CRnLPlayer *pPlayer = GetPlayerOwner(); 
-	if ( !pPlayer ) 
-		return false;
-
-	return BaseClass::HandleReloadTransitions();
-
 }
 
 //=====================================================================================// 

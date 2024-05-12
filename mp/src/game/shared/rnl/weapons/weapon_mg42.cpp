@@ -43,18 +43,22 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponMG42();
-	void Precache();
-	void ItemPostFrame();
-	int	GetWorldModelIndex( void );
-	virtual const char		*GetWorldModel( void );
+	~CWeaponMG42() override = default;
 
-	virtual float		GetStandOffset() { return mg42_standoffset.GetFloat(); }
+	void Precache() override;
+	void ItemPostFrame() override;
 	
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_MG42; }
+	const char	*GetWorldModel( void ) const override;
+
+	float		GetStandOffset() override { return mg42_standoffset.GetFloat(); }
+	
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_MG42; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( mg42_ironsightsx.GetFloat(), mg42_ironsightsy.GetFloat(), mg42_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( mg42_shoulderx.GetFloat(), mg42_shouldery.GetFloat(), mg42_shoulderz.GetFloat() ); }
+	int	GetWorldModelIndex(void) override;
+
+	Vector	GetIronsightsOffset() override { return Vector( mg42_ironsightsx.GetFloat(), mg42_ironsightsy.GetFloat(), mg42_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( mg42_shoulderx.GetFloat(), mg42_shouldery.GetFloat(), mg42_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -71,8 +75,6 @@ private:
 #ifdef CLIENT_DLL
 	float m_flNextHeatSmoke;
 #endif
-
-	void Fire( float flSpread );
 };
 
 static char* pDeployedMG42Model = "models/weapons/w_mg42_deployed.mdl";
@@ -172,6 +174,7 @@ void CWeaponMG42::Precache()
 	m_iDeployedModelIndex	= CBaseEntity::PrecacheModel( pDeployedMG42Model );
 }
 
+#if defined(CLIENT_DLL)
 int	CWeaponMG42::GetWorldModelIndex( void )
 {
 	if( IsDeployed() )
@@ -183,11 +186,12 @@ int	CWeaponMG42::GetWorldModelIndex( void )
 		return m_iWorldModelIndex;
 	}
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-const char *CWeaponMG42::GetWorldModel( void )
+const char *CWeaponMG42::GetWorldModel( void ) const
 {
 	if( IsDeployed() )
 	{

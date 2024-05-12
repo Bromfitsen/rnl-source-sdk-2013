@@ -43,16 +43,18 @@ public:
 	DECLARE_ACTTABLE();
 
 	CWeaponBrowning();
-	void Precache();
-	void ItemPostFrame();
+	~CWeaponBrowning() override = default;
 
-	virtual float		GetStandOffset() { return browning_standoffset.GetFloat(); }
+	void Precache() override;
+	void ItemPostFrame() override;
+
+	float GetStandOffset() override { return browning_standoffset.GetFloat(); }
 	
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_BROWNING; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_BROWNING; }
 
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( browning_ironsightsx.GetFloat(), browning_ironsightsy.GetFloat(), browning_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( browning_shoulderx.GetFloat(), browning_shouldery.GetFloat(), browning_shoulderz.GetFloat() ); }
+	Vector	GetIronsightsOffset() override { return Vector( browning_ironsightsx.GetFloat(), browning_ironsightsy.GetFloat(), browning_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( browning_shoulderx.GetFloat(), browning_shouldery.GetFloat(), browning_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -68,8 +70,6 @@ private:
 #ifdef CLIENT_DLL
 	float m_flNextHeatSmoke;
 #endif
-
-	void Fire( float flSpread );
 };
 
 IMPLEMENT_NETWORKCLASS_ALIASED( WeaponBrowning, DT_WeaponBrowning )

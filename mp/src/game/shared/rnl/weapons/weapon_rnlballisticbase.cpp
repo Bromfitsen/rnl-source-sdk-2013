@@ -46,6 +46,11 @@ CWeaponRnLBallisticBase::CWeaponRnLBallisticBase()
 	m_iReloadState = 0;
 }
 
+CWeaponRnLBallisticBase::~CWeaponRnLBallisticBase()
+{
+
+}
+
 //=============================================================================//
 // CWeaponRnLBallisticBase::Deploy( )
 // Purpose: Sets the starting value of the vars.
@@ -863,6 +868,9 @@ void CWeaponRnLBallisticBase::HandleFoVTransitions( void )
 bool CWeaponRnLBallisticBase::HandleReloadTransitions( void )
 {
 	CRnLPlayer *pPlayer = GetPlayerOwner();
+
+	if (!pPlayer)
+		return false;
 
 	if( m_bInReload )
 	{

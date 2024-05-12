@@ -41,8 +41,7 @@ public:
 	CWeaponKarabiner98k();
 	
 	void Precache( void );
-	virtual int	GetWorldModelIndex( void );
-	virtual const char *GetWorldModel( void );
+	
 	void PrimaryAttack();
 
 	void ItemPostFrame();
@@ -55,9 +54,13 @@ public:
 
 	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_K98K; }
 
+	const char* GetWorldModel(void) const override;
+
 #ifdef CLIENT_DLL
-	Vector	GetIronsightsOffset(){ return Vector( k98_ironsightsx.GetFloat(), k98_ironsightsy.GetFloat(), k98_ironsightsz.GetFloat() ); }
-	Vector	GetShoulderOffset(){ return Vector( k98_shoulderx.GetFloat(), k98_shouldery.GetFloat(), k98_shoulderz.GetFloat() ); }
+	int	GetWorldModelIndex(void) override;
+
+	Vector	GetIronsightsOffset() override { return Vector( k98_ironsightsx.GetFloat(), k98_ironsightsy.GetFloat(), k98_ironsightsz.GetFloat() ); }
+	Vector	GetShoulderOffset() override { return Vector( k98_shoulderx.GetFloat(), k98_shouldery.GetFloat(), k98_shoulderz.GetFloat() ); }
 #endif
 
 private:
@@ -142,6 +145,7 @@ void CWeaponKarabiner98k::Precache()
 	m_iDeployedModelIndex	= CBaseEntity::PrecacheModel( pK98kWithBayonetModel );
 }
 
+#if defined(CLIENT_DLL)
 int	CWeaponKarabiner98k::GetWorldModelIndex( void )
 {
 	if( IsBayonetDeployed() )
@@ -153,11 +157,12 @@ int	CWeaponKarabiner98k::GetWorldModelIndex( void )
 		return m_iWorldModelIndex;
 	}
 }
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
 //-----------------------------------------------------------------------------
-const char *CWeaponKarabiner98k::GetWorldModel( void )
+const char *CWeaponKarabiner98k::GetWorldModel( void ) const
 {
 	if( IsBayonetDeployed() )
 	{

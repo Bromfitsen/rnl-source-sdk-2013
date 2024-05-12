@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -45,47 +45,45 @@ public:
 
 	CBaseRnLGrenade();
 
-	virtual void	Precache();
+	void	Precache() override;
 
-	bool			Deploy();
-	bool			Holster( CBaseCombatWeapon *pSwitchingTo );
+	bool	CanDeploy(void) override;
+	bool	CanHolster(void) override;
+	bool	CanClimb(void) override;
+	bool	CanRearm( CRnLPlayer* pPlayer ) override { return true; }
 
-	void			PrimaryAttack();
+	bool	Deploy() override;
+	bool	Holster( CBaseCombatWeapon *pSwitchingTo ) override;
+	void	Equip(CBaseCombatCharacter* pOwner) override;
 
-	bool			Reload();
+	void	PrimaryAttack() override;
 
-	virtual void	ItemPostFrame();
+	bool	Reload() override;
+
+	void	ItemPostFrame() override;
+
+	void	WeaponIdle() override;
+	void	HandleViewAnimation(int iAnim) override;
+
+	// Michael Lebson
+	bool IsGrenade() const override { return true; }
+
+	Activity GetDrawActivity(void) override { return ACT_VM_SHOULDERDRAW; }
 	
-	void			DecrementAmmo( CBaseCombatCharacter *pOwner );
+	
 	virtual void	ThrowGrenade();
 	virtual void	RollGrenade();
 	virtual void	DropGrenade();
 
-	virtual void	WeaponIdle();
-	virtual void	HandleViewAnimation( int iAnim );
-
-	virtual void	Equip( CBaseCombatCharacter *pOwner );
-
-	bool	CanDeploy( void ) override;
-	bool	CanHolster( void ) override;
-	bool	CanRearm( CRnLPlayer* pPlayer ) override { return true; }
-
+	virtual bool IsSmokeGrenade(void) { return false; }
 	bool IsGrenadePrimed( ) { return m_iGrenadeState == GRENADE_STARTFUSE; };
-	virtual bool IsSmokeGrenade( void ) { return false; }
-
-	// Michael Lebson
-	virtual bool	IsGrenade() const { return true; }
-
-	virtual bool CanClimb( void );
-
-	virtual Activity GetDrawActivity( void )
-	{
-		return ACT_VM_SHOULDERDRAW;
-	}
+	
 	virtual int GetGrenadeState( void ) { return m_iGrenadeState; }
 
 	//Default Any State but pin
 	virtual bool ShouldDrop( void ) { return m_iGrenadeState != GRENADE_DRAWN; }
+
+	void	DecrementAmmo(CBaseCombatCharacter* pOwner);
 
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();

@@ -25,17 +25,15 @@ public:
 	DECLARE_PREDICTABLE();
 	
 	CWeaponRnLBasePistol();
-	virtual ~CWeaponRnLBasePistol();
+	~CWeaponRnLBasePistol() override;
 
-	virtual bool ShouldUseWeaponActivities( void ) { return true; }
+	bool ShouldUseWeaponActivities( void ) override { return true; }
 
-	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_NONE; }
 
 private:
 
 	CWeaponRnLBasePistol( const CWeaponRnLBasePistol & );
-
-	void Fire( float flSpread );
 };
 
 #endif //WEAPON_RNLBASERIFLE_H

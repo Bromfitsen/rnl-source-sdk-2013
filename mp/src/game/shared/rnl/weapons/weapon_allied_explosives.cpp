@@ -36,11 +36,12 @@ public:
 #endif
 
 	CWeaponAlliedExplosives() {}
+	~CWeaponAlliedExplosives() override = default;
 
-	virtual RnLWeaponID GetWeaponID( void ) const		{ return WEAPON_ALLIEDEXPLOSIVES; }
+	RnLWeaponID GetWeaponID( void ) const override { return WEAPON_ALLIEDEXPLOSIVES; }
 
 #ifndef CLIENT_DLL
-	virtual void PlantExplosive();
+	void PlantExplosive() override;
 #endif
 private:
 
