@@ -445,9 +445,9 @@ IMPLEMENT_NETWORKCLASS_ALIASED( RnLGameRulesProxy, DT_RnLGameRulesProxy )
 	// Purpose: Player has just spawned. Equip them.
 	//-----------------------------------------------------------------------------
 
-	void CRnLGameRules::RadiusDamage( const CTakeDamageInfo &info, const Vector &vecSrcIn, float flRadius, int iClassIgnore )
+	void CRnLGameRules::RadiusDamage(const CTakeDamageInfo& info, const Vector& vecSrc, float flRadius, int iClassIgnore, CBaseEntity* pEntityIgnore)
 	{
-		RadiusDamage( info, vecSrcIn, flRadius, iClassIgnore, false );
+		RadiusDamage( info, vecSrc, flRadius, iClassIgnore, false );
 	}
 
 	// Add the ability to ignore the world trace
