@@ -176,7 +176,7 @@ public:
 	virtual void InitDefaultAIRelationships(void);
 	virtual bool ClientCommand( CBaseEntity *pEdict, const CCommand &args );
 	virtual void ClientSettingsChanged( CBasePlayer *pPlayer );
-	void RadiusDamage(const CTakeDamageInfo& info, const Vector& vecSrc, float flRadius, int iClassIgnore, CBaseEntity* pEntityIgnore) override; // TODO_KORNEEL Is this supposed to override? Because signature is different...
+	void RadiusDamage(const CTakeDamageInfo& info, const Vector& vecSrc, float flRadius, int iClassIgnore, CBaseEntity* pEntityIgnore) override;
 	virtual bool FPlayerCanRespawn( CBasePlayer *pPlayer );
 	virtual CBaseEntity *GetPlayerSpawnSpot( CBasePlayer *pPlayer );
 	virtual void Think();
