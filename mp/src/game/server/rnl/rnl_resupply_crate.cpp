@@ -153,15 +153,20 @@ void CRnLResupplyCrate::Use( CBaseEntity *pActivator, CBaseEntity *pCaller, USE_
 	{
 		pWeapon = dynamic_cast<CWeaponRnLBase*>(pPlayer->GetWeapon( i ));
 
-		if( pWeapon && !pWeapon->IsGrenade() )
+		Assert(!pWeapon || pWeapon->GetPlayerOwner() == pPlayer); // Why are we passing player into CanRearm? 
+
+		if( pWeapon && pWeapon->CanRearm(pPlayer) )
 		{
-			pPlayer->GiveAmmo( GetRnLAmmoDef()->MaxCarry(pWeapon->GetPrimaryAmmoType()) - pPlayer->GetAmmoCount( pWeapon->GetPrimaryAmmoType()), pWeapon->GetPrimaryAmmoType() );
-			if( pWeapon == pPlayer->GetActiveRnLWeapon() )
+			if (pWeapon == pPlayer->GetActiveRnLWeapon())
 			{
-				pPlayer->DoAnimationEvent( PLAYERANIMEVENT_RELOAD );
-				pWeapon->HandleViewAnimation( WEAPON_ANIMATION_RELOAD );
+				if (pWeapon->m_flNextPrimaryAttack >= gpGlobals->curtime)
+					continue;
+
+				pPlayer->DoAnimationEvent(PLAYERANIMEVENT_RELOAD);
+				pWeapon->HandleViewAnimation(WEAPON_ANIMATION_RELOAD);
 			}
 
+			pPlayer->GiveAmmo(GetRnLAmmoDef()->MaxCarry(pWeapon->GetPrimaryAmmoType()) - pPlayer->GetAmmoCount(pWeapon->GetPrimaryAmmoType()), pWeapon->GetPrimaryAmmoType());
 			pWeapon->m_iClip1 = pWeapon->GetMaxClip1();
 		}
 	}

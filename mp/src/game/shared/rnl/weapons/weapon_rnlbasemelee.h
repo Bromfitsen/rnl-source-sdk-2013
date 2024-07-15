@@ -44,6 +44,8 @@ public:
 
 	virtual RnLWeaponID GetWeaponID( void ) const { return WEAPON_NONE; }
 
+	bool CanRearm(CRnLPlayer* pPlayer) override { return false; }
+
 protected:
 
 	CWeaponRnLBaseMelee( const CWeaponRnLBaseMelee & );

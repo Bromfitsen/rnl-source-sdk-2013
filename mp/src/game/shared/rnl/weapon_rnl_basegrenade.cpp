@@ -128,28 +128,20 @@ bool CBaseRnLGrenade::Holster( CBaseCombatWeapon *pSwitchingTo )
 	m_fThrowTime = 0;
 	m_bRedraw = false;
 
-	// Send holster animation
-	HandleViewAnimation( WEAPON_ANIMATION_HOLSTER );
-
 	m_iGrenadeState = GRENADE_DRAWN; // when this is holstered make sure the pin isn’t pulled.
 
 	// If they attempt to switch weapons before the throw animation is done, 
 	// allow it, but kill the weapon if we have to.
 	CRnLPlayer *pPlayer = GetPlayerOwner();
 
-	if( pPlayer )
+	if( pPlayer && pPlayer->GetAmmoCount(m_iPrimaryAmmoType) > 0)
 	{
+		// Send holster animation
+		HandleViewAnimation(WEAPON_ANIMATION_HOLSTER);
+
 		pPlayer->SetWeaponPosture( WEAPON_POSTURE_SHOULDER );
 		pPlayer->DoAnimationEvent( PLAYERANIMEVENT_HOLSTER );
 	}
-
-#ifndef CLIENT_DLL
-	if( pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
-	{
-		pPlayer->Weapon_Drop( this, NULL, NULL );
-		UTIL_Remove(this);
-	}
-#endif
 
 	return true;
 }
@@ -323,8 +315,10 @@ void CBaseRnLGrenade::ItemPostFrame()
 			// if we're officially out of grenades, ditch this weapon
 			if( pPlayer->GetAmmoCount(m_iPrimaryAmmoType) <= 0 )
 			{
-				pPlayer->Weapon_Drop( this, NULL, NULL );
-				UTIL_Remove(this);
+				pPlayer->SwitchToNextBestWeapon(this);
+
+				//pPlayer->Weapon_Drop( this, NULL, NULL );
+				//UTIL_Remove(this);
 			}
 			else
 				Deploy();

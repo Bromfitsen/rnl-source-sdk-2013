@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ï¿½ 1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -40,6 +40,7 @@ public:
 	bool Deploy() override;
 	bool CanDeploy() override;
 	bool Holster( CBaseCombatWeapon *pSwitchingTo ) override;
+	bool CanRearm(CRnLPlayer* pPlayer) override { return false; }
 
 	void PrimaryAttack() override;
 	void ItemPostFrame() override ;
@@ -50,6 +51,8 @@ public:
 	bool ShouldUseWeaponActivities(void) override { return true; }
 
 	virtual void PlantExplosive( void ) { }
+
+	
 
 #ifndef CLIENT_DLL
 	DECLARE_DATADESC();

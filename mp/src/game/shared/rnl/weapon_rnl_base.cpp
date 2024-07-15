@@ -138,6 +138,14 @@ bool CWeaponRnLBase::CanHolster( void )
 	return BaseClass::CanHolster() && ((m_iWeaponAnimationState != WEAPON_ANIMATION_HOLSTER && m_iWeaponAnimationState != WEAPON_ANIMATION_DRAW) || IsSequenceFinished() );
 }
 
+bool CWeaponRnLBase::CanRearm(CRnLPlayer* pPlayer)
+{
+	if (pPlayer == NULL || GetRnLWpnData().m_iTeamAssociation == TEAM_INVALID)
+		return true;
+	else
+		return GetRnLWpnData().m_iTeamAssociation == pPlayer->GetTeamNumber();
+}
+
 bool CWeaponRnLBase::PlayEmptySound()
 {
 	CPASAttenuationFilter filter( this );
